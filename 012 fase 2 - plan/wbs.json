@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "project": "G26 WinchPump",
+    "document": "Arbeidsnedbrytningsstruktur (WBS)",
+    "version": "1.0",
+    "last_updated": "2026-04-13",
+    "description": "Fullstendig WBS med identifikator, beskrivelse, eier, avhengigheter og status. Følger LOG650 sin fasestruktur."
+  },
+  "wbs": [
+    {
+      "id": "1.0",
+      "name": "Initiering",
+      "description": "Definere prosjektets rammer, problemstilling og samarbeidspartner.",
+      "owner": "Begge",
+      "type": "Sammendrag",
+      "status": "Ferdig",
+      "children": [
+        {
+          "id": "1.1",
+          "name": "Prosjektbeskrivelse (proposal)",
+          "description": "Utarbeide og levere godkjent proposal med problemstilling, data, målfunksjon og avgrensninger.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": [],
+          "deliverables": ["Godkjent proposal (2 sider)"],
+          "acceptance_criteria": "Godkjent av veiledere"
+        },
+        {
+          "id": "1.2",
+          "name": "Litteratursøk (innledende)",
+          "description": "Kartlegge relevant forskning og teori innen etterspørselsprognoser og KI-basert kapasitetsplanlegging.",
+          "owner": "Tord",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["1.1"],
+          "deliverables": ["Oversikt over nøkkellitteratur i 003 references/"],
+          "acceptance_criteria": "Minimum 5–10 relevante kilder identifisert"
+        },
+        {
+          "id": "1.3",
+          "name": "Datatilgang avklart",
+          "description": "Bekrefte lesertilgang til Power BI og avtale format for dataeksport med Motive Offshore.",
+          "owner": "David",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["1.1"],
+          "deliverables": ["Bekreftet datatilgang, signert taushetserklæring"],
+          "acceptance_criteria": "Tilgang til reelle data fra Power BI bekreftet"
+        }
+      ]
+    },
+    {
+      "id": "2.0",
+      "name": "Planlegging",
+      "description": "Utarbeide prosjektplan, forskningsdesign og detaljert tidsplan.",
+      "owner": "Begge",
+      "type": "Sammendrag",
+      "status": "Ferdig",
+      "children": [
+        {
+          "id": "2.1",
+          "name": "Prosjektstyringsplan",
+          "description": "Dokumentere baselines for omfang, fremdrift, risiko og ressurser.",
+          "owner": "Tord",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["1.2", "1.3"],
+          "deliverables": ["Prosjektstyringsplan (.docx) i 012 fase 2 - plan/"],
+          "acceptance_criteria": "Alle 12 seksjoner fylt ut og godkjent av veiledere"
+        },
+        {
+          "id": "2.2",
+          "name": "Kravspesifikasjon",
+          "description": "Definere funksjonelle og ikke-funksjonelle krav til modell og leveranser.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["1.2", "1.3"],
+          "deliverables": ["Kravmatrise (vedlegg A i prosjektstyringsplan)"],
+          "acceptance_criteria": "Alle krav har ID, type, eier og sporbarhet"
+        },
+        {
+          "id": "2.3",
+          "name": "Forskningsplan",
+          "description": "Beskrive datakilder, KI-metoder, evalueringsmåltall og etiske vurderinger.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["2.1", "2.2"],
+          "deliverables": ["Forskningsplan inkludert i prosjektstyringsplan"],
+          "acceptance_criteria": "Metodevalg begrunnet med referanse til kompendium"
+        },
+        {
+          "id": "2.4",
+          "name": "WBS og Gantt-plan",
+          "description": "Utarbeide arbeidsnedbrytning med avhengigheter og tidsplan i MS Project.",
+          "owner": "Tord",
+          "type": "Leveranse",
+          "status": "Ferdig",
+          "predecessors": ["2.1"],
+          "deliverables": ["Gantt-plan i MS Project med baseline"],
+          "acceptance_criteria": "Alle aktiviteter har varighet, avhengigheter og eier; baseline satt"
+        }
+      ]
+    },
+    {
+      "id": "3.0",
+      "name": "Gjennomføring",
+      "description": "Bygge, teste og validere prognosemodell og varslingslogikk.",
+      "owner": "Begge",
+      "type": "Sammendrag",
+      "status": "Pågår",
+      "children": [
+        {
+          "id": "3.1",
+          "name": "Datainnhenting og klargjøring",
+          "description": "Eksportere relevante datasett fra Power BI som CSV og rense/strukturere for analyse.",
+          "owner": "David",
+          "type": "Leveranse",
+          "status": "Pågår",
+          "predecessors": ["2.3", "2.4"],
+          "deliverables": [
+            "Rå CSV-filer i 004 data/raw/",
+            "Rensede CSV-filer i 004 data/clean/",
+            "Datadokumentasjon (kolonner, typer, mangler)"
+          ],
+          "acceptance_criteria": "Data renset, dokumentert og klart for EDA"
+        },
+        {
+          "id": "3.2",
+          "name": "Eksplorativ dataanalyse (EDA)",
+          "description": "Visualisere data, identifisere mønstre og teste stasjonaritet med ADF-test.",
+          "owner": "Tord",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["3.1"],
+          "deliverables": [
+            "Python-skript for EDA i 006 analysis/",
+            "Visualiseringer (tidsserier, korrelasjoner, sesongmønstre)",
+            "Stasjonaritetstest-resultater (ADF, KPSS)"
+          ],
+          "acceptance_criteria": "Deskriptiv statistikk, visualiseringer og stasjonaritetstest dokumentert"
+        },
+        {
+          "id": "3.3",
+          "name": "SARIMA-modellering",
+          "description": "Identifisere, estimere og diagnostisere SARIMA-modell etter Box-Jenkins-metoden.",
+          "owner": "Tord",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["3.2"],
+          "deliverables": [
+            "Python-skript for SARIMA i 006 analysis/",
+            "ACF/PACF-plott",
+            "Parameterestimater og diagnostikk",
+            "Residualanalyse (Ljung-Box)"
+          ],
+          "acceptance_criteria": "Modell estimert, residualer er hvit støy, parametre dokumentert"
+        },
+        {
+          "id": "3.4",
+          "name": "Varslingslogikk",
+          "description": "Implementere regelbasert gap-deteksjon som utløser varsel ved ≥75 % vinnersannsynlighet.",
+          "owner": "David",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["3.2"],
+          "deliverables": [
+            "Python-modul for gap-deteksjon i 006 analysis/",
+            "Varselsformat (region, utstyrstype, uke, gap-størrelse)",
+            "Dokumentasjon av produksjonsintegrasjon (Power BI REST API)"
+          ],
+          "acceptance_criteria": "Gap-logikk fungerer på testdata; varselformat definert"
+        },
+        {
+          "id": "3.5",
+          "name": "Validering og testing",
+          "description": "Evaluere modellens presisjon med MAE, RMSE og MAPE, og gjennomføre sensitivitetsanalyse.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["3.3", "3.4"],
+          "deliverables": [
+            "Evalueringsrapport med feilmetrikker",
+            "Sensitivitetsanalyse (ulike terskler: 50 %, 75 %, 90 %)",
+            "Backtesting-resultater"
+          ],
+          "acceptance_criteria": "Metrikker beregnet på testsett; begrensninger dokumentert"
+        },
+        {
+          "id": "3.6",
+          "name": "Rapportskriving (løpende)",
+          "description": "Skrive rapportkapitler løpende parallelt med gjennomføringsfasen.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Pågår",
+          "predecessors": ["3.1"],
+          "deliverables": [
+            "Markdown-filer per kapittel i 005 report/",
+            "Kapitelrekkefølge: data/metode → modell → analyse → case → teori → diskusjon → innledning"
+          ],
+          "acceptance_criteria": "Hovedutkast 80–90 % ferdig innen 27. april"
+        }
+      ]
+    },
+    {
+      "id": "4.0",
+      "name": "Avslutning",
+      "description": "Ferdigstille alle leveranser og forberede muntlig eksamen.",
+      "owner": "Begge",
+      "type": "Sammendrag",
+      "status": "Ikke startet",
+      "children": [
+        {
+          "id": "4.1",
+          "name": "Sluttrapport",
+          "description": "Komplett vitenskapelig forskningsrapport i henhold til LOG650-krav.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["3.5", "3.6"],
+          "deliverables": [
+            "Ferdig rapport i 005 report/",
+            "PDF-versjon til veiledere innen 1. mai"
+          ],
+          "acceptance_criteria": "Alle kapitler ferdig, APA 7 gjennomgående, figurer reproduserbare"
+        },
+        {
+          "id": "4.2",
+          "name": "KI-bruk-dokumentasjon",
+          "description": "Dokumentere all bruk av KI-verktøy og legge ved signert erklæring.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["4.1"],
+          "deliverables": [
+            "KI-bruk beskrevet i metodekapittelet",
+            "Signert erklæring som vedlegg",
+            "APA 7-referanser for KI-generert kode"
+          ],
+          "acceptance_criteria": "All KI-bruk dokumentert i henhold til retningslinjer fra kap. 7.8 og 8.6"
+        },
+        {
+          "id": "4.3",
+          "name": "Muntlig presentasjon",
+          "description": "Forberede og gjennomføre muntlig presentasjon med spørsmål.",
+          "owner": "Begge",
+          "type": "Leveranse",
+          "status": "Ikke startet",
+          "predecessors": ["4.1", "4.2"],
+          "deliverables": [
+            "Presentasjon (PowerPoint/slides)",
+            "Forberedte svar på sannsynlige spørsmål"
+          ],
+          "acceptance_criteria": "Begge teammedlemmer kan forklare alle deler av prosjektet muntlig"
+        }
+      ]
+    }
+  ]
+}
