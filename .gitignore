@@ -1,0 +1,46 @@
+# ── Data (konfidensielt / store filer) ───────────────────────────────────────
+004 data/raw/
+004 data/clean/
+004 data/processed/
+*.csv
+*.xlsx
+*.xls
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ── Miljøvariabler og hemmeligheter ──────────────────────────────────────────
+.env
+.env.*
+*.key
+secrets.*
+
+# ── Windows ───────────────────────────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Microsoft Office midlertidige filer ──────────────────────────────────────
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# ── VS Code ───────────────────────────────────────────────────────────────────
+.vscode/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
