@@ -2,154 +2,118 @@
   "metadata": {
     "project": "G26 WinchPump",
     "document": "Kravspesifikasjon",
-    "version": "1.0",
-    "last_updated": "2026-04-13",
+    "version": "1.1",
+    "last_updated": "2026-04-29",
     "description": "Fullstendig kravliste med identifikator, type, eier og sporbarhet til leveranser og testtilfeller."
   },
   "requirements": [
     {
-      "id": "REQ-F01",
+      "id": "K01",
       "type": "Funksjonell",
-      "requirement": "Systemet skal identifisere kapasitetsgap per region og utstyrsklasse for en planleggingshorisont på 3–6 måneder.",
-      "owner": "Tord",
-      "deliverable": "3.4",
+      "requirement": "Systemet skal loggføre hvilke regler som har utløst hvert varsel, inkludert dato, asset-type, tidligere verdi, ny verdi og mottaker.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.3",
       "test_case": "T01",
       "priority": "Høy"
     },
     {
-      "id": "REQ-F02",
+      "id": "K02",
       "type": "Funksjonell",
-      "requirement": "Systemet skal automatisk generere varsel når en kontrakt oppdateres til ≥75 % vinnersannsynlighet og det eksisterer et kapasitetsgap i bookingperioden.",
-      "owner": "David",
-      "deliverable": "3.4",
+      "requirement": "Systemet skal oppdage kapasitetsgap per region og utstyrsklasse i planleggingshorisonten.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.3",
       "test_case": "T02",
       "priority": "Høy"
     },
     {
-      "id": "REQ-F03",
+      "id": "K03",
       "type": "Funksjonell",
-      "requirement": "Varselet skal inneholde detaljer om region, utstyrstype, uke(r) med gap og gap-størrelse.",
-      "owner": "David",
+      "requirement": "Systemet skal automatisk generere varsel når en kontrakt når ≥75 % vinnersannsynlighet og kapasitetsgap eksisterer.",
+      "owner": "Prosjektgruppen",
       "deliverable": "3.4",
       "test_case": "T03",
-      "priority": "Middels"
+      "priority": "Høy"
     },
     {
-      "id": "REQ-F04",
-      "type": "Funksjonell",
-      "requirement": "Systemet skal kunne kjøre gap-analyse på ulike sannsynlighetsterskler (50 %, 75 %, 90 %) for sensitivitetsanalyse.",
-      "owner": "Begge",
-      "deliverable": "3.5",
-      "test_case": "T04",
-      "priority": "Middels"
-    },
-    {
-      "id": "REQ-D01",
+      "id": "K04",
       "type": "Data",
-      "requirement": "Data skal hentes fra Power BI (aggregert fra Salesforce og Asset Voice) som CSV-filer med supply/demand per region, utstyrsklasse og tidsperiode.",
-      "owner": "David",
+      "requirement": "Systemet skal bruke reelle data eksportert fra Power BI (opprinnelig fra Salesforce og Asset Voice).",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.1",
+      "test_case": "T04",
+      "priority": "Høy"
+    },
+    {
+      "id": "K05",
+      "type": "Data",
+      "requirement": "Datasettet skal inneholde aktuell supply/demand-oversikt per region, utstyrsklasse og tidsperiode (ukentlig).",
+      "owner": "Prosjektgruppen",
       "deliverable": "3.1",
       "test_case": "T05",
       "priority": "Høy"
     },
     {
-      "id": "REQ-D02",
-      "type": "Data",
-      "requirement": "Rådata skal lagres uendret i 004 data/. All bearbeiding gjøres på kopier.",
-      "owner": "David",
-      "deliverable": "3.1",
+      "id": "K06",
+      "type": "System",
+      "requirement": "Systemet skal skille mellom nye kapasitetsgap, eksisterende kapasitetsgap og forverrede kapasitetsgap.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.3",
       "test_case": "T06",
       "priority": "Høy"
     },
     {
-      "id": "REQ-D03",
-      "type": "Data",
-      "requirement": "Datasettet skal inneholde vinnersannsynlighet (1 %, 25 %, 50 %, 75 %, 100 %) per kontrakt/mulighet.",
-      "owner": "David",
-      "deliverable": "3.1",
+      "id": "K07",
+      "type": "System",
+      "requirement": "Gap-deteksjonen skal være regelbasert med uke-til-uke-sammenligning av supply/demand-data.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.3",
       "test_case": "T07",
       "priority": "Høy"
     },
     {
-      "id": "REQ-M01",
-      "type": "Modell",
-      "requirement": "SARIMA-modell med Box-Jenkins-metoden skal benyttes som primærmodell for etterspørselsprognoser der det er relevant.",
-      "owner": "Tord",
-      "deliverable": "3.3",
+      "id": "K08",
+      "type": "System",
+      "requirement": "Systemet skal valideres mot kjente kapasitetsgap for å verifisere korrekt deteksjon og varsling.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "3.5",
       "test_case": "T08",
       "priority": "Høy"
     },
     {
-      "id": "REQ-M02",
-      "type": "Modell",
-      "requirement": "Modellens presisjon skal evalueres med MAE, RMSE og MAPE på et testsett (80/20-splitt).",
-      "owner": "Tord",
-      "deliverable": "3.5",
+      "id": "K09",
+      "type": "Dokumentasjon",
+      "requirement": "Vitenskapelig forskningsrapport i henhold til LOG650-krav og kompendium for vitenskapelig skriving.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "4.1",
       "test_case": "T09",
       "priority": "Høy"
     },
     {
-      "id": "REQ-M03",
-      "type": "Modell",
-      "requirement": "Residualanalyse med Ljung-Box-test skal bekrefte at residualene er hvit støy.",
-      "owner": "Tord",
-      "deliverable": "3.3",
+      "id": "K10",
+      "type": "Dokumentasjon",
+      "requirement": "All KI-bruk skal dokumenteres og en signert erklæring skal legges ved som vedlegg.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "4.2",
       "test_case": "T10",
-      "priority": "Middels"
+      "priority": "Høy"
     },
     {
-      "id": "REQ-K01",
-      "type": "Kvalitet",
-      "requirement": "Alle figurer skal genereres fra kode og være fullt reproduserbare.",
-      "owner": "Begge",
-      "deliverable": "3.6",
+      "id": "K11",
+      "type": "Dokumentasjon",
+      "requirement": "Rapporten skal beskrive live API-integrasjon som anbefalt produksjonsarkitektur.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "4.1",
       "test_case": "T11",
       "priority": "Middels"
     },
     {
-      "id": "REQ-K02",
-      "type": "Kvalitet",
-      "requirement": "Sensitiv bedriftsdata fra Motive skal ikke deles med åpne KI-tjenester.",
-      "owner": "Begge",
-      "deliverable": "Alle",
+      "id": "K12",
+      "type": "Presentasjon",
+      "requirement": "Muntlig presentasjon med spørsmål i begynnelsen av juni 2026.",
+      "owner": "Prosjektgruppen",
+      "deliverable": "4.3",
       "test_case": "T12",
       "priority": "Høy"
-    },
-    {
-      "id": "REQ-L01",
-      "type": "Leveranse",
-      "requirement": "Vitenskapelig forskningsrapport i henhold til LOG650-krav, APA 7-stil.",
-      "owner": "Begge",
-      "deliverable": "4.1",
-      "test_case": "T13",
-      "priority": "Høy"
-    },
-    {
-      "id": "REQ-L02",
-      "type": "Leveranse",
-      "requirement": "Dokumentasjon av all KI-bruk med signert erklæring som vedlegg.",
-      "owner": "Begge",
-      "deliverable": "4.2",
-      "test_case": "T14",
-      "priority": "Høy"
-    },
-    {
-      "id": "REQ-L03",
-      "type": "Leveranse",
-      "requirement": "Muntlig presentasjon med spørsmål i begynnelsen av juni 2026.",
-      "owner": "Begge",
-      "deliverable": "4.3",
-      "test_case": "T15",
-      "priority": "Høy"
-    },
-    {
-      "id": "REQ-L04",
-      "type": "Leveranse",
-      "requirement": "Rapporten skal beskrive hvordan løsningen kan realiseres i produksjon gjennom Power BI REST API og Power Automate.",
-      "owner": "Begge",
-      "deliverable": "4.1",
-      "test_case": "T16",
-      "priority": "Middels"
     }
   ]
 }

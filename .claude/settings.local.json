@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:doi.org)",
+      "WebFetch(domain:www.frontiersin.org)",
+      "WebFetch(domain:linkinghub.elsevier.com)"
+    ]
+  }
+}

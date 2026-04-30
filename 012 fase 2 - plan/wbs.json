@@ -2,8 +2,8 @@
   "metadata": {
     "project": "G26 WinchPump",
     "document": "Arbeidsnedbrytningsstruktur (WBS)",
-    "version": "1.0",
-    "last_updated": "2026-04-13",
+    "version": "1.1",
+    "last_updated": "2026-04-29",
     "description": "Fullstendig WBS med identifikator, beskrivelse, eier, avhengigheter og status. Følger LOG650 sin fasestruktur."
   },
   "wbs": [
@@ -130,7 +130,7 @@
         {
           "id": "3.2",
           "name": "Eksplorativ dataanalyse (EDA)",
-          "description": "Visualisere data, identifisere mønstre og teste stasjonaritet med ADF-test.",
+          "description": "Visualisere data, identifisere mønstre og analysere datastruktur.",
           "owner": "Tord",
           "type": "Leveranse",
           "status": "Ikke startet",
@@ -138,55 +138,55 @@
           "deliverables": [
             "Python-skript for EDA i 006 analysis/",
             "Visualiseringer (tidsserier, korrelasjoner, sesongmønstre)",
-            "Stasjonaritetstest-resultater (ADF, KPSS)"
+            "Mønsteridentifikasjon og datastrukturanalyse"
           ],
-          "acceptance_criteria": "Deskriptiv statistikk, visualiseringer og stasjonaritetstest dokumentert"
+          "acceptance_criteria": "Deskriptiv statistikk og visualiseringer dokumentert"
         },
         {
           "id": "3.3",
-          "name": "SARIMA-modellering",
-          "description": "Identifisere, estimere og diagnostisere SARIMA-modell etter Box-Jenkins-metoden.",
-          "owner": "Tord",
+          "name": "Gap-deteksjonslogikk",
+          "description": "Regelbasert logikk for identifisering av kapasitetsgap og uke-til-uke-endringer i supply/demand-data.",
+          "owner": "Begge",
           "type": "Leveranse",
-          "status": "Ikke startet",
+          "status": "Pågår",
           "predecessors": ["3.2"],
           "deliverables": [
-            "Python-skript for SARIMA i 006 analysis/",
-            "ACF/PACF-plott",
-            "Parameterestimater og diagnostikk",
-            "Residualanalyse (Ljung-Box)"
+            "Python-script for gap-deteksjon i 006 analysis/",
+            "Uke-til-uke-sammenligning av supply/demand-data",
+            "Logg over utløste regler (dato, asset-type, verdier, mottaker)"
           ],
-          "acceptance_criteria": "Modell estimert, residualer er hvit støy, parametre dokumentert"
+          "acceptance_criteria": "Gap-deteksjon skiller mellom nye, eksisterende og forverrede gap på testdata"
         },
         {
           "id": "3.4",
           "name": "Varslingslogikk",
-          "description": "Implementere regelbasert gap-deteksjon som utløser varsel ved ≥75 % vinnersannsynlighet.",
-          "owner": "David",
+          "description": "Implementere 75 %-terskel, gap-deteksjon og e-postvarsling med ukentlige påminnelser.",
+          "owner": "Begge",
           "type": "Leveranse",
           "status": "Ikke startet",
-          "predecessors": ["3.2"],
+          "predecessors": ["3.3"],
           "deliverables": [
-            "Python-modul for gap-deteksjon i 006 analysis/",
-            "Varselsformat (region, utstyrstype, uke, gap-størrelse)",
+            "Python-modul for e-postvarsling i 006 analysis/",
+            "Varselsformat (utstyrsklasse, tidsperiode, gap-størrelse, mottaker)",
+            "Ukentlig påminnelseslogikk frem til gap er løst",
             "Dokumentasjon av produksjonsintegrasjon (Power BI REST API)"
           ],
-          "acceptance_criteria": "Gap-logikk fungerer på testdata; varselformat definert"
+          "acceptance_criteria": "Varsel genereres korrekt ved ≥75 % vinnersannsynlighet og gap; påminnelse sendes ukentlig"
         },
         {
           "id": "3.5",
           "name": "Validering og testing",
-          "description": "Evaluere modellens presisjon med MAE, RMSE og MAPE, og gjennomføre sensitivitetsanalyse.",
+          "description": "Teste systemet mot kjente gap, verifisere korrekt varsling og teste edge cases.",
           "owner": "Begge",
           "type": "Leveranse",
           "status": "Ikke startet",
           "predecessors": ["3.3", "3.4"],
           "deliverables": [
-            "Evalueringsrapport med feilmetrikker",
-            "Sensitivitetsanalyse (ulike terskler: 50 %, 75 %, 90 %)",
-            "Backtesting-resultater"
+            "Testrapport mot kjente kapasitetsgap i historiske data",
+            "Verifisering av korrekt deteksjon og varsling",
+            "Edge case-testing (ingen gap, flere samtidige gap, forverring over tid)"
           ],
-          "acceptance_criteria": "Metrikker beregnet på testsett; begrensninger dokumentert"
+          "acceptance_criteria": "Systemet korrekt identifiserer gap, sender varsling til riktig mottaker og håndterer edge cases"
         },
         {
           "id": "3.6",

@@ -14,7 +14,7 @@
 
 - Svar alltid på **norsk**
 - Vær kortfattet og presis – unngå unødvendig utfylling
-- Bruk faglige termer der det er naturlig (supply/demand, SARIMA, kapasitetsgap osv.)
+- Bruk faglige termer der det er naturlig (supply/demand, kapasitetsgap, gap-deteksjon, varslingslogikk osv.)
 - Bruk norsk i rapporttekst, statusfiler og planfiler
 - Behold norske bokstaver **æ, ø og å** i både kode, Markdown og genererte tabeller når filene skal leses av mennesker
 
@@ -47,8 +47,7 @@
 | `012 fase 2 - plan/wbs.json` | Arbeidsnedbrytningsstruktur |
 | `012 fase 2 - plan/milestones.json` | Milepælsplan |
 | `012 fase 2 - plan/status.md` | Løpende prosjektstatus med checkbokser |
-| `005 report/rapport.md` | Selve rapporten – skrives her |
-| `005 report/rapport_mal.md` | Rapportmal med kapitelstruktur og veiledning (les, ikke rediger) |
+| `005 report/Prosjektrapport.md` | Selve rapporten – skrives her |
 | `000 templates/` | Høgskolens maler (les, ikke rediger) |
 
 ## Regler
@@ -61,7 +60,7 @@
 
 ## Rapportstruktur
 
-Rapporten skrives i `005 report/rapport.md`. Malen med veiledning ligger i `005 report/rapport_mal.md` – les den, men ikke rediger den.
+Rapporten skrives i `005 report/Prosjektrapport.md`.
 
 | Kapittel | Tittel | Merknad |
 |----------|--------|---------|
@@ -79,13 +78,61 @@ Rapporten skrives i `005 report/rapport.md`. Malen med veiledning ligger i `005 
 | 5.0 | Metode og data | |
 | 5.1 | Metode | |
 | 5.2 | Data | |
-| 6.0 | Modellering | SARIMA + varslingslogikk |
-| 7.0 | Analyse | EDA, Box-Jenkins, gap-analyse |
+| 6.0 | Modellering | gap-deteksjonslogikk + varslingslogikk |
+| 7.0 | Analyse | EDA, uke-til-uke-analyse, gap-analyse |
 | 8.0 | Resultat | Kun presentasjon, ingen diskusjon |
 | 9.0 | Diskusjon | |
 | 10.0 | Konklusjon | |
 | 11.0 | Bibliografi | APA 7 |
 | 12.0 | Vedlegg | KI-erklæring, kravmatrise, kode |
+
+## Rapportskriving
+
+- Skriv innhold fortløpende i rapporten underveis i prosjektet, ikke vent til alt analysearbeid er ferdig.
+- I `Prosjektrapport.md` skal inline matematikk skrives med `$...$`, ikke `\(...\)`, siden Markdown-visningen støtter dollar-notasjon best.
+- Skill tydelig mellom:
+  - `Casebeskrivelse`: beskriver Motive Offshore, dataøkosystemet og historiske fakta.
+  - `Metode og data`: beskriver metodevalg, datagrunnlag, datakvalitet og CSV-eksportoppsett.
+  - `Analyse/Resultat`: brukes først når faktisk gap-analyse og valideringsresultater er gjort.
+- Beskrivende figurer for historisk supply/demand-utvikling skal inn i casekapitlet, ikke i analysekapitlet.
+- Datatabeller som dokumenterer datasettet skal inn i datakapitlet.
+- Når noe bare er en antagelse, skriv det eksplisitt som antagelse og ikke som verifisert fakta.
+
+## Figurer i rapporten
+
+- Bruk HTML for bilder i `Prosjektrapport.md`, ikke vanlig Markdown-bildeformat, når bredde og sentrering skal styres.
+- Standard for rapportfigurer i dette prosjektet:
+  - sentrert figur
+  - `width="80%"`
+  - kort figurtekst under figuren
+- Figurtekst skal være sentrert, liten skrift og kursiv.
+- Foretrukket mønster:
+
+```html
+<div align="center">
+  <img src="..." alt="..." width="80%">
+  <p align="center"><small><i>Figur X Kort figurtekst.</i></small></p>
+</div>
+```
+
+## Tabeller i rapporten
+
+- Tabeller kan limes inn direkte som Markdown-tabeller når de er små og lesbare.
+- Tabeller skal ha en kort introduksjonssetning i brødteksten før de settes inn.
+- Bruk tabellnummer i teksten, for eksempel `Tabell 4.1`.
+- Tabeller som trenger tabelltekst kan få samme stil som figurtekster: sentrert, liten skrift og kursiv under tabellen.
+
+## Kode og analyse
+
+- Analysearbeid i `006 analysis/` organiseres etter aktiviteter i prosjektplanen (3.1, 3.2, 3.3 osv.).
+- Ett felles `uv`-prosjekt brukes for hele `006 analysis/`.
+- Skript, figurer og resultatfiler skal ligge i samme aktivitetsmappe.
+- Filnavn i analyseartefakter skal være korte, ryddige og prefikset med `fig_` for figurer og `tab_` for tabeller.
+
+## Praktiske preferanser
+
+- Når noe er fullført i prosjektet, oppdater både planfiler (`milestones.json`, `wbs.json`) og `status.md`.
+- Nye arbeidssteg bør legges inn i planen før aktiviteten lukkes.
 
 ## Rapportsjekkliste
 
@@ -96,8 +143,8 @@ Bruk denne som en siste kontroll før kapitler ferdigstilles.
 - [ ] **Teori** – plasserer problemstillingen i fagfeltet, danner grunnlag for metodevalg.
 - [ ] **Casebeskrivelse** – beskriver Motive Offshore, dataøkosystemet og 75 %-terskelen. Kun relevant info.
 - [ ] **Metode og data** – så nøyaktig at prosessen kan gjentas. KI-bruk dokumentert (kap. 8).
-- [ ] **Modellering** – SARIMA matematisk definert, varslingslogikk forklart, én-til-én med problemstillingen.
-- [ ] **Analyse** – EDA, Box-Jenkins, residualanalyse og sensitivitetsanalyse dokumentert.
+- [ ] **Modellering** – gap-deteksjonslogikk og varslingslogikk forklart og én-til-én med problemstillingen.
+- [ ] **Analyse** – EDA, uke-til-uke-sammenligning og gap-analyse dokumentert.
 - [ ] **Resultat** – kun presentasjon, ingen diskusjon. Tekst før hver tabell/figur.
 - [ ] **Diskusjon** – funn kommentert mot litteratur og problemstilling, begrensninger nevnt.
 - [ ] **Konklusjon** – gjentar problemstillingen, oppsummerer hovedfunn, foreslår videre forskning.
@@ -118,4 +165,4 @@ Bruk denne som en siste kontroll før kapitler ferdigstilles.
 - Kun prosjekter med **≥75 % vinnersannsynlighet** inkluderes i etterspørselsanalysen
 - Kun **Tier 2-utstyrskategorier** inngår i modellen
 - Modellen varsler om gap – foreslår ikke løsninger
-- Prosjektet bruker **SARIMA/Box-Jenkins** for tidsseriemodellering
+- Systemet bruker **regelbasert gap-deteksjon** (ikke SARIMA) – uke-til-uke-sammenligning av supply/demand

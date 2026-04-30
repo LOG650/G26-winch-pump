@@ -2,81 +2,67 @@
   "metadata": {
     "project": "G26 WinchPump",
     "document": "Milepælsplan",
-    "version": "1.0",
-    "last_updated": "2026-04-13",
+    "version": "1.1",
+    "last_updated": "2026-04-29",
     "authors": ["David Johan Lunde", "Tord Haakon Johnsen Hovden"],
     "project_start": "2026-01-05",
-    "project_end": "2026-06-01"
+    "project_end": "2026-05-31"
   },
   "milestones": [
     {
       "id": "M1",
-      "name": "Godkjent proposal",
-      "date": "2026-02-09",
+      "name": "Godkjent prosjektbeskrivelse (proposal)",
+      "date": "2026-02-23",
       "deliverable": "1.1",
       "status": "Oppnådd"
     },
     {
       "id": "M2",
-      "name": "Datatilgang bekreftet",
-      "date": "2026-02-09",
-      "deliverable": "1.3",
+      "name": "Data mottatt og klargjort",
+      "date": "2026-03-10",
+      "deliverable": "3.1",
       "status": "Oppnådd"
     },
     {
       "id": "M3",
-      "name": "Prosjektstyringsplan godkjent",
-      "date": "2026-03-09",
+      "name": "Godkjent prosjektstyringsplan",
+      "date": "2026-03-16",
       "deliverable": "2.1",
       "status": "Oppnådd"
     },
     {
       "id": "M4",
-      "name": "Data renset og klart for analyse",
-      "date": "2026-03-20",
-      "deliverable": "3.1",
+      "name": "Første fungerende gap-deteksjonsscript",
+      "date": "2026-04-18",
+      "deliverable": "3.3",
       "status": "Pågår"
     },
     {
       "id": "M5",
-      "name": "EDA ferdigstilt",
-      "date": "2026-03-27",
-      "deliverable": "3.2",
+      "name": "Varslingslogikk implementert (e-postvarsling)",
+      "date": "2026-05-02",
+      "deliverable": "3.4",
       "status": "Ikke startet"
     },
     {
       "id": "M6",
-      "name": "Modell validert",
-      "date": "2026-04-20",
+      "name": "Varslingssystem testet og validert mot kjente gap",
+      "date": "2026-05-10",
       "deliverable": "3.5",
       "status": "Ikke startet"
     },
     {
       "id": "M7",
-      "name": "Hovedutkast rapport (80–90 % ferdig)",
-      "date": "2026-04-27",
+      "name": "Førsteutkast rapport ferdig",
+      "date": "2026-05-16",
       "deliverable": "3.6",
       "status": "Ikke startet"
     },
     {
       "id": "M8",
-      "name": "PDF til veiledere for gjennomlesning",
-      "date": "2026-05-01",
-      "deliverable": "4.1",
-      "status": "Ikke startet"
-    },
-    {
-      "id": "M9",
-      "name": "Endelig innlevering",
+      "name": "Sluttrapport innlevert",
       "date": "2026-05-31",
       "deliverable": "4.1",
-      "status": "Ikke startet"
-    },
-    {
-      "id": "M10",
-      "name": "Muntlig eksamen",
-      "date": "2026-06-01",
-      "deliverable": "4.3",
       "status": "Ikke startet"
     }
   ]

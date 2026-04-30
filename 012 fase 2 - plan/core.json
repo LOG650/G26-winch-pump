@@ -2,8 +2,8 @@
   "metadata": {
     "project": "G26 WinchPump",
     "document": "Prosjektkjerne",
-    "version": "1.0",
-    "last_updated": "2026-04-13",
+    "version": "1.1",
+    "last_updated": "2026-04-29",
     "description": "Kjernedata for prosjektet: team, interessenter, mål, omfang og løsning."
   },
   "project": {
@@ -96,20 +96,20 @@
     }
   ],
   "objective": {
-    "main": "Utvikle et KI-basert varslingssystem som automatisk identifiserer kapasitetsgap i Motive Offshores utleieflåte når kontrakter oppdateres til ≥75 % vinnersannsynlighet.",
-    "research_question": "Hvordan kan en KI-modell basert på data fra Salesforce og Asset Voice automatisk varsle om fremtidige kapasitetsgap i Motive Offshores utleieflåte 3–6 måneder frem i tid?",
+    "main": "Utvikle et automatisert varslingssystem som oppdager kapasitetsgap i Motive Offshores utleieflåte basert på live supply/demand-data fra Power BI, og varsler ansvarlig selger slik at tiltak kan iverksettes i god tid.",
+    "research_question": "Hvordan kan et automatisert varslingssystem basert på data fra Power BI oppdage kapasitetsgap i Motive Offshores utleieflåte og varsle ansvarlig selger i tide?",
     "sub_questions": [
       "Hvilke utstyrsklasser og regioner er mest utsatt for kapasitetsgap?",
-      "Hva er den optimale varslingshorisonten for å gi tilstrekkelig handlingsrom?",
+      "Hvordan kan uke-til-uke-sammenligning av supply/demand-data brukes til å identifisere nye og forverrede kapasitetsgap?",
       "Hvordan kan løsningen integreres med eksisterende Power BI-infrastruktur i produksjon?"
     ]
   },
   "scope": {
     "included": [
-      "Regelbasert varslingslogikk med 75 %-terskel",
-      "Gap-deteksjon per region og utstyrsklasse, 3–6 måneders horisont",
-      "SARIMA-modellering som tilleggsmetode for etterspørselsprognoser",
-      "Validering med MAE, RMSE, MAPE og sensitivitetsanalyse",
+      "Regelbasert gap-deteksjonslogikk med 75 %-terskel i Python",
+      "Uke-til-uke-sammenligning av supply/demand-data per region og utstyrsklasse",
+      "Automatisk e-postvarsling med ukentlige påminnelser ved kapasitetsgap",
+      "Validering mot kjente kapasitetsgap i historiske data",
       "Produksjonsanbefaling for Power BI REST API-integrasjon",
       "Vitenskapelig rapport og muntlig presentasjon"
     ],
@@ -117,6 +117,8 @@
       "Direkte API-integrasjon mot Salesforce eller Asset Voice i produksjon",
       "Implementering i Motives produksjonsmiljø",
       "Sanntids-trigger fra Salesforce (beskrives kun som anbefaling)",
+      "SARIMA-baserte etterspørselsprognoser",
+      "Optimalisering av logistikkbeslutninger (f.eks. omallokering av utstyr)",
       "Datatransformasjon/DAX-utvikling i Power BI"
     ]
   },
@@ -124,18 +126,18 @@
     "components": [
       {
         "name": "Datainnhenting og klargjøring",
-        "description": "CSV-eksport fra Power BI med aggregerte supply/demand-data per region, utstyrsklasse og tidsperiode. Inneholder vinnersannsynlighet fra Salesforce og tilgjengelighetsstatus fra Asset Voice."
+        "description": "Ukentlig eksport av supply/demand-tabellen fra Power BI som CSV-fil. Inneholder aggregerte gap-verdier per utstyrsklasse og uke, med informasjon om kontrakter og ansvarlige selgere."
       },
       {
-        "name": "Prognosemodell (SARIMA)",
-        "description": "SARIMA-modell i Python for etterspørselsprognoser 3–6 måneder fremover. Box-Jenkins-metoden: ADF-test, ACF/PACF, parameterestimering, Ljung-Box-validering."
+        "name": "Gap-deteksjonslogikk",
+        "description": "Python-script som ukentlig leser supply/demand-tabellen fra Power BI, sammenligner med forrige ukes data, og identifiserer nye eller forverrede kapasitetsgap. Sjekker negative verdier (mangel) per utstyrsklasse og periode, og om tallene har endret seg negativt fra forrige uke."
       },
       {
         "name": "Varslingslogikk",
-        "description": "Når en kontrakt oppdateres til ≥75 % vinnersannsynlighet, sammenligner systemet prognostisert demand mot tilgjengelig supply. Ved kapasitetsgap genereres varsel til relevant selger/planlegger."
+        "description": "Automatisk e-postvarsling til ansvarlig selger/prosjektkoordinator når gap oppdages eller forverres. Varselet inneholder utstyrsklasse, tidsperiode og gap-størrelse. Ukentlig påminnelse sendes frem til gapet er løst."
       }
     ],
-    "production_recommendation": "Power BI REST API for sanntidsdata + Power Automate eller Python webhook for automatisk varsling via Teams/e-post.",
+    "production_recommendation": "Live API-integrasjon mot Power BI REST API med Power Automate eller Python webhook for automatisk varsling via e-post/Teams.",
     "data_sources": [
       {
         "system": "Salesforce",
