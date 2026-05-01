@@ -3,7 +3,7 @@
     "project": "G26 WinchPump",
     "document": "Arbeidsnedbrytningsstruktur (WBS)",
     "version": "1.1",
-    "last_updated": "2026-04-29",
+    "last_updated": "2026-05-01",
     "description": "Fullstendig WBS med identifikator, beskrivelse, eier, avhengigheter og status. Følger LOG650 sin fasestruktur."
   },
   "wbs": [
@@ -115,17 +115,18 @@
         {
           "id": "3.1",
           "name": "Datainnhenting og klargjøring",
-          "description": "Eksportere relevante datasett fra Power BI som CSV og rense/strukturere for analyse.",
+          "description": "Fange supply/demand-data fra Power BI og strukturere for analyse. Direkte CSV-eksport ble sperret av rettighetspolicy; datafangst skjer derfor ved manuell skjermavlesning og transkribering til CSV.",
           "owner": "David",
           "type": "Leveranse",
-          "status": "Pågår",
+          "status": "Baseline ferdig, pågår løpende",
           "predecessors": ["2.3", "2.4"],
           "deliverables": [
-            "Rå CSV-filer i 004 data/raw/",
-            "Rensede CSV-filer i 004 data/clean/",
-            "Datadokumentasjon (kolonner, typer, mangler)"
+            "Råbilder per snapshot i 004 data/<dato>_motive_baseline/raw/",
+            "Rensede CSV-er per snapshot i 004 data/<dato>_motive_baseline/clean/",
+            "Skjemadokumentasjon i 006 analysis/3.1 datainnhenting/tab_kolonner.md",
+            "Transkriberings- og verifikasjonsskript i 006 analysis/3.1 datainnhenting/"
           ],
-          "acceptance_criteria": "Data renset, dokumentert og klart for EDA"
+          "acceptance_criteria": "Data verifisert mot Power BIs Totalt- og Tier 1-rader, dokumentert og klart for EDA. Baseline-snapshot 2026-04-30 oppnådd."
         },
         {
           "id": "3.2",
@@ -133,12 +134,13 @@
           "description": "Visualisere data, identifisere mønstre og analysere datastruktur.",
           "owner": "Tord",
           "type": "Leveranse",
-          "status": "Ikke startet",
+          "status": "Ferdig",
           "predecessors": ["3.1"],
           "deliverables": [
-            "Python-skript for EDA i 006 analysis/",
-            "Visualiseringer (tidsserier, korrelasjoner, sesongmønstre)",
-            "Mønsteridentifikasjon og datastrukturanalyse"
+            "Python-skript for EDA i 006 analysis/3.2 eda/eda_main.py",
+            "Seks figurer (gap-distribusjon, total per uke, heatmap, topp 10, per Tier 1, demand vs reservations)",
+            "Tre tabeller (strukturelle gaps, topp 10, zero-gap-assets)",
+            "Funnsdokument i 006 analysis/3.2 eda/eda_findings.md"
           ],
           "acceptance_criteria": "Deskriptiv statistikk og visualiseringer dokumentert"
         },

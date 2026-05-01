@@ -1,0 +1,26 @@
+# Virtuelle miljøer
+.venv/
+__pycache__/
+*.pyc
+
+# Sensitive credentials
+.env
+.env.*
+!.env.example
+
+# Datafiler – konfidensielt (Motive Offshore)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+
+# Output / mellomresultater
+*.log
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

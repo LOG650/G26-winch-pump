@@ -1,7 +1,7 @@
 # Prosjektstatus
 
 **Prosjekt:** G26 WinchPump – KI-basert kapasitetsvarsling for Motive Offshore
-**Dato:** 2026-04-30
+**Dato:** 2026-05-01
 **Utarbeidet av:** David Johan Lunde og Tord Haakon Johnsen Hovden
 
 ---
@@ -38,12 +38,12 @@
 
 ### 3.0 Gjennomføring
 
-- [ ] 3.1 Datainnhenting og klargjøring — David
-- [ ] 3.2 Eksplorativ dataanalyse (EDA) — Tord
-- [ ] 3.3 Gap-deteksjonslogikk — Begge
+- [x] 3.1 Datainnhenting og klargjøring — David *(baseline-snapshot 2026-04-30 ferdig; løpende ukentlige snapshots fortsetter)*
+- [x] 3.2 Eksplorativ dataanalyse (EDA) — Tord
+- [ ] 3.3 Gap-deteksjonslogikk — Begge *(pågår; trenger snapshot 2 for delta-detektor)*
 - [ ] 3.4 Varslingslogikk — Begge
 - [ ] 3.5 Validering og testing — Begge
-- [ ] 3.6 Rapportskriving (løpende) — Begge
+- [ ] 3.6 Rapportskriving (løpende) — Begge *(kapittel 1–5 ferdig; kapittel 6 påbegynnes)*
 
 ### 4.0 Avslutning
 
@@ -72,10 +72,10 @@
   - [x] 1.4 Antagelser
 - [x] 2.0 Litteratur
 - [x] 3.0 Teori
-- [ ] 4.0 Casebeskrivelse (Motive Offshore)
-- [ ] 5.0 Metode og data
+- [x] 4.0 Casebeskrivelse (Motive Offshore)
+- [x] 5.0 Metode og data
   - [x] 5.1 Metode
-  - [ ] 5.2 Data
+  - [x] 5.2 Data
 - [ ] 6.0 Modellering
 - [ ] 7.0 Analyse
 - [ ] 8.0 Resultat

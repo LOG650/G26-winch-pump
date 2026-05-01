@@ -3,7 +3,7 @@
     "project": "G26 WinchPump",
     "document": "Risikoregister",
     "version": "1.1",
-    "last_updated": "2026-04-29",
+    "last_updated": "2026-05-01",
     "description": "Risikoregister med sannsynlighet, konsekvens, risikonivå, eier, tiltak og beredskapsplan.",
     "scoring": {
       "probability": "1–5 (1 = svært lav, 5 = svært høy)",
@@ -125,16 +125,29 @@
     },
     {
       "id": "R09",
-      "description": "Power BI-dataene endrer format eller struktur",
+      "description": "Power BI-dataene endrer format eller visningslayout",
       "probability": 2,
       "impact": 3,
       "level": 6,
       "severity": "Middels",
       "owner": "Begge",
-      "mitigation": "Dokumentere forventet dataformat; bygge inn feilhåndtering i scriptet",
-      "contingency": "Manuell tilpasning av CSV-parsing",
+      "mitigation": "Dokumentere forventet dataformat og visningslayout; bygge inn feilhåndtering i transkriberingsskriptet; ta nye snapshots ved layout-endringer",
+      "contingency": "Manuell tilpasning av CSV-skjema og transkribering",
       "status": "Aktiv",
       "affected_deliverables": ["3.1", "3.3"]
+    },
+    {
+      "id": "R10",
+      "description": "Begrenset Power BI-eksportrettighet (Analyser i Excel og Eksporter data sperret av rettighetspolicy)",
+      "probability": 5,
+      "impact": 3,
+      "level": 15,
+      "severity": "Realisert",
+      "owner": "Begge",
+      "mitigation": "Forsøk på å eskalere tilgang; vurdert PDF-eksport som alternativ",
+      "contingency": "Manuell skjermavlesning av PNG-skjermbilder fra Power BI med transkribering til CSV i Python; sumsjekk mot Power BIs Totalt- og Tier 1-rader for å oppdage transkriberingsfeil",
+      "status": "Realisert (håndtert via skjermavlesning)",
+      "affected_deliverables": ["3.1", "3.2", "3.3", "3.4", "3.5"]
     }
   ]
 }
