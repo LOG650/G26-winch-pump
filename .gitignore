@@ -1,10 +1,13 @@
 # ── Data (konfidensielt / store filer) ───────────────────────────────────────
-004 data/raw/
-004 data/clean/
-004 data/processed/
+# Hver snapshot lagres i egen dato-mappe under 004 data/. Hele mappen er
+# konfidensiell og skal ikke committes.
+004 data/*/
 *.csv
 *.xlsx
 *.xls
+
+# Transkriberingsskript (inneholder rådata inline – konfidensielt)
+_transcribe_*.py
 
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/

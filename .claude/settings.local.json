@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:doi.org)",
       "WebFetch(domain:www.frontiersin.org)",
-      "WebFetch(domain:linkinghub.elsevier.com)"
+      "WebFetch(domain:linkinghub.elsevier.com)",
+      "Bash(uv --version)",
+      "Bash(uv init *)"
     ]
   }
 }

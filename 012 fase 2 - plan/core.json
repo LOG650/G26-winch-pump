@@ -3,7 +3,7 @@
     "project": "G26 WinchPump",
     "document": "Prosjektkjerne",
     "version": "1.1",
-    "last_updated": "2026-04-29",
+    "last_updated": "2026-05-01",
     "description": "Kjernedata for prosjektet: team, interessenter, mål, omfang og løsning."
   },
   "project": {
@@ -20,7 +20,7 @@
         "role": "Prosjektleder / Modellering",
         "responsibilities": [
           "Prosjektledelse og fremdriftsstyring",
-          "SARIMA-modellering og parameteranalyse",
+          "Regelbasert gap-deteksjonsmodell og uke-til-uke-deteksjonslogikk",
           "Eksplorativ dataanalyse",
           "Prosjektstyringsplan og Gantt",
           "Versjonskontroll (Git/GitHub)"
@@ -126,7 +126,7 @@
     "components": [
       {
         "name": "Datainnhenting og klargjøring",
-        "description": "Ukentlig eksport av supply/demand-tabellen fra Power BI som CSV-fil. Inneholder aggregerte gap-verdier per utstyrsklasse og uke, med informasjon om kontrakter og ansvarlige selgere."
+        "description": "Ukentlig fangst av supply/demand-tabellen fra Power BI. Direkte CSV-eksport ble sperret av rettighetspolicy hos Motive; datafangst skjer derfor ved skjermavlesning av PNG-skjermbilder med transkribering til CSV. Resultatet er aggregerte gap-verdier per utstyrsklasse, region og uke."
       },
       {
         "name": "Gap-deteksjonslogikk",
@@ -152,7 +152,7 @@
       {
         "system": "Power BI",
         "provides": "Aggregert supply/demand-oversikt med fargekoding og ukentlig granularitet",
-        "access": "CSV-eksport (prosjektet), REST API (produksjonsanbefaling)"
+        "access": "Skjermavlesning av PNG-skjermbilder med transkribering til CSV (prosjektet, fordi Analyser i Excel og Eksporter data er sperret av rettighetspolicy); REST API (produksjonsanbefaling)"
       }
     ]
   },
