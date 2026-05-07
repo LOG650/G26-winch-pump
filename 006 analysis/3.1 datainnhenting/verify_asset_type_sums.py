@@ -1,9 +1,9 @@
-"""Verifiserer leaf-sum mot Tier 1-gruppesummer for et snapshot.
+"""Verifiserer leaf-sum mot asset type-summer for et snapshot.
 
-Bruk: uv run python "3.1 datainnhenting/verify_tier1_sums.py" <csv-fil>
+Bruk: uv run python "3.1 datainnhenting/verify_asset_type_sums.py" <csv-fil>
 
 Forskjell |diff| <= ROUNDING_TOLERANCE markeres som avrundingsstoy
-(Power BI viser avrundede heltall i celler men aggregerer Tier 1 fra
+(Power BI viser avrundede heltall i celler men aggregerer asset type-summer fra
 desimal-grunndata). Storre forskjeller er sannsynligvis transkriberingsfeil.
 """
 import csv
@@ -13,7 +13,7 @@ from collections import defaultdict
 ROUNDING_TOLERANCE = 2
 
 
-def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
+def main(csv_path: str, expected_asset_type: dict[str, list[int]]) -> int:
     rows = []
     with open(csv_path, encoding='utf-8') as f:
         for r in csv.DictReader(f):
@@ -23,21 +23,21 @@ def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
     sums: dict[str, list[int]] = defaultdict(lambda: [0] * len(weeks))
     week_idx = {w: i for i, w in enumerate(weeks)}
     for r in rows:
-        sums[r['asset_tier1']][week_idx[r['week_start']]] += int(r['gap_value'])
+        sums[r['asset_type']][week_idx[r['week_start']]] += int(r['gap_value'])
 
     print(f'CSV: {csv_path}')
     print(f'Uker: {weeks}')
     print()
-    print(f'{"Tier 1":25s} | ' + ' | '.join(f'{w[5:]:>6s}' for w in weeks))
+    print(f'{"Asset type":25s} | ' + ' | '.join(f'{w[5:]:>6s}' for w in weeks))
     print('-' * (28 + 9 * len(weeks)))
     transcription_errors = 0
     rounding_noise = 0
-    for t1 in sorted(sums):
-        line = f'{t1:25s} | ' + ' | '.join(f'{v:>6d}' for v in sums[t1])
+    for at in sorted(sums):
+        line = f'{at:25s} | ' + ' | '.join(f'{v:>6d}' for v in sums[at])
         print(line)
-        if t1 in expected_tier1:
-            exp = expected_tier1[t1]
-            diffs = [s - e for s, e in zip(sums[t1], exp)]
+        if at in expected_asset_type:
+            exp = expected_asset_type[at]
+            diffs = [s - e for s, e in zip(sums[at], exp)]
             if any(d != 0 for d in diffs):
                 marks = []
                 for d in diffs:
@@ -59,7 +59,7 @@ def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Bruk: verify_tier1_sums.py <csv-fil>')
+        print('Bruk: verify_asset_type_sums.py <csv-fil>')
         sys.exit(2)
 
     EXPECTED_2026_04_30 = {

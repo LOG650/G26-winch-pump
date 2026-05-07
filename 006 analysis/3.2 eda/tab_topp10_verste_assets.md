@@ -1,4 +1,4 @@
-| asset_tier1           | asset_tier2                                                                    |   kumulativ_gap |
+| asset_type            | asset_tier2                                                                    |   kumulativ_gap |
 |:----------------------|:-------------------------------------------------------------------------------|----------------:|
 | Tensioner             | Horizontal - 2 track - 15Te Horizontal Tensioner                               |            -299 |
 | HPUS                  | Electric - 54kW Electric HPU                                                   |            -293 |

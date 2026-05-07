@@ -1,4 +1,4 @@
-| asset_tier1   | asset_tier2                                                  |   min_gap |   max_gap |   snitt_gap |   sum_gap |
+| asset_type    | asset_tier2                                                  |   min_gap |   max_gap |   snitt_gap |   sum_gap |
 |:--------------|:-------------------------------------------------------------|----------:|----------:|------------:|----------:|
 | Tensioner     | Horizontal - 2 track - 15Te Horizontal Tensioner             |       -13 |        -2 |       -8.31 |      -299 |
 | HPUS          | Electric - 54kW Electric HPU                                 |       -12 |        -1 |       -8.14 |      -293 |

@@ -1,4 +1,4 @@
-| asset_tier1   | asset_tier2                                                                    |
+| asset_type    | asset_tier2                                                                    |
 |:--------------|:-------------------------------------------------------------------------------|
 | Under rollers | 200Te Crane loaded Underrollers                                                |
 | Under rollers | Crane loaded|250Te Crane Loaded Underrollers - 250Te Crane Loaded Underrollers |

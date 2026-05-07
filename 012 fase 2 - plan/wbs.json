@@ -126,7 +126,7 @@
             "Skjemadokumentasjon i 006 analysis/3.1 datainnhenting/tab_kolonner.md",
             "Transkriberings- og verifikasjonsskript i 006 analysis/3.1 datainnhenting/"
           ],
-          "acceptance_criteria": "Data verifisert mot Power BIs Totalt- og Tier 1-rader, dokumentert og klart for EDA. Baseline-snapshot 2026-04-30 oppnådd."
+          "acceptance_criteria": "Data verifisert mot Power BIs Totalt- og asset type-summer, dokumentert og klart for EDA. Baseline-snapshot 2026-04-30 oppnådd."
         },
         {
           "id": "3.2",
@@ -138,7 +138,7 @@
           "predecessors": ["3.1"],
           "deliverables": [
             "Python-skript for EDA i 006 analysis/3.2 eda/eda_main.py",
-            "Seks figurer (gap-distribusjon, total per uke, heatmap, topp 10, per Tier 1, demand vs reservations)",
+            "Seks figurer (gap-distribusjon, total per uke, heatmap, topp 10, per asset type, demand vs reservations)",
             "Tre tabeller (strukturelle gaps, topp 10, zero-gap-assets)",
             "Funnsdokument i 006 analysis/3.2 eda/eda_findings.md"
           ],

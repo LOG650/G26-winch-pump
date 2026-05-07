@@ -33,7 +33,7 @@ plt.rcParams.update({
 
 print(f'Calendar: {len(cal)} rader, {cal["asset_tier2"].nunique()} assets, '
       f'{cal["week_start"].nunique()} uker')
-print(f'Overview: {len(ov)} rader, {ov["asset_tier1"].nunique()} kategorier, '
+print(f'Overview: {len(ov)} rader, {ov["asset_type"].nunique()} kategorier, '
       f'{ov["month"].nunique()} maaneder')
 
 
@@ -146,24 +146,24 @@ fig.savefig(os.path.join(OUT, 'fig_topp10_verste_assets.png'))
 plt.close(fig)
 
 # ============================================================
-# Figur 5: Per Tier 1-gruppe over tid
+# Figur 5: Per asset type over tid
 # ============================================================
-group_weekly = cal.groupby(['week_start', 'asset_tier1'])['gap_value'].sum().reset_index()
+group_weekly = cal.groupby(['week_start', 'asset_type'])['gap_value'].sum().reset_index()
 fig, ax = plt.subplots(figsize=(11, 6))
-for tier1 in sorted(cal['asset_tier1'].unique()):
-    sub = group_weekly[group_weekly['asset_tier1'] == tier1]
+for at in sorted(cal['asset_type'].unique()):
+    sub = group_weekly[group_weekly['asset_type'] == at]
     ax.plot(sub['week_start'], sub['gap_value'], marker='o', ms=3, lw=1.5,
-            label=tier1)
+            label=at)
 ax.axhline(0, color='black', lw=0.8)
 ax.set_xlabel('Uke (mandag)')
 ax.set_ylabel('Sum gap-verdi')
-ax.set_title('Gap-utvikling per Tier 1-kategori')
+ax.set_title('Gap-utvikling per asset type')
 ax.legend(loc='lower right', fontsize=8, ncol=2)
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 fig.autofmt_xdate()
 plt.tight_layout()
-fig.savefig(os.path.join(OUT, 'fig_per_tier1_uker.png'))
+fig.savefig(os.path.join(OUT, 'fig_per_asset_type_uker.png'))
 plt.close(fig)
 
 # ============================================================
@@ -191,7 +191,7 @@ plt.close(fig)
 # Tabell 1: Strukturelle gaps (alltid negativ over alle 36 uker)
 # ============================================================
 asset_stats = cal.groupby('asset_tier2').agg(
-    asset_tier1=('asset_tier1', 'first'),
+    asset_type=('asset_type', 'first'),
     min_gap=('gap_value', 'min'),
     max_gap=('gap_value', 'max'),
     snitt_gap=('gap_value', 'mean'),
@@ -201,7 +201,7 @@ strukturelle = asset_stats[asset_stats['max_gap'] < 0].copy()
 strukturelle['snitt_gap'] = strukturelle['snitt_gap'].round(2)
 strukturelle = strukturelle.sort_values('snitt_gap')
 write_table(
-    strukturelle[['asset_tier1', 'asset_tier2', 'min_gap', 'max_gap', 'snitt_gap', 'sum_gap']],
+    strukturelle[['asset_type', 'asset_tier2', 'min_gap', 'max_gap', 'snitt_gap', 'sum_gap']],
     os.path.join(OUT, 'tab_strukturelle_gaps.md'),
     'Tabell - utstyrsenheter med negativ gap-verdi i alle 36 uker av snapshot 2026-04-30 '
     '(strukturelle underskudd, ikke kontraktsdrevne nye gap).'
@@ -214,9 +214,9 @@ print(f'\nStrukturelle gaps (alltid negativ): {len(strukturelle)}')
 top10_table = top10.reset_index()
 top10_table.columns = ['asset_tier2', 'kumulativ_gap']
 top10_table = top10_table.merge(
-    cal[['asset_tier2', 'asset_tier1']].drop_duplicates(),
+    cal[['asset_tier2', 'asset_type']].drop_duplicates(),
     on='asset_tier2'
-)[['asset_tier1', 'asset_tier2', 'kumulativ_gap']]
+)[['asset_type', 'asset_tier2', 'kumulativ_gap']]
 write_table(
     top10_table,
     os.path.join(OUT, 'tab_topp10_verste_assets.md'),
@@ -229,7 +229,7 @@ write_table(
 # ============================================================
 zero_assets = asset_stats[(asset_stats['min_gap'] == 0) & (asset_stats['max_gap'] == 0)]
 write_table(
-    zero_assets[['asset_tier1', 'asset_tier2']],
+    zero_assets[['asset_type', 'asset_tier2']],
     os.path.join(OUT, 'tab_zero_gap_assets.md'),
     'Tabell - utstyrsenheter med gap-verdi 0 i alle 36 uker. '
     'Kandidater for eksklusjon fra gap-deteksjonen.'

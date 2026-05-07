@@ -313,7 +313,7 @@ Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdaterings
 Datagrunnlaget for prosjektet er hentet fra Motive Offshores Power BI-rapport *Supply vs Demand*. Rapporten aggregerer flåtens tilgjengelighet fra Asset Voice og etterspørsel fra Salesforce til en samlet supply/demand-oversikt per utstyrskategori, region og uke. To rapportsider brukes som primære datakilder:
 
 * **Supply/ Demand – Calendar:** Ukentlig kapasitetsbalanse per Tier 2-utstyrsenhet over de neste 8 månedene. Hver celle viser supply minus demand som heltall, der negative verdier representerer kapasitetsgap. Dette er hoveddatasettet for gap-deteksjonen.
-* **Supply vs Demand – Overview:** Månedlig aggregat per Tier 1-kategori med kolonnene Assets in Fleet, Demand og Reservations Per AV. Brukes som overordnet kontroll av datagrunnlaget og som grunnlag for sammenligninger på kategorinivå.
+* **Supply vs Demand – Overview:** Månedlig aggregat per asset type med kolonnene Assets in Fleet, Demand og Reservations Per AV. Brukes som overordnet kontroll av datagrunnlaget og som grunnlag for sammenligninger på kategorinivå.
 
 ### **5.2.2 Filterinnstillinger**
 
@@ -333,7 +333,7 @@ På uttrekkstidspunktet hadde prosjektgruppens Power BI-bruker ikke tilstrekkeli
 
 Hvert snapshot dekker hele kalenderen fra inneværende uke og frem til siste uke som vises i Power BI, fordelt over 4–8 skjermbilder for å dekke hele Tier 2-listen vannrett og hele datointervallet loddrett. Råbildene lagres lokalt under `004 data/raw/snapshots/<YYYY-MM-DD>/` og transkriberes til lang-form CSV i `004 data/clean/snapshots/`. Hele datakatalogen er ekskludert fra versjonskontroll i tråd med taushetserklæringen med Motive Offshore.
 
-Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og Tier 1-gruppesummene i Power BI før det godkjennes som datagrunnlag. Avvik på mer enn ±2 unit-uker per Tier 1-gruppe per uke flagges som mistanke om transkriberingsfeil og kontrolleres manuelt mot kildebildet. For å fange uke-til-uke-endringene som er kjernen i gap-deteksjonen, tas nye snapshots ukentlig (mandager) gjennom resten av prosjektperioden.
+Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-summene i Power BI før det godkjennes som datagrunnlag. Avvik på mer enn ±2 unit-uker per asset type per uke flagges som mistanke om transkriberingsfeil og kontrolleres manuelt mot kildebildet. For å fange uke-til-uke-endringene som er kjernen i gap-deteksjonen, tas nye snapshots ukentlig (mandager) gjennom resten av prosjektperioden.
 
 ### **5.2.4 Datasettoversikt**
 
@@ -342,15 +342,15 @@ Tabell 5.2 oppsummerer de to datasettene som inngår i analysegrunnlaget per sna
 | Datasett | Enhet per rad | Periode | Antall rader |
 |----------|---------------|---------|--------------|
 | Calendar | Tier 2-utstyrsenhet × uke | 2026-05-04 til 2027-01-04 (36 uker) | 2 880 |
-| Overview | Tier 1-kategori × måned | mai 2026 til desember 2026 (8 måneder) | 152 |
+| Overview | Asset type × måned | mai 2026 til desember 2026 (8 måneder) | 152 |
 
 <p align="center"><small><i>Tabell 5.2 Datasett som inngår i analysegrunnlaget per snapshot 2026-04-30.</i></small></p>
 
-Calendar-datasettet dekker 80 unike Tier 2-utstyrsenheter fordelt på 13 Tier 1-kategorier (Winch, Under rollers, Turntables, Tensioner, Storage reels, Spoolers, RDS, LMA machines, HPUS, HLS, Generators, Cranes og Cable Pulling machine). Overview-datasettet inneholder i tillegg seks operasjonelle tjenestekategorier – Mob-Personnel, Mob-Equipment, Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel og Demob-Equipment – som ikke representerer fysisk utstyr og derfor er ekskludert fra gap-deteksjonen jamfør avgrensingen i kapittel 1.3.
+Calendar-datasettet dekker 80 unike Tier 2-utstyrsenheter fordelt på 13 asset types (Winch, Under rollers, Turntables, Tensioner, Storage reels, Spoolers, RDS, LMA machines, HPUS, HLS, Generators, Cranes og Cable Pulling machine). Overview-datasettet inneholder i tillegg seks operasjonelle tjenestekategorier – Mob-Personnel, Mob-Equipment, Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel og Demob-Equipment – som ikke representerer fysisk utstyr og derfor er ekskludert fra gap-deteksjonen jamfør avgrensingen i kapittel 1.3.
 
 ### **5.2.5 Datakvalitet**
 
-For Calendar-datasettet finnes det 36 uker × 13 Tier 1-grupper = 468 verifiserbare celler. Av disse matcher 466 eksakt mot Power BIs egne Tier 1-summer. To celler avviker med +2 unit-uker, begge i gruppen HPUS. Dette tilsvarer en feilmargin på 0,4 prosent og forklares av at Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer Tier 1-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler kan avvike fra Power BIs Tier 1-sum med ±1 til 2 unit-uker. Dette er strukturell avrundingsstøy og ikke transkriberingsfeil. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet matcher alle åtte måneder eksakt på alle tre måltall (Assets in Fleet, Demand og Reservations Per AV).
+For Calendar-datasettet finnes det 36 uker × 13 asset types = 468 verifiserbare celler. Av disse matcher 466 eksakt mot Power BIs egne asset type-summer. To celler avviker med +2 unit-uker, begge i HPUS. Dette tilsvarer en feilmargin på 0,4 prosent og forklares av at Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Dette er strukturell avrundingsstøy og ikke transkriberingsfeil. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet matcher alle åtte måneder eksakt på alle tre måltall (Assets in Fleet, Demand og Reservations Per AV).
 
 ### **5.2.6 Datagrunnlagets relevans for problemstillingen**
 
@@ -398,7 +398,7 @@ Modellen leser ett eller to snapshots i lang-form CSV med kolonnestruktur som be
 Før reglene evalueres, anvendes to forhåndsfiltreringer på hvert snapshot:
 
 * **Eksklusjonsliste:** Et statisk konfigurert sett med assets fjernes fra videre prosessering. Innhold og begrunnelse er gitt i 6.6.
-* **Sumsjekk mot Power BI:** Hvert snapshot verifiseres mot Power BIs egne Tier 1-gruppesummer som ble registrert i samme datafangst. Avvik som overstiger en toleranse på $\pm 2$ unit-uker per Tier 1-gruppe per uke flagges som transkriberingsfeil, og snapshotet avvises automatisk fra videre prosessering. Toleransen reflekterer den strukturelle avrundingsstøyen dokumentert i 5.2.5: Power BI viser avrundede heltall i celler men aggregerer Tier 1-summer fra underliggende desimalverdier, slik at sum av celler kan avvike fra Tier 1-summen med opptil $\pm 2$ uten at det skyldes transkriberingsfeil.
+* **Sumsjekk mot Power BI:** Hvert snapshot verifiseres mot Power BIs egne asset type-summer som ble registrert i samme datafangst. Avvik som overstiger en toleranse på $\pm 2$ unit-uker per asset type per uke flagges som transkriberingsfeil, og snapshotet avvises automatisk fra videre prosessering. Toleransen reflekterer den strukturelle avrundingsstøyen dokumentert i 5.2.5: Power BI viser avrundede heltall i celler men aggregerer asset type-summer fra underliggende desimalverdier, slik at sum av celler kan avvike fra asset type-summen med opptil $\pm 2$ uten at det skyldes transkriberingsfeil.
 
 Ved parring av to snapshots i 6.4 oppstår to spesialtilfeller, fordi Power BI-kalenderen alltid viser et fast antall uker fremover fra uttrekksdatoen og dermed forskyver seg mellom påfølgende snapshots:
 
@@ -493,7 +493,7 @@ Etter at en celle har passert gjennom forhåndsfiltrering (6.2), statisk deteksj
 
 Prioriteten utledes som en funksjon av endringstype og magnitudeklasse. Et nytt gap eller en forverring som krysser en magnitudeklassegrense gir høy prioritet uavhengig av startklasse, ettersom slike endringer reflekterer at en kontrakt nylig har blitt bumpet i Salesforce eller at en reservasjon i Asset Voice er trukket. En forverring innenfor samme klasse gir lav prioritet og kan håndteres ved neste planlagte gjennomgang. Et løst gap genererer et informasjonsvarsel som lar mottakeren avslutte den aktive varslingstråden uten ny handling. Magnitudeklassen til den nåværende verdien $G^{(s_i)}$ løfter prioriteten ett nivå når klassen er kritisk – en kontrakt som bringer en celle fra balanse til $G = -7$ gir derfor høyeste prioritet selv om endringstypen alene ville gitt middels.
 
-Hvert utløste varsel rutes til en mottaker basert på en konfigurerbar mapping. For dette prosjektet brukes en oppsett der hver Tier 1-utstyrskategori har én primærmottaker, med selgersfellesskapet som CC:
+Hvert utløste varsel rutes til en mottaker basert på en konfigurerbar mapping. For dette prosjektet brukes et oppsett der hver asset type har én primærmottaker, med selgersfellesskapet som CC:
 
 ```yaml
 # recipients.yaml (utdrag)
@@ -503,7 +503,7 @@ Tensioner:   tensioner-koordinator@motive-offshore.no
 default:     salg@motive-offshore.no
 ```
 
-Valget av Tier 1 som rutingsnøkkel er pragmatisk: den aggregerte Power BI-tabellen oppgir ikke hvilken kontrakt eller selger som forårsaket en gitt gap-celle, og modellen kan derfor ikke route per kontrakt eller per individuell selger. En utvidelse til kontraktsnivå ville krevd integrasjon med Salesforce, hvilket faller utenfor prosjektets omfang slik definert i 1.3, og er omtalt som en produksjonsanbefaling i kapittel 9.
+Valget av asset type som rutingsnøkkel er pragmatisk: den aggregerte Power BI-tabellen oppgir ikke hvilken kontrakt eller selger som forårsaket en gitt gap-celle, og modellen kan derfor ikke route per kontrakt eller per individuell selger. En utvidelse til kontraktsnivå ville krevd integrasjon med Salesforce, hvilket faller utenfor prosjektets omfang slik definert i 1.3, og er omtalt som en produksjonsanbefaling i kapittel 9.
 
 For hvert utløste varsel produserer modellen et strukturert sett med felter som videreføres til varslingslogikken i WBS-aktivitet 3.4. Feltene omfatter snapshot-dato $s_i$, identifikatorene $(r, a, t)$, gap-verdiene $G^{(s_{i-1})}$ og $G^{(s_i)}$, endringstype, magnitudeklasse, prioritet, strukturelt-flagg og mottaker-identifikator. Selve formateringen av e-postmeldingen, ukentlig påminnelseslogikk for ulukkede gap, og avslutningstrigger ved løst gap beskrives i forbindelse med varslingslogikken. Modellen i dette kapittelet stopper ved utløsingsbeslutningen og overlater leveringsmekanismen til neste lag i systemet.
 
@@ -541,13 +541,13 @@ Figur 7.2 viser sum av $G_{r,a,t}$ aggregert per uke over hele 36-ukers-horisont
 
 Samlet ukentlig gap øker fra $-182$ unit-uker i mai 2026 til $+19$ i januar 2027. Lokale toppunkter er $-184$ og $-185$ i juni. Trenden er tilnærmet lineær med en gjennomsnittlig økning på rundt 5 unit-uker per uke nedover horisonten.
 
-## **7.3 Sammenligning på tvers av Tier 1-grupper**
+## **7.3 Sammenligning på tvers av asset types**
 
-Figur 7.3 dekomponerer det ukentlige gapet etter Tier 1-gruppe.
+Figur 7.3 dekomponerer det ukentlige gapet etter asset type.
 
 <div align="center">
-  <img src="../006 analysis/3.2 eda/fig_per_tier1_uker.png" alt="Gap per Tier 1-gruppe over uker" width="85%">
-  <p align="center"><small><i>Figur 7.3 Ukentlig sum av gap-verdi per Tier 1-gruppe.</i></small></p>
+  <img src="../006 analysis/3.2 eda/fig_per_asset_type_uker.png" alt="Gap per asset type over uker" width="85%">
+  <p align="center"><small><i>Figur 7.3 Ukentlig sum av gap-verdi per asset type.</i></small></p>
 </div>
 
 HPUS har størst underskudd i nær fremtid med ukentlige verdier ned mot $-69$. Winch og Tensioner følger med ned mot henholdsvis $-48$ og $-28$. De tre gruppene utgjør samlet 80 prosent av det ukentlige gapet i mai til august. Storage reels, HLS, Generators og Cranes ligger konsekvent nær null.
@@ -556,7 +556,7 @@ HPUS har størst underskudd i nær fremtid med ukentlige verdier ned mot $-69$. 
 
 Tabell 7.2 lister de ti enhetene med størst kumulativt underskudd over 36 uker. Figur 7.4 og Figur 7.5 viser samme sortering henholdsvis som søylediagram og som heatmap mot ukene.
 
-| Tier 1 | Asset (Tier 2) | Kumulativt gap |
+| Asset type | Asset (Tier 2) | Kumulativt gap |
 |--------|---------------|----------------|
 | Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | −299 |
 | HPUS | Electric – 54kW Electric HPU | −293 |
@@ -598,7 +598,7 @@ Synlig 75 %+ etterspørsel reduseres fra 884 unit-uker i mai til 301 i desember 
 
 Åtte utstyrsenheter har $G_{r,a,t} < 0$ i alle 36 uker av baseline-snapshotet (Tabell 7.3). De utgjør 10 prosent av totalt 80 utstyrsenheter i Calendar-datasettet.
 
-| Tier 1 | Asset (Tier 2) | Min | Maks | Snitt | Sum |
+| Asset type | Asset (Tier 2) | Min | Maks | Snitt | Sum |
 |--------|---------------|-----|------|-------|-----|
 | Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | −13 | −2 | −8,31 | −299 |
 | HPUS | Electric – 54kW Electric HPU | −12 | −1 | −8,14 | −293 |
@@ -613,7 +613,7 @@ Synlig 75 %+ etterspørsel reduseres fra 884 unit-uker i mai til 301 i desember 
 
 To utstyrsenheter har $G_{r,a,t} = 0$ i alle 36 uker (Tabell 7.4).
 
-| Tier 1 | Asset (Tier 2) |
+| Asset type | Asset (Tier 2) |
 |--------|---------------|
 | Under rollers | 200Te Crane loaded Underrollers |
 | Under rollers | Crane loaded\|250Te Crane Loaded Underrollers – 250Te Crane Loaded Underrollers |
@@ -630,7 +630,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 ## **8.1 Statisk gap-deteksjon på baseline-snapshot**
 
-*[Fylles inn etter at gap-deteksjonen i 3.3 har kjørt på baseline. Forventet innhold: antall celler som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, fordeling etter magnitudeklasse (mildt/moderat/kritisk), fordeling etter Tier 1-gruppe.]*
+*[Fylles inn etter at gap-deteksjonen i 3.3 har kjørt på baseline. Forventet innhold: antall celler som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, fordeling etter magnitudeklasse (mildt/moderat/kritisk), fordeling etter asset type.]*
 
 | Magnitudeklasse | Antall utløste celler | Andel av 1 690 negative celler |
 |-----------------|-----------------------|--------------------------------|
@@ -642,7 +642,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 ## **8.2 Uke-til-uke-deltadeteksjon**
 
-*[Fylles inn etter at delta-detektoren er kjørt på snapshot-paret (2026-04-30 ↔ 2026-05-04). Forventet innhold: antall celler i hver av de fem endringskategoriene definert i Tabell 6.2, samt fordeling per Tier 1-gruppe.]*
+*[Fylles inn etter at delta-detektoren er kjørt på snapshot-paret (2026-04-30 ↔ 2026-05-04). Forventet innhold: antall celler i hver av de fem endringskategoriene definert i Tabell 6.2, samt fordeling per asset type.]*
 
 | Endringstype | Antall celler | Andel av sammenlignede celler |
 |--------------|---------------|-------------------------------|
@@ -654,7 +654,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 <p align="center"><small><i>Tabell 8.2 Klassifisering av cellevise endringer mellom snapshot 2026-04-30 og 2026-05-04.</i></small></p>
 
-*[Forventet: en eller to figurer som visualiserer fordelingen mellom Tier 1-grupper, eventuelt et stablet søylediagram per uke.]*
+*[Forventet: en eller to figurer som visualiserer fordelingen mellom asset types, eventuelt et stablet søylediagram per uke.]*
 
 ## **8.3 Krysstabulering: endringstype × magnitudeklasse**
 
@@ -683,16 +683,16 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 ## **8.5 Varselsutløsing og prioritering**
 
-*[Fylles inn: total antall utløste varsler etter suppression, fordeling etter prioritet (lav/middels/høy) og etter mottaker per Tier 1-kategori.]*
+*[Fylles inn: total antall utløste varsler etter suppression, fordeling etter prioritet (lav/middels/høy) og etter mottaker per asset type.]*
 
-| Mottaker (Tier 1) | Lav prioritet | Middels prioritet | Høy prioritet | Totalt |
+| Mottaker (Asset type) | Lav prioritet | Middels prioritet | Høy prioritet | Totalt |
 |---|---|---|---|---|
 | HPUS | – | – | – | – |
 | Winch | – | – | – | – |
 | Tensioner | – | – | – | – |
 | Øvrige | – | – | – | – |
 
-<p align="center"><small><i>Tabell 8.5 Utløste varsler fordelt på mottaker (Tier 1-koordinator) og prioritet.</i></small></p>
+<p align="center"><small><i>Tabell 8.5 Utløste varsler fordelt på mottaker (asset type-koordinator) og prioritet.</i></small></p>
 
 ## **8.6 Validering mot syntetiske scenarier**
 
@@ -762,7 +762,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 *[Fylles inn: drøft hvordan skjermavlesning som datafangst (jf. `avviksanalyse-2026-04-30.md`) kan ha påvirket resultatene:
 - Risiko for transkriberingsfeil og hvordan sumsjekken mitigerer dette.
-- Power BIs interne avrundingsstøy og dens påvirkning på Tier 1-summeringer.
+- Power BIs interne avrundingsstøy og dens påvirkning på asset type-summeringer.
 - Hva direkte CSV-eksport via API ville endret av analysens validitet.
 - Skalerbarhet: hvor mange snapshots kunne vi realistisk fanget med denne metoden i produksjon?
 ]*
@@ -770,10 +770,10 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 ## **9.5 Praktisk betydning for Motive Offshore**
 
 *[Fylles inn:
-- Estimert antall varsler per uke per Tier 1-koordinator basert på Tabell 8.5.
+- Estimert antall varsler per uke per asset type-koordinator basert på Tabell 8.5.
 - Hvordan systemet endrer beslutningssyklusen for selgere og prosjektkoordinatorer.
 - Hvilke produksjonskomponenter som må på plass: Power BI REST API, Power Automate eller Python-webhook, e-post/Teams-integrasjon, SMTP-konfigurasjon.
-- Anbefalinger til Motive Offshore for produksjonsbruk: tilgangsutvidelse for direkte API-eksport, etablering av recipient-mapping på Tier 1-nivå, integrasjon med Salesforce for per-kontrakt-ruting (jf. 6.7).
+- Anbefalinger til Motive Offshore for produksjonsbruk: tilgangsutvidelse for direkte API-eksport, etablering av recipient-mapping på asset type-nivå, integrasjon med Salesforce for per-kontrakt-ruting (jf. 6.7).
 ]*
 
 ## **9.6 Generaliserbarhet**

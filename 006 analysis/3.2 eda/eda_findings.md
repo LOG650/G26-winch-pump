@@ -72,7 +72,7 @@ før endelig eksklusjon.
 
 ## Topp 10 utstyrsenheter med størst kumulativt underskudd
 
-Tre Tier 1-grupper dominerer "verstingslisten" (Figur `fig_topp10_verste_assets.png`):
+Tre asset types dominerer "verstingslisten" (Figur `fig_topp10_verste_assets.png`):
 
 - **HPUS:** 4 av topp 10 (54kW, 90KW, 84KW, 37kW)
 - **Tensioner:** 2 av topp 10 (15Te Horizontal, 50Te 4-track)
@@ -105,12 +105,12 @@ leveranse skjer. Hvis vi snitter gradienten i Figur 2, vokser synlige gap
 med ~5 unit-uker per uke nedover horisonten – det er størrelsesordenen
 varslingssystemet må fange tidlig.
 
-## Per-Tier 1-utvikling
+## Per-asset-type-utvikling
 
-Figur `fig_per_tier1_uker.png` viser at HPUS dominerer det totale gapet i
-nær fremtid (helt nede i −59 i mai), mens de andre gruppene ligger
+Figur `fig_per_asset_type_uker.png` viser at HPUS dominerer det totale gapet i
+nær fremtid (helt nede i −59 i mai), mens de andre asset types ligger
 relativt flatt. **HPUS er hovedbidragsyteren til samlet underskudd**, men
-også gruppen med flest assets (26 av 80 leaf-rader, 32,5 % av flåten i
+også asset typen med flest assets (26 av 80 leaf-rader, 32,5 % av flåten i
 Calendar). Per-asset-gjennomsnittet er ikke nødvendigvis verst i HPUS.
 
 ## Datakvalitet bekreftet
@@ -118,7 +118,7 @@ Calendar). Per-asset-gjennomsnittet er ikke nødvendigvis verst i HPUS.
 EDA bekrefter funn fra 5.2.5 i rapporten:
 - 0 negative outliers utover det som forklares av rounding (ingen verdier
   utenfor [−13, 6])
-- 2 av 36 uker har +2 avvik mot Tier 1-summer (allerede dokumentert som
+- 2 av 36 uker har +2 avvik mot asset type-summer (allerede dokumentert som
   rounding støy)
 - Ingen manglende uker eller assets i datasettet
 
