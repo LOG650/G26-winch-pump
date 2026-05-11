@@ -244,7 +244,7 @@ Motives kunder er typisk operatører og entreprenørselskaper innen offshoresekt
 
 Flåten er organisert etter utstyrsklasse og region. Hver utstyrsklasse består av et antall enheter, og tilgjengeligheten til disse enhetene varierer fra uke til uke avhengig av eksisterende bookinger, sertifikatstatus og annet. En enhet som allerede er leid ut, reservert for vedlikehold eller under sertifisering, er ikke tilgjengelig for nye kontrakter.
 
-Kapasitet måles som antall tilgjengelige enheter per utstyrsklasse per region per uke. Fordi utstyr er geografisk plassert i én av de fem regionene, og ikke kan flyttes fritt uten ekstra kostnad og planleggingstid, er tilgjengeligheten regionsspesifikk. Et kapasitetsgap i én region kan derfor ikke uten videre dekkes av ledig kapasitet i en annen.
+Kapasitet måles som antall tilgjengelige enheter per utstyrsklasse per region per uke. Fordi utstyr er geografisk plassert i én av de fem regionene, og ikke kan flyttes fritt uten ekstra kostnad og planleggingstid, er tilgjengeligheten regionsspesifikk. Et kapasitetsgap i én region kan derfor ikke uten videre dekkes av ledig kapasitet i en annen. Region *Motive Norway*, som er datagrunnlaget i denne rapporten, tilsvarer i praksis ett fysisk verksted lokalisert i Stavanger.
 
 ## **4.3 Salgs- og bookingprosessen**
 
@@ -317,15 +317,18 @@ Datagrunnlaget for prosjektet er hentet fra Motive Offshores Power BI-rapport *S
 
 ### **5.2.2 Filterinnstillinger**
 
-For å sikre at uttrekkene reflekterer kun de salgsmulighetene som anses som svært sannsynlige, og kun den delen av flåten som forvaltes av Motive selv, brukes følgende filtre konsekvent på begge rapportsider. Tabell 5.1 oppsummerer filterinnstillingene.
+For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt verksted faktisk kan disponere, låses både supply- og demand-siden til samme juridiske enhet. Datasettet i denne rapporten er hentet for verkstedet Motive Norway (juridisk enhet Motive AS), men de samme filtrene kan byttes synkront for ethvert annet verksted i konsernet (Motive UK, Motive USA, ...) – modellen er lokasjons-agnostisk. Tabell 5.1 oppsummerer filterinnstillingene som brukes konsekvent på begge rapportsider.
 
-| Felt | Verdi |
-|------|-------|
-| Asset Custodian (Supply) | Motive AS |
-| Region | Alle |
-| Opp. Probability (%) | 75–100 |
+| Felt | Verdi | Funksjon |
+|------|-------|----------|
+| Asset Custodian (Supply) | Motive AS | Juridisk enhet som forvalter flåten |
+| Project Owner Demand | Motive AS | Juridisk enhet som eier prosjektet |
+| Region | Motive Norway | Fysisk verkstedslokasjon |
+| Opp. Probability (%) | 75–100 | Nedre terskel for synlig etterspørsel |
 
 <p align="center"><small><i>Tabell 5.1 Filterinnstillinger i Power BI ved datafangst.</i></small></p>
+
+Filteret **Project Owner Demand** er det som låser etterspørselen til prosjekter som det valgte verkstedet selv eier. Uten dette filteret ville datasettet vise global demand mot norsk flåte alene, noe som blåser opp gap-verdiene og produserer varsler en lokal selger ikke har handlingsrom til å løse. Med filteret på plass varsles selgeren først når det aktuelle verkstedets egen flåte ikke dekker egne prosjekter – tiltak som omdisponering fra et annet verksted blir et bevisst valg, ikke noe som skjuler gapet automatisk.
 
 ### **5.2.3 Datafangst**
 
@@ -337,20 +340,20 @@ Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-s
 
 ### **5.2.4 Datasettoversikt**
 
-Tabell 5.2 oppsummerer de to datasettene som inngår i analysegrunnlaget per snapshot 2026-04-30.
+Tabell 5.2 oppsummerer de to datasettene som inngår i analysegrunnlaget per baseline-snapshot 2026-05-07.
 
 | Datasett | Enhet per rad | Periode | Antall rader |
 |----------|---------------|---------|--------------|
-| Calendar | Tier 2-utstyrsenhet × uke | 2026-05-04 til 2027-01-04 (36 uker) | 2 880 |
-| Overview | Asset type × måned | mai 2026 til desember 2026 (8 måneder) | 152 |
+| Calendar | Tier 2-utstyrsenhet × uke | 2026-05-11 til 2026-12-28 (34 uker) | 816 |
+| Overview | Asset type × måned | mai 2026 til desember 2026 (8 måneder) | 64 |
 
-<p align="center"><small><i>Tabell 5.2 Datasett som inngår i analysegrunnlaget per snapshot 2026-04-30.</i></small></p>
+<p align="center"><small><i>Tabell 5.2 Datasett som inngår i analysegrunnlaget per snapshot 2026-05-07.</i></small></p>
 
-Calendar-datasettet dekker 80 unike Tier 2-utstyrsenheter fordelt på 13 asset types (Winch, Under rollers, Turntables, Tensioner, Storage reels, Spoolers, RDS, LMA machines, HPUS, HLS, Generators, Cranes og Cable Pulling machine). Overview-datasettet inneholder i tillegg seks operasjonelle tjenestekategorier – Mob-Personnel, Mob-Equipment, Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel og Demob-Equipment – som ikke representerer fysisk utstyr og derfor er ekskludert fra gap-deteksjonen jamfør avgrensingen i kapittel 1.3.
+Calendar-datasettet dekker 24 unike Tier 2-utstyrsenheter fordelt på 8 asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som faktisk er fysisk lokalisert ved verkstedet Motive Norway. Asset types som Turntables, Storage reels, HLS, Generators og Cranes finnes hos andre verksteder, men inngår ikke i denne lokale flåten og dermed ikke i datasettet. Overview-datasettet inneholder i tillegg seks operasjonelle tjenestekategorier – Mob-Personnel, Mob-Equipment, Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel og Demob-Equipment – som ikke representerer fysisk utstyr og derfor er ekskludert fra gap-deteksjonen jamfør avgrensingen i kapittel 1.3.
 
 ### **5.2.5 Datakvalitet**
 
-For Calendar-datasettet finnes det 36 uker × 13 asset types = 468 verifiserbare celler. Av disse matcher 466 eksakt mot Power BIs egne asset type-summer. To celler avviker med +2 unit-uker, begge i HPUS. Dette tilsvarer en feilmargin på 0,4 prosent og forklares av at Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Dette er strukturell avrundingsstøy og ikke transkriberingsfeil. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet matcher alle åtte måneder eksakt på alle tre måltall (Assets in Fleet, Demand og Reservations Per AV).
+For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet matcher alle åtte måneder eksakt på alle tre måltall (Assets in Fleet, Demand og Reservations Per AV).
 
 ### **5.2.6 Datagrunnlagets relevans for problemstillingen**
 
@@ -367,7 +370,7 @@ Utviklingen i synlig 75 %+ etterspørsel over de åtte tilgjengelige månedene i
 | November 2026 | 36 | 451 | 274 | 177 |
 | Desember 2026 | 36 | 301 | 228 | 73 |
 
-<p align="center"><small><i>Tabell 5.3 Synlig 75 %+ etterspørsel per måned, snapshot 2026-04-30.</i></small></p>
+<p align="center"><small><i>Tabell 5.3 Synlig 75 %+ etterspørsel per måned, snapshot 2026-04-30 (Region = Alle, global demand). Erstattes med tilsvarende tall for verkstedet Motive Norway når nytt Overview-snapshot er hentet i 2026-05-07-baselinen.</i></small></p>
 
 Etterspørselen som vises ved 75 %-terskelen reduseres med 66 prosent fra mai (884) til desember (301), selv om flåtekapasiteten er konstant på 36 enheter og det historisk er aktivitet i hele perioden. Reduksjonen skyldes ikke manglende behov, men at kontrakter med leveranse senere på året ennå ikke har nådd 75 % vinnersannsynlighet i Salesforce. Når slike kontrakter etter hvert oppdateres, oppstår nye gap i celler som tidligere så uproblematiske ut. Det er nettopp disse endringene varslingssystemet skal fange opp gjennom uke-til-uke-sammenligning av påfølgende snapshots.
 

@@ -21,6 +21,29 @@ Eksportere relevante datasett fra Power BI som CSV/Excel og rense/strukturere fo
 | `clean_demand.py` | Rensing av demand-data |
 | `tab_kolonner.md` | Skjema for renset datasett |
 
+## Filteroppsett (Power BI)
+
+Alle snapshots bruker følgende filtre i Power BI. Begge sider av regnestykket
+er låst til samme verksted (Motive Norway), slik at gap-verdiene reflekterer
+flåten som lokalt selger faktisk kan disponere:
+
+| Filter | Verdi | Kommentar |
+|--------|-------|-----------|
+| Asset Custodian (Supply) | `Motive AS` | Juridisk enhet som forvalter flåten |
+| Project Owner Demand | `Motive AS` | Juridisk enhet som eier prosjektet |
+| Region | `Motive Norway` | Fysisk verkstedslokasjon |
+| Opp. Probability (%) | `75` | Nedre terskel for synlig etterspørsel |
+
+Modellen er lokasjons-agnostisk: de tre første filtrene byttes synkront for å
+kjøre samme analyse for et annet verksted (Motive UK, Motive USA, ...).
+
+Eldre datasett er **ikke sammenlignbare** med disse snapshotsene og er kassert:
+
+- 2026-04-30: `Region = "Alle"` (global demand vs. norsk flåte)
+- 2026-05-07 (forrige versjon): `Region = "Motive Norway"` men uten Project Owner Demand-filter
+
+Gjeldende baseline er **2026-05-07** med fullt filtersett (re-kjørt på samme dato med Project Owner Demand-filteret aktivert).
+
 ## Datafangst via skjermbilder
 
 "Analyser i Excel" og "Eksporter data" er sperret av rettighetspolicy hos Motive.
@@ -41,11 +64,11 @@ Se [`tab_kolonner.md`](tab_kolonner.md) for kolonnedefinisjoner og eksempelrader
 
 | t | Dato | Formål |
 |---|------|--------|
-| t₀ | 2026-04-30 | Baseline (i dag) |
-| t₁ | 2026-05-04 | Første uke-til-uke-sammenligning |
-| t₂ | 2026-05-11 | |
-| t₃ | 2026-05-18 | |
-| t₄ | 2026-05-25 | Siste før innlevering 2026-05-31 |
+| ~~t₀~~ | ~~2026-04-30~~ | ~~Utgår – Region = Alle (global demand vs. norsk flåte)~~ |
+| t₀ | 2026-05-07 | Baseline – lokalt verksted (Motive Norway) på begge sider, fullt filtersett |
+| t₁ | 2026-05-11 | Første uke-til-uke-sammenligning |
+| t₂ | 2026-05-18 | |
+| t₃ | 2026-05-25 | Siste før innlevering 2026-05-31 |
 
 ## Notat
 

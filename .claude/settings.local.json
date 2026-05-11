@@ -5,7 +5,9 @@
       "WebFetch(domain:www.frontiersin.org)",
       "WebFetch(domain:linkinghub.elsevier.com)",
       "Bash(uv --version)",
-      "Bash(uv init *)"
+      "Bash(uv init *)",
+      "PowerShell(claude config list 2>&1)",
+      "Bash(uv run *)"
     ]
   }
 }

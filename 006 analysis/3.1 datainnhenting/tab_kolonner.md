@@ -2,8 +2,8 @@
 
 To CSV-er per snapshot:
 
-1. **Calendar** – ukentlig gap-verdi per Tier 2-utstyrsenhet (`*_supply_demand_motive_alle_75pct.csv`)
-2. **Overview** – månedlig aggregat per asset type (`*_supply_demand_overview_motive_alle_75pct.csv`)
+1. **Calendar** – ukentlig gap-verdi per Tier 2-utstyrsenhet (`*_supply_demand_motive_no_75pct.csv`)
+2. **Overview** – månedlig aggregat per asset type (`*_supply_demand_overview_motive_no_75pct.csv`)
 
 ---
 
@@ -24,24 +24,25 @@ Skjema for renset CSV som genereres fra Power BI-skjermbilder (kalendervisningen
 
 | Kolonne | Type | Eksempel | Beskrivelse |
 |---------|------|----------|-------------|
-| `snapshot_date` | dato | `2026-04-30` | Dato skjermbildet ble tatt – fungerer som id for hver "uke-til-uke"-sammenligning |
+| `snapshot_date` | dato | `2026-05-07` | Dato skjermbildet ble tatt – fungerer som id for hver "uke-til-uke"-sammenligning |
 | `week_start` | dato | `2026-09-07` | Mandag i den uken cellen gjelder for |
 | `asset_type` | streng | `Winches` | Asset type / utstyrstype (Winches, Under rollers, ...) |
 | `asset_tier2` | streng | `Hydraulic - 60Te Mooring Winch` | Spesifikk utstyrsenhet, eksakt slik den står i Power BI |
 | `gap_value` | heltall | `-4` | Supply minus demand. Negativ verdi = kapasitetsgap |
-| `custodian` | streng | `Motive AS` | Filterverdi: Asset Custodian (Supply) |
-| `region` | streng | `Alle` | Filterverdi: Region |
+| `custodian` | streng | `Motive AS` | Filterverdi: Asset Custodian (Supply) – juridisk enhet som forvalter utstyret |
+| `project_owner_demand` | streng | `Motive AS` | Filterverdi: Project Owner Demand – juridisk enhet som eier prosjektet |
+| `region` | streng | `Motive Norway` | Filterverdi: Region – fysisk verksted/lokasjon |
 | `probability_threshold` | heltall | `75` | Filterverdi: Opp. Probability (%) – nedre terskel |
 
 ## Eksempel (5 rader)
 
 ```csv
-snapshot_date,week_start,asset_type,asset_tier2,gap_value,custodian,region,probability_threshold
-2026-04-30,2026-09-07,Winches,Pneumatic - FA5 Air winch,0,Motive AS,Alle,75
-2026-04-30,2026-09-14,Winches,Pneumatic - FA5 Air winch,0,Motive AS,Alle,75
-2026-04-30,2026-09-21,Winches,Pneumatic - FA5 Air winch,0,Motive AS,Alle,75
-2026-04-30,2026-09-28,Winches,Pneumatic - FA5 Air winch,-2,Motive AS,Alle,75
-2026-04-30,2026-10-05,Winches,Pneumatic - FA5 Air winch,-2,Motive AS,Alle,75
+snapshot_date,week_start,asset_type,asset_tier2,gap_value,custodian,project_owner_demand,region,probability_threshold
+2026-05-07,2026-05-11,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,Motive AS,Motive AS,Motive Norway,75
+2026-05-07,2026-05-18,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,Motive AS,Motive AS,Motive Norway,75
+2026-05-07,2026-05-11,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,Motive AS,Motive AS,Motive Norway,75
+2026-05-07,2026-05-11,RDS,- 500Te RDS,-1,Motive AS,Motive AS,Motive Norway,75
+2026-05-07,2026-05-11,HPUS,Electric - 90KW Electric HPU,-2,Motive AS,Motive AS,Motive Norway,75
 ```
 
 ## Datakilde
@@ -55,8 +56,12 @@ i prosjektperioden 2026-04-30 til 2026-05-31.
 
 - **Tidsoppløsning:** uke (mandag-mandag)
 - **Utstyrsoppløsning:** Tier 2 (spesifikk utstyrsenhet, ikke individuelle serienumre)
-- **Geografisk oppløsning:** aggregert på tvers av alle regioner (`region = "Alle"`)
-  for grunnsettet. Region-spesifikke uttrekk gjøres separat dersom relevant.
+- **Geografisk oppløsning:** Datasettet er låst til ett verksted om gangen.
+  Supply filtreres på `custodian = "Motive AS"` (juridisk enhet som forvalter
+  flåten), demand filtreres på `project_owner_demand = "Motive AS"` (juridisk
+  enhet som eier prosjektet) og `region = "Motive Norway"` (fysisk
+  verkstedslokasjon). Samme rapport kan kjøres lokalt for andre verksteder
+  (Motive UK, Motive USA, ...) ved å bytte alle tre filtrene synkront.
 
 ## Datakvalitet
 
@@ -99,15 +104,16 @@ rapporten – ikke som hoveddatasett for gap-deteksjon.
 
 | Kolonne | Type | Eksempel | Beskrivelse |
 |---------|------|----------|-------------|
-| `snapshot_date` | dato | `2026-04-30` | Dato bildene ble tatt |
+| `snapshot_date` | dato | `2026-05-07` | Dato bildene ble tatt |
 | `month` | streng | `2026-05` | Måned aggregatet gjelder for (`YYYY-MM`) |
 | `asset_type` | streng | `Winch` | Asset type (Winch, HPUS, Mob-Personnel, ...) |
 | `assets_in_fleet` | heltall \| tom | `12` | Antall enheter i flåten. Tom for tjenester (mob/demob) og noen kategorier |
 | `assets_red_tag` | heltall \| tom | tom | Antall enheter merket Red Tag (oftest tom) |
 | `demand` | heltall | `212` | Total etterspørsel for måneden (unit-uker) |
 | `reservations_per_av` | heltall \| tom | `135` | Reservasjoner i Asset Voice. Tom for tjenester |
-| `custodian` | streng | `Motive AS` | Filterverdi |
-| `region` | streng | `Alle` | Filterverdi |
+| `custodian` | streng | `Motive AS` | Filterverdi: Asset Custodian (Supply) |
+| `project_owner_demand` | streng | `Motive AS` | Filterverdi: Project Owner Demand |
+| `region` | streng | `Motive Norway` | Filterverdi: Region (verksted) |
 | `probability_threshold` | heltall | `75` | Filterverdi (Opp. Probability % nedre terskel) |
 
 ### Asset types
@@ -127,10 +133,9 @@ avgrensning i 1.3 i prosjektrapporten.
 ### Eksempel (3 rader)
 
 ```csv
-snapshot_date,month,asset_type,assets_in_fleet,assets_red_tag,demand,reservations_per_av,custodian,region,probability_threshold
-2026-04-30,2026-05,Winch,12,,212,135,Motive AS,Alle,75
-2026-04-30,2026-05,Mob-Personnel,,,9,,Motive AS,Alle,75
-2026-04-30,2026-05,HPUS,16,,291,241,Motive AS,Alle,75
+snapshot_date,month,asset_type,assets_in_fleet,assets_red_tag,demand,reservations_per_av,custodian,project_owner_demand,region,probability_threshold
+2026-05-07,2026-05,Winch,4,,,,Motive AS,Motive AS,Motive Norway,75
+2026-05-07,2026-05,HPUS,11,,,,Motive AS,Motive AS,Motive Norway,75
 ```
 
 ### Datakvalitet

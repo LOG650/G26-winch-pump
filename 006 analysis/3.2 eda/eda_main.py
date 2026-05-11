@@ -13,10 +13,10 @@ import matplotlib.dates as mdates
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
-CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-04-30_motive_baseline', 'clean',
-                       '2026-04-30_supply_demand_motive_alle_75pct.csv')
-OV_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-04-30_motive_baseline', 'clean',
-                      '2026-04-30_supply_demand_overview_motive_alle_75pct.csv')
+CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no_baseline', 'clean',
+                       '2026-05-07_supply_demand_motive_no_75pct.csv')
+OV_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no_baseline', 'clean',
+                      '2026-05-07_supply_demand_overview_motive_no_75pct.csv')
 OUT = SCRIPT_DIR
 
 cal = pd.read_csv(CAL_CSV, parse_dates=['snapshot_date', 'week_start'])
