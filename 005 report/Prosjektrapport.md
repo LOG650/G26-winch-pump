@@ -1,8 +1,8 @@
 
 
-**Tittel (norsk og/eller engelsk)** 
+**Datadrevet kapasitetsvarsling i offshore utleievirksomhet — Et regelbasert system for tidlig deteksjon av kapasitetsgap hos Motive Offshore Group**
 
-Forfatter(e)
+Tord Hovden og David Johan Lunde
 
 Totalt antall sider inkludert forsiden:      
 
@@ -125,17 +125,17 @@ Innhold
 
 # 
 
-1. # **Innledning** {#innledning}
+1. # **Innledning**
 
 Effektiv kapasitetsstyring er avgjørende i kapitalintensive bransjer der spesialisert utstyr utgjør kjerneressursen. Innen offshore marine- og løfteutstyrsutleie må selskaper kontinuerlig balansere tilgjengelig flåte mot innkommende prosjektetterspørsel som er balansegang som direkte påvirker både lønnsomhet og kundetilfredshet. Når investeringssyklusene i olje, gass og fornybar energi svinger, blir evnen til å reagere proaktivt på endringer i salgspipelinen en kritisk suksessfaktor.
 
 Dette prosjektet faller innenfor datadrevet kapasitetsstyring og kapasitetsplanlegging, hvor prosjektet knytter salgsdata fra CRM-systemer sammen med flåtens tilgjengelighetsdata for å forbedre denne balansen. Ved å overvåke når salgsmuligheter når en høy vinnersannsynlighet, og automatisk identifisere potensielle kapasitetsgap i den relevante bookingperioden, søker vi å utvikle et regelbasert varslingssystem som kan gi bedre beslutningsstøtte enn dagens manuelle prosesser. Rapporten er skrevet i samarbeid med Motive Offshore Group, et internasjonalt selskap som leier ut offshore-utstyr på tvers av fem regioner.
 
-1. ## **Problemstilling** {#problemstilling}
+1. ## **Problemstilling**
 
 “Hvordan kan et Python-basert varslingssystem bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte?”
 
-2. ## **Delproblemer** {#delproblemer}
+2. ## **Delproblemer**
 
 For å svare på hovedproblemstillingen er prosjektet delt inn i følgende delproblemer:
 
@@ -144,7 +144,7 @@ For å svare på hovedproblemstillingen er prosjektet delt inn i følgende delpr
 3. Hvordan kan et automatisk varsel utformes slik at selger eller prosjektkoordinator får tydelig informasjon om assets, periode og gap?  
 4. I hvilken grad gir systemet tidligere og tydeligere varsling enn dagens manuelle kontrollprosess?
 
-   3. ## **Avgrensinger** {#avgrensinger}
+   3. ## **Avgrensinger**
 
 Prosjektet er avgrenset på følgende områder for å sikre en målrettet analyse:
 
@@ -154,7 +154,7 @@ Prosjektet er avgrenset på følgende områder for å sikre en målrettet analys
 * Prosjektet fokuserer på gapdeteksjon og varsling, ikke på å foreslå løsninger for hvordan kapasitetsgapene skal håndteres. Selve håndteringen, som for eksempel omallokering av utstyr mellom regioner eller innleie fra tredjeparter, er operasjonelle beslutninger som ligger hos Motive.  
 * Modellen tar ikke hensyn til vedlikeholdsplanlegging eller transporttid mellom regioner, da disse variablene ikke er tilgjengelig i datagrunnlaget fra Power BI.
 
-  4. ## **Antagelser** {#antagelser}
+  4. ## **Antagelser**
 
 For å kunne gjennomføre analysen og modelleringen er følgende forutsetninger lagt til grunn:
 
@@ -163,37 +163,37 @@ For å kunne gjennomføre analysen og modelleringen er følgende forutsetninger 
 * Det antas at vinnersannsynligheten på 75 prosent er en pålitelig indikator på at en kontrakt er nær avslutning, i tråd med Motives interne retningslinjer for pipeline-klassifisering. Dette gjør at systemet kan fokusere ressursene på de mest sannsynlige kontraktene i stedet for å varsle på alle muligheter i pipelinen.  
 * Det antas at endringer i etterspørsel og tilgjengelig kapasitet blir fanget opp i Power BI ved neste ukentlige oppdatering.
 
-2. # **Litteratur** {#litteratur}
+2. # **Litteratur**
 
 Dette kapittelet tar for seg relevant forskning og faglitteratur som danner grunnlaget for rapportens problemstilling. Litteraturen brukes til å forklare hvordan datadrevet kapasitetsstyring, kapasitetsplanlegging, sales pipeline-data og automatiserte varslingssystemer kan knyttes sammen i en praktisk beslutningsstøttemodell. Kapittelet viser dermed hvordan tidligere forskning støtter valget av metode og gir et faglig grunnlag for videre teori, modellering og analyse.
 
-## **2.1 Datadrevet kapasitetsstyring i supply chain** {#2.1-datadrevet-kapasitetsstyring-i-supply-chain}
+## **2.1 Datadrevet kapasitetsstyring i supply chain**
 
 Datadrevet kapasitetsstyring handler om å bruke oppdaterte og strukturerte data som grunnlag for bedre planlegging og raskere beslutninger i supply chain. Xu et al. (2024) viser at big data analytics kan forbedre supply chain planning gjennom bedre nøyaktighet, kortere responstid og økt fleksibilitet. De peker også på at en viktig effekt av slike datadrevne løsninger er prosessoptimalisering og automatisering. Dette er relevant for denne rapporten fordi Power BI allerede samler supply/demand-data fra Salesforce og Asset Voice, men verdien oppstår først når dataene brukes aktivt til å oppdage kapasitetsgap. Koot et al. (2021) viser på samme måte at IoT og big data analytics kan støtte beslutningstaking i supply chain ved å koble operative data til mer systematisk overvåking og beslutningsstøtte. Denne rapporten bygger videre på denne litteraturen ved å utvikle et regelbasert system som ikke bare visualiserer kapasitet, men automatisk identifiserer nye eller forverrede gap og varsler ansvarlig selger. Dermed plasserer prosjektet seg innen datadrevet kapasitetsstyring, med fokus på praktisk bruk av eksisterende data fremfor avansert prediksjonsmodellering. 
 
-## **2.2 Kapasitetsplanlegging og ressursutnyttelse** {#2.2-kapasitetsplanlegging-og-ressursutnyttelse}
+## **2.2 Kapasitetsplanlegging og ressursutnyttelse**
 
 Kapasitetsplanlegging handler i stor grad om å sikre at riktige ressurser er tilgjengelige når etterspørselen oppstår. I maritim logistikk blir dette ekstra krevende fordi ressursene ofte er kostbare, geografisk spredt og bundet opp i prosjekter over tid. Wang og Zhen (2025) viser hvordan usikker etterspørsel påvirker beslutninger om flåteplassering og kapasitetsallokering i maritim logistikk. Dette er relevant for Motive Offshore, siden selskapet må vurdere om tilgjengelig utstyr i riktig region er tilstrekkelig til å dekke fremtidige kontrakter. Dersom kapasitetsgap oppdages for sent, kan konsekvensen bli dyre hasteløsninger, som flyfrakt, fremleie eller omdisponering fra andre lokasjoner.
 
 Et lignende poeng kommer frem i forskning på leasingstrategier for fergekapasitet, der etterspørsels-usikkerhet påvirker hvordan kapasitet bør planlegges og utnyttes over tid (Cheng et al., 2025). Selv om studien gjelder ferger, er den overførbar til denne rapporten fordi begge kontekster handler om kapitalintensive ressurser som må disponeres før behovet faktisk oppstår. Sonnleitner et al. (2025) trekker også frem at prognoser ofte fungerer som grunnlag for senere planleggings- og optimaliseringsbeslutninger i transportlogistikk. Denne rapporten bygger videre på denne tankegangen, men med et mer avgrenset formål: modellen skal ikke optimalisere hele flåteallokeringen, men varsle når forventet etterspørsel overstiger tilgjengelig kapasitet. Dermed brukes kapasitetsplanlegging som beslutningsstøtte, ikke som en fullt automatisk styringsmodell.
 
-## **2.3 Sales pipeline og vinnersannsynlighet som datagrunnlag** {#2.3-sales-pipeline-og-vinnersannsynlighet-som-datagrunnlag}
+## **2.3 Sales pipeline og vinnersannsynlighet som datagrunnlag**
 
 Sales pipeline-data kan brukes som mer enn bare en oversikt over mulige salg. I B2B-markeder kan slike data også fungere som et tidlig signal om hvilke fremtidige behov bedriften bør forberede seg på. González-Flores et al. (2025) viser hvordan maskinlæring og CRM-data kan brukes til lead scoring, der målet er å prioritere de salgsmulighetene som har høyest sannsynlighet for å konvertere til faktiske kunder. Studien peker på at dette kan hjelpe salgsorganisasjoner med å bruke tid og ressurser mer effektivt, fordi de får bedre grunnlag for å vurdere hvilke leads som bør følges opp først.
 
 Dette er relevant for denne rapporten fordi Motive Offshore allerede bruker vinnersannsynlighet i Salesforce som en del av sin salgsprosess. Når en kontrakt når 75 % sannsynlighet, kan dette tolkes som et sterkt signal om kommende etterspørsel, ikke bare som en salgsindikator. Rapporten bygger videre på denne tankegangen ved å koble salgsdata til kapasitetsdata fra utleieflåten. I stedet for at vinnersannsynligheten kun brukes til å prioritere salgsarbeid, brukes den her som en trigger for å undersøke om fremtidig etterspørsel kan skape kapasitetsgap. Dermed blir sales pipeline-data en del av beslutningsstøtten for kapasitetsplanlegging, ikke bare et verktøy for salgsoppfølging.
 
-## **2.4 Automatiserte varslingssystemer** {#2.4-automatiserte-varslingssystemer}
+## **2.4 Automatiserte varslingssystemer**
 
 Et varslingssystem har størst verdi når det gjør data om til et beslutningsgrunnlag som brukerne kan handle på. Koot et al. (2021) viser i sin litteraturgjennomgang at IoT og big data analytics kan støtte beslutningstaking i supply chain ved å koble data fra fysiske objekter og operasjonelle prosesser inn i planleggingsarbeidet. Dette er relevant for denne rapporten fordi Motive Offshore har data fra både Salesforce og Asset Voice, men utfordringen ligger i å bruke disse dataene mer proaktivt. I stedet for at selgere og prosjektkoordinatorer manuelt må kontrollere kapasitet, kan et automatisert system gjøre analysen tidligere og mer systematisk.
 
 Sonnleitner et al. (2025) peker på at prognoser i transportlogistikk ofte brukes som input til videre planlegging og optimalisering, altså at prediksjoner først får praktisk verdi når de kobles til beslutninger. Denne rapporten bygger på samme tankegang, men med et mer avgrenset formål. Målet er ikke å automatisere alle beslutninger om flåteallokering, men å varsle når forventet etterspørsel overstiger tilgjengelig kapasitet. Varslingssystemet fungerer derfor som beslutningsstøtte: det gir brukerne tidligere informasjon om mulige kapasitetsgap, slik at de kan vurdere tiltak før problemet blir akutt.
 
-3. # **Teori** {#teori}
+3. # **Teori**
 
 Dette kapittelet presenterer det teoretiske rammeverket som ligger til grunn for metodevalg og senere modellering. Kapittelet avgrenser seg til sentrale begreper og prinsipper som brukes for å forstå kapasitetsstyring, tilgjengelighet, kapasitetsgap, kapasitetsutnyttelse og regelbasert varsling. Tidligere forskning er behandlet i litteraturkapittelet, mens den konkrete matematiske modellen og implementeringen beskrives senere i modellering- og metodekapittelet.
 
-## **3.1 Kapasitetsstyring og ressursbalanse** {#3.1-kapasitetsstyring-og-ressursbalanse}
+## **3.1 Kapasitetsstyring og ressursbalanse**
 
 Kapasitetsstyring handler om å balansere tilgjengelige ressurser mot etterspørsel innenfor en gitt tidsperiode. I logistikk innebærer dette å sikre at virksomheten har nok kapasitet til å dekke behovet, uten at ressursene blir stående unødvendig ubrukt. For lav kapasitet kan føre til forsinkelser, tapte inntekter og behov for dyre hastetiltak, mens for høy kapasitet kan gi lav ressursutnyttelse og økte kostnader.
 
@@ -203,7 +203,7 @@ Gr,a,t \=Sr,a,t-Dr,a,t
 
 der Gr,a,t er kapasitetsbalansen, Sr,a,t er tilgjengelig kapasitet, og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Dersom Gr,a,t\<0, overstiger etterspørselen tilgjengelig kapasitet, og det oppstår et kapasitetsgap.
 
-## **3.2 Tilgjengelighet og kapasitetsgap** {#3.2-tilgjengelighet-og-kapasitetsgap}
+## **3.2 Tilgjengelighet og kapasitetsgap**
 
 Tilgjengelighet beskriver hvor mye kapasitet som faktisk kan brukes i en bestemt periode. I et utleiebasert system er ikke alt utstyr tilgjengelig samtidig, fordi enkelte enheter allerede kan være leid ut, reservert eller bundet til andre oppdrag. Kapasitetsvurderingen må derfor ta hensyn til både eksisterende forpliktelser og nye behov.  
 Et kapasitetsgap oppstår når etterspørselen er større enn tilgjengelig kapasitet. Dette kan uttrykkes som:  
@@ -211,7 +211,7 @@ Sr,a,t \< Dr,a,t
 
 der Sr,a,t er tilgjengelig kapasitet og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Når denne betingelsen er oppfylt, betyr det at virksomheten ikke har nok tilgjengelig utstyr til å dekke behovet i den aktuelle perioden uten ekstra tiltak. Slike gap er særlig viktige å oppdage tidlig, fordi tiltak som omdisponering, innleie eller nyanskaffelse ofte krever planleggingstid.
 
-## **3.3 Kapasitetsutnyttelse og servicenivå** {#3.3-kapasitetsutnyttelse-og-servicenivå}
+## **3.3 Kapasitetsutnyttelse og servicenivå**
 
 Kapasitetsutnyttelse beskriver hvor stor del av tilgjengelig kapasitet som brukes til å dekke etterspørsel. Høy kapasitetsutnyttelse kan være positivt fordi ressursene brukes effektivt, men svært høy utnyttelse gir mindre fleksibilitet dersom nye behov oppstår. Kapasitetsutnyttelse kan uttrykkes som:
 
@@ -221,7 +221,7 @@ der Ur,a,t er kapasitetsutnyttelsen, Dr,a,t er etterspørsel, og Sr,a,t er tilgj
 
 Servicenivå handler om evnen til å dekke kundebehov innen avtalt tid og omfang. Dersom et kapasitetsgap oppstår, kan servicenivået svekkes fordi virksomheten må bruke ekstra tiltak for å levere som planlagt. Sammenhengen mellom kapasitetsutnyttelse og servicenivå forklarer derfor hvorfor kapasitetsgap bør identifiseres før de blir operative problemer.
 
-## **3.4 Regelbasert varslingslogikk** {#3.4-regelbasert-varslingslogikk}
+## **3.4 Regelbasert varslingslogikk**
 
 Regelbasert varslingslogikk innebærer at systemet bruker faste betingelser for å avgjøre når et varsel skal utløses. I stedet for å predikere fremtidig etterspørsel, kontrollerer systemet om bestemte forhold er oppfylt i datagrunnlaget. En slik tilnærming er hensiktsmessig nå. Samlet gir teorien et grunnlag for metode- og modellkapittelet. Kapasitetsstyring forklarer hvorfor supply og demand må sammenlignes, kapasitetsgap forklarer hva systemet skal oppdage, kapasitetsutnyttelse og servicenivå forklarer hvorfor gapene har operasjonell betydning, og regelbasert varslingslogikk forklarer hvorfor løsningen kan bygges som en kontrollmodell fremfor en prediksjonsmodell.
 
@@ -232,7 +232,7 @@ Ar,a,t \= 1 hvis Gr,a,t \< 0 og pj ≥ 0,75
 
 Her betyr Ar,a,t=1 at et varsel utløses, Gr,a,t er kapasitetsbalansen, og pj er vinnersannsynligheten for kontrakt j. Regelen viser at varsel bare sendes når det finnes et kapasitetsgap, og når kontrakten har nådd en definert sannsynlighetsterskel. Regelbasert logikk gir et tydelig beslutningsgrunnlag fordi kriteriene for varsel er eksplisitte og kan testes mot datagrunnlaget.
 
-4. # **Casebeskrivelse** {#casebeskrivelse}
+4. # **Casebeskrivelse**
 
 ## **4.1 Motive Offshore Group**
 
@@ -288,11 +288,11 @@ Datagrunnlaget for prosjektet er ukentlige snapshots fra Motive Offshores Power 
 
 Negative gap-verdier indikerer at etterspørselen overstiger tilgjengelig kapasitet. Ved å sammenligne to påfølgende snapshots tatt på ulike datoer kan det oppdages om et gap er nytt, om det har forverret seg, eller om det har blitt løst som følge av endringer i Salesforce eller Asset Voice. Detaljert beskrivelse av selve datafangstmetoden og datasettets størrelse og periode følger i kapittel 5.2.
 
-5. # **Metode og data (kan splittes i to)** {#metode-og-data-(kan-splittes-i-to)}
+5. # **Metode og data (kan splittes i to)**
 
 Litt avhengig av omfanget, kan det være lurt å vurdere om du skal splitte kapittelet i to eller ikke.
 
-## **5.1Metode** {#metode}
+## **5.1Metode**
 
 Prosjektet følger et kvantitativt, anvendt forskningsdesign med en casebasert tilnærming. Motive Offshore brukes som case fordi prosjektet undersøker et konkret kapasitetsproblem i én virksomhet. Analysen bygger på strukturerte Power BI-eksporter med numeriske kapasitetsverdier, etterspørsel og endringer over tid.
 
@@ -306,7 +306,7 @@ Implementeringen gjennomføres i Python. KI-verktøy brukes som støtte til kode
 
 Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdateringsfrekvens. Systemet forutsetter at dataene i Salesforce, Asset Voice og Power BI er korrekte og oppdaterte. Prosjektet identifiserer og varsler kapasitetsgap, men vurderer ikke hvilke tiltak Motive Offshore bør gjennomføre for å løse gapet.
 
-## **5.2 Data** {#data}
+## **5.2 Data**
 
 ### **5.2.1 Datakilder**
 
@@ -371,7 +371,7 @@ Utviklingen i synlig 75 %+ etterspørsel over de åtte tilgjengelige månedene i
 
 Etterspørselen som vises ved 75 %-terskelen reduseres med 66 prosent fra mai (884) til desember (301), selv om flåtekapasiteten er konstant på 36 enheter og det historisk er aktivitet i hele perioden. Reduksjonen skyldes ikke manglende behov, men at kontrakter med leveranse senere på året ennå ikke har nådd 75 % vinnersannsynlighet i Salesforce. Når slike kontrakter etter hvert oppdateres, oppstår nye gap i celler som tidligere så uproblematiske ut. Det er nettopp disse endringene varslingssystemet skal fange opp gjennom uke-til-uke-sammenligning av påfølgende snapshots.
 
-6. # **Modellering** {#modellering}
+6. # **Modellering**
 
 Dette kapittelet beskriver den konkrete modellen som utvikles for å oppdage kapasitetsgap og utløse varsler. Modellen bygger på det teoretiske rammeverket fra kapittel 3 og operasjonaliserer dette mot datagrunnlaget beskrevet i kapittel 5.2. Beskrivelsen er utformet slik at modellen kan implementeres uten ytterligere klargjøringer, og hvert designvalg forankres i den eksplorative dataanalysen i kapittel 7.
 
@@ -507,7 +507,7 @@ Valget av Tier 1 som rutingsnøkkel er pragmatisk: den aggregerte Power BI-tabel
 
 For hvert utløste varsel produserer modellen et strukturert sett med felter som videreføres til varslingslogikken i WBS-aktivitet 3.4. Feltene omfatter snapshot-dato $s_i$, identifikatorene $(r, a, t)$, gap-verdiene $G^{(s_{i-1})}$ og $G^{(s_i)}$, endringstype, magnitudeklasse, prioritet, strukturelt-flagg og mottaker-identifikator. Selve formateringen av e-postmeldingen, ukentlig påminnelseslogikk for ulukkede gap, og avslutningstrigger ved løst gap beskrives i forbindelse med varslingslogikken. Modellen i dette kapittelet stopper ved utløsingsbeslutningen og overlater leveringsmekanismen til neste lag i systemet.
 
-7. # **Analyse** {#analyse}
+7. # **Analyse**
 
 Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-04-30. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.7 og bygger på sammenligning mellom påfølgende snapshots.
 
@@ -624,7 +624,7 @@ To utstyrsenheter har $G_{r,a,t} = 0$ i alle 36 uker (Tabell 7.4).
 
 Den dynamiske endringsdeteksjonen beskrevet i kapittel 6.4 forutsetter sammenligning mellom to påfølgende snapshots. På analysetidspunktet for dette utkastet foreligger kun baseline-snapshotet 2026-04-30. Når neste snapshot (2026-05-04) er fanget og transkribert, vil delta-detektoren kjøres på snapshot-paret og resultatene presenteres her, herunder fordeling mellom *nye*, *forverrede*, *forbedrede* og *løste* gap, samt hvilke utstyrskategorier som har størst dynamikk mellom snapshots.
 
-8. # **Resultat** {#resultat}
+8. # **Resultat**
 
 Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-04-30 og det første snapshot-paret (baseline mot 2026-05-04). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
 
@@ -731,7 +731,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 <p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og kapittelets resultater.</i></small></p>
 
-9. # **Diskusjon** {#diskusjon}
+9. # **Diskusjon**
 
 Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen, litteraturen i kapittel 2 og de metodiske valgene dokumentert i kapittel 5. Det vurderer i hvilken grad varslingssystemet svarer på forskningsspørsmålet, hvilke begrensninger metoden medfører, og hvilke implikasjoner resultatene har for Motive Offshore og lignende virksomheter.
 
@@ -794,7 +794,7 @@ Diskuter hva som er generelt versus spesifikt for offshore-konteksten.]*
 - Brukerstudier av selgere og prosjektkoordinatorer for å vurdere varselsformatets praktiske nytte og signal-til-støy-forhold.
 ]*
 
-10. # **Konklusjon** {#konklusjon}
+10. # **Konklusjon**
 
 I oppgavens konklusjon oppsummerer du hovedfunn sett i forhold til problemstilling.  
 Avslutt gjerne med spørsmål til videre forskning, og del personlige refleksjoner du eventuelt måtte ha.
@@ -807,7 +807,7 @@ Hva er det viktigste dere har funnet?
   * «På tross av de svakhetene som oppgaven har er det indikasjoner om at ...»  
 * I konklusjonen blir det ofte litt gjentagelse fra diskusjon/resultat men det er helt greit. Her skal dere dra frem de viktigste funnene og hvilken betydning det har for deres case.
 
-11. # **Bibliografi** {#bibliografi}
+11. # **Bibliografi**
 
 Anthropic. (2026). Claude \[stor språkmodell\]. [https://claude.ai](https://claude.ai)
 
@@ -823,5 +823,5 @@ Wang, X., & Zhen, L. (2025). Fleet deployment and freight allocation for cleaner
 
 Xu, J., Pero, M., & Fabbri, M. (2023). Unfolding the link between big data analytics and supply chain planning. *Technological Forecasting and Social Change, 196*, Article 122805\. [https://doi.org/10.1016/j.techfore.2023.122805](https://doi.org/10.1016/j.techfore.2023.122805) 
 
-12. # **Vedlegg** {#vedlegg}
+12. # **Vedlegg**
 
