@@ -345,7 +345,7 @@ Tabell 5.2 oppsummerer de to datasettene som inngår i analysegrunnlaget per bas
 | Datasett | Enhet per rad | Periode | Antall rader |
 |----------|---------------|---------|--------------|
 | Calendar | Tier 2-utstyrsenhet × uke | 2026-05-11 til 2026-12-28 (34 uker) | 816 |
-| Overview | Asset type × måned | mai 2026 til desember 2026 (8 måneder) | 64 |
+| Overview | Asset type × måned | mai 2026 (1 av 8 planlagte måneder transkribert) | 8 |
 
 <p align="center"><small><i>Tabell 5.2 Datasett som inngår i analysegrunnlaget per snapshot 2026-05-07.</i></small></p>
 
@@ -353,7 +353,7 @@ Calendar-datasettet dekker 24 unike Tier 2-utstyrsenheter fordelt på 8 asset ty
 
 ### **5.2.5 Datakvalitet**
 
-For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet matcher alle åtte måneder eksakt på alle tre måltall (Assets in Fleet, Demand og Reservations Per AV).
+For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet er mai 2026 verifisert mot Power BI på alle tre måltall (Assets in Fleet = 36, Demand = 44, Reservations Per AV = 44); de øvrige syv månedene transkriberes når de respektive månedsfiltrene er fanget i 2026-05-07-baselinen.
 
 ### **5.2.6 Datagrunnlagets relevans for problemstillingen**
 
@@ -361,18 +361,18 @@ Utviklingen i synlig 75 %+ etterspørsel over de åtte tilgjengelige månedene i
 
 | Måned | Assets in Fleet | Demand | Reservations | Demand − Reservations |
 |-------|-----------------|--------|--------------|-----------------------|
-| Mai 2026 | 36 | 884 | 595 | 289 |
-| Juni 2026 | 36 | 929 | 605 | 324 |
-| Juli 2026 | 36 | 845 | 533 | 312 |
-| August 2026 | 36 | 855 | 570 | 285 |
-| September 2026 | 36 | 597 | 401 | 196 |
-| Oktober 2026 | 36 | 440 | 302 | 138 |
-| November 2026 | 36 | 451 | 274 | 177 |
-| Desember 2026 | 36 | 301 | 228 | 73 |
+| Mai 2026 | 36 | 44 | 44 | 0 |
+| Juni 2026 | 36 | – | – | – |
+| Juli 2026 | 36 | – | – | – |
+| August 2026 | 36 | – | – | – |
+| September 2026 | 36 | – | – | – |
+| Oktober 2026 | 36 | – | – | – |
+| November 2026 | 36 | – | – | – |
+| Desember 2026 | 36 | – | – | – |
 
-<p align="center"><small><i>Tabell 5.3 Synlig 75 %+ etterspørsel per måned, snapshot 2026-04-30 (Region = Alle, global demand). Erstattes med tilsvarende tall for verkstedet Motive Norway når nytt Overview-snapshot er hentet i 2026-05-07-baselinen.</i></small></p>
+<p align="center"><small><i>Tabell 5.3 Synlig 75 %+ etterspørsel per måned for verkstedet Motive Norway, snapshot 2026-05-07. Kun mai 2026 er foreløpig transkribert; øvrige måneder fylles inn etter hvert som månedsfilteret skiftes og skjermbildet fanges.</i></small></p>
 
-Etterspørselen som vises ved 75 %-terskelen reduseres med 66 prosent fra mai (884) til desember (301), selv om flåtekapasiteten er konstant på 36 enheter og det historisk er aktivitet i hele perioden. Reduksjonen skyldes ikke manglende behov, men at kontrakter med leveranse senere på året ennå ikke har nådd 75 % vinnersannsynlighet i Salesforce. Når slike kontrakter etter hvert oppdateres, oppstår nye gap i celler som tidligere så uproblematiske ut. Det er nettopp disse endringene varslingssystemet skal fange opp gjennom uke-til-uke-sammenligning av påfølgende snapshots.
+For mai 2026 ligger synlig 75 %+ etterspørsel på 44 unit-uker mot en fleet på 36 enheter, og reservasjoner i Asset Voice dekker hele den synlige etterspørselen (Demand − Reservations = 0). Tallene er kvalitativt forskjellige fra det globale uttrekket fordi etterspørselen nå avgrenses til prosjekter eid av Motive AS i Stavanger-verkstedet, ikke konsernet samlet. Reduksjonen i synlig 75 %+ etterspørsel fremover i året – mekanismen problemstillingen skal adressere – kan først dokumenteres for Motive Norway når månedsverdiene for juni til desember er hentet. Når slike kontrakter etter hvert oppdateres mot 75 %-terskelen i Salesforce, oppstår nye gap i celler som tidligere så uproblematiske ut, og det er nettopp disse endringene varslingssystemet skal fange opp gjennom uke-til-uke-sammenligning av påfølgende snapshots.
 
 6. # **Modellering** {#modellering}
 
@@ -418,17 +418,17 @@ $$A_{r,a,t}^{(s)} = 1 \quad \text{hvis} \quad G_{r,a,t}^{(s)} < 0$$
 
 der $A_{r,a,t}^{(s)} = 1$ markerer at cellen har et aktivt gap i snapshot $s$. Vinnersannsynlighetsbetingelsen $p_j \geq 0{,}75$ fra teorikapittelet er allerede pålagt i Power BI-filteret som beskrevet i 5.2.2, og inngår derfor ikke som en separat regel i selve kodebasen.
 
-Binær deteksjon alene skiller imidlertid ikke mellom et marginalt celleunderskudd og et alvorlig flåtegap. Den eksplorative dataanalysen i kapittel 7 viser at gap-verdiene er sterkt høyreskeive: medianen blant negative celler er $-2$, mens halen strekker seg ned mot $-13$. Modellen klassifiserer derfor hver detekterte gap-celle i én av tre magnitudeklasser, slik at varslingsprioritering kan reflektere alvorlighetsgrad. Klassene er oppsummert i Tabell 6.1.
+Binær deteksjon alene skiller imidlertid ikke mellom et marginalt celleunderskudd og et alvorlig flåtegap. Den eksplorative dataanalysen i kapittel 7 viser at gap-verdiene i Motive Norway-baselinen er smale: blant negative celler er median $-1$, 5-prosentilen $-2$ og minste observerte verdi $-2$. Datasettet inneholder altså ingen celler i moderat eller kritisk klasse slik klassegrensene opprinnelig ble definert (jf. drøfting av terskel-sensitivitet i 9.3). Modellen beholder likevel tre magnitudeklasser slik at varslingsprioritering automatisk kan reflektere alvorlighetsgrad når et fremtidig snapshot inneholder mer ekstreme verdier, for eksempel dersom flere kontrakter passerer 75 %-terskelen samtidig eller dersom suppression-listen flytter et kjent strukturelt gap inn på den dynamiske strømmen. Klassene er oppsummert i Tabell 6.1.
 
-| Magnitudeklasse | Intervall | Beskrivelse | Antall celler | Andel av 1 690 negative |
-|-----------------|-----------|-------------|---------------|-------------------------|
-| Mildt gap | $-2 \leq G_{r,a,t} \leq -1$ | Marginalt underskudd, sannsynligvis håndterbart innenfor eksisterende fleksibilitet | 1 152 | 68,2 % |
-| Moderat gap | $-5 \leq G_{r,a,t} \leq -3$ | Tydelig underskudd som krever aktiv oppfølging | 362 | 21,4 % |
-| Kritisk gap | $G_{r,a,t} \leq -6$ | Stort underskudd som typisk krever omdisponering, fremleie eller hasteanskaffelse | 176 | 10,4 % |
+| Magnitudeklasse | Intervall | Beskrivelse | Antall celler | Andel av 77 negative |
+|-----------------|-----------|-------------|---------------|----------------------|
+| Mildt gap | $-2 \leq G_{r,a,t} \leq -1$ | Marginalt underskudd, sannsynligvis håndterbart innenfor eksisterende fleksibilitet | 77 | 100,0 % |
+| Moderat gap | $-5 \leq G_{r,a,t} \leq -3$ | Tydelig underskudd som krever aktiv oppfølging | 0 | 0,0 % |
+| Kritisk gap | $G_{r,a,t} \leq -6$ | Stort underskudd som typisk krever omdisponering, fremleie eller hasteanskaffelse | 0 | 0,0 % |
 
-<p align="center"><small><i>Tabell 6.1 Magnitudeklasser med fordeling fra Calendar-datasettet, baseline-snapshot 2026-04-30.</i></small></p>
+<p align="center"><small><i>Tabell 6.1 Magnitudeklasser med fordeling fra Calendar-datasettet, baseline-snapshot 2026-05-07.</i></small></p>
 
-Klassegrensene følger naturlige brudd i distribusjonen. Grensen mellom *mildt* og *moderat* ved $-2/-3$ skiller marginale fra tydelige underskudd: 25-prosentilen av negative celler ligger ved $-3$, så *moderat* og *kritisk* utgjør til sammen den verste fjerdedelen av negative celler. Grensen mellom *moderat* og *kritisk* ved $-5/-6$ fanger halen i distribusjonen: 5-prosentilen av alle gap-verdier ligger ved $-6$, og verdier under denne grensen er sjeldne men har stor operasjonell betydning – tre av de ti utstyrsenhetene med størst kumulativt underskudd har gjennomsnittlig gap-verdi i denne klassen (jf. kapittel 7).
+Klassegrensene følger naturlige brudd i en bredere distribusjon enn dagens baseline alene representerer. Grensen mellom *mildt* og *moderat* ved $-2/-3$ skiller marginale fra tydelige underskudd, og grensen mellom *moderat* og *kritisk* ved $-5/-6$ fanger halen i distribusjonen. I 2026-05-07-baselinen for Motive Norway ligger alle 77 negative celler innenfor *mildt*-klassen, men flere av de mest utsatte enhetene (jf. kapittel 7) har dypere underskudd dersom man ser ut over enkeltuker eller inkluderer global demand. Klassegrensene revideres ved behov når flere ukentlige snapshots foreligger og den dynamiske endringsdeteksjonen i 6.4 har produsert et bredere empirisk verdiområde.
 
 Resultatet av den statiske regelen for et snapshot $s$ er en samling tripletter $(r, a, t)$ som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, hver merket med sin magnitudeklasse. Denne samlingen utgjør grunnlaget for delta-detektoren i 6.4 og for varselsutløsingen i 6.7. Strukturelt vedvarende underskudd, som typisk havner i kritisk-klassen, skilles ut og styres separat gjennom suppression-reglene i 6.5.
 
@@ -459,11 +459,11 @@ For celler som ikke finnes i begge snapshots, gjelder de to spesialtilfellene de
 
 ## **6.5 Suppression: strukturelle gap**
 
-Eksplorativ dataanalyse i kapittel 7 viser at åtte utstyrsenheter har gap-verdi $G_{r,a,t} < 0$ i alle 36 ukene av baseline-snapshotet 2026-04-30. *Hydraulic – 60Te Mooring Winch* har for eksempel $G = -4$ identisk i hver av de 36 ukene; *Horizontal – 2 track – 15Te Horizontal Tensioner* har gjennomsnittlig gap på $-8{,}3$ med spredning $[-13, -2]$. Slike enheter representerer en strukturell underdimensjonering – etterspørselen overstiger flåtekapasiteten kontinuerlig, ikke som følge av enkeltkontrakter som krysser 75 %-terskelen.
+Eksplorativ dataanalyse i kapittel 7 viser at ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene av snapshot 2026-05-07, men syv enheter har sammenhengende negative gap-verdier gjennom de første 9 til 13 ukene av kalenderhorisonten før de stabiliserer seg på null eller positivt overskudd. *Hydraulic – Wide|35Te Wide Drum Winch* har for eksempel $G = -2$ i hver av ukene 2026-05-11 til 2026-07-06 (9 påfølgende uker), og *Horizontal – 2 track – 15Te Horizontal Tensioner* har $G \in [-2, -1]$ i de 13 første ukene med kumulativt underskudd $-16$. Slike sekvenser representerer en strukturell underdimensjonering i den nære delen av horisonten – etterspørselen overstiger flåtekapasiteten kontinuerlig fra dagens dato, ikke som følge av enkeltkontrakter som krysser 75 %-terskelen.
 
 Hvis den statiske gap-deteksjonen utløser varsel for hver uke disse enhetene er i gap, fylles varslingsstrømmen av redundant informasjon. De varslene som faktisk representerer en kontraktsdrevet endring i pipeline – problemstillingens kjernescenario – risikerer å drukne i støy. Modellen anvender derfor en suppression-regel som klassifiserer assets som *strukturelle* og behandler dem annerledes enn øvrige assets.
 
-Et asset $a$ markeres som strukturelt når $G_{r,a,t}^{(s)} < 0$ for alle observerte $(t, s)$ i et evalueringsvindu på $K$ påfølgende snapshots. Med ukentlig kadens er $K$ valgt til 4, slik at en kortvarig nedgangsperiode på 1–3 uker ikke feilaktig kategoriserer et asset som strukturelt. For initiell baseline brukes alle 36 ukene i snapshot 2026-04-30 som vindu, hvilket identifiserer de åtte enhetene over. Listen oppdateres kontinuerlig etter hver nye datafangst og lagres som en konfigurasjonsfil.
+Et asset $a$ markeres som strukturelt når $G_{r,a,t}^{(s)} < 0$ for alle observerte $(t, s)$ i et evalueringsvindu på $K$ påfølgende snapshots. Med ukentlig kadens er $K$ valgt til 4, slik at en kortvarig nedgangsperiode på 1–3 uker ikke feilaktig kategoriserer et asset som strukturelt. For initiell baseline brukes 2026-05-07-snapshotet som vindu og syv enheter identifiseres som strukturelle for sin respektive vedvarende-periode tidlig i kalenderen (35Te Wide Drum Winch, 15Te Horizontal Tensioner, 50Te Tensioner 4-track, 500Te RDS, 150Te RDS, 158KW Electric HPU og 2Te Linear Cable Engine; se Tabell 7.3). Listen oppdateres kontinuerlig etter hver nye datafangst og lagres som en konfigurasjonsfil.
 
 Suppression-regelen styrer hvordan hver detektert endring fra 6.3 og 6.4 håndteres avhengig av om asset er strukturelt eller ikke (Tabell 6.3).
 
@@ -484,7 +484,7 @@ Strukturelle gap rapporteres i en separat månedlig oversikt rettet mot vedlikeh
 
 ## **6.6 Eksklusjonsliste**
 
-EDA i kapittel 7 identifiserer to utstyrsenheter med $G_{r,a,t} = 0$ i alle 36 ukene av baseline-snapshotet: *Crane loaded|250Te Crane Loaded Underrollers* og *200Te Crane loaded Underrollers*. Verken positiv eller negativ avvik observeres for disse cellene i hele snapshotperioden, hvilket tyder på at enhetene enten er inaktive utleieenheter, er registrert med null kapasitet i Asset Voice, eller på annen måte ikke gir meningsfullt input til gap-deteksjonen.
+EDA i kapittel 7 identifiserer én utstyrsenhet med $G_{r,a,t} = 0$ i alle 34 ukene av baseline-snapshotet: *Diesel – 63kW Diesel HPU Zone II*. Verken positivt eller negativt avvik observeres for denne cellen i hele snapshotperioden, hvilket tyder på at enheten enten er en inaktiv utleieenhet, er registrert med null kapasitet i Asset Voice, eller på annen måte ikke gir meningsfullt input til gap-deteksjonen.
 
 Modellen håndterer slike enheter via en konfigurert eksklusjonsliste. Assets på listen filtreres bort i forhåndsfiltreringen i 6.2 og evalueres ikke av reglene i 6.3, 6.4 eller 6.5. Listen er bevisst skilt fra suppression-listen i 6.5: suppression behandler assets som har vedvarende gap der varsling ville vært støy, mens eksklusjon fjerner assets som ikke skal evalueres i det hele tatt.
 
@@ -512,17 +512,17 @@ For hvert utløste varsel produserer modellen et strukturert sett med felter som
 
 7. # **Analyse** {#analyse}
 
-Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-04-30. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.7 og bygger på sammenligning mellom påfølgende snapshots.
+Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-05-07. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.7 og bygger på sammenligning mellom påfølgende snapshots.
 
 ## **7.1 Distribusjon av gap-verdier**
 
-Calendar-datasettet inneholder 2 880 celler fordelt over 80 utstyrsenheter og 36 uker. Tabell 7.1 viser fordelingen etter fortegn på gap-verdien $G_{r,a,t}$, og Figur 7.1 viser den fulle distribusjonen.
+Calendar-datasettet inneholder 816 celler fordelt over 24 utstyrsenheter og 34 uker. Tabell 7.1 viser fordelingen etter fortegn på gap-verdien $G_{r,a,t}$, og Figur 7.1 viser den fulle distribusjonen.
 
 | Tilstand | Antall celler | Andel |
 |----------|---------------|-------|
-| Negativ verdi (gap) | 1 690 | 58,7 % |
-| Null verdi (balanse) | 908 | 31,5 % |
-| Positiv verdi (overskudd) | 282 | 9,8 % |
+| Negativ verdi (gap) | 77 | 9,4 % |
+| Null verdi (balanse) | 260 | 31,9 % |
+| Positiv verdi (overskudd) | 479 | 58,7 % |
 
 <p align="center"><small><i>Tabell 7.1 Fordeling av cellene i Calendar-datasettet etter fortegn på gap-verdien.</i></small></p>
 
@@ -531,7 +531,7 @@ Calendar-datasettet inneholder 2 880 celler fordelt over 80 utstyrsenheter og 36
   <p align="center"><small><i>Figur 7.1 Distribusjon av gap-verdiene i Calendar-datasettet, fargekodet etter negativ, balansert og positiv tilstand.</i></small></p>
 </div>
 
-Distribusjonen er sterkt høyreskeiv. For de negative cellene er median $-2$, 25-prosentilen $-3$ og 5-prosentilen $-6$. Verdiområdet for hele datasettet er $[-13, +1]$.
+Distribusjonen er lett venstreforskjøvet for negative verdier og bredere på overskuddssiden. For de negative cellene er median $-1$, 25-prosentilen $-1$ og 5-prosentilen $-2$. Verdiområdet for hele datasettet er $[-2, +7]$.
 
 ## **7.2 Gap-utviklingen over kalenderhorisonten**
 
@@ -542,7 +542,7 @@ Figur 7.2 viser sum av $G_{r,a,t}$ aggregert per uke over hele 36-ukers-horisont
   <p align="center"><small><i>Figur 7.2 Totalt synlig gap per uke i baseline-snapshotet.</i></small></p>
 </div>
 
-Samlet ukentlig gap øker fra $-182$ unit-uker i mai 2026 til $+19$ i januar 2027. Lokale toppunkter er $-184$ og $-185$ i juni. Trenden er tilnærmet lineær med en gjennomsnittlig økning på rundt 5 unit-uker per uke nedover horisonten.
+Samlet ukentlig gap er positivt gjennom hele horisonten og øker fra $+10$ unit-uker i uken 2026-05-11 til $+34$ i uken 2026-12-28. Trendkurven er svakt stigende og monoton fra og med oktober 2026; de første 9 ukene har lokal flatlinje i intervallet $+9$ til $+13$ fordi syv enheter har strukturelt underskudd i denne tidlige perioden (jf. 7.6). At baseline-snapshotet i sin helhet ligger over null betyr at Motive Norway-flåten samlet sett dekker den 75 %+-eksponerte etterspørselen som er synlig per snapshot-datoen.
 
 ## **7.3 Sammenligning på tvers av asset types**
 
@@ -553,38 +553,35 @@ Figur 7.3 dekomponerer det ukentlige gapet etter asset type.
   <p align="center"><small><i>Figur 7.3 Ukentlig sum av gap-verdi per asset type.</i></small></p>
 </div>
 
-HPUS har størst underskudd i nær fremtid med ukentlige verdier ned mot $-69$. Winch og Tensioner følger med ned mot henholdsvis $-48$ og $-28$. De tre gruppene utgjør samlet 80 prosent av det ukentlige gapet i mai til august. Storage reels, HLS, Generators og Cranes ligger konsekvent nær null.
+Tensioner, RDS og Cable Pulling machine er de asset typene som har vedvarende negative ukessummer i Motive Norway-flåten. Tensioner går så lavt som $-3$ per uke, RDS ned til $-2$ og Cable Pulling machine ned til $-2$. Disse tre asset typene står til sammen for hele det negative bidraget på asset type-nivå (kumulativt $-25$, $-23$ og $-6$ unit-uker over de 34 ukene). Winch, Spoolers, LMA machines, Under rollers og HPUS har positiv ukessum i alle 34 ukene (sum henholdsvis $+308$, $+199$, $+34$, $+34$ og $+307$); HPUS som asset type er altså samlet i overskudd, selv om enkeltenheten *158KW Electric HPU* har negative leaf-celler i tidlig periode (jf. 7.6).
 
 ## **7.4 De mest utsatte utstyrsenhetene**
 
-Tabell 7.2 lister de ti enhetene med størst kumulativt underskudd over 36 uker. Figur 7.4 og Figur 7.5 viser samme sortering henholdsvis som søylediagram og som heatmap mot ukene.
+Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker. Figur 7.4 og Figur 7.5 viser samme sortering henholdsvis som søylediagram og som heatmap mot ukene.
 
 | Asset type | Asset (Tier 2) | Kumulativt gap |
 |--------|---------------|----------------|
-| Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | −299 |
-| HPUS | Electric – 54kW Electric HPU | −293 |
-| HPUS | Electric – 90KW Electric HPU | −215 |
-| Winch | Hydraulic – Wide\|35Te Wide Drum Winch – 35Te Wide Drum Winch | −168 |
-| RDS | 400Te RDS | −148 |
-| Cable Pulling machine | 2Te Linear Cable Engine | −144 |
-| HPUS | Electric – 84KW Electric HPU | −143 |
-| Winch | Hydraulic – 60Te Mooring Winch | −140 |
-| HPUS | Electric – 37kW Electric HPU | −130 |
-| Under rollers | Crane loaded\|350Te Crane Loaded Underrollers – 350Te Crane Loaded Underrollers | −129 |
+| Winch | Hydraulic – Wide\|35Te Wide Drum Winch | −19 |
+| Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | −16 |
+| RDS | 500Te RDS | −14 |
+| Tensioner | Horizontal – 4 track – 50Te Tensioner – 4 Track | −9 |
+| RDS | 150Te RDS | −9 |
+| HPUS | Electric – 158KW Electric HPU | −9 |
+| Cable Pulling machine | 2Te Linear Cable Engine | −6 |
 
-<p align="center"><small><i>Tabell 7.2 De ti utstyrsenhetene med størst kumulativt underskudd over snapshot-perioden 2026-05-04 til 2027-01-04.</i></small></p>
+<p align="center"><small><i>Tabell 7.2 Utstyrsenhetene med negativt kumulativt gap over snapshot-perioden 2026-05-11 til 2026-12-28.</i></small></p>
 
 <div align="center">
-  <img src="../006 analysis/3.2 eda/fig_topp10_verste_assets.png" alt="Topp 10 verste assets" width="80%">
-  <p align="center"><small><i>Figur 7.4 Topp 10 utstyrsenheter med størst kumulativt underskudd.</i></small></p>
+  <img src="../006 analysis/3.2 eda/fig_topp10_verste_assets.png" alt="Enheter med negativt kumulativt gap" width="80%">
+  <p align="center"><small><i>Figur 7.4 Utstyrsenheter med negativt kumulativt gap.</i></small></p>
 </div>
 
 <div align="center">
-  <img src="../006 analysis/3.2 eda/fig_gap_heatmap_topp30.png" alt="Heatmap topp 30" width="95%">
-  <p align="center"><small><i>Figur 7.5 Heatmap av gap-verdi per uke for de 30 utstyrsenhetene med størst kumulativt underskudd.</i></small></p>
+  <img src="../006 analysis/3.2 eda/fig_gap_heatmap_topp30.png" alt="Heatmap utstyrsenheter" width="95%">
+  <p align="center"><small><i>Figur 7.5 Heatmap av gap-verdi per uke for de 24 utstyrsenhetene i Motive Norway-baselinen.</i></small></p>
 </div>
 
-Fire av de ti enhetene tilhører HPUS-gruppen, to tilhører Winch og to tilhører Tensioner. Verste enkeltasset er *Horizontal – 2 track – 15Te Horizontal Tensioner* med kumulativt gap $-299$, etterfulgt av *Electric – 54kW Electric HPU* med $-293$. Begge har gjennomsnittlig gap-verdi rundt $-8$ over perioden.
+To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$, etterfulgt av *Horizontal – 2 track – 15Te Horizontal Tensioner* med $-16$ og *500Te RDS* med $-14$. Alle syv enhetene har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.6).
 
 ## **7.5 Etterspørsel og reservasjoner i Overview-datasettet**
 
@@ -595,48 +592,46 @@ Figur 7.6 viser etterspørsel og reservasjoner per måned mellom mai og desember
   <p align="center"><small><i>Figur 7.6 Synlig 75 %+ etterspørsel og registrerte reservasjoner i Asset Voice per måned.</i></small></p>
 </div>
 
-Synlig 75 %+ etterspørsel reduseres fra 884 unit-uker i mai til 301 i desember (66 prosent reduksjon). Reservasjoner i Asset Voice følger samme trend, fra 595 i mai til 228 i desember. Differansen *demand minus reservations* (reservation-gapet) varierer fra 73 (desember) til 324 (juni) unit-uker.
+For mai 2026 viser Overview-uttrekket synlig 75 %+ etterspørsel på 44 unit-uker mot en fleet på 36, og reservasjoner i Asset Voice dekker hele den synlige etterspørselen (reservation-gap = 0). Tilsvarende månedsverdier for juni til desember er ikke transkribert per 2026-05-07-snapshotet og er foreløpig markert som ufullstendige i Tabell 5.3. Den månedlige nedtrendingen i synlig 75 %+ etterspørsel som problemstillingen forventer, dokumenteres for Motive Norway-perspektivet når disse månedene er fanget. Figur 7.6 oppdateres tilsvarende når Overview-datasettet er komplett.
 
 ## **7.6 Strukturelle gap og inaktive utstyrsenheter**
 
-Åtte utstyrsenheter har $G_{r,a,t} < 0$ i alle 36 uker av baseline-snapshotet (Tabell 7.3). De utgjør 10 prosent av totalt 80 utstyrsenheter i Calendar-datasettet.
+Ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene av snapshot 2026-05-07. Syv enheter har derimot en sammenhengende sekvens med negative gap-verdier i begynnelsen av kalenderhorisonten – typisk uke 1 til 9 eller uke 1 til 13 – før gap-verdien stabiliserer seg på 0 eller positivt overskudd. Disse syv enhetene utgjør 29 prosent av de 24 enhetene i Calendar-datasettet og oppsummeres i Tabell 7.3.
 
-| Asset type | Asset (Tier 2) | Min | Maks | Snitt | Sum |
-|--------|---------------|-----|------|-------|-----|
-| Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | −13 | −2 | −8,31 | −299 |
-| HPUS | Electric – 54kW Electric HPU | −12 | −1 | −8,14 | −293 |
-| Winch | Hydraulic – Wide\|35Te Wide Drum Winch – 35Te Wide Drum Winch | −13 | −1 | −4,67 | −168 |
-| RDS | 400Te RDS | −7 | −1 | −4,11 | −148 |
-| RDS | 80Te RDS | −3 | −1 | −1,58 | −57 |
-| RDS | 60Te RDS | −2 | −1 | −1,06 | −38 |
-| Cranes | Hydraulic – Crane – Palfinger | −2 | −1 | −1,03 | −37 |
-| Tensioner | Horizontal – 2 track – 20Te Vertical | −1 | −1 | −1,00 | −36 |
+| Asset type | Asset (Tier 2) | Neg uker av 34 | Min | Snitt-neg | Sum |
+|--------|---------------|----------------|-----|-----------|-----|
+| RDS | 500Te RDS | 14 | −1 | −1,00 | −14 |
+| Tensioner | Horizontal – 2 track – 15Te Horizontal Tensioner | 13 | −2 | −1,23 | −16 |
+| Winch | Hydraulic – Wide\|35Te Wide Drum Winch | 10 | −2 | −1,90 | −19 |
+| Tensioner | Horizontal – 4 track – 50Te Tensioner – 4 Track | 9 | −1 | −1,00 | −9 |
+| RDS | 150Te RDS | 9 | −1 | −1,00 | −9 |
+| HPUS | Electric – 158KW Electric HPU | 9 | −1 | −1,00 | −9 |
+| Cable Pulling machine | 2Te Linear Cable Engine | 3 | −2 | −2,00 | −6 |
 
-<p align="center"><small><i>Tabell 7.3 Utstyrsenheter med negativ gap-verdi i alle 36 uker av baseline-snapshotet.</i></small></p>
+<p align="center"><small><i>Tabell 7.3 Utstyrsenheter med strukturelt negativ gap-verdi i tidlig kalenderperiode av baseline-snapshotet 2026-05-07.</i></small></p>
 
-To utstyrsenheter har $G_{r,a,t} = 0$ i alle 36 uker (Tabell 7.4).
+Én utstyrsenhet har $G_{r,a,t} = 0$ i alle 34 uker (Tabell 7.4).
 
 | Asset type | Asset (Tier 2) |
 |--------|---------------|
-| Under rollers | 200Te Crane loaded Underrollers |
-| Under rollers | Crane loaded\|250Te Crane Loaded Underrollers – 250Te Crane Loaded Underrollers |
+| HPUS | Diesel – 63kW Diesel HPU Zone II |
 
-<p align="center"><small><i>Tabell 7.4 Utstyrsenheter med gap-verdi 0 i alle 36 uker av baseline-snapshotet.</i></small></p>
+<p align="center"><small><i>Tabell 7.4 Utstyrsenheter med gap-verdi 0 i alle 34 uker av baseline-snapshotet 2026-05-07.</i></small></p>
 
 ## **7.7 Uke-til-uke-analyse**
 
-Den dynamiske endringsdeteksjonen beskrevet i kapittel 6.4 forutsetter sammenligning mellom to påfølgende snapshots. På analysetidspunktet for dette utkastet foreligger kun baseline-snapshotet 2026-04-30. Når neste snapshot (2026-05-04) er fanget og transkribert, vil delta-detektoren kjøres på snapshot-paret og resultatene presenteres her, herunder fordeling mellom *nye*, *forverrede*, *forbedrede* og *løste* gap, samt hvilke utstyrskategorier som har størst dynamikk mellom snapshots.
+Den dynamiske endringsdeteksjonen beskrevet i kapittel 6.4 forutsetter sammenligning mellom to påfølgende snapshots. På analysetidspunktet for dette utkastet foreligger kun baseline-snapshotet 2026-05-07. Når neste snapshot (2026-05-14) er fanget og transkribert med samme filterprofil (Asset Custodian = Motive AS, Project Owner Demand = Motive AS, Region = Motive Norway), vil delta-detektoren kjøres på snapshot-paret og resultatene presenteres her, herunder fordeling mellom *nye*, *forverrede*, *forbedrede* og *løste* gap, samt hvilke utstyrskategorier som har størst dynamikk mellom snapshots.
 
 8. # **Resultat** {#resultat}
 
-Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-04-30 og det første snapshot-paret (baseline mot 2026-05-04). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
+Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-05-07 og det første snapshot-paret (baseline mot 2026-05-14). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
 
 ## **8.1 Statisk gap-deteksjon på baseline-snapshot**
 
 *[Fylles inn etter at gap-deteksjonen i 3.3 har kjørt på baseline. Forventet innhold: antall celler som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, fordeling etter magnitudeklasse (mildt/moderat/kritisk), fordeling etter asset type.]*
 
-| Magnitudeklasse | Antall utløste celler | Andel av 1 690 negative celler |
-|-----------------|-----------------------|--------------------------------|
+| Magnitudeklasse | Antall utløste celler | Andel av 77 negative celler |
+|-----------------|-----------------------|------------------------------|
 | Mildt gap | – | – |
 | Moderat gap | – | – |
 | Kritisk gap | – | – |
@@ -645,7 +640,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 ## **8.2 Uke-til-uke-deltadeteksjon**
 
-*[Fylles inn etter at delta-detektoren er kjørt på snapshot-paret (2026-04-30 ↔ 2026-05-04). Forventet innhold: antall celler i hver av de fem endringskategoriene definert i Tabell 6.2, samt fordeling per asset type.]*
+*[Fylles inn etter at delta-detektoren er kjørt på snapshot-paret (2026-05-07 ↔ 2026-05-14). Forventet innhold: antall celler i hver av de fem endringskategoriene definert i Tabell 6.2, samt fordeling per asset type.]*
 
 | Endringstype | Antall celler | Andel av sammenlignede celler |
 |--------------|---------------|-------------------------------|
@@ -655,7 +650,7 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 | Uendret gap | – | – |
 | Løst gap | – | – |
 
-<p align="center"><small><i>Tabell 8.2 Klassifisering av cellevise endringer mellom snapshot 2026-04-30 og 2026-05-04.</i></small></p>
+<p align="center"><small><i>Tabell 8.2 Klassifisering av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14.</i></small></p>
 
 *[Forventet: en eller to figurer som visualiserer fordelingen mellom asset types, eventuelt et stablet søylediagram per uke.]*
 
@@ -754,7 +749,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 ## **9.3 Modellens robusthet og begrensninger**
 
 *[Fylles inn:
-- Begrensning fra én snapshot-serie i validering, jf. `avviksanalyse-2026-05-01.md`. Hva ville en lengre serie ha tillatt?
+- Begrensning fra én snapshot-serie i validering, jf. `avviksanalyse-2026-05-07.md`. Hva ville en lengre serie ha tillatt?
 - Avhengighet av Power BIs avrundingslogikk (jf. 5.2.5) og hvor mye dette påvirker terskelfølsomhet.
 - Suppression-vinduets størrelse $K = 4$: konsekvenser av å justere opp eller ned.
 - Sensitivitet for endringer i magnitudeklassegrenser ($-2/-3$ og $-5/-6$).
@@ -763,7 +758,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 ## **9.4 Datafangstmetodens påvirkning på resultatene**
 
-*[Fylles inn: drøft hvordan skjermavlesning som datafangst (jf. `avviksanalyse-2026-04-30.md`) kan ha påvirket resultatene:
+*[Fylles inn: drøft hvordan skjermavlesning som datafangst (jf. `avviksanalyse-2026-05-07.md`) kan ha påvirket resultatene:
 - Risiko for transkriberingsfeil og hvordan sumsjekken mitigerer dette.
 - Power BIs interne avrundingsstøy og dens påvirkning på asset type-summeringer.
 - Hva direkte CSV-eksport via API ville endret av analysens validitet.
