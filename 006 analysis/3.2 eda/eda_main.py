@@ -15,13 +15,9 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
 CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no_baseline', 'clean',
                        '2026-05-07_supply_demand_motive_no_75pct.csv')
-OV_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no_baseline', 'clean',
-                      '2026-05-07_supply_demand_overview_motive_no_75pct.csv')
 OUT = SCRIPT_DIR
 
 cal = pd.read_csv(CAL_CSV, parse_dates=['snapshot_date', 'week_start'])
-ov = pd.read_csv(OV_CSV, parse_dates=['snapshot_date'])
-ov['month_dt'] = pd.to_datetime(ov['month'] + '-01')
 
 plt.rcParams.update({
     'font.size': 10,
@@ -33,8 +29,6 @@ plt.rcParams.update({
 
 print(f'Calendar: {len(cal)} rader, {cal["asset_tier2"].nunique()} assets, '
       f'{cal["week_start"].nunique()} uker')
-print(f'Overview: {len(ov)} rader, {ov["asset_type"].nunique()} kategorier, '
-      f'{ov["month"].nunique()} maaneder')
 
 
 def write_table(df, path, caption):
@@ -164,27 +158,6 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 fig.autofmt_xdate()
 plt.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig_per_asset_type_uker.png'))
-plt.close(fig)
-
-# ============================================================
-# Figur 6: Overview - demand vs reservations per maaned
-# ============================================================
-ov_total = ov.groupby('month_dt')[['demand', 'reservations_per_av']].sum().reset_index()
-fig, ax = plt.subplots(figsize=(11, 5))
-ax.plot(ov_total['month_dt'], ov_total['demand'], marker='o', lw=2, ms=8,
-        color='#c0392b', label='Demand (synlig 75 %+)')
-ax.plot(ov_total['month_dt'], ov_total['reservations_per_av'], marker='s', lw=2, ms=8,
-        color='#2980b9', label='Reservations (Asset Voice)')
-ax.fill_between(ov_total['month_dt'], ov_total['demand'], ov_total['reservations_per_av'],
-                color='#e67e22', alpha=0.2, label='Reservation-gap')
-ax.set_xlabel('Maaned')
-ax.set_ylabel('Unit-uker')
-ax.set_title('Demand vs reservations per maaned (snapshot 2026-04-30)')
-ax.legend(loc='upper right')
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
-fig.autofmt_xdate()
-plt.tight_layout()
-fig.savefig(os.path.join(OUT, 'fig_demand_vs_reservations_maanedlig.png'))
 plt.close(fig)
 
 # ============================================================

@@ -310,14 +310,11 @@ Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdaterings
 
 ### **5.2.1 Datakilder**
 
-Datagrunnlaget for prosjektet er hentet fra Motive Offshores Power BI-rapport *Supply vs Demand*. Rapporten aggregerer flåtens tilgjengelighet fra Asset Voice og etterspørsel fra Salesforce til en samlet supply/demand-oversikt per utstyrskategori, region og uke. To rapportsider brukes som primære datakilder:
-
-* **Supply/ Demand – Calendar:** Ukentlig kapasitetsbalanse per Tier 2-utstyrsenhet over de neste 8 månedene. Hver celle viser supply minus demand som heltall, der negative verdier representerer kapasitetsgap. Dette er hoveddatasettet for gap-deteksjonen.
-* **Supply vs Demand – Overview:** Månedlig aggregat per asset type med kolonnene Assets in Fleet, Demand og Reservations Per AV. Brukes som overordnet kontroll av datagrunnlaget og som grunnlag for sammenligninger på kategorinivå.
+Datagrunnlaget for prosjektet er hentet fra Motive Offshores Power BI-rapport *Supply vs Demand*. Rapporten aggregerer flåtens tilgjengelighet fra Asset Voice og etterspørsel fra Salesforce til en samlet supply/demand-oversikt per utstyrskategori, region og uke. Som primær datakilde brukes rapportsiden **Supply/ Demand – Calendar**, som viser ukentlig kapasitetsbalanse per Tier 2-utstyrsenhet over de neste 8 månedene. Hver celle viser supply minus demand som heltall, der negative verdier representerer kapasitetsgap.
 
 ### **5.2.2 Filterinnstillinger**
 
-For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt verksted faktisk kan disponere, låses både supply- og demand-siden til samme juridiske enhet. Datasettet i denne rapporten er hentet for verkstedet Motive Norway (juridisk enhet Motive AS), men de samme filtrene kan byttes synkront for ethvert annet verksted i konsernet (Motive UK, Motive USA, ...) – modellen er lokasjons-agnostisk. Tabell 5.1 oppsummerer filterinnstillingene som brukes konsekvent på begge rapportsider.
+For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt verksted faktisk kan disponere, låses både supply- og demand-siden til samme juridiske enhet. Datasettet i denne rapporten er hentet for verkstedet Motive Norway (juridisk enhet Motive AS), men de samme filtrene kan byttes synkront for ethvert annet verksted i konsernet (Motive UK, Motive USA, ...) – modellen er lokasjons-agnostisk. Tabell 5.1 oppsummerer filterinnstillingene som brukes ved datafangst.
 
 | Felt | Verdi | Funksjon |
 |------|-------|----------|
@@ -340,39 +337,19 @@ Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-s
 
 ### **5.2.4 Datasettoversikt**
 
-Tabell 5.2 oppsummerer de to datasettene som inngår i analysegrunnlaget per baseline-snapshot 2026-05-07.
+Tabell 5.2 oppsummerer datasettet som inngår i analysegrunnlaget per baseline-snapshot 2026-05-07.
 
 | Datasett | Enhet per rad | Periode | Antall rader |
 |----------|---------------|---------|--------------|
 | Calendar | Tier 2-utstyrsenhet × uke | 2026-05-11 til 2026-12-28 (34 uker) | 816 |
-| Overview | Asset type × måned | mai 2026 (1 av 8 planlagte måneder transkribert) | 8 |
 
 <p align="center"><small><i>Tabell 5.2 Datasett som inngår i analysegrunnlaget per snapshot 2026-05-07.</i></small></p>
 
-Calendar-datasettet dekker 24 unike Tier 2-utstyrsenheter fordelt på 8 asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som faktisk er fysisk lokalisert ved verkstedet Motive Norway. Asset types som Turntables, Storage reels, HLS, Generators og Cranes finnes hos andre verksteder, men inngår ikke i denne lokale flåten og dermed ikke i datasettet. Overview-datasettet inneholder i tillegg seks operasjonelle tjenestekategorier – Mob-Personnel, Mob-Equipment, Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel og Demob-Equipment – som ikke representerer fysisk utstyr og derfor er ekskludert fra gap-deteksjonen jamfør avgrensingen i kapittel 1.3.
+Calendar-datasettet dekker 24 unike Tier 2-utstyrsenheter fordelt på 8 asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som faktisk er fysisk lokalisert ved verkstedet Motive Norway. Asset types som Turntables, Storage reels, HLS, Generators og Cranes finnes hos andre verksteder, men inngår ikke i denne lokale flåten og dermed ikke i datasettet.
 
 ### **5.2.5 Datakvalitet**
 
-For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett. For Overview-datasettet er mai 2026 verifisert mot Power BI på alle tre måltall (Assets in Fleet = 36, Demand = 44, Reservations Per AV = 44); de øvrige syv månedene transkriberes når de respektive månedsfiltrene er fanget i 2026-05-07-baselinen.
-
-### **5.2.6 Datagrunnlagets relevans for problemstillingen**
-
-Utviklingen i synlig 75 %+ etterspørsel over de åtte tilgjengelige månedene illustrerer den mekanismen problemstillingen skal adressere. Tabell 5.3 viser månedstotaler hentet fra Overview-datasettet.
-
-| Måned | Assets in Fleet | Demand | Reservations | Demand − Reservations |
-|-------|-----------------|--------|--------------|-----------------------|
-| Mai 2026 | 36 | 44 | 44 | 0 |
-| Juni 2026 | 36 | – | – | – |
-| Juli 2026 | 36 | – | – | – |
-| August 2026 | 36 | – | – | – |
-| September 2026 | 36 | – | – | – |
-| Oktober 2026 | 36 | – | – | – |
-| November 2026 | 36 | – | – | – |
-| Desember 2026 | 36 | – | – | – |
-
-<p align="center"><small><i>Tabell 5.3 Synlig 75 %+ etterspørsel per måned for verkstedet Motive Norway, snapshot 2026-05-07. Kun mai 2026 er foreløpig transkribert; øvrige måneder fylles inn etter hvert som månedsfilteret skiftes og skjermbildet fanges.</i></small></p>
-
-For mai 2026 ligger synlig 75 %+ etterspørsel på 44 unit-uker mot en fleet på 36 enheter, og reservasjoner i Asset Voice dekker hele den synlige etterspørselen (Demand − Reservations = 0). Tallene er kvalitativt forskjellige fra det globale uttrekket fordi etterspørselen nå avgrenses til prosjekter eid av Motive AS i Stavanger-verkstedet, ikke konsernet samlet. Reduksjonen i synlig 75 %+ etterspørsel fremover i året – mekanismen problemstillingen skal adressere – kan først dokumenteres for Motive Norway når månedsverdiene for juni til desember er hentet. Når slike kontrakter etter hvert oppdateres mot 75 %-terskelen i Salesforce, oppstår nye gap i celler som tidligere så uproblematiske ut, og det er nettopp disse endringene varslingssystemet skal fange opp gjennom uke-til-uke-sammenligning av påfølgende snapshots.
+For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett.
 
 6. # **Modellering** {#modellering}
 
@@ -512,7 +489,7 @@ For hvert utløste varsel produserer modellen et strukturert sett med felter som
 
 7. # **Analyse** {#analyse}
 
-Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-05-07. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.7 og bygger på sammenligning mellom påfølgende snapshots.
+Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-05-07. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.6 og bygger på sammenligning mellom påfølgende snapshots.
 
 ## **7.1 Distribusjon av gap-verdier**
 
@@ -581,20 +558,9 @@ Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker. Figu
   <p align="center"><small><i>Figur 7.5 Heatmap av gap-verdi per uke for de 24 utstyrsenhetene i Motive Norway-baselinen.</i></small></p>
 </div>
 
-To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$, etterfulgt av *Horizontal – 2 track – 15Te Horizontal Tensioner* med $-16$ og *500Te RDS* med $-14$. Alle syv enhetene har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.6).
+To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$, etterfulgt av *Horizontal – 2 track – 15Te Horizontal Tensioner* med $-16$ og *500Te RDS* med $-14$. Alle syv enhetene har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.5).
 
-## **7.5 Etterspørsel og reservasjoner i Overview-datasettet**
-
-Figur 7.6 viser etterspørsel og reservasjoner per måned mellom mai og desember 2026.
-
-<div align="center">
-  <img src="../006 analysis/3.2 eda/fig_demand_vs_reservations_maanedlig.png" alt="Demand vs reservations per måned" width="85%">
-  <p align="center"><small><i>Figur 7.6 Synlig 75 %+ etterspørsel og registrerte reservasjoner i Asset Voice per måned.</i></small></p>
-</div>
-
-For mai 2026 viser Overview-uttrekket synlig 75 %+ etterspørsel på 44 unit-uker mot en fleet på 36, og reservasjoner i Asset Voice dekker hele den synlige etterspørselen (reservation-gap = 0). Tilsvarende månedsverdier for juni til desember er ikke transkribert per 2026-05-07-snapshotet og er foreløpig markert som ufullstendige i Tabell 5.3. Den månedlige nedtrendingen i synlig 75 %+ etterspørsel som problemstillingen forventer, dokumenteres for Motive Norway-perspektivet når disse månedene er fanget. Figur 7.6 oppdateres tilsvarende når Overview-datasettet er komplett.
-
-## **7.6 Strukturelle gap og inaktive utstyrsenheter**
+## **7.5 Strukturelle gap og inaktive utstyrsenheter**
 
 Ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene av snapshot 2026-05-07. Syv enheter har derimot en sammenhengende sekvens med negative gap-verdier i begynnelsen av kalenderhorisonten – typisk uke 1 til 9 eller uke 1 til 13 – før gap-verdien stabiliserer seg på 0 eller positivt overskudd. Disse syv enhetene utgjør 29 prosent av de 24 enhetene i Calendar-datasettet og oppsummeres i Tabell 7.3.
 
@@ -618,7 +584,7 @@ Ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene
 
 <p align="center"><small><i>Tabell 7.4 Utstyrsenheter med gap-verdi 0 i alle 34 uker av baseline-snapshotet 2026-05-07.</i></small></p>
 
-## **7.7 Uke-til-uke-analyse**
+## **7.6 Uke-til-uke-analyse**
 
 Den dynamiske endringsdeteksjonen beskrevet i kapittel 6.4 forutsetter sammenligning mellom to påfølgende snapshots. På analysetidspunktet for dette utkastet foreligger kun baseline-snapshotet 2026-05-07. Når neste snapshot (2026-05-14) er fanget og transkribert med samme filterprofil (Asset Custodian = Motive AS, Project Owner Demand = Motive AS, Region = Motive Norway), vil delta-detektoren kjøres på snapshot-paret og resultatene presenteres her, herunder fordeling mellom *nye*, *forverrede*, *forbedrede* og *løste* gap, samt hvilke utstyrskategorier som har størst dynamikk mellom snapshots.
 

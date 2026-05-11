@@ -1,8 +1,8 @@
 # 3.2 EDA – Funn og implikasjoner for modelleringen
 
 Eksplorativ dataanalyse av snapshot 2026-04-30 (Calendar: 2 880 celler over 80
-utstyrsenheter × 36 uker; Overview: 152 rader over 19 kategorier × 8 måneder).
-Genererte figurer og tabeller ligger i samme mappe som dette dokumentet.
+utstyrsenheter × 36 uker). Genererte figurer og tabeller ligger i samme mappe
+som dette dokumentet.
 
 ## Overordnet bilde
 
@@ -10,7 +10,6 @@ Genererte figurer og tabeller ligger i samme mappe som dette dokumentet.
 - **31,5 %** er nøyaktig 0 (balanse)
 - **9,8 %** har overskuddskapasitet (gap-verdi > 0)
 - **Median gap-verdi: −1**, P5: −6, ekstremverdier ned til −13
-- **Reservation-gap (Demand − Reservations) per måned varierer fra 73 til 324 unit-uker**
 
 Distribusjonen er sterkt høyreskeiv (Figur 1): de fleste gap-celler er små
 (−1 eller −2), men en lang hale av store underskudd opp mot −13 trekker opp
@@ -88,15 +87,10 @@ Dette bør reflekteres i recipients-konfigurasjonen.
 
 ## Blindsone-effekten – kvantifisert
 
-Figur `fig_total_gap_per_uke.png` og `fig_demand_vs_reservations_maanedlig.png`
-viser tydelig hovedmotivasjonen for prosjektet:
+Figur `fig_total_gap_per_uke.png` viser tydelig hovedmotivasjonen for prosjektet:
 
 - **Total ukentlig gap reduseres lineært fra ca −182 i mai 2026 til omtrent 0
   i januar 2027** – en reduksjon på ~180 unit-uker over 8 måneder
-- **Synlig 75 %+ demand reduseres fra 884 (mai) til 301 (desember)** – 66 %
-  reduksjon
-- **Reservation-gap per måned er nokså stabilt 285–324 unit-uker fra
-  mai–august**, men faller til 73 i desember
 
 Den nedadgående trenden er **ikke** et tegn på at fremtiden er problemfri –
 det er nettopp tegnet på at fremtidens kontrakter ennå ikke er bumpet til

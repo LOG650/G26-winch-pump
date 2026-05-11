@@ -1,13 +1,9 @@
 # Dataskjema – supply/demand-snapshots
 
-To CSV-er per snapshot:
+Én CSV per snapshot: **Calendar** – ukentlig gap-verdi per Tier 2-utstyrsenhet
+(`*_supply_demand_motive_no_75pct.csv`).
 
-1. **Calendar** – ukentlig gap-verdi per Tier 2-utstyrsenhet (`*_supply_demand_motive_no_75pct.csv`)
-2. **Overview** – månedlig aggregat per asset type (`*_supply_demand_overview_motive_no_75pct.csv`)
-
----
-
-## 1. Calendar – ukentlige gap-verdier
+## Calendar – ukentlige gap-verdier
 
 Skjema for renset CSV som genereres fra Power BI-skjermbilder (kalendervisningen
 "Supply/ Demand – Calendar"). Én rad per **(snapshot, uke, utstyrsenhet)**.
@@ -89,58 +85,3 @@ Power BI – og som gap-deteksjonen skal reagere på.
 
 Datasettet lagres i **lang form** (én rad per uke per asset). Brede tabeller
 brukt i rapporten genereres ved behov med `pivot_table` i pandas.
-
----
-
-## 2. Overview – månedlige aggregater
-
-Skjema for renset CSV som genereres fra "Supply vs Demand – Overview"-siden i
-Power BI. Én rad per **(snapshot, måned, asset type)**.
-
-Brukes som overordnet kontroll av datagrunnlaget og for høynivåfigurer i
-rapporten – ikke som hoveddatasett for gap-deteksjon.
-
-### Kolonner
-
-| Kolonne | Type | Eksempel | Beskrivelse |
-|---------|------|----------|-------------|
-| `snapshot_date` | dato | `2026-05-07` | Dato bildene ble tatt |
-| `month` | streng | `2026-05` | Måned aggregatet gjelder for (`YYYY-MM`) |
-| `asset_type` | streng | `Winch` | Asset type (Winch, HPUS, Mob-Personnel, ...) |
-| `assets_in_fleet` | heltall \| tom | `12` | Antall enheter i flåten. Tom for tjenester (mob/demob) og noen kategorier |
-| `assets_red_tag` | heltall \| tom | tom | Antall enheter merket Red Tag (oftest tom) |
-| `demand` | heltall | `212` | Total etterspørsel for måneden (unit-uker) |
-| `reservations_per_av` | heltall \| tom | `135` | Reservasjoner i Asset Voice. Tom for tjenester |
-| `custodian` | streng | `Motive AS` | Filterverdi: Asset Custodian (Supply) |
-| `project_owner_demand` | streng | `Motive AS` | Filterverdi: Project Owner Demand |
-| `region` | streng | `Motive Norway` | Filterverdi: Region (verksted) |
-| `probability_threshold` | heltall | `75` | Filterverdi (Opp. Probability % nedre terskel) |
-
-### Asset types
-
-Overview inneholder 19 asset types – flere enn Calendar:
-
-- **Med flåte (i Calendar):** Winch, Under rollers, Turntables, Tensioner,
-  Storage reels, Spoolers, RDS, LMA machines, HPUS, HLS, Generators, Cranes,
-  Cable Pulling machine
-- **Uten flåte (kun i Overview):** Mob-Personnel, Mob-Equipment,
-  Mob/Demob-Personnel, Mob/Demob-Equipment, Demob-Personnel, Demob-Equipment
-
-De siste seks er **operasjonelle tjenester** (mobilisering/demobilisering),
-ikke fysisk utstyr. De er ekskludert fra gap-deteksjonen per
-avgrensning i 1.3 i prosjektrapporten.
-
-### Eksempel (3 rader)
-
-```csv
-snapshot_date,month,asset_type,assets_in_fleet,assets_red_tag,demand,reservations_per_av,custodian,project_owner_demand,region,probability_threshold
-2026-05-07,2026-05,Winch,4,,,,Motive AS,Motive AS,Motive Norway,75
-2026-05-07,2026-05,HPUS,11,,,,Motive AS,Motive AS,Motive Norway,75
-```
-
-### Datakvalitet
-
-- Sumsjekk per måned mot `Totalt`-raden i Power BI verifiserer at fleet,
-  demand og reservations summerer korrekt. **Ingen avrundingsstøy** observert
-  her – Overview-tallene er rene heltall (i motsetning til Calendar).
-- Tom celle = blank i Power BI (ikke 0). Skiller "ikke målt" fra "0".

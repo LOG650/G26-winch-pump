@@ -35,7 +35,7 @@ Tilgangsmodellen til Motive Offshores Power BI tildeler eksportrettigheter selek
 
 Følgende tiltak er implementert:
 
-1. **Datafangst via skjermavlesning.** Hver datafangst gjennomføres ved at prosjektgruppen tar PNG-skjermbilder av Power BI-rapportens to relevante sider (*Supply/ Demand – Calendar* og *Supply vs Demand – Overview*) med fastsatt filtersett. Bildene lagres lokalt i `004 data/<dato>_motive_baseline/raw/`.
+1. **Datafangst via skjermavlesning.** Hver datafangst gjennomføres ved at prosjektgruppen tar PNG-skjermbilder av Power BI-rapportens *Supply/ Demand – Calendar*-side med fastsatt filtersett. Bildene lagres lokalt i `004 data/<dato>_motive_baseline/raw/`.
 2. **Transkribering til CSV i Python.** Skript i `006 analysis/3.1 datainnhenting/_transcribe_*.py` (gitignored, inneholder rådata inline) leser av tallene fra skjermbildene og produserer lang-form CSV i `004 data/<dato>_motive_baseline/clean/`.
 3. **Sumsjekk mot Power BI.** Hvert transkribert datasett verifiseres automatisk mot Power BIs egne asset type-summer og Totalt-rad via `verify_asset_type_sums.py`. Avvik over $\pm 2$ unit-uker per asset type per uke flagges som transkriberingsfeil.
 4. **Avrundingsdokumentasjon.** Power BIs avrundingsstøy på opp til $\pm 2$ mellom celleverdier og asset type-summer dokumentert i kapittel 5.2.5 i sluttrapporten.
