@@ -9,7 +9,9 @@
       "PowerShell(claude config list 2>&1)",
       "Bash(uv run *)",
       "PowerShell(Get-ChildItem \"$env:APPDATA\\\\Code\\\\logs\" -Directory | Sort-Object LastWriteTime -Descending | Select-Object Name, LastWriteTime -First 5)",
-      "Bash(echo \"---exit $?\")"
+      "Bash(echo \"---exit $?\")",
+      "Bash(git check-ignore *)",
+      "Bash(awk 'NR==412' \"012 fase 2 - plan/prosjektsstyringsplan.md\")"
     ]
   }
 }
