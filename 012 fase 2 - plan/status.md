@@ -41,8 +41,8 @@
 - [x] 3.1 Datainnhenting og klargjøring — David *(snapshot 1 (2026-05-07 baseline) og snapshot 2 (2026-05-14) ferdig (Motive Norway); snapshot 3 planlagt 2026-05-21 som siste i serien)*
 - [x] 3.2 Eksplorativ dataanalyse (EDA) — Tord
 - [ ] 3.3 Gap-deteksjonslogikk — Begge *(første delta-par (snap1 ↔ snap2) kjørt – 7 nye gap, 10 fargeendringer fanget; verifiseres mot snap3 2026-05-21)*
-- [ ] 3.4 Varslingslogikk — Begge *(kjernemodul ferdig: 12 varsler generert fra snap1↔snap2 (7 G-regel + 5 severity-regel), 3 digest-e-poster; ukentlig påminnelse avventer snap3)*
-- [ ] 3.5 Validering og testing — Begge
+- [ ] 3.4 Varslingslogikk — Begge *(kjernemodul + thread-tracking ferdig: 12 varsler generert fra snap1↔snap2, 3 digest-e-poster, ny → påminnelse → løst-livssyklus implementert; SMTP-leveranse gjenstår)*
+- [ ] 3.5 Validering og testing — Begge *(50 pytest-tester implementert og passerer; dekker Tabell 6.4, Tabell 6.5, trad-livssyklus, ruting, mønsterdeteksjon, edge cases. Integrasjonstest mot snap 2↔3 avventer torsdag)*
 - [ ] 3.6 Rapportskriving (løpende) — Begge *(kapittel 1–5 ferdig; kapittel 6 påbegynnes)*
 
 ### 4.0 Avslutning

@@ -1,13 +1,14 @@
 """3.4 Varslingslogikk - genererer varsler fra gap_changes.csv.
 
 Anvender regelmatrisene i 6.5 (G-baserte + severity-baserte) og rutingen i 6.7.
-Bygger varselsobjekter, prioriterer og rute, og genererer digest-tekst per
-mottaker per snapshot. Sender ikke faktisk e-post (det krever SMTP-credentials
-i .env og er beskrevet i 6.7); skriver til varsler.csv og digests/-mappe.
+Sporer aktive varslingstrader i active_alerts.json mellom snapshot-kjoringer,
+slik at samme celle som forblir i gap utloser ukentlig paminnelse og avsluttes
+med varsel nar gapet er lost.
 
 Kjor: uv run python "3.4 varsling/gap_alerting.py"
 """
 import csv
+import json
 import os
 from collections import defaultdict
 from dataclasses import asdict, dataclass, fields
@@ -21,21 +22,20 @@ RECIPIENTS_PATH = os.path.join(SCRIPT_DIR, 'recipients.yaml')
 GAP_CHANGES_PATH = os.path.join(
     PROJECT_ROOT, '006 analysis', '3.3 gap-deteksjon', 'gap_changes.csv'
 )
+STATE_PATH = os.path.join(SCRIPT_DIR, 'active_alerts.json')
 OUT_DIR = SCRIPT_DIR
 
-# Eksklusjonsliste (kap 6.6) - enheter som filtreres bort for varsling
 EXCLUSION_LIST = {
     'Diesel - 63kW Diesel HPU Zone II',
 }
-
-# Suppression-listen (kap 6.5) - manuelt konfigurerte strukturelle assets.
-# Tom som default fordi K=4-kriteriet ikke kan eksercereres innenfor
-# prosjektperioden (jf. 9.3). Kandidater fra front-lastet-analysen i 7.5
-# kan legges inn etter koordinatorbekreftelse.
 STRUCTURAL_ASSETS: set[str] = set()
 
 OVERDEKNING = {'green', 'yellow', 'red'}
 UNDERDEKNING = {'purple', 'black'}
+
+# Hardkodede snapshot-datoer for denne kjoringen. Utvidelse: les fra metadata.
+SNAPSHOT_T = '2026-05-14'
+SNAPSHOT_T1 = '2026-05-07'
 
 
 @dataclass
@@ -57,6 +57,9 @@ class Varsel:
     magnitude_class: str
     priority: str
     is_structural: bool
+    thread_status: str  # 'ny' / 'paminnelse' / 'eskalert' / 'lost' / 'informasjon'
+    reminder_count: int  # 0 for nye varsler, 1+ for paminnelser
+    opened_at: str  # snapshot-dato da threaden ble apnet
     recipient: str
 
 
@@ -71,7 +74,6 @@ def magnitude_class(gap: int) -> str:
 
 
 def severity_cross(s1: str, s2: str) -> str | None:
-    """Klassifiser severity-overgang per Tabell 6.5."""
     if s1 in OVERDEKNING and s2 in UNDERDEKNING:
         return 'SKJULT_NYTT_GAP'
     if s1 in UNDERDEKNING and s2 in OVERDEKNING:
@@ -84,10 +86,7 @@ def severity_cross(s1: str, s2: str) -> str | None:
 
 
 def evaluate_alert(row: dict, is_structural: bool) -> tuple[bool, str, str, str]:
-    """Avgjor om en celle utloser varsel per Tabell 6.4 og 6.5.
-
-    Returnerer (alert, rule, sub_category, priority).
-    """
+    """Avgjor om en celle utloser varsel per Tabell 6.4 og 6.5."""
     ct = row['change_type']
     g1, g2 = int(row['gap_value_t1']), int(row['gap_value_t2'])
     s1, s2 = row['severity_band_t1'], row['severity_band_t2']
@@ -96,18 +95,16 @@ def evaluate_alert(row: dict, is_structural: bool) -> tuple[bool, str, str, str]
     if ct == 'NYTT_GAP':
         prio = 'høy' if magnitude_class(g2) in ('moderat', 'kritisk') else 'middels'
         return True, 'G-regel', 'NYTT_GAP', prio
-
     if ct == 'FORVERRET':
         if magnitude_class(g1) != magnitude_class(g2):
             return True, 'G-regel', 'FORVERRET_KLASSEBYTTE', 'høy'
         if is_structural:
             return False, '', '', ''
         return True, 'G-regel', 'FORVERRET_INNEN_KLASSE', 'lav'
-
     if ct == 'LOEST':
         return True, 'G-regel', 'LOEST', 'informasjon'
 
-    # Tabell 6.5 - severity-supplement nar G-regelen ikke utloste varsel
+    # Tabell 6.5 - severity-supplement
     sct = severity_cross(s1, s2)
     if sct == 'SKJULT_NYTT_GAP':
         return True, 'severity-regel', sct, 'middels'
@@ -115,18 +112,185 @@ def evaluate_alert(row: dict, is_structural: bool) -> tuple[bool, str, str, str]
         return True, 'severity-regel', sct, 'høy'
     if sct == 'SKJULT_LOST_GAP':
         return True, 'severity-regel', sct, 'informasjon'
-
     return False, '', '', ''
+
+
+def cell_in_gap(gap: int, severity: str) -> bool:
+    """Cellen er 'i gap-tilstand' hvis G negativ eller severity i underdekning."""
+    return gap < 0 or severity in UNDERDEKNING
+
+
+def thread_key(asset_type: str, asset_tier2: str, week_start: str) -> str:
+    return f'{asset_type}|{asset_tier2}|{week_start}'
+
+
+def load_state() -> dict:
+    if not os.path.exists(STATE_PATH):
+        return {'last_run': None, 'threads': {}}
+    with open(STATE_PATH, encoding='utf-8') as f:
+        return json.load(f)
+
+
+def save_state(state: dict) -> None:
+    with open(STATE_PATH, 'w', encoding='utf-8') as f:
+        json.dump(state, f, indent=2, ensure_ascii=False)
+
+
+def is_gap_opening_alert(sub_category: str) -> bool:
+    """Avgjor om denne alert-typen apner en ny varslingstrad."""
+    return sub_category in (
+        'NYTT_GAP',
+        'SKJULT_NYTT_GAP',
+        'FORVERRET_KLASSEBYTTE',
+        'FORVERRET_INNEN_KLASSE',
+        'SKJULT_FORVERRING',
+    )
+
+
+def make_varsel(
+    row: dict, recipient: str, is_structural: bool,
+    rule: str, sub_cat: str, priority: str,
+    thread_status: str, reminder_count: int, opened_at: str,
+) -> Varsel:
+    return Varsel(
+        snapshot_t=SNAPSHOT_T,
+        snapshot_t_minus_1=SNAPSHOT_T1,
+        week_start=row['week_start'],
+        region='Motive Norway',
+        asset_type=row['asset_type'],
+        asset_tier2=row['asset_tier2'],
+        gap_t_minus_1=int(row['gap_value_t1']),
+        gap_t=int(row['gap_value_t2']),
+        severity_t_minus_1=row['severity_band_t1'],
+        severity_t=row['severity_band_t2'],
+        change_type=row['change_type'],
+        severity_change=row['severity_change'],
+        rule_triggered=rule,
+        sub_category=sub_cat,
+        magnitude_class=magnitude_class(int(row['gap_value_t2'])),
+        priority=priority,
+        is_structural=is_structural,
+        thread_status=thread_status,
+        reminder_count=reminder_count,
+        opened_at=opened_at,
+        recipient=recipient,
+    )
+
+
+def generate_varsler(
+    df: pd.DataFrame, recipients: dict, default_recipient: str,
+    existing_threads: dict,
+) -> tuple[list[Varsel], dict]:
+    """Bygg varsler og oppdatert trad-tilstand.
+
+    Returnerer (varsler, new_threads).
+    """
+    varsler: list[Varsel] = []
+    new_threads: dict = {}
+    seen_keys: set[str] = set()
+
+    for _, row in df.iterrows():
+        r = row.to_dict()
+        key = thread_key(r['asset_type'], r['asset_tier2'], r['week_start'])
+        seen_keys.add(key)
+
+        is_struct = r['asset_tier2'] in STRUCTURAL_ASSETS
+        recipient = recipients.get(r['asset_type'], default_recipient)
+        alert, rule, sub_cat, prio = evaluate_alert(r, is_struct)
+        in_gap_now = cell_in_gap(int(r['gap_value_t2']), r['severity_band_t2'])
+
+        prior = existing_threads.get(key)
+
+        if prior is not None:
+            # Eksisterende trad
+            if not in_gap_now:
+                # Lukker - emit lost varsel
+                varsler.append(make_varsel(
+                    r, recipient, is_struct,
+                    rule='thread-closure', sub_cat='LØST_TRAD',
+                    priority='informasjon',
+                    thread_status='lost',
+                    reminder_count=prior.get('reminder_count', 0),
+                    opened_at=prior['opened_at'],
+                ))
+                # Tråden lukkes (ikke videreført)
+            else:
+                # Fortsatt i gap
+                if alert and sub_cat == 'FORVERRET_KLASSEBYTTE':
+                    status = 'eskalert'
+                    varsler.append(make_varsel(
+                        r, recipient, is_struct,
+                        rule=rule, sub_cat=sub_cat, priority=prio,
+                        thread_status=status,
+                        reminder_count=prior.get('reminder_count', 0) + 1,
+                        opened_at=prior['opened_at'],
+                    ))
+                else:
+                    varsler.append(make_varsel(
+                        r, recipient, is_struct,
+                        rule='reminder', sub_cat='PÅMINNELSE',
+                        priority='informasjon',
+                        thread_status='paminnelse',
+                        reminder_count=prior.get('reminder_count', 0) + 1,
+                        opened_at=prior['opened_at'],
+                    ))
+                # Oppdater trad
+                new_threads[key] = {
+                    **prior,
+                    'reminder_count': prior.get('reminder_count', 0) + 1,
+                    'last_seen_at': SNAPSHOT_T,
+                    'last_gap_value': int(r['gap_value_t2']),
+                    'last_severity': r['severity_band_t2'],
+                }
+        else:
+            # Ingen tidligere trad
+            if not alert:
+                continue
+            if in_gap_now and is_gap_opening_alert(sub_cat):
+                # Apne ny trad
+                varsler.append(make_varsel(
+                    r, recipient, is_struct,
+                    rule=rule, sub_cat=sub_cat, priority=prio,
+                    thread_status='ny',
+                    reminder_count=0,
+                    opened_at=SNAPSHOT_T,
+                ))
+                new_threads[key] = {
+                    'asset_type': r['asset_type'],
+                    'asset_tier2': r['asset_tier2'],
+                    'week_start': r['week_start'],
+                    'opened_at': SNAPSHOT_T,
+                    'opening_change_type': r['change_type'],
+                    'opening_severity_change': r['severity_change'],
+                    'opening_sub_category': sub_cat,
+                    'reminder_count': 0,
+                    'last_seen_at': SNAPSHOT_T,
+                    'last_gap_value': int(r['gap_value_t2']),
+                    'last_severity': r['severity_band_t2'],
+                    'recipient': recipient,
+                }
+            else:
+                # Informasjons-varsel uten trad (f.eks. SKJULT_LOST_GAP for celle uten tidligere trad)
+                varsler.append(make_varsel(
+                    r, recipient, is_struct,
+                    rule=rule, sub_cat=sub_cat, priority=prio,
+                    thread_status='informasjon',
+                    reminder_count=0,
+                    opened_at=SNAPSHOT_T,
+                ))
+
+    # Trader som tidligere var aktive men ikke ble sett (uken har passert kalenderhorisonten)
+    # ignoreres per kap 6.2 - ingen varsel og ingen vidererforing.
+    return varsler, new_threads
 
 
 def format_digest(varsler: list[Varsel], cc: str | None) -> str:
     if not varsler:
         return ''
-
     asset_types = sorted({v.asset_type for v in varsler})
-    snapshot_t = varsler[0].snapshot_t
-    snapshot_t_minus_1 = varsler[0].snapshot_t_minus_1
     recipient = varsler[0].recipient
+    snapshot_t = varsler[0].snapshot_t
+    snapshot_t1 = varsler[0].snapshot_t_minus_1
 
     out: list[str] = []
     out.append(f'To: {recipient}')
@@ -142,31 +306,32 @@ def format_digest(varsler: list[Varsel], cc: str | None) -> str:
     out.append('')
     out.append(
         f'Ukens snapshot ({snapshot_t}) sammenlignet med forrige '
-        f'({snapshot_t_minus_1}) viser folgende endringer for utstyrsenheter '
-        f'du folger opp ({", ".join(asset_types)}):'
+        f'({snapshot_t1}) viser folgende endringer for utstyrsenheter du '
+        f'folger opp ({", ".join(asset_types)}):'
     )
     out.append('')
 
-    by_prio: dict[str, list[Varsel]] = defaultdict(list)
-    for v in varsler:
-        by_prio[v.priority].append(v)
-
-    prio_order = ['høy', 'middels', 'lav', 'informasjon']
-    prio_labels = {
-        'høy': 'HØY PRIORITET',
-        'middels': 'MIDDELS PRIORITET',
-        'lav': 'LAV PRIORITET',
+    # Grupper etter thread_status, så etter prioritet
+    status_order = ['ny', 'eskalert', 'paminnelse', 'lost', 'informasjon']
+    status_labels = {
+        'ny': 'NYE VARSLER',
+        'eskalert': 'ESKALERTE VARSLER (krever umiddelbar oppfolging)',
+        'paminnelse': 'PÅMINNELSER (aktive saker fra tidligere snapshots)',
+        'lost': 'LØSTE SAKER (avslutter varslingstrad)',
         'informasjon': 'INFORMASJONSVARSLER',
     }
+    by_status: dict[str, list[Varsel]] = defaultdict(list)
+    for v in varsler:
+        by_status[v.thread_status].append(v)
 
-    for prio in prio_order:
-        vs = by_prio.get(prio, [])
+    for status in status_order:
+        vs = by_status.get(status, [])
         if not vs:
             continue
         out.append('-' * 60)
-        out.append(f'{prio_labels[prio]} ({len(vs)})')
+        out.append(f'{status_labels[status]} ({len(vs)})')
         out.append('-' * 60)
-        # Grupper per asset for monsterdeteksjon
+
         by_asset: dict[str, list[Varsel]] = defaultdict(list)
         for v in vs:
             by_asset[v.asset_tier2].append(v)
@@ -176,21 +341,27 @@ def format_digest(varsler: list[Varsel], cc: str | None) -> str:
                 weeks = ', '.join(v.week_start for v in asset_vs)
                 first_v = asset_vs[0]
                 out.append(
-                    f'  • {asset} ({first_v.asset_type}) - {len(asset_vs)} '
-                    f'sammenhengende uker: {weeks}\n'
+                    f'  • {asset} ({first_v.asset_type}) - '
+                    f'{len(asset_vs)} sammenhengende uker: {weeks}\n'
                     f'    gap {first_v.gap_t_minus_1} → {first_v.gap_t}, '
-                    f'farge {first_v.severity_t_minus_1} → {first_v.severity_t}\n'
-                    f'    Monster: ny kontrakt har sannsynligvis passert '
-                    f'75 %-terskelen for denne perioden.'
+                    f'farge {first_v.severity_t_minus_1} → {first_v.severity_t}'
                 )
+                if status == 'ny':
+                    out.append(
+                        '    Monster: ny kontrakt har sannsynligvis '
+                        'passert 75 %-terskelen for denne perioden.'
+                    )
             else:
                 for v in asset_vs:
+                    detail = f'[{v.sub_category}, {v.rule_triggered}]'
+                    if v.reminder_count > 0:
+                        detail += f' (uke {v.reminder_count} i tråden, åpnet {v.opened_at})'
                     out.append(
                         f'  • {v.asset_tier2} ({v.asset_type}), '
                         f'uke {v.week_start}:\n'
                         f'    gap {v.gap_t_minus_1} → {v.gap_t}, '
                         f'farge {v.severity_t_minus_1} → {v.severity_t}\n'
-                        f'    [{v.sub_category}, {v.rule_triggered}]'
+                        f'    {detail}'
                     )
         out.append('')
 
@@ -206,75 +377,46 @@ def main() -> None:
     default_recipient = recipients_cfg.pop('default', 'salg@motive-offshore.no')
 
     df = pd.read_csv(GAP_CHANGES_PATH)
-
     initial_count = len(df)
     df = df[~df['asset_tier2'].isin(EXCLUSION_LIST)]
     excluded = initial_count - len(df)
     print(f'Forhandsfilter: ekskluderte {excluded} celler '
           f'({len(EXCLUSION_LIST)} enheter)')
 
-    # Snapshot-datoer (alle rader har samme snapshot-par)
-    # gap_changes.csv inneholder ikke eksplicitte snapshot-datoer.
-    # Hardkodes her - utvidelse: les fra metadata.
-    SNAPSHOT_T = '2026-05-14'
-    SNAPSHOT_T1 = '2026-05-07'
+    state = load_state()
+    existing_threads = state.get('threads', {})
+    print(f'Lastet {len(existing_threads)} aktive trader fra state '
+          f'(siste kjoring: {state.get("last_run")})')
 
-    varsler: list[Varsel] = []
-    for _, row in df.iterrows():
-        row_dict = row.to_dict()
-        is_struct = row_dict['asset_tier2'] in STRUCTURAL_ASSETS
-        alert, rule, sub_cat, prio = evaluate_alert(row_dict, is_struct)
-        if not alert:
-            continue
+    varsler, new_threads = generate_varsler(
+        df, recipients_cfg, default_recipient, existing_threads
+    )
 
-        recipient = recipients_cfg.get(row_dict['asset_type'], default_recipient)
-        v = Varsel(
-            snapshot_t=SNAPSHOT_T,
-            snapshot_t_minus_1=SNAPSHOT_T1,
-            week_start=row_dict['week_start'],
-            region='Motive Norway',
-            asset_type=row_dict['asset_type'],
-            asset_tier2=row_dict['asset_tier2'],
-            gap_t_minus_1=int(row_dict['gap_value_t1']),
-            gap_t=int(row_dict['gap_value_t2']),
-            severity_t_minus_1=row_dict['severity_band_t1'],
-            severity_t=row_dict['severity_band_t2'],
-            change_type=row_dict['change_type'],
-            severity_change=row_dict['severity_change'],
-            rule_triggered=rule,
-            sub_category=sub_cat,
-            magnitude_class=magnitude_class(int(row_dict['gap_value_t2'])),
-            priority=prio,
-            is_structural=is_struct,
-            recipient=recipient,
-        )
-        varsler.append(v)
-
-    print(f'Genererte {len(varsler)} varsler totalt.')
-
-    # Oppsummering per regel og prioritet
-    by_rule = defaultdict(int)
-    by_prio = defaultdict(int)
+    print(f'\nGenererte {len(varsler)} varsler:')
+    by_status = defaultdict(int)
     for v in varsler:
-        by_rule[v.rule_triggered] += 1
-        by_prio[v.priority] += 1
-    print('\nFordeling per regel:')
-    for r, c in sorted(by_rule.items()):
-        print(f'  {r:18s} {c}')
-    print('\nFordeling per prioritet:')
-    for p in ['høy', 'middels', 'lav', 'informasjon']:
-        print(f'  {p:14s} {by_prio.get(p, 0)}')
+        by_status[v.thread_status] += 1
+    for s in ['ny', 'eskalert', 'paminnelse', 'lost', 'informasjon']:
+        print(f'  {s:14s} {by_status.get(s, 0)}')
 
-    # Skriv komplett varselsliste
+    print(f'\nTrad-tilstand: {len(existing_threads)} -> {len(new_threads)}')
+
+    # Skriv csv
     csv_path = os.path.join(OUT_DIR, 'varsler.csv')
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=[fld.name for fld in fields(Varsel)])
         writer.writeheader()
         for v in varsler:
             writer.writerow(asdict(v))
-    print(f'\nKomplett varselsliste: {csv_path}')
+    print(f'\nVarsler: {csv_path}')
 
-    # Grupper og generer digest per mottaker
+    # Lagre tilstand
+    state['last_run'] = SNAPSHOT_T
+    state['threads'] = new_threads
+    save_state(state)
+    print(f'State: {STATE_PATH}')
+
+    # Digest per mottaker
     by_recipient: dict[str, list[Varsel]] = defaultdict(list)
     for v in varsler:
         by_recipient[v.recipient].append(v)
@@ -285,7 +427,7 @@ def main() -> None:
         if old.endswith('.txt'):
             os.remove(os.path.join(digest_dir, old))
 
-    print(f'\nDigest-e-poster (per mottaker, snapshot {SNAPSHOT_T}):')
+    print(f'\nDigest-e-poster (snapshot {SNAPSHOT_T}):')
     for recipient, vs in sorted(by_recipient.items()):
         text = format_digest(vs, cc)
         local_part = recipient.split('@')[0]

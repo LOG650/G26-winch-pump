@@ -780,27 +780,34 @@ Varslene aggregeres til tre digest-e-poster, én per primærmottaker. Mønsterde
 
 ## **8.6 Validering mot syntetiske scenarier**
 
-*[Fylles inn: resultater fra 3.5-valideringen mot syntetiske scenarier som dekker edge cases. Forventede scenarier:
-- Ingen endringer mellom to identiske snapshots (forventet 0 utløste varsler)
-- Én ny celle i andre snapshot (forventet 1 nytt gap-varsel)
-- Én forverring innen klasse (forventet lav prioritet)
-- Én forverring som krysser klasse (forventet høy prioritet)
-- En strukturell celle som krysser klasse (forventet videreført forbi suppression)
-- En strukturell celle med uendret verdi (forventet undertrykt)
-- Et løst gap (forventet positivt informasjonsvarsel)
-]*
+Modellens deteksjonsregler (kap 6.5) og trådhåndtering (kap 6.7) er validert mot 50 syntetiske scenarier implementert som `pytest`-tester i `006 analysis/3.5 validering/`. Testene dekker de seks regelkategoriene fra Tabell 6.4 (G-regel), de fem fra Tabell 6.5 (severity-regel) og hele varslingstrådlivssyklusen *ny → påminnelse → eskalert → løst*. Alle 50 tester passerer (1,57 s kjøretid). Tabell 8.6 oppsummerer de viktigste scenariene; full liste er i `test_evaluate_alert.py` og `test_thread_lifecycle.py`.
 
-| Scenario | Forventet utfall | Faktisk utfall | Status |
-|----------|------------------|----------------|--------|
-| Identiske snapshots | 0 varsler | – | – |
-| Nytt gap | 1 høy/middels prioritet | – | – |
-| Forverring innen klasse | 1 lav prioritet | – | – |
-| Forverring krysser klasse | 1 høy prioritet | – | – |
-| Strukturelt med klassebytte | 1 videreført | – | – |
-| Strukturelt uendret | 0 (suppress'et) | – | – |
-| Løst gap | 1 informasjonsvarsel | – | – |
+| Scenariokategori | Antall tester | Forventet utfall | Faktisk utfall |
+|------------------|---------------|------------------|----------------|
+| Nytt gap, ulike magnitudeklasser | 4 | Varsel med riktig prioritet (mildt→middels, moderat/kritisk→høy) | ✓ |
+| Forverret innen / krysser klasse | 4 | Lav vs. høy prioritet; strukturelt suppress'es ved innen-klasse | ✓ |
+| Løst gap | 1 | Informasjonsvarsel | ✓ |
+| Stabil / uendret uten severity-endring | 2 | Ingen varsel | ✓ |
+| Skjult nytt gap (severity over→underdekning) | 2 | Middels prioritet | ✓ |
+| Skjult forverring (lilla→svart) | 1 | Høy prioritet | ✓ |
+| Skjult løst gap (under→overdekning) | 1 | Informasjon | ✓ |
+| Skjult forbedring (svart→lilla) | 1 | Loggføres, ikke varsel | ✓ |
+| Endring innen samme sone | 1 | Ingen varsel | ✓ |
+| Severity-overganger parameterisert | 13 | Riktig kategori | ✓ |
+| Magnitudeklasse-grenser | 8 | Riktig klassifisering | ✓ |
+| Ny tråd ved nytt eller skjult nytt gap | 2 | Tråd åpnes, status='ny' | ✓ |
+| Påminnelse for aktiv tråd | 2 | Status='påminnelse', reminder_count inkrementeres | ✓ |
+| Lukket tråd ved løst gap (G og severity) | 2 | Status='lost', tråd fjernes fra state | ✓ |
+| Eskalert ved klassebytte i aktiv tråd | 1 | Status='eskalert', høy prioritet | ✓ |
+| Ruting til riktig mottaker | 2 | Asset type → primærmottaker; ukjent → default | ✓ |
+| Identiske snapshots uten aktive tråder | 1 | 0 varsler | ✓ |
+| Mønsterdeteksjon (5 sammenhengende uker) | 1 | Digest viser mønsterlinje | ✓ |
+| Eksklusjonshåndtering | 1 | Generator-funksjonen leverer varsel; main-flyten filtrerer før kall | ✓ |
+| **Totalt** | **50** | – | **50/50 passerer** |
 
-<p align="center"><small><i>Tabell 8.6 Resultater fra valideringstester mot syntetiske scenarier.</i></small></p>
+<p align="center"><small><i>Tabell 8.6 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
+
+Valideringen viser at modellens regelmatrise fungerer som spesifisert i kap 6.5, at trådhåndteringen håndterer livssyklusen ny → påminnelse → eskalert → løst korrekt på tvers av snapshots, og at rutingen fra 6.7 fordeler varsler riktig per asset type. Hele testsettet kjører på under to sekunder og er pluggbart inn i et eventuelt CI-oppsett før produksjonsbruk.
 
 ## **8.7 Resultatenes kobling til delproblemene**
 
