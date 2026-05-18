@@ -121,12 +121,12 @@
           "status": "Baseline ferdig, pågår løpende",
           "predecessors": ["2.3", "2.4"],
           "deliverables": [
-            "Råbilder per snapshot i 004 data/<dato>_motive_baseline/raw/",
-            "Rensede CSV-er per snapshot i 004 data/<dato>_motive_baseline/clean/",
+            "Råbilder per snapshot i 004 data/<dato>_motive_no/raw/",
+            "Rensede CSV-er per snapshot i 004 data/<dato>_motive_no/clean/",
             "Skjemadokumentasjon i 006 analysis/3.1 datainnhenting/tab_kolonner.md",
             "Transkriberings- og verifikasjonsskript i 006 analysis/3.1 datainnhenting/"
           ],
-          "acceptance_criteria": "Data verifisert mot Power BIs Totalt- og asset type-summer, dokumentert og klart for EDA. Baseline-snapshot 2026-04-30 oppnådd."
+          "acceptance_criteria": "Data verifisert mot Power BIs Totalt- og asset type-summer, dokumentert og klart for EDA. Baseline-snapshot 2026-05-07 (Motive Norway) oppnådd."
         },
         {
           "id": "3.2",

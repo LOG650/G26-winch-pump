@@ -1,4 +1,4 @@
-"""3.2 EDA - Eksplorativ dataanalyse av snapshot 2026-04-30.
+"""3.2 EDA - Eksplorativ dataanalyse av baseline-snapshot 2026-05-07 (Motive Norway).
 
 Genererer figurer og tabeller for kapitlene 4.7 (Casebeskrivelse) og 7 (Analyse)
 i 005 report/Prosjektrapport.md. Output: fig_*.png og tab_*.md i denne mappen.
@@ -13,7 +13,7 @@ import matplotlib.dates as mdates
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
-CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no_baseline', 'clean',
+CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no', 'clean',
                        '2026-05-07_supply_demand_motive_no_75pct.csv')
 OUT = SCRIPT_DIR
 
@@ -83,7 +83,7 @@ ax.fill_between(weekly['week_start'], weekly['gap_value'], 0,
 ax.axhline(0, color='black', lw=0.8)
 ax.set_xlabel('Uke (mandag)')
 ax.set_ylabel('Sum gap-verdi (unit-uker)')
-ax.set_title('Totalt synlig gap per uke (snapshot 2026-04-30)')
+ax.set_title('Totalt synlig gap per uke (snapshot 2026-05-07, Motive Norway)')
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 fig.autofmt_xdate()
@@ -176,7 +176,7 @@ strukturelle = strukturelle.sort_values('snitt_gap')
 write_table(
     strukturelle[['asset_type', 'asset_tier2', 'min_gap', 'max_gap', 'snitt_gap', 'sum_gap']],
     os.path.join(OUT, 'tab_strukturelle_gaps.md'),
-    'Tabell - utstyrsenheter med negativ gap-verdi i alle 36 uker av snapshot 2026-04-30 '
+    'Tabell - utstyrsenheter med negativ gap-verdi i alle 34 uker av snapshot 2026-05-07 '
     '(strukturelle underskudd, ikke kontraktsdrevne nye gap).'
 )
 print(f'\nStrukturelle gaps (alltid negativ): {len(strukturelle)}')
@@ -194,7 +194,7 @@ write_table(
     top10_table,
     os.path.join(OUT, 'tab_topp10_verste_assets.md'),
     'Tabell - topp 10 utstyrsenheter med stoerst kumulativt underskudd over '
-    'snapshot-perioden (2026-05-04 til 2027-01-04).'
+    'snapshot-perioden (2026-05-11 til 2026-12-28).'
 )
 
 # ============================================================
@@ -204,7 +204,7 @@ zero_assets = asset_stats[(asset_stats['min_gap'] == 0) & (asset_stats['max_gap'
 write_table(
     zero_assets[['asset_type', 'asset_tier2']],
     os.path.join(OUT, 'tab_zero_gap_assets.md'),
-    'Tabell - utstyrsenheter med gap-verdi 0 i alle 36 uker. '
+    'Tabell - utstyrsenheter med gap-verdi 0 i alle 34 uker. '
     'Kandidater for eksklusjon fra gap-deteksjonen.'
 )
 print(f'Zero-gap assets (alltid 0): {len(zero_assets)}')

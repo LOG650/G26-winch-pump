@@ -7,7 +7,9 @@
       "Bash(uv --version)",
       "Bash(uv init *)",
       "PowerShell(claude config list 2>&1)",
-      "Bash(uv run *)"
+      "Bash(uv run *)",
+      "PowerShell(Get-ChildItem \"$env:APPDATA\\\\Code\\\\logs\" -Directory | Sort-Object LastWriteTime -Descending | Select-Object Name, LastWriteTime -First 5)",
+      "Bash(echo \"---exit $?\")"
     ]
   }
 }

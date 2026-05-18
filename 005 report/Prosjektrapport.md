@@ -715,7 +715,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 ## **9.3 Modellens robusthet og begrensninger**
 
 *[Fylles inn:
-- Begrensning fra én snapshot-serie i validering, jf. `avviksanalyse-2026-05-07.md`. Hva ville en lengre serie ha tillatt?
+- Begrensning fra én snapshot-serie i validering (baseline 2026-05-07, første sammenligning 2026-05-14). Hva ville en lengre serie ha tillatt?
 - Avhengighet av Power BIs avrundingslogikk (jf. 5.2.5) og hvor mye dette påvirker terskelfølsomhet.
 - Suppression-vinduets størrelse $K = 4$: konsekvenser av å justere opp eller ned.
 - Sensitivitet for endringer i magnitudeklassegrenser ($-2/-3$ og $-5/-6$).
@@ -724,7 +724,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 ## **9.4 Datafangstmetodens påvirkning på resultatene**
 
-*[Fylles inn: drøft hvordan skjermavlesning som datafangst (jf. `avviksanalyse-2026-05-07.md`) kan ha påvirket resultatene:
+*[Fylles inn: drøft hvordan skjermavlesning som datafangst (jf. R10 i `risk.json`) kan ha påvirket resultatene:
 - Risiko for transkriberingsfeil og hvordan sumsjekken mitigerer dette.
 - Power BIs interne avrundingsstøy og dens påvirkning på asset type-summeringer.
 - Hva direkte CSV-eksport via API ville endret av analysens validitet.

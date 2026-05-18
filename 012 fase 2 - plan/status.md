@@ -38,7 +38,7 @@
 
 ### 3.0 Gjennomføring
 
-- [x] 3.1 Datainnhenting og klargjøring — David *(baseline-snapshot 2026-04-30 ferdig; løpende ukentlige snapshots fortsetter)*
+- [x] 3.1 Datainnhenting og klargjøring — David *(baseline-snapshot 2026-05-07 ferdig (Motive Norway); løpende ukentlige snapshots fortsetter)*
 - [x] 3.2 Eksplorativ dataanalyse (EDA) — Tord
 - [ ] 3.3 Gap-deteksjonslogikk — Begge *(pågår; trenger snapshot 2 for delta-detektor)*
 - [ ] 3.4 Varslingslogikk — Begge

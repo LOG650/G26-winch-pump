@@ -37,12 +37,7 @@ flåten som lokalt selger faktisk kan disponere:
 Modellen er lokasjons-agnostisk: de tre første filtrene byttes synkront for å
 kjøre samme analyse for et annet verksted (Motive UK, Motive USA, ...).
 
-Eldre datasett er **ikke sammenlignbare** med disse snapshotsene og er kassert:
-
-- 2026-04-30: `Region = "Alle"` (global demand vs. norsk flåte)
-- 2026-05-07 (forrige versjon): `Region = "Motive Norway"` men uten Project Owner Demand-filter
-
-Gjeldende baseline er **2026-05-07** med fullt filtersett (re-kjørt på samme dato med Project Owner Demand-filteret aktivert).
+Gjeldende baseline er **2026-05-07** med fullt filtersett.
 
 ## Datafangst via skjermbilder
 
@@ -52,8 +47,8 @@ Datafangst skjer derfor ved **manuell skjermavlesning** av Power BI-kalendervisn
 ### Mappestruktur
 
 ```
-004 data/raw/snapshots/<YYYY-MM-DD>/   ← PNG-bilder per snapshot-dato
-004 data/clean/snapshots/              ← transkribert CSV per snapshot
+004 data/<YYYY-MM-DD>_motive_no/raw/    ← PNG-bilder per snapshot-dato
+004 data/<YYYY-MM-DD>_motive_no/clean/  ← transkribert CSV per snapshot
 ```
 
 ### Skjema
@@ -64,11 +59,10 @@ Se [`tab_kolonner.md`](tab_kolonner.md) for kolonnedefinisjoner og eksempelrader
 
 | t | Dato | Formål |
 |---|------|--------|
-| ~~t₀~~ | ~~2026-04-30~~ | ~~Utgår – Region = Alle (global demand vs. norsk flåte)~~ |
 | t₀ | 2026-05-07 | Baseline – lokalt verksted (Motive Norway) på begge sider, fullt filtersett |
-| t₁ | 2026-05-11 | Første uke-til-uke-sammenligning |
-| t₂ | 2026-05-18 | |
-| t₃ | 2026-05-25 | Siste før innlevering 2026-05-31 |
+| t₁ | 2026-05-14 | Første uke-til-uke-sammenligning |
+| t₂ | 2026-05-21 | |
+| t₃ | 2026-05-28 | Siste før innlevering 2026-05-31 |
 
 ## Notat
 

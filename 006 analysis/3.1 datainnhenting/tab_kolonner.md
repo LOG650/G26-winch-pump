@@ -24,21 +24,37 @@ Skjema for renset CSV som genereres fra Power BI-skjermbilder (kalendervisningen
 | `week_start` | dato | `2026-09-07` | Mandag i den uken cellen gjelder for |
 | `asset_type` | streng | `Winches` | Asset type / utstyrstype (Winches, Under rollers, ...) |
 | `asset_tier2` | streng | `Hydraulic - 60Te Mooring Winch` | Spesifikk utstyrsenhet, eksakt slik den står i Power BI |
-| `gap_value` | heltall | `-4` | Supply minus demand. Negativ verdi = kapasitetsgap |
+| `gap_value` | heltall | `-2` | Supply minus demand, avrundet til heltall slik Power BI viser cellen |
+| `severity_band` | streng | `purple` | Cellens bakgrunnsfarge fra Power BI-fargenøkkelen. Koder prosent-gap (se under) |
 | `custodian` | streng | `Motive AS` | Filterverdi: Asset Custodian (Supply) – juridisk enhet som forvalter utstyret |
 | `project_owner_demand` | streng | `Motive AS` | Filterverdi: Project Owner Demand – juridisk enhet som eier prosjektet |
 | `region` | streng | `Motive Norway` | Filterverdi: Region – fysisk verksted/lokasjon |
 | `probability_threshold` | heltall | `75` | Filterverdi: Opp. Probability (%) – nedre terskel |
 
+### Fargenøkkel for `severity_band`
+
+| Verdi | Power BI-farge | Betydning |
+|-------|----------------|-----------|
+| `green` | grønn | Supply > Demand, 25 %+ overdekning |
+| `yellow` | gul | Supply > Demand, 10–25 % overdekning |
+| `red` | rød | Supply > Demand, 0–10 % overdekning |
+| `purple` | lilla | Demand > Supply, 0–50 % underdekning |
+| `black` | svart | Demand > Supply, 50 %+ underdekning |
+
+Fargen koder **relativ** gap (% av demand), ikke absoluttverdi. Samme
+`gap_value` kan ha forskjellig farge avhengig av demand-størrelse, så
+`severity_band` bevarer det operasjonelt meningsfulle alvorlighetssignalet
+som forsvinner ved avrunding til heltall.
+
 ## Eksempel (5 rader)
 
 ```csv
-snapshot_date,week_start,asset_type,asset_tier2,gap_value,custodian,project_owner_demand,region,probability_threshold
-2026-05-07,2026-05-11,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,Motive AS,Motive AS,Motive Norway,75
-2026-05-07,2026-05-18,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,Motive AS,Motive AS,Motive Norway,75
-2026-05-07,2026-05-11,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,Motive AS,Motive AS,Motive Norway,75
-2026-05-07,2026-05-11,RDS,- 500Te RDS,-1,Motive AS,Motive AS,Motive Norway,75
-2026-05-07,2026-05-11,HPUS,Electric - 90KW Electric HPU,-2,Motive AS,Motive AS,Motive Norway,75
+snapshot_date,week_start,asset_type,asset_tier2,gap_value,severity_band,custodian,project_owner_demand,region,probability_threshold
+2026-05-14,2026-05-18,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-14,2026-05-18,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-14,2026-05-18,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-14,2026-05-18,HPUS,Electric - 90KW Electric HPU,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-14,2026-05-18,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
 ```
 
 ## Datakilde
@@ -46,7 +62,7 @@ snapshot_date,week_start,asset_type,asset_tier2,gap_value,custodian,project_owne
 Power BI-rapport, side **"Supply/ Demand – Calendar"**, hos Motive Offshore.
 Eksport via "Analyser i Excel" og "Eksporter data" er sperret av rettighetspolicy.
 Datafangst skjer derfor ved **manuell skjermavlesning** av PNG-skjermbilder
-i prosjektperioden 2026-04-30 til 2026-05-31.
+i prosjektperioden 2026-05-07 til 2026-05-31.
 
 ## Aggregeringsnivå
 
