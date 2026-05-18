@@ -5,8 +5,15 @@ Sporer aktive varslingstrader i active_alerts.json mellom snapshot-kjoringer,
 slik at samme celle som forblir i gap utloser ukentlig paminnelse og avsluttes
 med varsel nar gapet er lost.
 
-Kjor: uv run python "3.4 varsling/gap_alerting.py"
+Kjor (default-snapshots 2026-05-07 og 2026-05-14):
+    uv run python "3.4 varsling/gap_alerting.py"
+
+Kjor med eksplisitte parametre:
+    uv run python "3.4 varsling/gap_alerting.py" \\
+        --gap-changes path/to/gap_changes.csv \\
+        --snapshot-t 2026-05-21 --snapshot-t-minus-1 2026-05-14
 """
+import argparse
 import csv
 import json
 import os
@@ -19,11 +26,24 @@ import yaml
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
 RECIPIENTS_PATH = os.path.join(SCRIPT_DIR, 'recipients.yaml')
-GAP_CHANGES_PATH = os.path.join(
+DEFAULT_GAP_CHANGES_PATH = os.path.join(
     PROJECT_ROOT, '006 analysis', '3.3 gap-deteksjon', 'gap_changes.csv'
 )
 STATE_PATH = os.path.join(SCRIPT_DIR, 'active_alerts.json')
 OUT_DIR = SCRIPT_DIR
+
+_parser = argparse.ArgumentParser(add_help=False)
+_parser.add_argument('--gap-changes', default=DEFAULT_GAP_CHANGES_PATH,
+                     help='Sti til gap_changes.csv fra 3.3')
+_parser.add_argument('--snapshot-t', default='2026-05-14',
+                     help='Snapshot-dato for inneverende snapshot (t)')
+_parser.add_argument('--snapshot-t-minus-1', default='2026-05-07',
+                     help='Snapshot-dato for forrige snapshot (t-1)')
+_args, _ = _parser.parse_known_args()
+
+GAP_CHANGES_PATH = _args.gap_changes
+SNAPSHOT_T = _args.snapshot_t
+SNAPSHOT_T1 = _args.snapshot_t_minus_1
 
 EXCLUSION_LIST = {
     'Diesel - 63kW Diesel HPU Zone II',
@@ -32,10 +52,6 @@ STRUCTURAL_ASSETS: set[str] = set()
 
 OVERDEKNING = {'green', 'yellow', 'red'}
 UNDERDEKNING = {'purple', 'black'}
-
-# Hardkodede snapshot-datoer for denne kjoringen. Utvidelse: les fra metadata.
-SNAPSHOT_T = '2026-05-14'
-SNAPSHOT_T1 = '2026-05-07'
 
 
 @dataclass

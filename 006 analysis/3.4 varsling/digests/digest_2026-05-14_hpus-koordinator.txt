@@ -7,20 +7,20 @@ Hei,
 Ukens snapshot (2026-05-14) sammenlignet med forrige (2026-05-07) viser folgende endringer for utstyrsenheter du folger opp (HPUS):
 
 ------------------------------------------------------------
-PÅMINNELSER (aktive saker fra tidligere snapshots) (4)
+NYE VARSLER (4)
 ------------------------------------------------------------
   • Electric - 11kW Electric HPU (HPUS), uke 2026-10-12:
     gap 1 → 0, farge green → purple
-    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+    [SKJULT_NYTT_GAP, severity-regel]
   • Electric - 158KW Electric HPU (HPUS), uke 2026-07-13:
     gap 0 → -1, farge green → black
-    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+    [NYTT_GAP, G-regel]
   • Electric - 30kW Electric HPU (HPUS), uke 2026-07-13:
     gap 1 → 0, farge green → purple
-    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+    [SKJULT_NYTT_GAP, severity-regel]
   • Electric - 55kW Electric HPU (HPUS), uke 2026-07-20:
     gap 0 → -2, farge purple → black
-    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+    [NYTT_GAP, G-regel]
 
 ------------------------------------------------------------
 INFORMASJONSVARSLER (2)

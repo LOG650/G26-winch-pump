@@ -7,10 +7,10 @@ Hei,
 Ukens snapshot (2026-05-14) sammenlignet med forrige (2026-05-07) viser folgende endringer for utstyrsenheter du folger opp (Spoolers):
 
 ------------------------------------------------------------
-PÅMINNELSER (aktive saker fra tidligere snapshots) (1)
+NYE VARSLER (1)
 ------------------------------------------------------------
   • Electric - 75Te Electric Spooler (Spoolers), uke 2026-06-22:
     gap 2 → 0, farge green → purple
-    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+    [SKJULT_NYTT_GAP, severity-regel]
 
 Detaljer: varsler.csv (vedlagt)

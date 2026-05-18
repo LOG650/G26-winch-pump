@@ -712,54 +712,58 @@ Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snaps
 
 ## **8.1 Statisk gap-deteksjon på baseline-snapshot**
 
-*[Fylles inn etter at gap-deteksjonen i 3.3 har kjørt på baseline. Forventet innhold: antall celler som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, fordeling etter magnitudeklasse (mildt/moderat/kritisk), fordeling etter asset type.]*
+Den statiske gap-deteksjonsregelen $A_{r,a,t}^{(s)} = 1$ hvis $G_{r,a,t}^{(s)} < 0$ utløser **77 celler** i baseline-snapshot 2026-05-07, av totalt 816 celler i Calendar-datasettet (9,4 %). Fordelingen etter magnitudeklasse er gitt i Tabell 8.1.
 
-| Magnitudeklasse | Antall utløste celler | Andel av 77 negative celler |
-|-----------------|-----------------------|------------------------------|
-| Mildt gap | – | – |
-| Moderat gap | – | – |
-| Kritisk gap | – | – |
+| Magnitudeklasse | Intervall | Antall utløste celler | Andel av 77 negative celler |
+|-----------------|-----------|-----------------------|------------------------------|
+| Mildt gap | $-2 \leq G \leq -1$ | 77 | 100,0 % |
+| Moderat gap | $-5 \leq G \leq -3$ | 0 | 0,0 % |
+| Kritisk gap | $G \leq -6$ | 0 | 0,0 % |
 
 <p align="center"><small><i>Tabell 8.1 Fordeling av utløste statiske gap-celler i baseline-snapshotet etter magnitudeklasse.</i></small></p>
 
+Fordelingen etter asset type er vist i Tabell 8.1b. Tensioner, RDS og HPUS bidrar med flest negative celler; Spoolers, LMA machines og Under rollers har ingen.
+
+| Asset type | Antall negative celler | Andel av 77 |
+|------------|------------------------|-------------|
+| RDS | 23 | 29,9 % |
+| Tensioner | 22 | 28,6 % |
+| HPUS | 19 | 24,7 % |
+| Winch | 10 | 13,0 % |
+| Cable Pulling machine | 3 | 3,9 % |
+| Spoolers, LMA machines, Under rollers | 0 | 0,0 % |
+
+<p align="center"><small><i>Tabell 8.1b Fordeling av utløste statiske gap-celler i baseline-snapshotet per asset type.</i></small></p>
+
 ## **8.2 Uke-til-uke-deltadeteksjon**
 
-*[Fylles inn etter at delta-detektoren er kjørt på snapshot-paret (2026-05-07 ↔ 2026-05-14). Forventet innhold: antall celler i hver av de fem endringskategoriene definert i Tabell 6.3, samt fordeling per asset type.]*
-
-| Endringstype | Antall celler | Andel av sammenlignede celler |
-|--------------|---------------|-------------------------------|
-| Nytt gap | – | – |
-| Forverret gap | – | – |
-| Forbedret gap | – | – |
-| Uendret gap | – | – |
-| Løst gap | – | – |
-
-<p align="center"><small><i>Tabell 8.2 Klassifisering av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14.</i></small></p>
-
-*[Forventet: en eller to figurer som visualiserer fordelingen mellom asset types, eventuelt et stablet søylediagram per uke.]*
+Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.5 og bygges ikke om her. Severity-deltaen er gitt i Tabell 7.6. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten og per asset type er visualisert i Figur 7.6 og 7.7.
 
 ## **8.3 Krysstabulering: endringstype × magnitudeklasse**
 
-*[Fylles inn: hvilken magnitudeklasse de nye og forverrede gapene faller i, og hvor mange av forverrelsene som krysser klassegrenser.]*
+Tabell 8.3 viser hvilken magnitudeklasse hver utløste endring faller i for snapshot-paret 2026-05-07 ↔ 2026-05-14. Samtlige syv $G$-baserte *nye gap* har $G^{(s_i)} \in \{-1, -2\}$ og faller i klassen *mildt*. Kategoriene *forverret innen klasse* og *forverret krysser klasse* har null observasjoner i dette delta-paret.
 
-| | Mildt | Moderat | Kritisk | Totalt |
+| | Mildt ($-2 \leq G \leq -1$) | Moderat ($-5 \leq G \leq -3$) | Kritisk ($G \leq -6$) | Totalt |
 |---|---|---|---|---|
-| Nytt gap | – | – | – | – |
-| Forverret (innen klasse) | – | – | – | – |
-| Forverret (krysser klasse) | – | – | – | – |
+| Nytt gap (G-regel) | 7 | 0 | 0 | 7 |
+| Forverret (innen klasse) | 0 | 0 | 0 | 0 |
+| Forverret (krysser klasse) | 0 | 0 | 0 | 0 |
+| Skjult nytt gap (severity-regel) | 3 | 0 | 0 | 3 |
+| Skjult forverring (severity-regel) | 0 | 0 | 0 | 0 |
+| **Totalt utløste gap-åpnende varsler** | **10** | **0** | **0** | **10** |
 
-<p align="center"><small><i>Tabell 8.3 Fordeling av utløste varsler etter endringstype og magnitudeklasse.</i></small></p>
+<p align="center"><small><i>Tabell 8.3 Fordeling av utløste gap-åpnende varsler etter regel og magnitudeklasse. Magnitudeklassen er bestemt av $G^{(s_i)}$ for $G$-regelen og av $G^{(s_i)}$-ekvivalenten ved skjult gap (også her havner alle i mildt). Informasjonsvarsler (LØST og SKJULT_LOST_GAP) er ikke inkludert.</i></small></p>
 
 ## **8.4 Suppression-effekt på varslingsvolum**
 
-*[Fylles inn: hvor mange potensielle varsler ble undertrykt av suppression-regelen i 6.5, fordelt på de syv enhetene med front-lastet underskudd (jf. 7.5) – forutsatt at koordinator har manuelt markert dem som strukturelle. Med dagens datagrunnlag (2 snapshots) har ingen enheter automatisk strukturell-status, så suppression vil kun ha effekt etter manuell overstyring.]*
+Suppression-regelen i 6.5 evaluerer hvert utløste varsel mot suppression-listen over strukturelle assets. For snapshot-paret 2026-05-07 ↔ 2026-05-14 er listen tom – ingen enheter tilfredsstiller $K = 4$-kriteriet (kun to snapshots tilgjengelig), og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle. Resultatet er at samtlige utløste varsler videreføres til varselsutløsing (Tabell 8.4).
 
 | | Antall varsler |
 |---|---|
-| Potensielle varsler før suppression | – |
-| Suppress'et (front-lastede enheter uten klassebytte) | – |
-| Videreført til varselsutløsing | – |
-| Suppression-rate | – |
+| Potensielle varsler før suppression | 12 |
+| Suppress'et (strukturelle assets uten klassebytte) | 0 |
+| Videreført til varselsutløsing | 12 |
+| Suppression-rate | 0 % |
 
 <p align="center"><small><i>Tabell 8.4 Suppression-regelens effekt på varslingsvolum for snapshot-paret.</i></small></p>
 
@@ -811,16 +815,16 @@ Valideringen viser at modellens regelmatrise fungerer som spesifisert i kap 6.5,
 
 ## **8.7 Resultatenes kobling til delproblemene**
 
-*[Fylles inn: kort, faktisk oversikt som knytter delresultatene til delproblemene fra kapittel 1.2. Ingen vurdering av implikasjoner.]*
+De fire delproblemene formulert i 1.2 dekkes av ulike resultater i dette kapittelet. Tabell 8.7 viser hvilke konkrete tabeller og figurer som adresserer hvert delproblem; selve vurderingen av i hvilken grad delproblemene er besvart er forbeholdt 9.1.
 
-| Delproblem | Adresseres av |
+| Delproblem | Resultater som dokumenterer dekningen |
 |---|---|
-| 1. Strukturere data fra Salesforce, Asset Voice og Power BI | Kapittel 5.2 og resultater i 8.1 |
-| 2. Regelbasert oppdagelse av negative og forverrede verdier | Tabell 8.1, 8.2 og 8.3 |
-| 3. Automatisk varselsformat med relevant informasjon | Tabell 8.5 |
-| 4. Tidligere og tydeligere varsling enn manuell prosess | Tabell 8.6 og 8.4 |
+| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker) |
+| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel), Tabell 7.6 (5 supplerende varsler via severity-regel) |
+| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Tabell 6.6 (varselsobjekt-skjema), Tabell 8.5 (12 utløste varsler fordelt på tre mottakere), digest-eksempler i `006 analysis/3.4 varsling/digests/` |
+| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Tabell 8.5 (automatisk fordeling per koordinator), Tabell 7.6 (severity-deltaen fanger 3 "skjulte" endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
 
-<p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og kapittelets resultater.</i></small></p>
+<p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og resultatene presentert i kapitlet.</i></small></p>
 
 9. # **Diskusjon** {#diskusjon}
 
@@ -860,30 +864,47 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 ## **9.5 Praktisk betydning for Motive Offshore**
 
-*[Fylles inn:
-- Estimert antall varsler per uke per asset type-koordinator basert på Tabell 8.5.
-- Hvordan systemet endrer beslutningssyklusen for selgere og prosjektkoordinatorer.
-- Hvilke produksjonskomponenter som må på plass: Power BI REST API, Power Automate eller Python-webhook, e-post/Teams-integrasjon, SMTP-konfigurasjon.
-- Anbefalinger til Motive Offshore for produksjonsbruk: tilgangsutvidelse for direkte API-eksport, etablering av recipient-mapping på asset type-nivå, integrasjon med Salesforce for per-kontrakt-ruting (jf. 6.7).
-]*
+Dagens manuelle prosess i 4.4 viser at kapasitetsgap først blir prioritert når en selger eller koordinator selv åpner Power BI-dashbordet og ser etter dem. Mellom en kontrakts oppdatering til 75 prosent vinnersannsynlighet og leveransedatoen finnes det ingen automatisk mekanisme som påminner om gap som ikke er handlet på. Konsekvensen, beskrevet i 4.5, er at gap som kunne vært løst billig på tre til seks måneders horisont, ender med hasteanskaffelse, luftfrakt eller fremleie – alle med direkte marginpåvirkning for kontrakten.
+
+Volumet av varsler systemet produserer er moderat og operasjonelt håndterbart. For det første snapshot-paret (Tabell 8.5) gikk 12 varsler ut til tre koordinatorer: 5 til RDS-, 6 til HPUS- og 1 til Spoolers-koordinatoren. Fem av RDS-varslene gjelder samme utstyrsenhet over fem sammenhengende uker og presenteres som ett mønster i digesten – det vil si én reell handlingsoppgave for koordinatoren, ikke fem. På denne baselinen vil en enkelt koordinator i praksis motta én ukentlig digest med under ti distinkte handlingspunkter. Det er et nivå som faktisk kan leses og handles på, ikke et varslingsvolum som drukner.
+
+Severity-deltaen, ikke gap-verdien alene, fanger tre av disse tolv varslene (jf. 7.6). Disse tre cellene har $G_{r,a,t}$ med endring mindre enn én enhet, men prosentvis gap har krysset et fargebånd i Power BI. De ville vært usynlige for en regel som kun ser på heltallsverdien, og de er nettopp den typen tidlige signaler kontraktskoordinatoren trenger for å handle før gappet rekker å bli større. At modellen fanger dem styrker svaret på delproblem 4 om tydeligere varsling enn manuell kontroll.
+
+Systemet endrer beslutningssyklusen fra en *pull*-modell, hvor handling betinger at riktig person sjekker dashbordet til riktig tid, til en *push*-modell hvor digesten leveres til ansvarlig koordinator hver mandag. Den ukentlige påminnelsen som er beskrevet i 6.7 og demonstrert i 50 testscenarier (Tabell 8.6) sikrer at en gang utløste varsler ikke forsvinner ut av synet hvis koordinator ikke rekker å handle med en gang. Avslutningsvarsel ved løst gap lar varslingstråden lukkes formelt, slik at koordinatorens innboks ikke fylles av åpne saker som faktisk er løst.
+
+For at Motive Offshore skal kunne ta systemet i bruk i produksjon, må fire komponenter falle på plass. **Datafangsten** må gå fra manuell skjermavlesning til en automatisert eksport – enten ved tilgangsutvidelse for Power BI sin *Analyser i Excel*, eller via Power BI REST API som beskrevet kort i 9.7. **Recipient-mappingen** i `recipients.yaml` må valideres mot Motives faktiske organisasjonsstruktur og oppdateres ved personalendringer. **SMTP- eller Teams-integrasjon** må konfigureres mot Motives e-postsystem med passende avsenderadresse og signatur. **Suppression-listen** bør gjennomgås manuelt av en flåtekoordinator første gang systemet kjøres i produksjon, slik at kjente strukturelle underdimensjoneringer (jf. 7.5) markeres opp før K=4-kriteriet rekker å samle nok historikk.
+
+Den umiddelbare gevinsten er reduksjon av risikoen for at en kontraktsdrevet kapasitetskonflikt forblir uoppdaget til leveransedato. Det er denne risikoen 4.5 dokumenterer som direkte marginreduserende, og den langsiktige gevinsten ved automatisering er at den reduserende effekten kommer alle uker, ikke bare når en oppmerksom selger tilfeldigvis sjekker det riktige dashbordet til riktig tid.
 
 ## **9.6 Generaliserbarhet**
 
-*[Fylles inn: i hvilken grad kan løsningen overføres til:
-- Andre offshore-utleievirksomheter med tilsvarende Salesforce/Asset Voice-økosystem?
-- Andre Tier 2-strukturer eller andre varianter av kapasitetsmodeller (regional inndeling, tidsoppløsning utover ukentlig)?
-- Helt andre bransjer med kapitalintensiv ressursforvaltning (utleie av maskiner, fartøy, fly)?
-Diskuter hva som er generelt versus spesifikt for offshore-konteksten.]*
+Modellen er bygget rundt fire generelle byggesteiner som ikke er spesifikke for Motive Offshore eller offshore-bransjen: (1) en kapasitetsoversikt strukturert som *enhet × tidsperiode* med supply-, demand- og gap-verdi, (2) en pipeline-mekanisme med probabilistisk fremdrift og en aksjonsterskel (her 75 %), (3) en regelbasert klassifisering av uke-til-uke-endringer og (4) en varslingsmekanisme som ruter strukturerte varsler til ansvarlige mottakere. Det som er spesifikt for Motive er kun verdiene som fyller disse byggesteinene – navnet på Tier 2-utstyrsenhetene, fargeintervallene fra Power BI-rapporten, antallet asset types og koordinator-tilordningen i `recipients.yaml`.
+
+Innenfor Motive-konsernet er overgangen triviell. Selve modellen er **lokasjons-agnostisk**: filtrene Asset Custodian, Project Owner Demand og Region byttes synkront for å kjøre samme analyse for Motive UK, Motive USA eller en hvilken som helst annen lokasjon (jf. 5.2.2). Datasettets størrelse vil variere – andre verksteder har andre utstyrstyper – men pipelinen fra CSV-eksport til varsel er uendret. Det betyr at hvis Motive ønsker å skalere opp, kreves det null kodeendringer; kun nye recipient-mappinger og eventuelle justeringer av suppression- og eksklusjonslistene per verksted.
+
+Andre offshore-utleievirksomheter med tilsvarende dataøkosystem – Salesforce eller annen CRM som CRM, et flåteforvaltningssystem som tilsvarer Asset Voice, og et BI-verktøy som aggregerer dem til en supply/demand-oversikt – kan adoptere modellen med moderat tilpasningsarbeid. Hovedoppgaven er å sette opp datafangsten (eksport eller transkribering) til samme skjema som beskrevet i 5.2, og oppdatere fargenøkkelen i 5.2.1 hvis BI-rapporten bruker andre intervaller. Selve gap-deteksjonen, suppression-reglene og varslingslogikken er datadrevne og krever ingen omskriving.
+
+For tidsoppløsning og granularitet er modellen fleksibel. Uke som tidsenhet er en pragmatisk konsekvens av at Power BI-rapporten oppdateres ukentlig; modellen kan like gjerne kjøres på daglig eller månedlig kadens dersom datakilden støtter det. Tier 2-granulariteten er valgt fordi det er den lokale flåtekoordinatoren faktisk forholder seg til i daglig drift; en annen virksomhet kunne adopterer Tier 1 (asset type), Tier 3 (individuell enhet) eller en helt egen taksonomi uten at deteksjons- og varslingsreglene endres.
+
+Utover offshore-utleie er modellen overførbar til andre kapitalintensive utleiebransjer hvor pipeline-fremdrift møter en kapasitetsbeskrankning over tid – maskinutleie, kran- og løfteutstyr, fartøyssharter, flycharter. Felles for disse er en kombinasjon av kontraktsforhandling med variabel sannsynlighet og en fysisk fleet som ikke kan utvides på kort varsel. Modellen vil **ikke** uten videre fungere i tjenestebaserte virksomheter der "kapasitet" er menneskelig arbeidstid som kan omfordeles fleksibelt; der vil suppression-regelen ha andre semantiske implikasjoner og magnitudeklassene må kalibreres helt på nytt mot tjenestens kost-konsekvensstruktur.
+
+Det helt generelle bidraget fra dette prosjektet er konstruksjonen av en **regelbasert tidsserie-delta-detektor** kombinert med en **prosentbasert alvorlighetsklassifikasjon** (`severity_band`). Denne kombinasjonen er ikke spesifikk for utleiebransjer i det hele tatt og kan benyttes overalt hvor BI-verktøy presenterer prosentbaserte fargekoder over et numerisk grunnlag. Severity-deltaen som komplement til den absolutte gap-deltaen er et metodisk mønster som kan adopteres bredt i regelbasert overvåking av aggregerte BI-rapporter.
 
 ## **9.7 Forslag til videre forskning**
 
-*[Fylles inn:
-- Per-kontrakt-ruting via Salesforce-integrasjon, jf. 6.7 og kapittel 1.3 om avgrensninger.
-- Kalibrering av magnitudeklassegrenser mot konsekvensanalyse av sen oppdagelse (kostnad ved luftfrakt vs. fremleie vs. tap av kontrakt).
-- SARIMA eller andre tidsserieprognoser som supplement til regelbasert deteksjon for å fange ikke-bumpede kontrakter tidligere.
-- Lengre snapshot-serie i produksjon (12+ uker) for å verifisere at suppression-listen stabiliserer seg og at delta-detektoren ikke produserer falske positive over tid.
-- Brukerstudier av selgere og prosjektkoordinatorer for å vurdere varselsformatets praktiske nytte og signal-til-støy-forhold.
-]*
+Prosjektet etablerer en regelbasert deteksjons- og varslingsmodell som demonstreres på et begrenset datagrunnlag fra ett verksted og to delta-par. Resultatene peker mot fem konkrete forskningsspor som ville bygge videre på løsningen og adressere de begrensningene som er identifisert i 9.3 og 9.4.
+
+**Per-kontrakt-ruting via Salesforce-integrasjon.** Dagens modell ruter varsler per asset type fordi den aggregerte Power BI-tabellen ikke oppgir hvilken kontrakt som forårsaket en gitt gap-celle (jf. 6.7 og avgrensningen i 1.3). En naturlig utvidelse er å hente kontrakts-id fra Salesforce og koble varslet til den spesifikke selgeren som eier den utløsende kontrakten. Det vil flytte varslingen fra koordinator-nivå til selger-nivå og kan forbedre signal-til-støy-forholdet ytterligere. Forskningsspørsmålet er hvor mye reaksjonstiden faktisk reduseres ved å sende varslet direkte til den ansvarlige selgeren, og om koordinatoren fortsatt bør motta en oppsummering for flåtebalansering på tvers av selgere.
+
+**Empirisk kalibrering av magnitudeklassegrenser.** Klassegrensene mildt/moderat/kritisk er i denne studien satt skjønnsmessig ved $-2/-3$ og $-5/-6$ (jf. 6.3). En videre studie bør koble klassegrensene til faktiske kostnadsforskjeller mellom håndteringstiltakene som beskrives i 4.5: hvor mye dyrere er luftfrakt versus sjøtransport som funksjon av gap-størrelsen, hvor stort gap krever fremleie versus nyanskaffelse, og når blir tap av kontrakt det mest sannsynlige utfallet. En slik konsekvensanalyse kan rettferdiggjøre kvantitative klassegrenser og direkte koble magnitudeklassene til varslingsprioritetene i 6.7.
+
+**SARIMA eller andre tidsserieprognoser som supplement.** Modellen reagerer på endringer som har skjedd – det vil si kontrakter som allerede har krysset 75 prosent vinnersannsynlighet. En prognoserende komponent kunne fange opp kontrakter med raskt voksende vinnersannsynlighet under terskelen og varsle proaktivt, ikke reaktivt. Forskningsspørsmålet er hvor verdifullt et "varsel om kommende varsel" er i den daglige driften, sett opp mot risikoen for falske positive prognoser. SARIMA er nevnt i kapittel 3.4 som alternativ til regelbasert deteksjon, og denne studien har valgt regelbasert tilnærming bevisst. Et hybrid-design hvor regelbasert deteksjon er hovedmekanisme og prognosen et supplement, bevarer modellens sporbarhet samtidig som det utvider varslingshorisonten.
+
+**Lengre snapshot-serie i produksjon.** Suppression-regelens $K = 4$-kriterium kan ikke eksercereres innenfor prosjektperioden (jf. 9.3). En 12+ ukers serie i produksjon vil tillate empirisk validering av at suppression-listen stabiliserer seg over tid uten å forkaste reelle nye gap, og at delta-detektoren ikke produserer falske positive ved rask oscillasjon eller kontrakter som beveger seg over og under 75 %-terskelen. En slik longitudinell studie kan også gi grunnlag for å justere $K$ opp eller ned basert på observert varslingsvolum og koordinatorens evne til å handle på dem.
+
+**Brukerstudie av varselsformatet.** Digest-formatet beskrevet i 6.7 og demonstrert i 8.5 er designet basert på antagelser om hva selgere og prosjektkoordinatorer trenger – prioritetsgruppering, mønsterdeteksjon, livssyklus-status. En kvalitativ studie hvor faktiske brukere mottar digester over flere uker og rapporterer signal-til-støy, lesbarhet og handlbarhet, vil avdekke om formatet faktisk støtter den beslutningssyklusen 9.5 argumenterer for. Brukerstudien kan også vurdere foretrukken kanal (e-post, Teams, dedikert dashboard) og påminnelsesfrekvens som ikke nødvendigvis er ukentlig for alle prioritetsnivåer.
+
+Felles for de fem sporene er at de bygger videre på, ikke erstatter, den regelbaserte kjernen som er konstruert i dette prosjektet. Prosjektets bidrag har vært å etablere et fundament som tåler videre forskning – ved å være sporbart, regelbasert, testbart og separasjonsklart mellom dataskjema, deteksjonslogikk og leveransekanal.
 
 10. # **Konklusjon** {#konklusjon}
 

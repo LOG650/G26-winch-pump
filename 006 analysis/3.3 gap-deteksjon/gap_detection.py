@@ -1,11 +1,17 @@
 """3.3 Gap-deteksjon - uke-til-uke-sammenligning av to snapshots.
 
-Sammenligner baseline (snapshot 1, 2026-05-07) med snapshot 2 (2026-05-14) og
-klassifiserer hver (asset, uke)-celle i endringstype basert paa gap_value og
-severity_band. Genererer logg og oppsummering.
+Sammenligner to snapshots og klassifiserer hver (asset, uke)-celle i
+endringstype basert paa gap_value og severity_band. Genererer logg og
+oppsummering.
 
-Kjor: uv run python "3.3 gap-deteksjon/gap_detection.py"
+Kjor (default-snapshots 2026-05-07 og 2026-05-14):
+    uv run python "3.3 gap-deteksjon/gap_detection.py"
+
+Kjor med eksplisitte snapshots:
+    uv run python "3.3 gap-deteksjon/gap_detection.py" \\
+        --snap1 path/to/snap1.csv --snap2 path/to/snap2.csv
 """
+import argparse
 import os
 from collections import Counter
 
@@ -15,10 +21,18 @@ import matplotlib.dates as mdates
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
-SNAP1_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no',
-                         'clean', '2026-05-07_supply_demand_motive_no_75pct.csv')
-SNAP2_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-14_motive_no',
-                         'clean', '2026-05-14_supply_demand_motive_no_75pct.csv')
+DEFAULT_SNAP1 = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no',
+                             'clean', '2026-05-07_supply_demand_motive_no_75pct.csv')
+DEFAULT_SNAP2 = os.path.join(PROJECT_ROOT, '004 data', '2026-05-14_motive_no',
+                             'clean', '2026-05-14_supply_demand_motive_no_75pct.csv')
+
+_parser = argparse.ArgumentParser(add_help=False)
+_parser.add_argument('--snap1', default=DEFAULT_SNAP1, help='Sti til foerste snapshot-CSV (t-1)')
+_parser.add_argument('--snap2', default=DEFAULT_SNAP2, help='Sti til andre snapshot-CSV (t)')
+_args, _ = _parser.parse_known_args()
+
+SNAP1_CSV = _args.snap1
+SNAP2_CSV = _args.snap2
 OUT = SCRIPT_DIR
 
 plt.rcParams.update({

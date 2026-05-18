@@ -7,9 +7,10 @@ Hei,
 Ukens snapshot (2026-05-14) sammenlignet med forrige (2026-05-07) viser folgende endringer for utstyrsenheter du folger opp (RDS):
 
 ------------------------------------------------------------
-PÅMINNELSER (aktive saker fra tidligere snapshots) (5)
+NYE VARSLER (5)
 ------------------------------------------------------------
   • - 500Te RDS (RDS) - 5 sammenhengende uker: 2026-08-17, 2026-08-24, 2026-08-31, 2026-09-07, 2026-09-14
     gap 0 → -1, farge green → black
+    Monster: ny kontrakt har sannsynligvis passert 75 %-terskelen for denne perioden.
 
 Detaljer: varsler.csv (vedlagt)
