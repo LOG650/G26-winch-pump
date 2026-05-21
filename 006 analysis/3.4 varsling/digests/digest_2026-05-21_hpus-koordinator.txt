@@ -1,0 +1,46 @@
+To: hpus-koordinator@motive-offshore.no
+Cc: salg@motive-offshore.no
+Subject: Kapasitetsvarsler 2026-05-21 (Motive Norway) - 7 endringer
+
+Hei,
+
+Ukens snapshot (2026-05-21) sammenlignet med forrige (2026-05-14) viser folgende endringer for utstyrsenheter du folger opp (HPUS):
+
+------------------------------------------------------------
+NYE VARSLER (1)
+------------------------------------------------------------
+  • Electric - 55kW Electric HPU (HPUS), uke 2026-07-06:
+    gap 0 → -1, farge purple → black
+    [NYTT_GAP, G-regel]
+
+------------------------------------------------------------
+PÅMINNELSER (aktive saker fra tidligere snapshots) (2)
+------------------------------------------------------------
+  • Electric - 11kW Electric HPU (HPUS), uke 2026-10-12:
+    gap 0 → 0, farge purple → purple
+    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+  • Electric - 55kW Electric HPU (HPUS), uke 2026-07-20:
+    gap -2 → 0, farge black → purple
+    [PÅMINNELSE, reminder] (uke 1 i tråden, åpnet 2026-05-14)
+
+------------------------------------------------------------
+LØSTE SAKER (avslutter varslingstrad) (2)
+------------------------------------------------------------
+  • Electric - 158KW Electric HPU (HPUS), uke 2026-07-13:
+    gap -1 → 0, farge black → green
+    [LØST_TRAD, thread-closure]
+  • Electric - 30kW Electric HPU (HPUS), uke 2026-07-13:
+    gap 0 → 1, farge purple → green
+    [LØST_TRAD, thread-closure]
+
+------------------------------------------------------------
+INFORMASJONSVARSLER (2)
+------------------------------------------------------------
+  • Electric - 30kW Electric HPU (HPUS), uke 2026-07-06:
+    gap 0 → 1, farge purple → green
+    [SKJULT_LOST_GAP, severity-regel]
+  • Electric - 55kW Electric HPU (HPUS), uke 2026-10-05:
+    gap 0 → 1, farge purple → green
+    [SKJULT_LOST_GAP, severity-regel]
+
+Detaljer: varsler.csv (vedlagt)

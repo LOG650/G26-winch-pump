@@ -358,17 +358,17 @@ Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-s
 
 Analysegrunnlaget består av en serie ukentlige snapshots av samme Calendar-tabell, hver fanget på en mandag med identisk filterprofil. Tabell 5.3 oppsummerer snapshot-serien.
 
-| Snapshot | Dato | Periode dekket | Antall uker | Antall rader |
-|----------|------|----------------|-------------|--------------|
-| $t_0$ (baseline) | 2026-05-07 | 2026-05-11 til 2026-12-28 | 34 | 816 |
-| $t_1$ | 2026-05-14 | 2026-05-18 til 2026-12-28 | 33 | 792 |
-| $t_2$ (planlagt) | 2026-05-21 | 2026-05-25 til 2026-12-28 | 32 | 768 |
+| Snapshot | Dato | Periode dekket | Antall uker | Antall Tier 2-enheter | Antall rader |
+|----------|------|----------------|-------------|-----------------------|--------------|
+| $t_0$ (baseline) | 2026-05-07 | 2026-05-11 til 2026-12-28 | 34 | 24 | 816 |
+| $t_1$ | 2026-05-14 | 2026-05-18 til 2026-12-28 | 33 | 24 | 792 |
+| $t_2$ | 2026-05-21 | 2026-05-25 til 2026-12-28 | 32 | 26 | 832 |
 
 <p align="center"><small><i>Tabell 5.3 Snapshot-serien som inngår i analysegrunnlaget. Hver rad i Calendar er én Tier 2-utstyrsenhet × én uke.</i></small></p>
 
 Tre snapshots gir to delta-par til den dynamiske endringsdeteksjonen i kap 6.4. Antall uker per snapshot avtar med én for hvert påfølgende snapshot fordi Power BI-kalenderen viser en fast endhorisont (28.12.2026) og dermed forskyves bakover etter hvert som inneværende uke flyttes framover. Vurdering av om snapshot-serien er tilstrekkelig som valideringsgrunnlag diskuteres i kap 9.3.
 
-Calendar-datasettet dekker 24 unike Tier 2-utstyrsenheter fordelt på 8 asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som faktisk er fysisk lokalisert ved verkstedet Motive Norway. Asset types som Turntables, Storage reels, HLS, Generators og Cranes finnes hos andre verksteder, men inngår ikke i denne lokale flåten og dermed ikke i datasettet.
+Baseline-snapshotet 2026-05-07 dekket 24 unike Tier 2-utstyrsenheter fordelt på åtte asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som var fysisk lokalisert ved verkstedet Motive Norway på datafangstdatoen. I snapshot $t_2$ (2026-05-21) dukket det opp to nye Tier 2-rader i Power BI-tabellen: *60Te Turntable* under en ny asset type *Turntables*, og *Electric – 54kW Electric HPU* under HPUS. Disse er sannsynligvis flyttet inn til Motive Norway fra et annet verksted i Motive-konsernet mellom snapshot $t_1$ og $t_2$. Asset types som Storage reels, HLS, Generators og Cranes finnes hos andre verksteder og inngår ikke i denne lokale flåten i noen av de tre snapshotene. Den dynamiske endringsdeteksjonen i kap 6.4 sammenligner kun celler som finnes i begge snapshots i et delta-par, og de to nye Tier 2-radene inngår derfor først som baseline for et eventuelt snapshot $t_3$.
 
 ### **5.2.5 Datakvalitet**
 
@@ -695,16 +695,73 @@ I tillegg til de syv $G$-baserte nye gapene flagger severity-deltaen ti celler s
 Fordelingen av endringer over kalenderhorisonten og over asset types er vist i Figur 7.6 og 7.7. Endringene konsentreres i juli–september, det vil si i det tidsvinduet som har høyest tetthet av eksisterende negative celler i baselinen, og fordeler seg på asset types RDS og HPUS. Ingen endringer i kategoriene *forverret*, *forbedret* eller *løst* observeres i dette første delta-paret – en konsekvens av at perioden mellom snapshotene kun er én uke, og at de fleste underdekninger i baselinen ligger på $G \in \{-1, -2\}$ uten rom for ytterligere forverring innenfor magnitudeklassen *mildt*.
 
 <div align="center">
-  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke.png" alt="Endringer per uke" width="80%">
-  <p align="center"><small><i>Figur 7.6 Fordeling av cellevise endringer over kalenderhorisonten. Stabile celler er ekskludert for lesbarhet.</i></small></p>
+  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta1.png" alt="Endringer per uke - delta-par 1" width="80%">
+  <p align="center"><small><i>Figur 7.6 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 1 (2026-05-07 ↔ 2026-05-14). Stabile celler er ekskludert for lesbarhet.</i></small></p>
 </div>
 
 <div align="center">
-  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type.png" alt="Endringer per asset type" width="80%">
-  <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer per asset type. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
+  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta1.png" alt="Endringer per asset type - delta-par 1" width="80%">
+  <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer per asset type for delta-par 1. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
 </div>
 
-Analysen oppdateres når snapshot $t_2$ (2026-05-21) er transkribert og det andre delta-paret 2026-05-14 ↔ 2026-05-21 kan kjøres. Med to delta-par blir det mulig å vise varslingstråder som lever over flere snapshots og avsluttes ved kategorien *løst gap*, jf. 3.4-akseptansekriteriet om ukentlig påminnelse.
+### 7.6.1 Andre delta-par 2026-05-14 ↔ 2026-05-21
+
+Med snapshot $t_2$ (2026-05-21) tilgjengelig kjøres delta-detektoren også på det andre snapshot-paret. Sammenligningen omfatter de 768 cellene som finnes i begge snapshots (32 uker × 24 utstyrsenheter); de to nye Tier 2-radene i $t_2$ (jf. 5.2.4) inngår ikke i delta-deteksjonen siden de mangler en motpart i $t_1$. Tabell 7.7 viser fordelingen.
+
+| Endringstype | Antall celler | Andel |
+|--------------|---------------|-------|
+| Nytt gap | 4 | 0,5 % |
+| Forverret gap | 0 | 0,0 % |
+| Forbedret gap | 2 | 0,3 % |
+| Løst gap | 8 | 1,0 % |
+| Uendret gap (negativt) | 60 | 7,8 % |
+| Positiv endring (ikke-negativt begge snapshots) | 15 | 2,0 % |
+| Stabil (uendret ikke-negativt) | 679 | 88,4 % |
+
+<p align="center"><small><i>Tabell 7.7 Fordeling av cellevise endringer mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
+
+I motsetning til det første delta-paret er nå alle de fire dynamiske kategoriene aktivert. Åtte celler havner i kategorien *løst gap* – tre av dem hører til *2Te Linear Cable Engine* (ukene 2026-06-08 til 2026-06-22), tre tilhører *500Te RDS* (ukene 2026-08-31 til 2026-09-14) og én er *158KW Electric HPU* (uke 2026-07-13). De fire nye gapene fordeler seg på fire ulike kombinasjoner: *2Te Linear Cable Engine* åpner nye underskudd i ukene 2026-07-06 og 2026-07-13 (begge $G : 0 \to -2$, fargen grønn → svart), *55kW Electric HPU* åpner nytt gap i uke 2026-07-06 ($G : 0 \to -1$), og *4-track 50Te Tensioner* åpner nytt gap i uke 2026-07-13 ($G : 0 \to -1$). Mønsteret er konsistent med at tidens gang forskyver kalenderen én uke framover: gap som tidligere lå i de første ukene løses ut av synshorisonten, mens nye gap dukker opp ved overgangen fra «for tett på» til «innenfor 75 %-vinduet». Severity-fordelingen er gitt i Tabell 7.8.
+
+| Severity-endring | Antall celler |
+|------------------|---------------|
+| Verre farge | 4 |
+| Bedre farge | 11 |
+| Samme farge | 753 |
+
+<p align="center"><small><i>Tabell 7.8 Endring i severity_band mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
+
+Fordelingen av endringene over kalenderhorisonten og per asset type for delta-par 2 er vist i Figur 7.8 og 7.9. Endringene grupperer seg igjen i sommer- og tidlig høstmåneder – i tråd med at det er denne perioden som har høyest tetthet av eksisterende negative og lilla celler i baselinen og dermed flest celler som er innenfor «én klassebytte» fra et nytt eller løst gap.
+
+<div align="center">
+  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta2.png" alt="Endringer per uke - delta-par 2" width="80%">
+  <p align="center"><small><i>Figur 7.8 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 2 (2026-05-14 ↔ 2026-05-21). Stabile celler er ekskludert for lesbarhet.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta2.png" alt="Endringer per asset type - delta-par 2" width="80%">
+  <p align="center"><small><i>Figur 7.9 Fordeling av cellevise endringer per asset type for delta-par 2. Cable Pulling machine og RDS er mest aktive – Cable bidrar med både to nye gap og tre løste gap, RDS med tre løste gap.</i></small></p>
+</div>
+
+### 7.6.2 Varslingstråder over to delta-par
+
+Varslingsmodulen `gap_alerting.py` (kap 6.7) holder en persistent tråd-tilstand i `active_alerts.json` på tvers av snapshots. Etter første delta-par var det 10 aktive tråder; etter andre delta-par er antallet 9. Netto endring $-1$ skjuler en større bevegelse: fem tråder lukkes (fire ved *løst gap* mot $G$-regelen og én via *positiv endring* der severity går fra lilla til grønn), og fire nye tråder åpnes (de fire *nye gap*-cellene i Tabell 7.7). Fem av de ti opprinnelige trådene fortsetter inn i tredje syklus med en ukentlig påminnelse (`reminder_count = 1`). Tabell 7.9 sporer de ti opprinnelige trådene gjennom de to delta-parene.
+
+| Tråd-ID | Åpnet ved | Status etter delta-par 1 | Status etter delta-par 2 |
+|---------|-----------|--------------------------|--------------------------|
+| 500Te RDS @ 2026-08-17 | NYTT_GAP | aktiv | påminnelse |
+| 500Te RDS @ 2026-08-24 | NYTT_GAP | aktiv | påminnelse |
+| 500Te RDS @ 2026-08-31 | NYTT_GAP | aktiv | **lukket (løst)** |
+| 500Te RDS @ 2026-09-07 | NYTT_GAP | aktiv | **lukket (løst)** |
+| 500Te RDS @ 2026-09-14 | NYTT_GAP | aktiv | **lukket (løst)** |
+| 158KW HPU @ 2026-07-13 | NYTT_GAP | aktiv | **lukket (løst)** |
+| 55kW HPU @ 2026-07-20 | NYTT_GAP | aktiv | påminnelse |
+| 75Te Spooler @ 2026-06-22 | SKJULT_NYTT_GAP | aktiv | påminnelse |
+| 11kW HPU @ 2026-10-12 | SKJULT_NYTT_GAP | aktiv | påminnelse |
+| 30kW HPU @ 2026-07-13 | SKJULT_NYTT_GAP | aktiv | **lukket (positiv)** |
+
+<p align="center"><small><i>Tabell 7.9 Livssyklus for de ti trådene som ble åpnet i delta-par 1 (sju via G-regelen og tre via severity-regelen). Etter delta-par 2 er fem tråder lukket og fem fortsetter til neste snapshot. I tillegg åpnes fire nye tråder i delta-par 2 (de fire NYTT_GAP-cellene fra Tabell 7.7), slik at trådtilstanden går fra 10 til 9.</i></small></p>
+
+Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (500Te RDS-mønsteret der underskuddet smelter bort uke for uke etter hvert som kalenderen forskyves) og *engangsavklaring* (158KW HPU og 30kW HPU). Den viser også at trådene som krever vedvarende oppfølging – 500Te RDS @ 08-17 og 08-24 samt 55kW HPU @ 07-20 – overlever til en tredje påminnelse, noe som er konsistent med 3.4-akseptansekriteriet om ukentlig påminnelse inntil resolusjon. Den underliggende mekanikken (digest-formatering, mottakerruting og tilstandsfilen) er resultatet av gap-deteksjonens output kjørt gjennom varslingsmodulen, og dekkes i sin helhet i kap 8.5.
 
 8. # **Resultat** {#resultat}
 
@@ -739,6 +796,22 @@ Fordelingen etter asset type er vist i Tabell 8.1b. Tensioner, RDS og HPUS bidra
 
 Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.5 og bygges ikke om her. Severity-deltaen er gitt i Tabell 7.6. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten og per asset type er visualisert i Figur 7.6 og 7.7.
 
+For det andre delta-paret 2026-05-14 ↔ 2026-05-21 (Tabell 7.7) utløser deltadetektoren 4 *nye gap* og 8 *løste gap* via $G$-regelen, samt 2 *forbedrede gap*. Severity-deltaen flagger 4 *verre farge*-celler og 11 *bedre farge*-celler (Tabell 7.8). I motsetning til første delta-par er nå alle de fire dynamiske kategoriene aktivert, noe som gir den første empiriske observasjonen av en hel livssyklus i datasettet – fra åpning til løsning. Tabell 8.2 oppsummerer regel-utløsingene for begge delta-parene.
+
+| Regel | Delta-par 1 (792 celler) | Delta-par 2 (768 celler) |
+|-------|---------------------------|---------------------------|
+| $G$-regel: nytt gap | 7 | 4 |
+| $G$-regel: forverret gap | 0 | 0 |
+| $G$-regel: forbedret gap | 0 | 2 |
+| $G$-regel: løst gap | 0 | 8 |
+| Severity-regel: skjult nytt gap | 3 | 0 |
+| Severity-regel: skjult forverring | 0 | 0 |
+| Severity-regel: skjult løst gap | 2 | 2 |
+| **Totalt gap-åpnende varsler (G + severity)** | **10** | **4** |
+| **Totalt informasjons-/lukke-varsler (G + severity)** | **2** | **12** |
+
+<p align="center"><small><i>Tabell 8.2 Sammenligning av regel-utløste varsler over de to delta-parene. Det første delta-paret er dominert av åpning av nye underskudd, mens det andre delta-paret kombinerer fire nye åpninger med ti lukke-/informasjonsvarsler – konsistent med at kalenderen forskyves én uke framover og at tidlige gap «glir ut» av synshorisonten.</i></small></p>
+
 ## **8.3 Krysstabulering: endringstype × magnitudeklasse**
 
 Tabell 8.3 viser hvilken magnitudeklasse hver utløste endring faller i for snapshot-paret 2026-05-07 ↔ 2026-05-14. Samtlige syv $G$-baserte *nye gap* har $G^{(s_i)} \in \{-1, -2\}$ og faller i klassen *mildt*. Kategoriene *forverret innen klasse* og *forverret krysser klasse* har null observasjoner i dette delta-paret.
@@ -752,24 +825,37 @@ Tabell 8.3 viser hvilken magnitudeklasse hver utløste endring faller i for snap
 | Skjult forverring (severity-regel) | 0 | 0 | 0 | 0 |
 | **Totalt utløste gap-åpnende varsler** | **10** | **0** | **0** | **10** |
 
-<p align="center"><small><i>Tabell 8.3 Fordeling av utløste gap-åpnende varsler etter regel og magnitudeklasse. Magnitudeklassen er bestemt av $G^{(s_i)}$ for $G$-regelen og av $G^{(s_i)}$-ekvivalenten ved skjult gap (også her havner alle i mildt). Informasjonsvarsler (LØST og SKJULT_LOST_GAP) er ikke inkludert.</i></small></p>
+<p align="center"><small><i>Tabell 8.3 Fordeling av utløste gap-åpnende varsler etter regel og magnitudeklasse for delta-par 1. Magnitudeklassen er bestemt av $G^{(s_i)}$ for $G$-regelen og av $G^{(s_i)}$-ekvivalenten ved skjult gap (også her havner alle i mildt). Informasjonsvarsler (LØST og SKJULT_LOST_GAP) er ikke inkludert.</i></small></p>
+
+Tabell 8.3b viser den tilsvarende fordelingen for delta-paret 2026-05-14 ↔ 2026-05-21. Mønsteret er det samme – samtlige fire $G$-baserte *nye gap* faller i klassen *mildt* ($G^{(s_2)} \in \{-1, -2\}$). Etter to delta-par er det fremdeles ikke registrert en eneste *forverret* observasjon, hverken innen-klasse eller klassebyttende, og heller ingen $G^{(s_i)} \leq -3$.
+
+| | Mildt ($-2 \leq G \leq -1$) | Moderat ($-5 \leq G \leq -3$) | Kritisk ($G \leq -6$) | Totalt |
+|---|---|---|---|---|
+| Nytt gap (G-regel) | 4 | 0 | 0 | 4 |
+| Forverret (innen klasse) | 0 | 0 | 0 | 0 |
+| Forverret (krysser klasse) | 0 | 0 | 0 | 0 |
+| Skjult nytt gap (severity-regel) | 0 | 0 | 0 | 0 |
+| Skjult forverring (severity-regel) | 0 | 0 | 0 | 0 |
+| **Totalt utløste gap-åpnende varsler** | **4** | **0** | **0** | **4** |
+
+<p align="center"><small><i>Tabell 8.3b Fordeling av utløste gap-åpnende varsler etter regel og magnitudeklasse for delta-par 2. Informasjonsvarsler (8 LØST, 2 FORBEDRET og 2 SKJULT_LOST_GAP) er ikke inkludert.</i></small></p>
 
 ## **8.4 Suppression-effekt på varslingsvolum**
 
-Suppression-regelen i 6.5 evaluerer hvert utløste varsel mot suppression-listen over strukturelle assets. For snapshot-paret 2026-05-07 ↔ 2026-05-14 er listen tom – ingen enheter tilfredsstiller $K = 4$-kriteriet (kun to snapshots tilgjengelig), og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle. Resultatet er at samtlige utløste varsler videreføres til varselsutløsing (Tabell 8.4).
+Suppression-regelen i 6.5 evaluerer hvert utløste varsel mot suppression-listen over strukturelle assets. For begge snapshot-parene er listen tom – ingen enheter tilfredsstiller $K = 4$-kriteriet (selv etter tre snapshots er det høyst $K = 3$ konsekutive observasjoner av en enhet med $G < 0$ i samme uke), og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle. Resultatet er at samtlige utløste varsler videreføres til varselsutløsing i begge parene (Tabell 8.4).
 
-| | Antall varsler |
-|---|---|
-| Potensielle varsler før suppression | 12 |
-| Suppress'et (strukturelle assets uten klassebytte) | 0 |
-| Videreført til varselsutløsing | 12 |
-| Suppression-rate | 0 % |
+| | Delta-par 1 | Delta-par 2 |
+|---|---|---|
+| Potensielle varsler før suppression | 12 | 14 |
+| Suppress'et (strukturelle assets uten klassebytte) | 0 | 0 |
+| Videreført til varselsutløsing | 12 | 14 |
+| Suppression-rate | 0 % | 0 % |
 
-<p align="center"><small><i>Tabell 8.4 Suppression-regelens effekt på varslingsvolum for snapshot-paret.</i></small></p>
+<p align="center"><small><i>Tabell 8.4 Suppression-regelens effekt på varslingsvolum for de to snapshot-parene. Antallet for delta-par 2 (14) summerer de 4 gap-åpnende varslene fra Tabell 8.3b med de 8 LØST og 2 SKJULT_LOST_GAP-varslene fra Tabell 8.2; det skiller seg fra det totale antallet utstedte varsler (19, jf. 8.5) som også inkluderer 5 påminnelser generert fra trådtilstand.</i></small></p>
 
 ## **8.5 Varselsutløsing og prioritering**
 
-Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.7 på snapshot-paret 2026-05-07 ↔ 2026-05-14. Av de 792 sammenlignede cellene filtreres 33 bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*). Av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
+Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.7 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
 
 | Mottaker (Asset type) | Lav prioritet | Middels prioritet | Høy prioritet | Informasjon | Totalt |
 |---|---|---|---|---|---|
@@ -781,6 +867,34 @@ Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatris
 <p align="center"><small><i>Tabell 8.5 Utløste varsler fordelt på mottaker (asset type-koordinator) og prioritet for snapshot-paret 2026-05-07 ↔ 2026-05-14. Lav og høy prioritet er 0 fordi alle observerte gap-verdier ligger i magnitudeklasse «mildt» (jf. 6.3) og ingen forverring krysser klassegrense.</i></small></p>
 
 Varslene aggregeres til tre digest-e-poster, én per primærmottaker. Mønsterdeteksjonen for sammenhengende uker grupperer de fem RDS-varslene i én linje i RDS-digesten – Power BI-cellene viser fem etterfølgende uker (2026-08-17 til 2026-09-14) med samme overgang $G : 0 \to -1$ og farge grønn → svart, som tolkes som én ny kontrakt og ikke fem uavhengige hendelser.
+
+For delta-par 2 (2026-05-14 ↔ 2026-05-21) filtreres 32 av 768 celler bort av samme eksklusjonsregel. På de gjenværende 736 cellene utløser modellen 14 nye/lukkende varsler fra regelmatrisen (Tabell 8.2) og henter i tillegg 5 påminnelser fra den persistente trådtilstanden generert i delta-par 1 (jf. 7.6.2). Resultatet er 19 utstedte varsler fordelt på fem digest-e-poster – to flere mottakere enn i forrige syklus, fordi *Cable Pulling machine* og *Tensioner* nå har egne varsler. Tabell 8.5b oppsummerer fordelingen per mottaker og prioritet.
+
+| Mottaker (Asset type) | Middels prioritet (ny) | Informasjon (løst, skjult løst, påminnelse) | Totalt |
+|---|---|---|---|
+| RDS-koordinator | 0 | 5 (3 lost + 2 påminnelse) | 5 |
+| HPUS-koordinator | 1 | 6 (1 lost + 2 påminnelse + 2 SKJULT_LOST_GAP + 1 LØST_TRAD) | 7 |
+| Cable Pulling-koordinator | 2 | 3 (3 lost-informasjon) | 5 |
+| Tensioner-koordinator | 1 | 0 | 1 |
+| Spoolers-koordinator | 0 | 1 (påminnelse) | 1 |
+| **Sum** | **4** | **15** | **19** |
+
+<p align="center"><small><i>Tabell 8.5b Utløste varsler for snapshot-paret 2026-05-14 ↔ 2026-05-21 fordelt på mottaker og prioritet. Antall mottakere øker fra 3 til 5 i denne syklusen fordi *Cable Pulling machine* og *Tensioner* også har endringer som krever oppfølging.</i></small></p>
+
+Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den ukentlige påminnelseslogikken (Tabell 6.5) operasjonell på tvers av snapshots. Etter delta-par 1 stod 10 tråder i `active_alerts.json`; etter delta-par 2 er antallet 9. Tabell 8.5c viser den underliggende balansen.
+
+| Trådhendelse | Antall | Beskrivelse |
+|---|---|---|
+| Aktive tråder før delta-par 2 | 10 | Bæres med fra slutten av delta-par 1 |
+| Lukket ved $G$-regel (LØST) | 4 | 500Te RDS × 3 + 158KW HPU × 1 |
+| Lukket ved severity-regel (POSITIV_ENDRING + BEDRE_FARGE) | 1 | 30kW HPU @ 2026-07-13 |
+| Påminnelse generert (`reminder_count` økes med 1) | 5 | 500Te RDS × 2 + 55kW HPU + 11kW HPU + 75Te Spooler |
+| Nye tråder åpnet (NYTT_GAP) | 4 | 2Te Linear Cable × 2 + 55kW HPU + 4-track 50Te |
+| **Aktive tråder etter delta-par 2** | **9** | $10 - 5 + 4 = 9$ |
+
+<p align="center"><small><i>Tabell 8.5c Tilstandsendring i `active_alerts.json` over snapshot-paret 2026-05-14 ↔ 2026-05-21.</i></small></p>
+
+At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at lukkemekanismen i kap 6.7 fungerer på reelle Power BI-data. Samtidig viser bevaringen av fem tråder med `reminder_count = 1` at påminnelseslogikken er aktivert som spesifisert i 3.4-akseptansekriteriet, og at trådene som ikke endrer status overlever til neste snapshot. Genererte digester for snapshot 2026-05-21 ligger i `006 analysis/3.4 varsling/digests/digest_2026-05-21_*.txt`.
 
 ## **8.6 Validering mot syntetiske scenarier**
 
