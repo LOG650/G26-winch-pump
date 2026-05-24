@@ -896,6 +896,63 @@ Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den uk
 
 At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at lukkemekanismen i kap 6.7 fungerer på reelle Power BI-data. Samtidig viser bevaringen av fem tråder med `reminder_count = 1` at påminnelseslogikken er aktivert som spesifisert i 3.4-akseptansekriteriet, og at trådene som ikke endrer status overlever til neste snapshot. Genererte digester for snapshot 2026-05-21 ligger i `006 analysis/3.4 varsling/digests/digest_2026-05-21_*.txt`.
 
+### 8.5.1 Demonstrasjon av SMTP-leveranse
+
+For å verifisere at varslingssystemet kan levere digestene som faktiske e-poster (og ikke bare som filer på disk), er modulen `send_digests.py` (006 analysis/3.4 varsling/) implementert som et tynt lag over Pythons standardbibliotek `smtplib`. Modulen leser hver `digest_<dato>_<mottaker>.txt`-fil, parser `To`/`Cc`/`Subject`-feltene, omdirigerer mottakeradressene til en testkonto (originaladressene beholdes synlig i brødteksten med en kort demo-merknad) og sender e-postene via `smtp.gmail.com:465` med innlogging via et Gmail App Password lest fra environment-variabelen `GMAIL_APP_PASSWORD`. Demoen ble kjørt 2026-05-23 mot testkontoen `tordalinho@gmail.com`. Alle fem digestene for snapshot 2026-05-21 ble levert, og resultatet er vist i Figur 8.1.
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_inbox.png" alt="Innboks etter SMTP-demo" width="90%">
+  <p align="center"><small><i>Figur 8.1 Innboksen til testkontoen umiddelbart etter at `send_digests.py` ble kjørt. De fem digestene for snapshot 2026-05-21 (Cable Pulling-, HPUS-, RDS-, Spoolers- og Tensioner-koordinator) er levert i samme syklus og merket med `[DEMO]`-prefiks i emnefeltet for å skille demokjøringen fra eventuelle produksjonskjøringer.</i></small></p>
+</div>
+
+#### Lesing av digestene
+
+Hver digest er en oppsummering av endringer mellom de to siste snapshotene (her: 2026-05-14 → 2026-05-21), filtrert til kun de utstyrsenhetene mottakerens asset type-domene dekker. Innholdet er gruppert i opptil fire kategorier, som svarer direkte til trådlogikken i kap 6.7:
+
+- **NYE VARSLER** – kapasitetsgap som ikke fantes i forrige snapshot. En ny varslingstråd åpnes; krever oppfølging fra koordinator. Utløst av `NYTT_GAP` (G-regel) eller `SKJULT_NYTT_GAP` (severity-regel).
+- **PÅMINNELSER** – aktive gap som ble varslet i et tidligere snapshot og ennå ikke er løst. Sendes ukentlig inntil tråden lukkes; `(uke N i tråden, åpnet YYYY-MM-DD)` viser hvor lenge saken har vært åpen.
+- **LØSTE SAKER** – tråder som lukkes denne uken fordi gap-verdien har gått fra negativ til ikke-negativ (eller severity har skiftet fra underdekning til overskudd). Ren informasjon – krever ingen handling.
+- **INFORMASJONSVARSLER** – «skjulte» endringer der severity-fargen har endret seg uten at gap-verdien krysser null (typisk `SKJULT_LOST_GAP`: lilla → grønn, dvs. fra «på grensen» til «klart overskudd»). Tas med fordi det signaliserer at underliggende etterspørsel har endret seg, selv om totalen ser uendret ut.
+
+Hver enkelt rad i en digest leses som:
+
+```
+• <Tier 2-utstyrsenhet> (<asset type>), uke <kalenderuke>:
+  gap <G_forrige> → <G_nå>, farge <severity_forrige> → <severity_nå>
+  [<sub-kategori>, <regel-trigger>]
+```
+
+Kalenderukene som adresseres ligger typisk **3–7 måneder fram i tid**, ikke i inneværende uke. Det er nettopp dette tidsvinduet som er forretningsverdien: et gap som flagges i mai for en uke i juli gir 6 ukers handlingsrom for å flytte utstyr fra et annet verksted, forhandle med kunden, eller dekke etterspørselen med en alternativ utstyrsenhet. Dersom samme gap først oppdages når kunden ringer dagen før leveranse, er tapet allerede påløpt.
+
+Digestens lengde varierer betydelig mellom mottakere (Tabell 8.5b). HPUS-koordinator får den rikeste digesten i dette delta-paret med varsler i alle fire kategoriene (Figur 8.2), mens Tensioner- og Spoolers-koordinator får én linje hver (Figur 8.5 og 8.6). Mottakere som ikke har noen endringer denne uken – i delta-par 2 gjelder dette Winch-, Under rollers-, LMA machines- og Turntables-koordinator – får ingen digest. Det er en bevisst designvalg: tomme e-poster ville svekket signalverdien av at en digest faktisk dukker opp i innboksen.
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_HPUS.png" alt="HPUS-digest" width="80%">
+  <p align="center"><small><i>Figur 8.2 HPUS-koordinatordigesten – den mest komplette i delta-par 2, med varsler i alle fire kategoriene (1 nytt, 2 påminnelser, 2 løste, 2 informasjon). Headerblokken viser at e-posten i produksjon ville gått til `hpus-koordinator@motive-offshore.no` med kopi til `salg@motive-offshore.no`; her er begge omdirigert til testkontoen. Saken «Electric – 55kW HPU, uke 2026-07-20» er et eksempel på en påminnelse der gap-verdien er forbedret fra -2 til 0, men severity er fortsatt purple, slik at tråden ikke lukkes.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_RDS.png" alt="RDS-digest" width="80%">
+  <p align="center"><small><i>Figur 8.3 RDS-koordinatordigesten. To påminnelser for *500Te RDS* ukene 17.08 og 24.08 (gap fortsatt -1) og tre LØST-saker for ukene 31.08, 07.09 og 14.09 (gap -1 → 0). Mønsterdeteksjonen grupperer de tre løste sakene i én linje siden de gjelder samme utstyrsenhet i sammenhengende uker, typisk indikator på at en og samme kontrakt har endret status.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_CPM.png" alt="Cable Pulling-digest" width="80%">
+  <p align="center"><small><i>Figur 8.4 Cable Pulling-koordinatordigesten. To nye NYTT_GAP-varsler for *2Te Linear Cable Engine* (ukene 06.07 og 13.07, gap 0 → -2) og tre LØST-informasjonsvarsler for ukene 08.06–22.06. Cable Pulling er den eneste asset type i dette delta-paret som både åpner og lukker tråder i samme syklus, og illustrerer hvordan kalenderhorisonten forskyves uke for uke.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Tensioners.png" alt="Tensioner-digest" width="80%">
+  <p align="center"><small><i>Figur 8.5 Tensioner-koordinatordigesten. Én ny NYTT_GAP-varsel for *Horizontal – 4-track 50Te Tensioner* i uke 13.07 (gap 0 → -1, farge green → black). Eneste endring i Tensioner-domenet denne uken.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Spoolers.png" alt="Spoolers-digest" width="80%">
+  <p align="center"><small><i>Figur 8.6 Spoolers-koordinatordigesten. Én PÅMINNELSE for *Electric – 75Te Electric Spooler* i uke 22.06 – tråden ble åpnet i delta-par 1 som SKJULT_NYTT_GAP og er fortsatt aktiv siden severity ikke har endret seg fra purple.</i></small></p>
+</div>
+
+Demoen lukker den siste tekniske delkomponenten i milepæl M5 («Varslingslogikk implementert – e-postvarsling»): pipelinen kan nå kjøres ende-til-ende fra to snapshot-CSV-er til mottatt e-post i innboks. Selve produksjonssetting (oppsett av en dedikert avsenderadresse i Motive Offshores M365-tenant, ruting av reelle mottakeradresser og overvåkning av leveranse-feil) er utenfor prosjektets omfang og diskuteres som videre arbeid i kap 9.5.
+
 ## **8.6 Validering mot syntetiske scenarier**
 
 Modellens deteksjonsregler (kap 6.5) og trådhåndtering (kap 6.7) er validert mot 50 syntetiske scenarier implementert som `pytest`-tester i `006 analysis/3.5 validering/`. Testene dekker de seks regelkategoriene fra Tabell 6.4 (G-regel), de fem fra Tabell 6.5 (severity-regel) og hele varslingstrådlivssyklusen *ny → påminnelse → eskalert → løst*. Alle 50 tester passerer (1,57 s kjøretid). Tabell 8.6 oppsummerer de viktigste scenariene; full liste er i `test_evaluate_alert.py` og `test_thread_lifecycle.py`.
@@ -933,10 +990,10 @@ De fire delproblemene formulert i 1.2 dekkes av ulike resultater i dette kapitte
 
 | Delproblem | Resultater som dokumenterer dekningen |
 |---|---|
-| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker) |
-| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel), Tabell 7.6 (5 supplerende varsler via severity-regel) |
-| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Tabell 6.6 (varselsobjekt-skjema), Tabell 8.5 (12 utløste varsler fordelt på tre mottakere), digest-eksempler i `006 analysis/3.4 varsling/digests/` |
-| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Tabell 8.5 (automatisk fordeling per koordinator), Tabell 7.6 (severity-deltaen fanger 3 "skjulte" endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
+| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien med 816 + 792 + 832 rader), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker i baselinen) |
+| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler i baselinen), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel i delta-par 1), Tabell 7.7 og 8.3b (4 nye gap + 8 løste i delta-par 2), Tabell 8.2 (sammenligning av regelutløsing over begge delta-par), Tabell 7.6 og 7.8 (severity-regel fanger 3 + 2 skjulte endringer i de to delta-parene) |
+| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Tabell 6.6 (varselsobjekt-skjema), Tabell 8.5 og 8.5b (12 og 19 utløste varsler fordelt på 3 og 5 mottakere i de to delta-parene), Figur 8.1–8.6 (SMTP-leverte digester) |
+| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Kap 8.5.1 (kalenderhorisont 3–7 måneder fram, automatisk ruting til 5 koordinatorer i delta-par 2), Tabell 7.6 og 7.8 (severity-deltaen fanger «skjulte» endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.5c (5 av 10 tråder lukkes automatisk i andre syklus), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
 
 <p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og resultatene presentert i kapitlet.</i></small></p>
 
@@ -946,7 +1003,33 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 ## **9.1 Drøfting mot problemstillingen og delproblemene**
 
-*[Fylles inn: vurder i hvilken grad systemet faktisk svarer på problemstillingen "Hvordan kan et Python-basert varslingssystem bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap?". Vurder hvert delproblem fra 1.2 mot resultatene i Tabell 8.7. Diskuter forventede vs. uventede funn.]*
+Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap. Resultatene i kap 7 og 8 viser at en slik pipeline er bygget og kjørt på reelle data over tre ukentlige snapshots, og at den produserer både statiske gap-rapporter (77 negative celler i baseline-snapshotet, Tabell 8.1) og dynamiske endringsvarsler (12 og 19 varsler i de to delta-parene, Tabell 8.5 og 8.5b). Vurderingen nedenfor følger de fire delproblemene fra kap 1.2 i tur, og avsluttes med en kort gjennomgang av hva som var forventet versus uventet i de empiriske observasjonene.
+
+### Delproblem 1: Datastrukturering
+
+Delproblem 1 spør hvordan data fra Salesforce, Asset Voice og Power BI kan struktureres for å identifisere kapasitetsgap per asset og tidsperiode. Tre ukentlige snapshots er transkribert fra PNG-skjermbilder til lang-form CSV med ti felt (Tabell 5.1), totalt 816 + 792 + 832 rader (Tabell 5.3). Skjemaet `(snapshot_date, week_start, asset_type, asset_tier2, gap_value, severity_band, …)` er fininndelt nok til at både den statiske gap-deteksjonen (cellevis $G < 0$, kap 6.3) og den dynamiske endringsdeteksjonen (uke-til-uke-sammenligning på samme celle, kap 6.4) kan operere uten ytterligere transformasjon. At alle tre snapshotene matcher Power BIs egne Tier 1-summer innenfor toleransen på ±2 unit-uker (kap 5.2.5) er en empirisk bekreftelse på at transkriberingen bevarer informasjonsinnholdet i originaldataene. Delproblemet er dermed besvart innenfor de rammene avgrensingene i kap 1.3 setter – nemlig at datafangsten skjer via PNG-eksport, ikke direkte API-integrasjon.
+
+### Delproblem 2: Regelbasert oppdagelse
+
+Delproblem 2 spør hvordan regelbasert logikk kan brukes til å oppdage negative verdier, forverrede verdier og uke-til-uke-endringer. Begge regelene er implementert og kjørt på reelle data: $G$-regelen (Tabell 6.4) klassifiserer hver celle ut fra fortegnet på $G^{(s_i)}$ og $G^{(s_{i-1})}$, og severity-regelen (Tabell 6.5) klassifiserer ut fra overganger i `severity_band`. Tabell 8.2 viser at de to delta-parene til sammen genererte 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP via disse to reglene. Hovedfunnet er at de to reglene komplementerer hverandre: severity-regelen fanget i delta-par 1 tre celler (Tabell 7.6) der gap-verdien var uendret eller forbedret, men der den underliggende prosent-eksponeringen passerte 75 %-terskelen i en retning som flyttet cellen fra grønn til lilla. Disse tre cellene ville vært usynlige for en detektor som kun ser på $G$. Det betyr at delproblemet er besvart med en sterkere modell enn det bokstaven av delproblemet krevde – `severity_band` legger til et signal som rein gap-verdi-måling ikke fanger.
+
+### Delproblem 3: Automatisk varselsformat
+
+Delproblem 3 spør hvordan et automatisk varsel kan utformes slik at selger eller prosjektkoordinator får tydelig informasjon om assets, periode og gap. Tabell 6.6 spesifiserer varselsobjektet med 16 felt som dekker alle de tre nevnte dimensjonene pluss kontekst (severity-overgang, regel, magnitudeklasse, prioritet, strukturelt-flagg, mottaker). Aggregeringen til én digest per mottaker per snapshot er implementert i `gap_alerting.py`, og SMTP-leveransen er demonstrert ende-til-ende i Figur 8.1–8.6: alle fem digestene for snapshot 2026-05-21 nådde testkontoen med fullstendig innhold, gruppert i de fire kategoriene NYE VARSLER, PÅMINNELSER, LØSTE SAKER og INFORMASJONSVARSLER (kap 8.5.1). Hver linje i digesten oppgir Tier 2-utstyrsenhet, kalenderuke, gap-overgang, severity-overgang og regel-trigger – det vil si nøyaktig det informasjonsgrunnlaget en koordinator trenger for å vurdere om en sak skal følges opp. Delproblemet er besvart både konseptuelt (skjema) og operativt (mottatt e-post i innboks).
+
+### Delproblem 4: Tidligere og tydeligere varsling
+
+Delproblem 4 er det normative og spør i hvilken grad systemet gir tidligere og tydeligere varsling enn dagens manuelle kontrollprosess. Den dynamiske endringsdeteksjonen identifiserte i delta-par 2 fire nye kapasitetsgap i kalenderukene 2026-07-06 og 2026-07-13 – det vil si 6,5 og 7,5 uker fram fra snapshot-datoen (kap 8.5.1). For en koordinator gir det et handlingsrom på halvannen til to måneder før etterspørselen materialiseres, mot dagens situasjon hvor gapet ofte først oppdages når en kontrakt nærmer seg signering eller kunden tar kontakt om leveransedato (kap 4.4–4.5). Tidligheten er altså demonstrert direkte. Tydeligheten viser seg i tre dimensjoner: (i) automatisk ruting til riktig asset type-koordinator basert på `recipients.yaml`, slik at HPUS-koordinator ikke får RDS-varsler og omvendt; (ii) mønsterdeteksjon som grupperer sammenhengende uker for samme utstyr i én digest-linje (Figur 8.3, der tre LØST-uker for 500Te RDS slås sammen til én linje – det er én kontrakt, ikke tre hendelser); og (iii) den ukentlige påminnelseslogikken (Tabell 8.5c) som holder en sak i koordinatorens bevissthet inntil $G$ eller `severity_band` faktisk endrer seg. Tilsammen utgjør dette en kvalitativt annen oppfølgingsmekanisme enn dagens prosess, der ansvarsfordelingen er implisitt og oppfølging skjer ad hoc.
+
+### Forventede og uventede funn
+
+Det forventede mønsteret materialiserte seg i delta-par 1: snapshot $t_0$ → $t_1$ er dominert av nye varsler ($n = 7$ NYTT_GAP) som etablerer trådbestanden, mens andelen LØST og FORBEDRET er null. Det stemmer overens med modellen: en åpningsfase trenger noen sykluser før løsninger begynner å materialisere seg. Delta-par 2 viste det motsatte mønsteret med åtte LØST og bare fire NYTT_GAP, og dette er hovedmekanismen bak at trådbestanden gikk fra 10 til 9 (Tabell 8.5c). Det viser at trådmodellen håndterer både åpning og lukking på reelle data og at gap-livssyklusen for en typisk Tier 2-utstyrsenhet er kortere enn først antatt – ofte én eller to uker. Tre funn var ikke fullt ut forventet på forhånd:
+
+Først ble det ikke registrert en eneste FORVERRET-celle i noen av de to delta-parene (Tabell 8.2). Forklaringen ligger i magnitudefordelingen: alle observerte gap havner i klassen *mildt* ($G \in \{-1, -2\}$, Tabell 8.3 og 8.3b), og det er smalt rom for ytterligere forverring innenfor samme klasse uten å enten lukkes eller krysse en klassegrense. At både innen-klasse-forverring og klassebyttende forverring forblir uobservert på reelle data er en empirisk begrensning som dekkes opp av syntetisk validering (Tabell 8.6), men diskuteres videre i 9.3.
+
+Dernest ga severity-regelen større praktisk verdi enn forventet. Tre av de ti gap-åpnende varslene i delta-par 1 (30 %) ble utløst kun av severity-overgangen, ikke av $G$-fortegnsbyttet. Det demonstrerer empirisk at `severity_band` ikke er redundant informasjon, og at en modell som kun ser på $G$-verdien ville oversett en tredjedel av de relevante endringene.
+
+Til slutt viste den persistente trådstaten seg å ha en helt sentral pedagogisk funksjon utover ren funksjonalitet. Tabell 8.5c viser at lukkemekanismen og påminnelseslogikken må ses sammen: uten persistens hadde de fem LØST-varslene i delta-par 2 vært vanskelige å koble til de opprinnelige NYTT_GAP-varslene fra delta-par 1, og koordinatoren ville mistet konteksten om hvilken sak som faktisk ble løst. At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at delproblem 4 anses besvart.
 
 ## **9.2 Sammenligning mot litteraturen**
 
