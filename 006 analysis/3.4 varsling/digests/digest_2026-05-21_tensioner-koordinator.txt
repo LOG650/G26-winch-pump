@@ -1,0 +1,16 @@
+To: tensioner-koordinator@motive-offshore.no
+Cc: salg@motive-offshore.no
+Subject: Kapasitetsvarsler 2026-05-21 (Motive Norway) - 1 endring
+
+Hei,
+
+Ukens snapshot (2026-05-21) sammenlignet med forrige (2026-05-14) viser folgende endringer for utstyrsenheter du folger opp (Tensioner):
+
+------------------------------------------------------------
+NYE VARSLER (1)
+------------------------------------------------------------
+  • Horizontal - 4 track - 50Te Tensioner - 4 Track (Tensioner), uke 2026-07-13:
+    gap 0 → -1, farge green → black
+    [NYTT_GAP, G-regel]
+
+Detaljer: varsler.csv (vedlagt)

@@ -1,4 +1,4 @@
-"""3.2 EDA - Eksplorativ dataanalyse av snapshot 2026-04-30.
+"""3.2 EDA - Eksplorativ dataanalyse av baseline-snapshot 2026-05-07 (Motive Norway).
 
 Genererer figurer og tabeller for kapitlene 4.7 (Casebeskrivelse) og 7 (Analyse)
 i 005 report/Prosjektrapport.md. Output: fig_*.png og tab_*.md i denne mappen.
@@ -13,15 +13,11 @@ import matplotlib.dates as mdates
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
-CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-04-30_motive_baseline', 'clean',
-                       '2026-04-30_supply_demand_motive_alle_75pct.csv')
-OV_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-04-30_motive_baseline', 'clean',
-                      '2026-04-30_supply_demand_overview_motive_alle_75pct.csv')
+CAL_CSV = os.path.join(PROJECT_ROOT, '004 data', '2026-05-07_motive_no', 'clean',
+                       '2026-05-07_supply_demand_motive_no_75pct.csv')
 OUT = SCRIPT_DIR
 
 cal = pd.read_csv(CAL_CSV, parse_dates=['snapshot_date', 'week_start'])
-ov = pd.read_csv(OV_CSV, parse_dates=['snapshot_date'])
-ov['month_dt'] = pd.to_datetime(ov['month'] + '-01')
 
 plt.rcParams.update({
     'font.size': 10,
@@ -33,8 +29,6 @@ plt.rcParams.update({
 
 print(f'Calendar: {len(cal)} rader, {cal["asset_tier2"].nunique()} assets, '
       f'{cal["week_start"].nunique()} uker')
-print(f'Overview: {len(ov)} rader, {ov["asset_tier1"].nunique()} kategorier, '
-      f'{ov["month"].nunique()} maaneder')
 
 
 def write_table(df, path, caption):
@@ -89,7 +83,7 @@ ax.fill_between(weekly['week_start'], weekly['gap_value'], 0,
 ax.axhline(0, color='black', lw=0.8)
 ax.set_xlabel('Uke (mandag)')
 ax.set_ylabel('Sum gap-verdi (unit-uker)')
-ax.set_title('Totalt synlig gap per uke (snapshot 2026-04-30)')
+ax.set_title('Totalt synlig gap per uke (snapshot 2026-05-07, Motive Norway)')
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 fig.autofmt_xdate()
@@ -146,52 +140,31 @@ fig.savefig(os.path.join(OUT, 'fig_topp10_verste_assets.png'))
 plt.close(fig)
 
 # ============================================================
-# Figur 5: Per Tier 1-gruppe over tid
+# Figur 5: Per asset type over tid
 # ============================================================
-group_weekly = cal.groupby(['week_start', 'asset_tier1'])['gap_value'].sum().reset_index()
+group_weekly = cal.groupby(['week_start', 'asset_type'])['gap_value'].sum().reset_index()
 fig, ax = plt.subplots(figsize=(11, 6))
-for tier1 in sorted(cal['asset_tier1'].unique()):
-    sub = group_weekly[group_weekly['asset_tier1'] == tier1]
+for at in sorted(cal['asset_type'].unique()):
+    sub = group_weekly[group_weekly['asset_type'] == at]
     ax.plot(sub['week_start'], sub['gap_value'], marker='o', ms=3, lw=1.5,
-            label=tier1)
+            label=at)
 ax.axhline(0, color='black', lw=0.8)
 ax.set_xlabel('Uke (mandag)')
 ax.set_ylabel('Sum gap-verdi')
-ax.set_title('Gap-utvikling per Tier 1-kategori')
+ax.set_title('Gap-utvikling per asset type')
 ax.legend(loc='lower right', fontsize=8, ncol=2)
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 fig.autofmt_xdate()
 plt.tight_layout()
-fig.savefig(os.path.join(OUT, 'fig_per_tier1_uker.png'))
-plt.close(fig)
-
-# ============================================================
-# Figur 6: Overview - demand vs reservations per maaned
-# ============================================================
-ov_total = ov.groupby('month_dt')[['demand', 'reservations_per_av']].sum().reset_index()
-fig, ax = plt.subplots(figsize=(11, 5))
-ax.plot(ov_total['month_dt'], ov_total['demand'], marker='o', lw=2, ms=8,
-        color='#c0392b', label='Demand (synlig 75 %+)')
-ax.plot(ov_total['month_dt'], ov_total['reservations_per_av'], marker='s', lw=2, ms=8,
-        color='#2980b9', label='Reservations (Asset Voice)')
-ax.fill_between(ov_total['month_dt'], ov_total['demand'], ov_total['reservations_per_av'],
-                color='#e67e22', alpha=0.2, label='Reservation-gap')
-ax.set_xlabel('Maaned')
-ax.set_ylabel('Unit-uker')
-ax.set_title('Demand vs reservations per maaned (snapshot 2026-04-30)')
-ax.legend(loc='upper right')
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
-fig.autofmt_xdate()
-plt.tight_layout()
-fig.savefig(os.path.join(OUT, 'fig_demand_vs_reservations_maanedlig.png'))
+fig.savefig(os.path.join(OUT, 'fig_per_asset_type_uker.png'))
 plt.close(fig)
 
 # ============================================================
 # Tabell 1: Strukturelle gaps (alltid negativ over alle 36 uker)
 # ============================================================
 asset_stats = cal.groupby('asset_tier2').agg(
-    asset_tier1=('asset_tier1', 'first'),
+    asset_type=('asset_type', 'first'),
     min_gap=('gap_value', 'min'),
     max_gap=('gap_value', 'max'),
     snitt_gap=('gap_value', 'mean'),
@@ -201,9 +174,9 @@ strukturelle = asset_stats[asset_stats['max_gap'] < 0].copy()
 strukturelle['snitt_gap'] = strukturelle['snitt_gap'].round(2)
 strukturelle = strukturelle.sort_values('snitt_gap')
 write_table(
-    strukturelle[['asset_tier1', 'asset_tier2', 'min_gap', 'max_gap', 'snitt_gap', 'sum_gap']],
+    strukturelle[['asset_type', 'asset_tier2', 'min_gap', 'max_gap', 'snitt_gap', 'sum_gap']],
     os.path.join(OUT, 'tab_strukturelle_gaps.md'),
-    'Tabell - utstyrsenheter med negativ gap-verdi i alle 36 uker av snapshot 2026-04-30 '
+    'Tabell - utstyrsenheter med negativ gap-verdi i alle 34 uker av snapshot 2026-05-07 '
     '(strukturelle underskudd, ikke kontraktsdrevne nye gap).'
 )
 print(f'\nStrukturelle gaps (alltid negativ): {len(strukturelle)}')
@@ -214,14 +187,14 @@ print(f'\nStrukturelle gaps (alltid negativ): {len(strukturelle)}')
 top10_table = top10.reset_index()
 top10_table.columns = ['asset_tier2', 'kumulativ_gap']
 top10_table = top10_table.merge(
-    cal[['asset_tier2', 'asset_tier1']].drop_duplicates(),
+    cal[['asset_tier2', 'asset_type']].drop_duplicates(),
     on='asset_tier2'
-)[['asset_tier1', 'asset_tier2', 'kumulativ_gap']]
+)[['asset_type', 'asset_tier2', 'kumulativ_gap']]
 write_table(
     top10_table,
     os.path.join(OUT, 'tab_topp10_verste_assets.md'),
     'Tabell - topp 10 utstyrsenheter med stoerst kumulativt underskudd over '
-    'snapshot-perioden (2026-05-04 til 2027-01-04).'
+    'snapshot-perioden (2026-05-11 til 2026-12-28).'
 )
 
 # ============================================================
@@ -229,9 +202,9 @@ write_table(
 # ============================================================
 zero_assets = asset_stats[(asset_stats['min_gap'] == 0) & (asset_stats['max_gap'] == 0)]
 write_table(
-    zero_assets[['asset_tier1', 'asset_tier2']],
+    zero_assets[['asset_type', 'asset_tier2']],
     os.path.join(OUT, 'tab_zero_gap_assets.md'),
-    'Tabell - utstyrsenheter med gap-verdi 0 i alle 36 uker. '
+    'Tabell - utstyrsenheter med gap-verdi 0 i alle 34 uker. '
     'Kandidater for eksklusjon fra gap-deteksjonen.'
 )
 print(f'Zero-gap assets (alltid 0): {len(zero_assets)}')

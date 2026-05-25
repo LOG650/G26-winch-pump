@@ -44,8 +44,8 @@ ax.axis('off')
 
 # (y, label, color, text_color)
 nodes = [
-    (11.5, 'Snapshot-CSV uke $t$ og $t-1$\n(fra 004 data/<dato>_motive_baseline/)', '#bdc3c7', 'black'),
-    (9.6,  'Forhåndsfiltering\n(eksklusjonsliste, sumsjekk mot Tier 1)', '#3498db', 'white'),
+    (11.5, 'Snapshot-CSV uke $t$ og $t-1$\n(fra 004 data/<dato>_motive_no/)', '#bdc3c7', 'black'),
+    (9.6,  'Forhåndsfiltering\n(eksklusjonsliste, sumsjekk mot asset type)', '#3498db', 'white'),
     (7.7,  'Statisk gap-deteksjon\n($G < 0$ + magnitudeklassifisering)', '#e67e22', 'white'),
     (5.8,  'Dynamisk endringsdeteksjon\n(nytt / forverret / forbedret / løst / uendret gap)', '#e67e22', 'white'),
     (3.9,  'Suppression-regler\n(strukturelt vedvarende underskudd)', '#9b59b6', 'white'),

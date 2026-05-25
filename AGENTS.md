@@ -98,6 +98,32 @@ Rapporten skrives i `005 report/Prosjektrapport.md`.
 - Datatabeller som dokumenterer datasettet skal inn i datakapitlet.
 - Når noe bare er en antagelse, skriv det eksplisitt som antagelse og ikke som verifisert fakta.
 
+### Proaktiv rapportoppdatering
+
+Hver gang en arbeidsøkt produserer noe rapporten beskriver eller burde
+beskrive, skal `Prosjektrapport.md` oppdateres i **samme** økt – ikke vent
+på at brukeren spør. Triggere som alltid skal vurderes:
+
+| Arbeid | Rapportkapittel som påvirkes |
+|--------|------------------------------|
+| Nytt eller endret datasett, skjema, kolonne, filter | Kap 5.2 (Data) + tilhørende tabeller |
+| Ny eller endret modellregel, terskel, klassifisering | Kap 6 (Modellering) + figurer/tabeller |
+| Nytt analysefunn, ny figur, nye tall | Kap 7 (Analyse) – kun resultatpresentasjon, ikke diskusjon |
+| Ny verifisert leveranse eller valideringskjøring | Kap 8 (Resultat) |
+| Beslutning som rammer omfanget (f.eks. droppe et snapshot) | Kap 1.3 (Avgrensinger) eller kap 9 (Diskusjon) |
+| Ny ekstern referanse / kilde | Kap 11 (Bibliografi, APA 7) |
+| Ny ekstern leveranse av KI-bruk eller kravmatrise | Kap 12 (Vedlegg) |
+
+Regler for selve oppdateringen:
+
+- **Minimum nødvendig endring.** Ikke legg til redundans, gjentakelser eller "nice-to-have"-formuleringer. Hvert avsnitt skal tjene problemstillingen.
+- **Identifiser presis lokasjon.** Hvilken paragraf, tabell eller figur påvirkes? Nummerér tabeller/figurer på nytt hvis du legger til eller fjerner.
+- **Empiriske tall framfor placeholders.** Når noe er kjørt og verifisert, erstatt `[Fylles inn:]`-blokker med faktisk innhold.
+- **Konsistens på tvers av kapitler.** Hvis en endring i kap 5 påvirker et tall i kap 7, oppdater begge.
+- **Spør hvis usikker** på om noe hører hjemme i rapporten – ikke anta og ikke legg til "for sikkerhets skyld".
+
+Hvis en endring åpenbart ikke påvirker rapporten (f.eks. en intern refaktorering av et skript), nevn det kort uten å åpne rapporten.
+
 ## Figurer i rapporten
 
 - Bruk HTML for bilder i `Prosjektrapport.md`, ikke vanlig Markdown-bildeformat, når bredde og sentrering skal styres.

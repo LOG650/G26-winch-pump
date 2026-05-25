@@ -1,0 +1,14 @@
+# Mottakerkonfigurasjon for varslingssystemet
+# Hver asset type rutes til én primærmottaker; CC går til selgersfellesskapet.
+# 'default' brukes for asset types som ikke har dedikert koordinator.
+
+Winch:                  winch-koordinator@motive-offshore.no
+Under rollers:          underrollers-koordinator@motive-offshore.no
+Tensioner:              tensioner-koordinator@motive-offshore.no
+Spoolers:               spoolers-koordinator@motive-offshore.no
+RDS:                    rds-koordinator@motive-offshore.no
+LMA machines:           lma-koordinator@motive-offshore.no
+HPUS:                   hpus-koordinator@motive-offshore.no
+Cable Pulling machine:  cable-koordinator@motive-offshore.no
+default:                salg@motive-offshore.no
+cc:                     salg@motive-offshore.no

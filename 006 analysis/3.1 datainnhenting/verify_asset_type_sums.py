@@ -1,9 +1,9 @@
-"""Verifiserer leaf-sum mot Tier 1-gruppesummer for et snapshot.
+"""Verifiserer leaf-sum mot asset type-summer for et snapshot.
 
-Bruk: uv run python "3.1 datainnhenting/verify_tier1_sums.py" <csv-fil>
+Bruk: uv run python "3.1 datainnhenting/verify_asset_type_sums.py" <csv-fil>
 
 Forskjell |diff| <= ROUNDING_TOLERANCE markeres som avrundingsstoy
-(Power BI viser avrundede heltall i celler men aggregerer Tier 1 fra
+(Power BI viser avrundede heltall i celler men aggregerer asset type-summer fra
 desimal-grunndata). Storre forskjeller er sannsynligvis transkriberingsfeil.
 """
 import csv
@@ -13,7 +13,7 @@ from collections import defaultdict
 ROUNDING_TOLERANCE = 2
 
 
-def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
+def main(csv_path: str, expected_asset_type: dict[str, list[int]]) -> int:
     rows = []
     with open(csv_path, encoding='utf-8') as f:
         for r in csv.DictReader(f):
@@ -23,21 +23,21 @@ def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
     sums: dict[str, list[int]] = defaultdict(lambda: [0] * len(weeks))
     week_idx = {w: i for i, w in enumerate(weeks)}
     for r in rows:
-        sums[r['asset_tier1']][week_idx[r['week_start']]] += int(r['gap_value'])
+        sums[r['asset_type']][week_idx[r['week_start']]] += int(r['gap_value'])
 
     print(f'CSV: {csv_path}')
     print(f'Uker: {weeks}')
     print()
-    print(f'{"Tier 1":25s} | ' + ' | '.join(f'{w[5:]:>6s}' for w in weeks))
+    print(f'{"Asset type":25s} | ' + ' | '.join(f'{w[5:]:>6s}' for w in weeks))
     print('-' * (28 + 9 * len(weeks)))
     transcription_errors = 0
     rounding_noise = 0
-    for t1 in sorted(sums):
-        line = f'{t1:25s} | ' + ' | '.join(f'{v:>6d}' for v in sums[t1])
+    for at in sorted(sums):
+        line = f'{at:25s} | ' + ' | '.join(f'{v:>6d}' for v in sums[at])
         print(line)
-        if t1 in expected_tier1:
-            exp = expected_tier1[t1]
-            diffs = [s - e for s, e in zip(sums[t1], exp)]
+        if at in expected_asset_type:
+            exp = expected_asset_type[at]
+            diffs = [s - e for s, e in zip(sums[at], exp)]
             if any(d != 0 for d in diffs):
                 marks = []
                 for d in diffs:
@@ -59,10 +59,11 @@ def main(csv_path: str, expected_tier1: dict[str, list[int]]) -> int:
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Bruk: verify_tier1_sums.py <csv-fil>')
+        print('Bruk: verify_asset_type_sums.py <csv-fil>')
         sys.exit(2)
 
-    EXPECTED_2026_04_30 = {
+    # Gammelt datasett (Region = "Alle") – ikke lenger i bruk
+    EXPECTED_2026_04_30_ALLE = {
         # uker:                   05-04 05-11 05-18 05-25 06-01 06-08 06-15 06-22 06-29 07-06 07-13 07-20 07-27 08-03 08-10 08-17 08-24 08-31 09-07 09-14 09-21 09-28 10-05 10-12 10-19 10-26 11-02 11-09 11-16 11-23 11-30 12-07 12-14 12-21 12-28 01-04
         'Winch':                 [-44,  -45,  -39,  -36,  -37,  -48,  -36,  -32,  -37,  -30,  -31,  -27,  -30,  -24,  -28,  -21,  -21,  -20,  -21,  -19,  -12,  -14,  -10,  -9,   -10,  -10,  -11,  -10,  -8,   -8,   -6,   -6,   0,    0,    0,    6],
         'Under rollers':         [-5,   -6,   -5,   -5,   -4,   -4,   -6,   -7,   -7,   -7,   -7,   -7,   -8,   -6,   -7,   -5,   -5,   -5,   -5,   -5,   -5,   -5,   -3,   -2,   -2,   -1,   0,    0,    0,    0,    0,    0,    0,    0,    0,    1],
@@ -78,4 +79,20 @@ if __name__ == '__main__':
         'Cranes':                [-3,   -3,   -3,   -3,   -3,   -3,   -3,   -3,   -3,   -4,   -3,   -3,   -3,   -3,   -3,   -3,   -3,   -3,   -2,   -2,   -2,   -2,   -2,   -2,   -2,   -2,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1],
         'Cable Pulling machine': [-9,   -9,   -10,  -9,   -7,   -9,   -9,   -9,   -8,   -8,   -8,   -8,   -10,  -7,   -7,   -7,   -9,   -7,   -7,   -7,   -7,   -5,   -6,   -4,   -4,   -6,   -2,   -2,   -2,   -2,   -2,   -2,   -2,   -1,   -1,   0],
     }
-    sys.exit(main(sys.argv[1], EXPECTED_2026_04_30))
+
+    # Nytt datasett (Custodian = "Motive AS", Project Owner Demand = "Motive AS",
+    # Region = "Motive Norway") – fra 2026-05-07
+    # Uker: 05-11 05-18 05-25 06-01 06-08 06-15 06-22 06-29 07-06 07-13 07-20 07-27 08-03 08-10 08-17 08-24 08-31 09-07 09-14 09-21 09-28 10-05 10-12 10-19 10-26 11-02 11-09 11-16 11-23 11-30 12-07 12-14 12-21 12-28
+    EXPECTED_2026_05_07_NO = {
+        'Winch':                 [4,  6,  6,  5,  5,  5,  5,  5,  4,  5,  8,  8,  9,  9,  10, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+        'Under rollers':         [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+        'Tensioner':             [-2, -2, -2, -2, -2, -2, -2, -3, -3, -2, -1, -1, -1, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+        'Spoolers':              [6,  5,  5,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  5,  5,  5,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6],
+        'RDS':                   [-2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -1, -1, -1, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+        'LMA machines':          [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+        'HPUS':                  [2,  2,  4,  3,  3,  3,  3,  3,  2,  4,  7,  7,  9,  9,  10, 10, 10, 10, 10, 10, 10, 10, 12, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
+        'Cable Pulling machine': [0,  0,  0,  0,  -2, -2, -2, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+    }
+
+    expected = EXPECTED_2026_05_07_NO
+    sys.exit(main(sys.argv[1], expected))

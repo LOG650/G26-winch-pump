@@ -1,0 +1,25 @@
+To: cable-koordinator@motive-offshore.no
+Cc: salg@motive-offshore.no
+Subject: Kapasitetsvarsler 2026-05-21 (Motive Norway) - 5 endringer
+
+Hei,
+
+Ukens snapshot (2026-05-21) sammenlignet med forrige (2026-05-14) viser folgende endringer for utstyrsenheter du folger opp (Cable Pulling machine):
+
+------------------------------------------------------------
+NYE VARSLER (2)
+------------------------------------------------------------
+  • - 2Te Linear Cable Engine (Cable Pulling machine), uke 2026-07-06:
+    gap 0 → -2, farge green → black
+    [NYTT_GAP, G-regel]
+  • - 2Te Linear Cable Engine (Cable Pulling machine), uke 2026-07-13:
+    gap 0 → -2, farge green → black
+    [NYTT_GAP, G-regel]
+
+------------------------------------------------------------
+INFORMASJONSVARSLER (3)
+------------------------------------------------------------
+  • - 2Te Linear Cable Engine (Cable Pulling machine) - 3 sammenhengende uker: 2026-06-08, 2026-06-15, 2026-06-22
+    gap -2 → 0, farge black → green
+
+Detaljer: varsler.csv (vedlagt)
