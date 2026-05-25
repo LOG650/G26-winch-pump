@@ -101,7 +101,7 @@ Innhold
 
 [**4.0 Casebeskrivelse	16**](#casebeskrivelse)
 
-[**5.0 Metode og data (kan splittes i to)	17**](#metode-og-data-\(kan-splittes-i-to\))
+[**5.0 Metode og data	17**](#metode-og-data)
 
 [5.1 Metode	17](#metode)
 
@@ -121,21 +121,17 @@ Innhold
 
 [**12.0 Vedlegg	22**](#vedlegg)
 
-# 
-
-# 
-
-1. # **Innledning** {#innledning}
+# **1. Innledning**
 
 Effektiv kapasitetsstyring er avgjørende i kapitalintensive bransjer der spesialisert utstyr utgjør kjerneressursen. Innen offshore marine- og løfteutstyrsutleie må selskaper kontinuerlig balansere tilgjengelig flåte mot innkommende prosjektetterspørsel som er balansegang som direkte påvirker både lønnsomhet og kundetilfredshet. Når investeringssyklusene i olje, gass og fornybar energi svinger, blir evnen til å reagere proaktivt på endringer i salgspipelinen en kritisk suksessfaktor.
 
 Dette prosjektet faller innenfor datadrevet kapasitetsstyring og kapasitetsplanlegging, hvor prosjektet knytter salgsdata fra CRM-systemer sammen med flåtens tilgjengelighetsdata for å forbedre denne balansen. Ved å overvåke når salgsmuligheter når en høy vinnersannsynlighet, og automatisk identifisere potensielle kapasitetsgap i den relevante bookingperioden, søker vi å utvikle et regelbasert varslingssystem som kan gi bedre beslutningsstøtte enn dagens manuelle prosesser. Rapporten er skrevet i samarbeid med Motive Offshore Group, et internasjonalt selskap som leier ut offshore-utstyr på tvers av fem regioner.
 
-1. ## **Problemstilling** {#problemstilling}
+## **1.1 Problemstilling**
 
 “Hvordan kan et Python-basert varslingssystem bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte?”
 
-2. ## **Delproblemer** {#delproblemer}
+## **1.2 Delproblemer**
 
 For å svare på hovedproblemstillingen er prosjektet delt inn i følgende delproblemer:
 
@@ -144,7 +140,7 @@ For å svare på hovedproblemstillingen er prosjektet delt inn i følgende delpr
 3. Hvordan kan et automatisk varsel utformes slik at selger eller prosjektkoordinator får tydelig informasjon om assets, periode og gap?  
 4. I hvilken grad gir systemet tidligere og tydeligere varsling enn dagens manuelle kontrollprosess?
 
-   3. ## **Avgrensinger** {#avgrensinger}
+## **1.3 Avgrensinger**
 
 Prosjektet er avgrenset på følgende områder for å sikre en målrettet analyse:
 
@@ -154,7 +150,7 @@ Prosjektet er avgrenset på følgende områder for å sikre en målrettet analys
 * Prosjektet fokuserer på gapdeteksjon og varsling, ikke på å foreslå løsninger for hvordan kapasitetsgapene skal håndteres. Selve håndteringen, som for eksempel omallokering av utstyr mellom regioner eller innleie fra tredjeparter, er operasjonelle beslutninger som ligger hos Motive.  
 * Modellen tar ikke hensyn til vedlikeholdsplanlegging eller transporttid mellom regioner, da disse variablene ikke er tilgjengelig i datagrunnlaget fra Power BI.
 
-  4. ## **Antagelser** {#antagelser}
+## **1.4 Antagelser**
 
 For å kunne gjennomføre analysen og modelleringen er følgende forutsetninger lagt til grunn:
 
@@ -163,37 +159,37 @@ For å kunne gjennomføre analysen og modelleringen er følgende forutsetninger 
 * Det antas at vinnersannsynligheten på 75 prosent er en pålitelig indikator på at en kontrakt er nær avslutning, i tråd med Motives interne retningslinjer for pipeline-klassifisering. Dette gjør at systemet kan fokusere ressursene på de mest sannsynlige kontraktene i stedet for å varsle på alle muligheter i pipelinen.  
 * Det antas at endringer i etterspørsel og tilgjengelig kapasitet blir fanget opp i Power BI ved neste ukentlige oppdatering.
 
-2. # **Litteratur** {#litteratur}
+# **2. Litteratur**
 
 Dette kapittelet tar for seg relevant forskning og faglitteratur som danner grunnlaget for rapportens problemstilling. Litteraturen brukes til å forklare hvordan datadrevet kapasitetsstyring, kapasitetsplanlegging, sales pipeline-data og automatiserte varslingssystemer kan knyttes sammen i en praktisk beslutningsstøttemodell. Kapittelet viser dermed hvordan tidligere forskning støtter valget av metode og gir et faglig grunnlag for videre teori, modellering og analyse.
 
-## **2.1 Datadrevet kapasitetsstyring i supply chain** {#2.1-datadrevet-kapasitetsstyring-i-supply-chain}
+## **2.1 Datadrevet kapasitetsstyring i supply chain**
 
 Datadrevet kapasitetsstyring handler om å bruke oppdaterte og strukturerte data som grunnlag for bedre planlegging og raskere beslutninger i supply chain. Xu et al. (2024) viser at big data analytics kan forbedre supply chain planning gjennom bedre nøyaktighet, kortere responstid og økt fleksibilitet. De peker også på at en viktig effekt av slike datadrevne løsninger er prosessoptimalisering og automatisering. Dette er relevant for denne rapporten fordi Power BI allerede samler supply/demand-data fra Salesforce og Asset Voice, men verdien oppstår først når dataene brukes aktivt til å oppdage kapasitetsgap. Koot et al. (2021) viser på samme måte at IoT og big data analytics kan støtte beslutningstaking i supply chain ved å koble operative data til mer systematisk overvåking og beslutningsstøtte. Denne rapporten bygger videre på denne litteraturen ved å utvikle et regelbasert system som ikke bare visualiserer kapasitet, men automatisk identifiserer nye eller forverrede gap og varsler ansvarlig selger. Dermed plasserer prosjektet seg innen datadrevet kapasitetsstyring, med fokus på praktisk bruk av eksisterende data fremfor avansert prediksjonsmodellering. 
 
-## **2.2 Kapasitetsplanlegging og ressursutnyttelse** {#2.2-kapasitetsplanlegging-og-ressursutnyttelse}
+## **2.2 Kapasitetsplanlegging og ressursutnyttelse**
 
 Kapasitetsplanlegging handler i stor grad om å sikre at riktige ressurser er tilgjengelige når etterspørselen oppstår. I maritim logistikk blir dette ekstra krevende fordi ressursene ofte er kostbare, geografisk spredt og bundet opp i prosjekter over tid. Wang og Zhen (2025) viser hvordan usikker etterspørsel påvirker beslutninger om flåteplassering og kapasitetsallokering i maritim logistikk. Dette er relevant for Motive Offshore, siden selskapet må vurdere om tilgjengelig utstyr i riktig region er tilstrekkelig til å dekke fremtidige kontrakter. Dersom kapasitetsgap oppdages for sent, kan konsekvensen bli dyre hasteløsninger, som flyfrakt, fremleie eller omdisponering fra andre lokasjoner.
 
 Et lignende poeng kommer frem i forskning på leasingstrategier for fergekapasitet, der etterspørsels-usikkerhet påvirker hvordan kapasitet bør planlegges og utnyttes over tid (Cheng et al., 2025). Selv om studien gjelder ferger, er den overførbar til denne rapporten fordi begge kontekster handler om kapitalintensive ressurser som må disponeres før behovet faktisk oppstår. Sonnleitner et al. (2025) trekker også frem at prognoser ofte fungerer som grunnlag for senere planleggings- og optimaliseringsbeslutninger i transportlogistikk. Denne rapporten bygger videre på denne tankegangen, men med et mer avgrenset formål: modellen skal ikke optimalisere hele flåteallokeringen, men varsle når forventet etterspørsel overstiger tilgjengelig kapasitet. Dermed brukes kapasitetsplanlegging som beslutningsstøtte, ikke som en fullt automatisk styringsmodell.
 
-## **2.3 Sales pipeline og vinnersannsynlighet som datagrunnlag** {#2.3-sales-pipeline-og-vinnersannsynlighet-som-datagrunnlag}
+## **2.3 Sales pipeline og vinnersannsynlighet som datagrunnlag**
 
 Sales pipeline-data kan brukes som mer enn bare en oversikt over mulige salg. I B2B-markeder kan slike data også fungere som et tidlig signal om hvilke fremtidige behov bedriften bør forberede seg på. González-Flores et al. (2025) viser hvordan maskinlæring og CRM-data kan brukes til lead scoring, der målet er å prioritere de salgsmulighetene som har høyest sannsynlighet for å konvertere til faktiske kunder. Studien peker på at dette kan hjelpe salgsorganisasjoner med å bruke tid og ressurser mer effektivt, fordi de får bedre grunnlag for å vurdere hvilke leads som bør følges opp først.
 
 Dette er relevant for denne rapporten fordi Motive Offshore allerede bruker vinnersannsynlighet i Salesforce som en del av sin salgsprosess. Når en kontrakt når 75 % sannsynlighet, kan dette tolkes som et sterkt signal om kommende etterspørsel, ikke bare som en salgsindikator. Rapporten bygger videre på denne tankegangen ved å koble salgsdata til kapasitetsdata fra utleieflåten. I stedet for at vinnersannsynligheten kun brukes til å prioritere salgsarbeid, brukes den her som en trigger for å undersøke om fremtidig etterspørsel kan skape kapasitetsgap. Dermed blir sales pipeline-data en del av beslutningsstøtten for kapasitetsplanlegging, ikke bare et verktøy for salgsoppfølging.
 
-## **2.4 Automatiserte varslingssystemer** {#2.4-automatiserte-varslingssystemer}
+## **2.4 Automatiserte varslingssystemer**
 
 Et varslingssystem har størst verdi når det gjør data om til et beslutningsgrunnlag som brukerne kan handle på. Koot et al. (2021) viser i sin litteraturgjennomgang at IoT og big data analytics kan støtte beslutningstaking i supply chain ved å koble data fra fysiske objekter og operasjonelle prosesser inn i planleggingsarbeidet. Dette er relevant for denne rapporten fordi Motive Offshore har data fra både Salesforce og Asset Voice, men utfordringen ligger i å bruke disse dataene mer proaktivt. I stedet for at selgere og prosjektkoordinatorer manuelt må kontrollere kapasitet, kan et automatisert system gjøre analysen tidligere og mer systematisk.
 
 Sonnleitner et al. (2025) peker på at prognoser i transportlogistikk ofte brukes som input til videre planlegging og optimalisering, altså at prediksjoner først får praktisk verdi når de kobles til beslutninger. Denne rapporten bygger på samme tankegang, men med et mer avgrenset formål. Målet er ikke å automatisere alle beslutninger om flåteallokering, men å varsle når forventet etterspørsel overstiger tilgjengelig kapasitet. Varslingssystemet fungerer derfor som beslutningsstøtte: det gir brukerne tidligere informasjon om mulige kapasitetsgap, slik at de kan vurdere tiltak før problemet blir akutt.
 
-3. # **Teori** {#teori}
+# **3. Teori**
 
 Dette kapittelet presenterer det teoretiske rammeverket som ligger til grunn for metodevalg og senere modellering. Kapittelet avgrenser seg til sentrale begreper og prinsipper som brukes for å forstå kapasitetsstyring, tilgjengelighet, kapasitetsgap, kapasitetsutnyttelse og regelbasert varsling. Tidligere forskning er behandlet i litteraturkapittelet, mens den konkrete matematiske modellen og implementeringen beskrives senere i modellering- og metodekapittelet.
 
-## **3.1 Kapasitetsstyring og ressursbalanse** {#3.1-kapasitetsstyring-og-ressursbalanse}
+## **3.1 Kapasitetsstyring og ressursbalanse**
 
 Kapasitetsstyring handler om å balansere tilgjengelige ressurser mot etterspørsel innenfor en gitt tidsperiode, og er en sentral disiplin i operations management og supply chain-faget (Rajani & Heggde, 2020). I logistikk innebærer dette å sikre at virksomheten har nok kapasitet til å dekke behovet, uten at ressursene blir stående unødvendig ubrukt. For lav kapasitet kan føre til forsinkelser, tapte inntekter og behov for dyre hastetiltak, mens for høy kapasitet kan gi lav ressursutnyttelse og økte kostnader (Cheng et al., 2025; Wang & Zhen, 2025).
 
@@ -203,7 +199,7 @@ Gr,a,t \=Sr,a,t-Dr,a,t
 
 der Gr,a,t er kapasitetsbalansen, Sr,a,t er tilgjengelig kapasitet, og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Dersom Gr,a,t\<0, overstiger etterspørselen tilgjengelig kapasitet, og det oppstår et kapasitetsgap.
 
-## **3.2 Tilgjengelighet og kapasitetsgap** {#3.2-tilgjengelighet-og-kapasitetsgap}
+## **3.2 Tilgjengelighet og kapasitetsgap**
 
 Tilgjengelighet beskriver hvor mye kapasitet som faktisk kan brukes i en bestemt periode. I et utleiebasert system er ikke alt utstyr tilgjengelig samtidig, fordi enkelte enheter allerede kan være leid ut, reservert eller bundet til andre oppdrag, og kapasitetsvurderingen må derfor ta hensyn til både eksisterende forpliktelser og nye behov (Oliveira et al., 2017).
 Et kapasitetsgap oppstår når etterspørselen er større enn tilgjengelig kapasitet. Dette kan uttrykkes som:  
@@ -211,7 +207,7 @@ Sr,a,t \< Dr,a,t
 
 der Sr,a,t er tilgjengelig kapasitet og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Når denne betingelsen er oppfylt, betyr det at virksomheten ikke har nok tilgjengelig utstyr til å dekke behovet i den aktuelle perioden uten ekstra tiltak. Slike gap er særlig viktige å oppdage tidlig, fordi tiltak som omdisponering, innleie eller nyanskaffelse ofte krever planleggingstid (Koot et al., 2021; Xu et al., 2023).
 
-## **3.3 Kapasitetsutnyttelse og servicenivå** {#3.3-kapasitetsutnyttelse-og-servicenivå}
+## **3.3 Kapasitetsutnyttelse og servicenivå**
 
 Kapasitetsutnyttelse beskriver hvor stor del av tilgjengelig kapasitet som brukes til å dekke etterspørsel. Høy kapasitetsutnyttelse kan være positivt fordi ressursene brukes effektivt, men svært høy utnyttelse gir mindre fleksibilitet dersom nye behov oppstår, og avveiingen mellom effektivitet og bufferkapasitet er sentral i kapasitetsplanlegging under usikkerhet (Cheng et al., 2025; Wang & Zhen, 2025). Kapasitetsutnyttelse kan uttrykkes som:
 
@@ -221,7 +217,7 @@ der Ur,a,t er kapasitetsutnyttelsen, Dr,a,t er etterspørsel, og Sr,a,t er tilgj
 
 Servicenivå handler om evnen til å dekke kundebehov innen avtalt tid og omfang. Dersom et kapasitetsgap oppstår, kan servicenivået svekkes fordi virksomheten må bruke ekstra tiltak for å levere som planlagt. Sammenhengen mellom kapasitetsutnyttelse og servicenivå forklarer derfor hvorfor kapasitetsgap bør identifiseres før de blir operative problemer.
 
-## **3.4 Regelbasert varslingslogikk** {#3.4-regelbasert-varslingslogikk}
+## **3.4 Regelbasert varslingslogikk**
 
 Regelbasert varslingslogikk innebærer at systemet bruker faste betingelser for å avgjøre når et varsel skal utløses. I stedet for å predikere fremtidig etterspørsel, kontrollerer systemet om bestemte forhold er oppfylt i datagrunnlaget. En slik tilnærming, der varsler utløses ved at observerte verdier krysser forhåndsdefinerte terskler, omtales i nyere supply chain-litteratur som en *baseline probabilistic alert system* og brukes typisk som referansemodell for mer avanserte IoT- og prognosebaserte varslingssystemer (Alaoua & Karim, 2025). Til forskjell fra prediktive prognosemodeller (Sonnleitner et al., 2025) tar regelbaserte løsninger utgangspunkt i det som faktisk står i datagrunnlaget, og er hensiktsmessige når underliggende usikkerhet allerede er reflektert i et eksisterende sannsynlighetsfilter – som 75 %-terskelen i Motives pipeline. Samlet gir teorien et grunnlag for metode- og modellkapittelet: kapasitetsstyring forklarer hvorfor supply og demand må sammenlignes, kapasitetsgap forklarer hva systemet skal oppdage, kapasitetsutnyttelse og servicenivå forklarer hvorfor gapene har operasjonell betydning, og regelbasert varslingslogikk forklarer hvorfor løsningen kan bygges som en kontrollmodell fremfor en prediksjonsmodell.
 
@@ -232,7 +228,9 @@ Ar,a,t \= 1 hvis Gr,a,t \< 0 og pj ≥ 0,75
 
 Her betyr Ar,a,t=1 at et varsel utløses, Gr,a,t er kapasitetsbalansen, og pj er vinnersannsynligheten for kontrakt j. Regelen viser at varsel bare sendes når det finnes et kapasitetsgap, og når kontrakten har nådd en definert sannsynlighetsterskel. Regelbasert logikk gir et tydelig beslutningsgrunnlag fordi kriteriene for varsel er eksplisitte og kan testes mot datagrunnlaget.
 
-4. # **Casebeskrivelse** {#casebeskrivelse}
+# **4. Casebeskrivelse**
+
+Dette kapittelet beskriver Motive Offshore Group som case, med vekt på utleieflåten, dataøkosystemet rundt Salesforce, Asset Voice og Power BI, og hvordan kapasitetsgap oppstår og blir oversett i dagens manuelle prosess. Hensikten er å gi den operasjonelle konteksten som gjør problemstillingen relevant.
 
 ## **4.1 Motive Offshore Group**
 
@@ -254,45 +252,23 @@ Flåtens tilgjengelighet styres i Asset Voice, som er Motives system for flåtef
 
 I dag skjer overvåkingen av kapasitetsgap manuelt. Selgere og prosjektkoordinatorer må selv sjekke Power BI-dashbordet og vurdere om en salgsmulighet som nærmer seg kontraktsinngåelse vil skape konflikt med eksisterende bookinger. Det finnes ingen automatisk varsling, og oppdagelsen av et gap er derfor avhengig av at riktig person sjekker dataene til riktig tid.
 
-## **4.4 Hvordan kapasitetsgap blir oversett i dagens prosess**
+## **4.4 Hvordan kapasitetsgap blir oversett, konsekvenser og påvirkende faktorer**
 
-Selv om Power BI-dashbordet gjør det mulig å oppdage kapasitetsgap manuelt, viser den daglige driften at ressursprioritering kan føre til at gap fremover i tid ikke blir fulgt opp i tide. Når en selger oppdaterer en kontrakt til 75 prosent vinnersannsynlighet, kontrollerer hen typisk dashbordet for den aktuelle leveranseperioden. Resultatet er ett av to:
+Selv om Power BI-dashbordet gjør det mulig å oppdage kapasitetsgap manuelt, viser den daglige driften at ressursprioritering kan føre til at gap fremover i tid ikke blir fulgt opp i tide. Når en selger oppdaterer en kontrakt til 75 prosent vinnersannsynlighet, kontrollerer hen typisk dashbordet for den aktuelle leveranseperioden, og resultatet er enten **tilstrekkelig kapasitet** (ingen tiltak nødvendig) eller et **kapasitetsgap** flere måneder frem i tid – som selgeren noterer seg, men utsetter beslutning om fordi det vurderes som tid nok til å finne en løsning senere. Mellom kontraktsoppdatering og leveranse jobber selgerne videre med andre kunder med kortere tidshorisont (typisk én til fire uker) som har høyere prioritet fordi tiden til å reagere er kortere. Konsekvensen er at det første gapet kan forbli urørt i flere måneder uten at noen aktivt tar ansvar for å løse det, og når leveransedatoen for den opprinnelige kontrakten nærmer seg, er handlingsrommet vesentlig redusert.
 
-* **Tilstrekkelig kapasitet:** Tilbudet dekker etterspørselen, og ingen videre tiltak er nødvendige.
-* **Kapasitetsgap:** Dashbordet viser at etterspørselen overstiger tilgjengelig kapasitet, men leveransen ligger flere måneder frem i tid. Selgeren noterer seg gapet, men beslutning om tiltak utsettes fordi det vurderes som tid nok til å finne en løsning senere.
+Når et kapasitetsgap først oppdages tett opp mot leveransedato, finnes i hovedsak tre mulige tiltak: **bygge nytt utstyr** (produksjonstid ~4 måneder, sjelden mulig sent), **sende utstyr fra annen lokasjon** (krever ofte luftfrakt som er flere ganger dyrere enn sjøtransport) eller **fremleie fra ekstern leverandør** (innleiekostnader reduserer marginen). I tilfeller hvor gapet kunne vært oppdaget tre til seks måneder tidligere, dekkes en ellers unngåelig kostnad av Motive selv – kunden aksepterer normalt ikke ekstra fraktkostnader eller innleiepåslag som ikke var avtalt på forhånd. Tidlig og automatisk varsling gir derfor selgeren tid til å gjennomføre planlagte tiltak fremfor reaktive hasteløsninger, og er den direkte motivasjonen for varslingssystemet som utvikles i denne rapporten.
 
-Mellom kontraktsoppdatering og leveranse jobber selgerne videre med andre kunder med kortere tidshorisont, typisk én til fire uker. Disse sakene har høyere prioritet fordi tiden til å reagere er kortere. Konsekvensen er at det første gapet kan forbli urørt i flere måneder uten at noen aktivt tar ansvar for å løse det. Når leveransedatoen for den opprinnelige kontrakten nærmer seg, oppdager man at gapet fortsatt ikke er adressert. På dette tidspunktet er handlingsrommet vesentlig redusert.
+Fire faktorer er særlig relevante for hvorvidt kapasitetsgap oppstår og om de oppdages i tide: **salgsmulighetenes fremdrift** (når en kontrakt passerer 75 % vinnersannsynlighet, er behovet meget sannsynlig), **eksisterende bookinger** (utstyr leid ut eller reservert reduserer tilgjengelig kapasitet), **geografi** (utstyr er regionslokalisert og kan ikke omdisponeres uten planleggingstid) og **oppdateringsfrekvens** (Power BI oppdateres ukentlig, så endringer i Salesforce eller Asset Voice fanges først opp ved neste snapshot).
 
-## **4.5 Konsekvenser av sen oppdagelse**
+## **4.5 Datagrunnlag**
 
-Når et kapasitetsgap først oppdages tett opp mot leveransedato, finnes i hovedsak tre mulige tiltak:
+Datagrunnlaget for prosjektet er ukentlige snapshots fra Motive Offshores Power BI-rapport *Supply vs Demand*, som aggregerer etterspørsel fra Salesforce og tilgjengelighet fra Asset Voice; full beskrivelse av datakilder, filterprofil, datafangstmetode og datasettets omfang følger i kapittel 5.2.
 
-* **Bygge nytt utstyr:** Produksjonstid er gjennomsnittlig fire måneder. Dette tiltaket er sjelden mulig dersom gapet oppdages sent.
-* **Sende utstyr fra annen lokasjon:** Mulig på kort varsel, men forutsetter ofte luftfrakt fordi sjøtransport krever lengre ledetid. Luftfrakt er flere ganger dyrere enn sjøtransport.
-* **Fremleie fra ekstern leverandør:** Mulig, men medfører innleiekostnader som reduserer marginen på den aktuelle kontrakten.
+# **5. Metode og data**
 
-I tilfeller hvor gapet kunne vært oppdaget tre til seks måneder tidligere, er konsekvensen at en kostnad som ellers kunne vært unngått eller redusert nå må dekkes av Motive selv. Kunden aksepterer normalt ikke ekstra fraktkostnader eller innleiepåslag som ikke var avtalt på forhånd. Tidlig og automatisk varsling gir derfor selgeren tid til å gjennomføre planlagte tiltak fremfor reaktive hasteløsninger, og er den direkte motivasjonen for varslingssystemet som utvikles i denne rapporten.
+Dette kapittelet redegjør for det metodiske rammeverket prosjektet bygger på, og dokumenterer datagrunnlaget som ligger til grunn for modellering og analyse. Hensikten er at beskrivelsen skal være presis nok til at en uavhengig leser kan reprodusere både datafangsten og analysen.
 
-## **4.6 Faktorer som påvirker kapasitetsgap**
-
-Kapasitetsgap oppstår når forventet etterspørsel overstiger tilgjengelig kapasitet i en bestemt periode. Følgende faktorer er særlig relevante for dette prosjektet:
-
-* **Salgsmulighetenes fremdrift**: Når en kontrakt nærmer seg 75 prosent vinnersannsynlighet, er behovet for utstyr i den aktuelle perioden meget sannsynlig. Dersom dette ikke oppdages tidlig nok, kan det bli for sent å iverksette tiltak.
-* **Eksisterende bookinger**: Utstyr som allerede er leid ut eller reservert reduserer tilgjengelig kapasitet og øker risikoen for konflikt med nye kontrakter.
-* **Geografi**: Fordi utstyr er regionslokalisert, er kapasitetsgap regionsspesifikke. Omdisponering mellom regioner er mulig, men krever planleggingstid og ekstra kostnad.
-* **Oppdateringsfrekvens**: Power BI-dashbordet oppdateres ukentlig. Det betyr at endringer i salgsmulighetenes status eller flåtens tilgjengelighet først fanges opp ved neste oppdatering.
-
-## **4.7 Datagrunnlag**
-
-Datagrunnlaget for prosjektet er ukentlige snapshots fra Motive Offshores Power BI-rapport *Supply vs Demand*. Hvert snapshot inneholder en aggregert supply/demand-tabell med én rad per kombinasjon av utstyrsklasse, region og uke. Tabellen viser tilgjengelig kapasitet (supply), estimert etterspørsel (demand) og beregnet gap-verdi (supply minus demand). Dataene aggregeres fra Salesforce (etterspørselssiden) og Asset Voice (tilbudssiden) via Power BI.
-
-Negative gap-verdier indikerer at etterspørselen overstiger tilgjengelig kapasitet. Ved å sammenligne to påfølgende snapshots tatt på ulike datoer kan det oppdages om et gap er nytt, om det har forverret seg, eller om det har blitt løst som følge av endringer i Salesforce eller Asset Voice. Detaljert beskrivelse av selve datafangstmetoden og datasettets størrelse og periode følger i kapittel 5.2.
-
-5. # **Metode og data (kan splittes i to)** {#metode-og-data-(kan-splittes-i-to)}
-
-Litt avhengig av omfanget, kan det være lurt å vurdere om du skal splitte kapittelet i to eller ikke.
-
-## **5.1Metode** {#metode}
+## **5.1 Metode**
 
 Prosjektet følger et kvantitativt, anvendt forskningsdesign med en casebasert tilnærming. Motive Offshore brukes som case fordi prosjektet undersøker et konkret kapasitetsproblem i én virksomhet. Analysen bygger på strukturerte Power BI-eksporter med numeriske kapasitetsverdier, etterspørsel og endringer over tid.
 
@@ -306,9 +282,9 @@ Implementeringen gjennomføres i Python. KI-verktøy brukes som støtte til kode
 
 Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdateringsfrekvens. Systemet forutsetter at dataene i Salesforce, Asset Voice og Power BI er korrekte og oppdaterte. Prosjektet identifiserer og varsler kapasitetsgap, men vurderer ikke hvilke tiltak Motive Offshore bør gjennomføre for å løse gapet.
 
-## **5.2 Data** {#data}
+## **5.2 Data**
 
-### **5.2.1 Datakilder**
+### **5.2.1 Datakilder og filtrering**
 
 Datagrunnlaget for prosjektet er hentet fra Motive Offshores Power BI-rapport *Supply vs Demand*. Rapporten aggregerer flåtens tilgjengelighet fra Asset Voice og etterspørsel fra Salesforce til en samlet supply/demand-oversikt per utstyrskategori, region og uke. Som primær datakilde brukes rapportsiden **Supply/ Demand – Calendar**, som viser ukentlig kapasitetsbalanse per Tier 2-utstyrsenhet over de neste 8 månedene. Hver celle viser supply minus demand som heltall, der negative verdier representerer kapasitetsgap.
 
@@ -331,9 +307,7 @@ I tillegg til tallverdien er hver celle bakgrunns-fargekodet i én av fem klasse
 
 Skillet mellom gap-verdi og farge er operasjonelt betydningsfullt fordi **samme gap-verdi kan tilsvare ulik farge avhengig av underliggende demand**. For eksempel vil $G = -2$ med demand $= 10$ gi 20 % underdekning (lilla), mens $G = -2$ med demand $= 3$ gir 67 % underdekning (svart). Det er fargen, ikke gap-verdien alene, som selgere og prosjektkoordinatorer reagerer på i den daglige bruken av dashbordet. Datasettet i dette prosjektet fanger derfor begge attributtene per celle, lagret som `gap_value` (heltall) og `severity_band` (kategorisk) i den transkriberte CSV-en. Skjemaet er dokumentert i `006 analysis/3.1 datainnhenting/tab_kolonner.md`.
 
-### **5.2.2 Filterinnstillinger**
-
-For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt verksted faktisk kan disponere, låses både supply- og demand-siden til samme juridiske enhet. Datasettet i denne rapporten er hentet for verkstedet Motive Norway (juridisk enhet Motive AS), men de samme filtrene kan byttes synkront for ethvert annet verksted i konsernet (Motive UK, Motive USA, ...) – modellen er lokasjons-agnostisk. Tabell 5.2 oppsummerer filterinnstillingene som brukes ved datafangst.
+For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt verksted faktisk kan disponere, låses både supply- og demand-siden til samme juridiske enhet via filterprofilen i Tabell 5.2. Datasettet i denne rapporten er hentet for verkstedet Motive Norway (juridisk enhet Motive AS), men de samme filtrene kan byttes synkront for ethvert annet verksted i konsernet – modellen er lokasjons-agnostisk.
 
 | Felt | Verdi | Funksjon |
 |------|-------|----------|
@@ -346,7 +320,7 @@ For å sikre at uttrekkene reflekterer den delen av virksomheten som ett enkelt 
 
 Filteret **Project Owner Demand** er det som låser etterspørselen til prosjekter som det valgte verkstedet selv eier. Uten dette filteret ville datasettet vise global demand mot norsk flåte alene, noe som blåser opp gap-verdiene og produserer varsler en lokal selger ikke har handlingsrom til å løse. Med filteret på plass varsles selgeren først når det aktuelle verkstedets egen flåte ikke dekker egne prosjekter – tiltak som omdisponering fra et annet verksted blir et bevisst valg, ikke noe som skjuler gapet automatisk.
 
-### **5.2.3 Datafangst**
+### **5.2.2 Datafangst**
 
 På uttrekkstidspunktet hadde prosjektgruppens Power BI-bruker ikke tilstrekkelige rettigheter til å bruke *Analyser i Excel* eller *Eksporter data* i rapporten, og direkte tabelluttrekk var derfor ikke mulig. Som arbeidsmetode i prosjektperioden ble det valgt å fange dataene gjennom **manuell skjermavlesning av PNG-skjermbilder** av Power BI-tabellene, og transkribere disse til CSV i Python.
 
@@ -354,7 +328,7 @@ Hvert snapshot dekker hele kalenderen fra inneværende uke og frem til siste uke
 
 Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-summene i Power BI før det godkjennes som datagrunnlag. Avvik på mer enn ±2 unit-uker per asset type per uke flagges som mistanke om transkriberingsfeil og kontrolleres manuelt mot kildebildet. For å fange uke-til-uke-endringene som er kjernen i gap-deteksjonen, tas nye snapshots ukentlig (mandager) gjennom resten av prosjektperioden.
 
-### **5.2.4 Datasettoversikt**
+### **5.2.3 Datasett og kvalitet**
 
 Analysegrunnlaget består av en serie ukentlige snapshots av samme Calendar-tabell, hver fanget på en mandag med identisk filterprofil. Tabell 5.3 oppsummerer snapshot-serien.
 
@@ -368,13 +342,11 @@ Analysegrunnlaget består av en serie ukentlige snapshots av samme Calendar-tabe
 
 Tre snapshots gir to delta-par til den dynamiske endringsdeteksjonen i kap 6.4. Antall uker per snapshot avtar med én for hvert påfølgende snapshot fordi Power BI-kalenderen viser en fast endhorisont (28.12.2026) og dermed forskyves bakover etter hvert som inneværende uke flyttes framover. Vurdering av om snapshot-serien er tilstrekkelig som valideringsgrunnlag diskuteres i kap 9.3.
 
-Baseline-snapshotet 2026-05-07 dekket 24 unike Tier 2-utstyrsenheter fordelt på åtte asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som var fysisk lokalisert ved verkstedet Motive Norway på datafangstdatoen. I snapshot $t_2$ (2026-05-21) dukket det opp to nye Tier 2-rader i Power BI-tabellen: *60Te Turntable* under en ny asset type *Turntables*, og *Electric – 54kW Electric HPU* under HPUS. Disse er sannsynligvis flyttet inn til Motive Norway fra et annet verksted i Motive-konsernet mellom snapshot $t_1$ og $t_2$. Asset types som Storage reels, HLS, Generators og Cranes finnes hos andre verksteder og inngår ikke i denne lokale flåten i noen av de tre snapshotene. Den dynamiske endringsdeteksjonen i kap 6.4 sammenligner kun celler som finnes i begge snapshots i et delta-par, og de to nye Tier 2-radene inngår derfor først som baseline for et eventuelt snapshot $t_3$.
+Baseline-snapshotet 2026-05-07 dekket 24 unike Tier 2-utstyrsenheter fordelt på åtte asset types (Winch, Under rollers, Tensioner, Spoolers, RDS, LMA machines, HPUS og Cable Pulling machine) – det vil si den delen av Motive-konsernets fulle Tier 2-katalog som var fysisk lokalisert ved verkstedet Motive Norway på datafangstdatoen. I snapshot $t_2$ (2026-05-21) dukket det opp to nye Tier 2-rader: *60Te Turntable* under en ny asset type *Turntables*, og *Electric – 54kW Electric HPU* under HPUS, sannsynligvis flyttet inn fra et annet verksted i Motive-konsernet mellom $t_1$ og $t_2$. Asset types som Storage reels, HLS, Generators og Cranes finnes hos andre verksteder og inngår ikke i denne lokale flåten. Den dynamiske endringsdeteksjonen i kap 6.4 sammenligner kun celler som finnes i begge snapshots i et delta-par, og de to nye Tier 2-radene inngår derfor først som baseline for et eventuelt snapshot $t_3$.
 
-### **5.2.5 Datakvalitet**
+For datakvalitet finnes 34 uker × 8 asset types = 272 verifiserbare celler i baseline-snapshotet, og alle 272 matcher eksakt mot Power BIs egne asset type-summer. Power BI viser cellene som **avrundede heltall**, men aggregerer asset type-summer fra **underliggende desimalverdier** – en delvis tilgjengelig enhet (f.eks. utleid tre av sju dager = 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett.
 
-For Calendar-datasettet finnes det 34 uker × 8 asset types = 272 verifiserbare celler. Alle 272 matcher eksakt mot Power BIs egne asset type-summer i 2026-05-07-baselinen. Power BI viser supply- og demand-verdier som **avrundede heltall** i hver celle, men aggregerer asset type-summer fra **underliggende desimalverdier**. En delvis tilgjengelig utstyrsenhet (eksempelvis utleid tre av sju dager, det vil si 0,43) vises som 0 men teller som 0,43 i aggregatet, slik at sum av viste celler i prinsippet kan avvike fra Power BIs asset type-sum med ±1 til 2 unit-uker. Slike tilfeller flagges automatisk av sumsjekken og kontrolleres mot kildebildet før datasettet godkjennes. Siden gap-deteksjonen skal reagere på det selgere og prosjektkoordinatorer faktisk ser i dashbordet, brukes leaf-verdiene som hoveddatasett.
-
-6. # **Modellering** {#modellering}
+# **6. Modellering**
 
 Dette kapittelet beskriver den konkrete modellen som utvikles for å oppdage kapasitetsgap og utløse varsler. Modellen bygger på det teoretiske rammeverket fra kapittel 3 og operasjonaliserer dette mot datagrunnlaget beskrevet i kapittel 5.2. Beskrivelsen er utformet slik at modellen kan implementeres uten ytterligere klargjøringer, og hvert designvalg forankres i den eksplorative dataanalysen i kapittel 7.
 
@@ -385,7 +357,7 @@ Modellen behandler hvert ukentlige snapshot fra Power BI gjennom en sekvensiell 
 * **Statisk tilstandsdeteksjon** identifiserer aktive gap i ett enkelt snapshot. For hver celle $(r, a, t)$ – kombinasjonen av region $r$, asset $a$ og uke $t$ – registrerer modellen om gap-verdien $G_{r,a,t}$ er negativ, og klassifiserer hvor alvorlig underskuddet er.
 * **Dynamisk endringsdeteksjon** sammenligner samme celle mellom to påfølgende snapshots $s_{i-1}$ og $s_i$, og kategoriserer endringen som *ny*, *forverret*, *forbedret*, *uendret* eller *løst*. Det er denne mekanismen som fanger opp at en kontrakt har blitt oppdatert til 75 prosent vinnersannsynlighet i Salesforce, slik problemstillingen i kapittel 1.1 beskriver.
 
-Kombinasjonen av de to mekanismene utgjør grunnlaget for varselsutløsing: en celle kan trigge varsel både fordi den er i en alvorlig statisk tilstand og fordi den nylig har endret seg. Suppression-reglene i kapittel 6.5 forhindrer at strukturelt vedvarende underskudd støyer ut endringsdrevne varsler, mens eksklusjonslisten i 6.6 fjerner inaktive utstyrsenheter fra evaluering. Selve formateringen og rutingen av varsler beskrives i 6.7 og videreføres i kapittel om varslingslogikk i sluttsystemet (WBS-aktivitet 3.4).
+Kombinasjonen av de to mekanismene utgjør grunnlaget for varselsutløsing: en celle kan trigge varsel både fordi den er i en alvorlig statisk tilstand og fordi den nylig har endret seg. Suppression-reglene i kapittel 6.5 forhindrer at strukturelt vedvarende underskudd støyer ut endringsdrevne varsler, mens eksklusjonslisten i 6.5 fjerner inaktive utstyrsenheter fra evaluering. Selve formateringen og rutingen av varsler beskrives i 6.6 og videreføres i kapittel om varslingslogikk i sluttsystemet (WBS-aktivitet 3.4).
 
 Modellen er **regelbasert og deterministisk**. Den bruker ikke maskinlæring, regresjon eller tidsserieprognoser, men evaluerer faste betingelser mot inndataene. Dette gjør modellens beslutninger sporbare og forsvarbare, og samsvarer med begrunnelsen for regelbasert varslingslogikk i kapittel 3.4. Resultatet er at hvert utløst varsel kan tilbakeføres til en spesifikk regel, en spesifikk celle og to spesifikke snapshots.
 
@@ -400,7 +372,7 @@ Modellen leser ett eller to snapshots i lang-form CSV med kolonnestruktur som be
 
 Før reglene evalueres, anvendes to forhåndsfiltreringer på hvert snapshot:
 
-* **Eksklusjonsliste:** Et statisk konfigurert sett med assets fjernes fra videre prosessering. Innhold og begrunnelse er gitt i 6.6.
+* **Eksklusjonsliste:** Et statisk konfigurert sett med assets fjernes fra videre prosessering. Innhold og begrunnelse er gitt i 6.5.
 * **Sumsjekk mot Power BI:** Hvert snapshot verifiseres mot Power BIs egne asset type-summer som ble registrert i samme datafangst. Avvik som overstiger en toleranse på $\pm 2$ unit-uker per asset type per uke flagges som transkriberingsfeil, og snapshotet avvises automatisk fra videre prosessering. Toleransen reflekterer den strukturelle avrundingsstøyen dokumentert i 5.2.5: Power BI viser avrundede heltall i celler men aggregerer asset type-summer fra underliggende desimalverdier, slik at sum av celler kan avvike fra asset type-summen med opptil $\pm 2$ uten at det skyldes transkriberingsfeil.
 
 Ved parring av to snapshots i 6.4 oppstår to spesialtilfeller, fordi Power BI-kalenderen alltid viser et fast antall uker fremover fra uttrekksdatoen og dermed forskyver seg mellom påfølgende snapshots:
@@ -440,7 +412,7 @@ Som komplement til den verdibaserte magnitudeklassen registrerer modellen også 
 
 <p align="center"><small><i>Tabell 6.2 Forventet sammenheng mellom magnitudeklasse og severity-fargebånd. Modellen lagrer begge attributtene per detektert gap-celle.</i></small></p>
 
-Resultatet av den statiske regelen for et snapshot $s$ er en samling tripletter $(r, a, t)$ som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, hver merket med både magnitudeklasse og `severity_band`. Denne samlingen utgjør grunnlaget for delta-detektoren i 6.4 og for varselsutløsingen i 6.7. Strukturelt vedvarende underskudd, som typisk havner i kritisk-klassen eller har vedvarende svart fargebånd, skilles ut og styres separat gjennom suppression-reglene i 6.5.
+Resultatet av den statiske regelen for et snapshot $s$ er en samling tripletter $(r, a, t)$ som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, hver merket med både magnitudeklasse og `severity_band`. Denne samlingen utgjør grunnlaget for delta-detektoren i 6.4 og for varselsutløsingen i 6.6. Strukturelt vedvarende underskudd, som typisk havner i kritisk-klassen eller har vedvarende svart fargebånd, skilles ut og styres separat gjennom suppression-reglene i 6.5.
 
 ## **6.4 Uke-til-uke-deltadeteksjon**
 
@@ -463,17 +435,17 @@ Figur 6.2 visualiserer de fem kategoriene som regioner i $(G^{(s_{i-1})}, G^{(s_
   <p align="center"><small><i>Figur 6.2 Klassifisering av cellevise endringer som regioner i $(G^{(s_{i-1})}, G^{(s_i)})$-fasen. Diagonalen $y = x$ representerer uendret gap-verdi. Eksempelpunktene viser typiske celler i hver kategori.</i></small></p>
 </div>
 
-I tillegg til endringstypen kombinerer modellen hver detekterte endring med magnitudeklassen til den nåværende verdien fra 6.3. En forverring fra $-1$ til $-2$ holder seg innenfor *mildt*-klassen og varsles med lav prioritet, mens en forverring fra $-2$ til $-7$ krysser to klassegrenser (*mildt* → *kritisk*) i løpet av én uke og prioriteres høyt. Selve prioriteringslogikken som kombinerer endringstype og magnitudeklasse beskrives i 6.7.
+I tillegg til endringstypen kombinerer modellen hver detekterte endring med magnitudeklassen til den nåværende verdien fra 6.3. En forverring fra $-1$ til $-2$ holder seg innenfor *mildt*-klassen og varsles med lav prioritet, mens en forverring fra $-2$ til $-7$ krysser to klassegrenser (*mildt* → *kritisk*) i løpet av én uke og prioriteres høyt. Selve prioriteringslogikken som kombinerer endringstype og magnitudeklasse beskrives i 6.6.
 
 Parallelt med endringen i $G$ klassifiserer modellen også **endringen i `severity_band`** mellom de to snapshotene. Fargebåndet kan endre seg langs en ordnet skala fra svart (mest alvorlig) via lilla, rød og gul til grønn (mest komfortabel), og hver overgang kategoriseres som *verre farge*, *bedre farge* eller *samme farge*. Dette gir en deltadimensjon som er uavhengig av $G$: fordi fargen kodes fra det prosentvise forholdet mellom gap og underliggende demand, kan en celle skifte farge mellom to snapshots selv når den avrundede gap-verdien er identisk. Et empirisk eksempel fra sammenligningen mellom snapshot 2026-05-07 og 2026-05-14 illustrerer poenget: av de 792 sammenlignede cellene gav klassifiseringen 7 *nye gap* målt i $G$, mens severity-deltaen flagget 10 celler som *verre farge*. De tre overskytende cellene representerer reelle forverringer i underliggende demand som ikke krysset $G = 0$-terskelen og dermed ville vært usynlige for en detektor basert på gap-verdi alene. Modellen utløser derfor varsel både på endringer i $G$ (Tabell 6.3) og på severity-overganger som krysser fra et komfortabelt fargebånd (grønn, gul, rød) til et underdekningsbånd (lilla, svart), eller motsatt.
 
 For celler som ikke finnes i begge snapshots, gjelder de to spesialtilfellene definert i 6.2: en celle som finnes kun i $s_i$ behandles som *nytt gap* dersom $G^{(s_i)} < 0$ (kalenderhorisonten har skjøvet seg fremover), og en celle som finnes kun i $s_{i-1}$ ignoreres uavhengig av tidligere verdi (uken har passert). Resultatet av delta-deteksjonen er at hver gjenstående celle i $s_i$ har en endringstype, en severity-delta, en magnitudeklasse og to gap-verdier knyttet til seg, klare for evaluering av suppression-reglene i 6.5.
 
-## **6.5 Suppression: strukturelle gap**
+## **6.5 Suppression og eksklusjon**
 
-Eksplorativ dataanalyse i kapittel 7 viser at ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene av snapshot 2026-05-07, men syv enheter har sammenhengende negative gap-verdier gjennom de første 9 til 13 ukene av kalenderhorisonten før de stabiliserer seg på null eller positivt overskudd (kalt *front-lastet underskudd* i analysen, jf. 7.5). *Hydraulic – Wide|35Te Wide Drum Winch* har for eksempel $G = -2$ i hver av ukene 2026-05-11 til 2026-07-06 (9 påfølgende uker), og *Horizontal – 2 track – 15Te Horizontal Tensioner* har $G \in [-2, -1]$ i de 13 første ukene med kumulativt underskudd $-16$. Slike sekvenser representerer en vedvarende underdimensjonering i den nære delen av horisonten – etterspørselen overstiger flåtekapasiteten kontinuerlig fra dagens dato, ikke som følge av enkeltkontrakter som krysser 75 %-terskelen.
+Eksplorativ dataanalyse i kapittel 7 viser at ingen utstyrsenhet i Motive Norway-baselinen har $G_{r,a,t} < 0$ i alle 34 ukene av snapshot 2026-05-07, men syv enheter har sammenhengende negative gap-verdier gjennom de første 9 til 13 ukene av kalenderhorisonten før de stabiliserer seg på null eller positivt overskudd (kalt *front-lastet underskudd* i analysen, jf. 7.5). *Hydraulic – Wide|35Te Wide Drum Winch* har for eksempel $G = -2$ i ni påfølgende uker fra 2026-05-11, og *Horizontal – 2 track – 15Te Horizontal Tensioner* har $G \in [-2, -1]$ i de 13 første ukene med kumulativt underskudd $-16$. Slike sekvenser representerer en vedvarende underdimensjonering i den nære delen av horisonten – etterspørselen overstiger flåtekapasiteten kontinuerlig fra dagens dato, ikke som følge av enkeltkontrakter som krysser 75 %-terskelen.
 
-Hvis den statiske gap-deteksjonen utløser varsel for hver uke disse enhetene er i gap, fylles varslingsstrømmen av redundant informasjon. De varslene som faktisk representerer en kontraktsdrevet endring i pipeline – problemstillingens kjernescenario – risikerer å drukne i støy. Modellen anvender derfor en suppression-regel som klassifiserer assets som *strukturelle* og behandler dem annerledes enn øvrige assets.
+Hvis den statiske gap-deteksjonen utløser varsel for hver uke disse enhetene er i gap, fylles varslingsstrømmen av redundant informasjon, og varslene som faktisk representerer en kontraktsdrevet endring – problemstillingens kjernescenario – risikerer å drukne i støy. Modellen anvender derfor en *suppression-regel* som klassifiserer assets som strukturelle, og en *eksklusjonsliste* som fjerner inaktive enheter helt fra evalueringen.
 
 Et asset $a$ markeres som strukturelt når $G_{r,a,t}^{(s)} < 0$ for alle observerte $(t, s)$ i et evalueringsvindu på $K$ påfølgende snapshots. Med ukentlig kadens er $K$ valgt til 4, slik at en kortvarig nedgangsperiode på 1–3 uker ikke feilaktig kategoriserer et asset som strukturelt. Innenfor prosjekttidsrammen er det ikke samlet et tilstrekkelig antall snapshots til å eksercerere $K = 4$-kriteriet (jf. 9.3), så ingen enheter får automatisk strukturell-status fra dagens datagrunnlag. Den eksplorative analysen i 7.5 identifiserer derimot syv enheter med *front-lastet underskudd* – sammenhengende negative gap-verdier innenfor de første 9–13 ukene av ett enkelt snapshot (35Te Wide Drum Winch, 15Te Horizontal Tensioner, 50Te Tensioner 4-track, 500Te RDS, 150Te RDS, 158KW Electric HPU og 2Te Linear Cable Engine; se Tabell 7.3). Disse er naturlige kandidater for **manuell strukturell-markering** når Motive-koordinatoren bekrefter at underdimensjoneringen er kjent. Suppression-listen oppdateres kontinuerlig etter hver nye datafangst og lagres som en konfigurasjonsfil.
 
@@ -506,15 +478,9 @@ For celler hvor både $G$ og `severity_band` har endret seg, dominerer Tabell 6.
 
 Strukturelle gap rapporteres i en separat månedlig oversikt rettet mot vedlikeholds- og kapasitetsutvidelsesteamet, ikke i den ukentlige varslingsstrømmen til selgere og prosjektkoordinatorer. Skillet sikrer at kortsiktig handling – selger må følge opp en spesifikk kontrakt i pipeline – og langsiktig planlegging – flåten bør utvides på et område – håndteres i hver sin kanal med riktig mottaker.
 
-## **6.6 Eksklusjonsliste**
+I tillegg til suppression-listen anvender modellen en **eksklusjonsliste** for assets som ikke skal evalueres i det hele tatt. EDA i kapittel 7 identifiserer én utstyrsenhet med $G_{r,a,t} = 0$ i alle 34 ukene av baseline-snapshotet: *Diesel – 63kW Diesel HPU Zone II*. Verken positivt eller negativt avvik observeres for denne cellen, hvilket tyder på at enheten er inaktiv, registrert med null kapasitet i Asset Voice, eller på annen måte ikke gir meningsfullt input. Assets på eksklusjonslisten filtreres bort i forhåndsfiltreringen i 6.2. Skillet mot suppression er bevisst: suppression behandler assets som har *vedvarende gap* der varsling ville vært støy, mens eksklusjon fjerner assets som ikke skal evalueres i det hele tatt. Den initielle listen er et forslag basert på baseline og krever bekreftelse fra Motive før produksjonsbruk; den er utformet som en åpen konfigurasjonsfil med begrunnelse per ekskludert enhet, og revideres ved hver større datavalidering.
 
-EDA i kapittel 7 identifiserer én utstyrsenhet med $G_{r,a,t} = 0$ i alle 34 ukene av baseline-snapshotet: *Diesel – 63kW Diesel HPU Zone II*. Verken positivt eller negativt avvik observeres for denne cellen i hele snapshotperioden, hvilket tyder på at enheten enten er en inaktiv utleieenhet, er registrert med null kapasitet i Asset Voice, eller på annen måte ikke gir meningsfullt input til gap-deteksjonen.
-
-Modellen håndterer slike enheter via en konfigurert eksklusjonsliste. Assets på listen filtreres bort i forhåndsfiltreringen i 6.2 og evalueres ikke av reglene i 6.3, 6.4 eller 6.5. Listen er bevisst skilt fra suppression-listen i 6.5: suppression behandler assets som har vedvarende gap der varsling ville vært støy, mens eksklusjon fjerner assets som ikke skal evalueres i det hele tatt.
-
-Den initielle listen er et forslag basert på baseline-snapshotet og krever bekreftelse fra Motive før produksjonsbruk. Dersom enhetene faktisk er aktive men midlertidig uten registrert demand eller supply, vil de etter hvert få ikke-null verdier og bør evalueres som vanlig. Listen er derfor utformet som en åpen konfigurasjonsfil med begrunnelse per ekskludert enhet, og revideres ved hver større datavalidering.
-
-## **6.7 Varselsutløsing og ruting**
+## **6.6 Varselsutløsing og ruting**
 
 Etter at en celle har passert gjennom forhåndsfiltrering (6.2), statisk deteksjon (6.3), delta-deteksjon (6.4) og suppression (6.5), avgjør modellens siste trinn om utløst tilstand faktisk skal generere varsel og hvem som skal motta det. Utløsingsmatrisen i 6.5 bestemmer *om* et varsel utløses; varselsrutingen kombinerer endringstype og magnitudeklasse til en prioritet, og kobler hvert utløst varsel til en mottaker.
 
@@ -538,33 +504,11 @@ cc:                     salg@motive-offshore.no
 
 Valget av asset type som rutingsnøkkel er pragmatisk: den aggregerte Power BI-tabellen oppgir ikke hvilken kontrakt eller selger som forårsaket en gitt gap-celle, og modellen kan derfor ikke route per kontrakt eller per individuell selger. En utvidelse til kontraktsnivå ville krevd integrasjon med Salesforce, hvilket faller utenfor prosjektets omfang slik definert i 1.3, og er omtalt som en produksjonsanbefaling i kapittel 9.
 
-Hvert utløste varsel produserer modellen et strukturert objekt som videreføres til varslingslogikken i WBS-aktivitet 3.4. Skjemaet er gitt i Tabell 6.6.
-
-| Felt | Type | Eksempel | Beskrivelse |
-|------|------|----------|-------------|
-| `snapshot_t` | dato | `2026-05-14` | Snapshot-dato $s_i$ |
-| `snapshot_t_minus_1` | dato | `2026-05-07` | Forrige snapshot-dato $s_{i-1}$ |
-| `week_start` | dato | `2026-08-17` | Uken cellen gjelder for |
-| `region` | streng | `Motive Norway` | Verkstedet |
-| `asset_type` | streng | `RDS` | Asset type (rutingsnøkkel) |
-| `asset_tier2` | streng | `- 500Te RDS` | Spesifikk utstyrsenhet |
-| `gap_t_minus_1` | heltall | `0` | $G^{(s_{i-1})}$ |
-| `gap_t` | heltall | `-1` | $G^{(s_i)}$ |
-| `severity_t_minus_1` | streng | `green` | `severity_band` i $s_{i-1}$ |
-| `severity_t` | streng | `black` | `severity_band` i $s_i$ |
-| `change_type` | streng | `NYTT_GAP` | Klassifisering fra Tabell 6.3 |
-| `severity_change` | streng | `VERRE_FARGE` | Klassifisering fra 6.4 |
-| `rule_triggered` | streng | `G-regel` | `G-regel` (Tabell 6.4) eller `severity-regel` (Tabell 6.5) |
-| `magnitude_class` | streng | `mildt` | Magnitudeklasse for $G^{(s_i)}$ |
-| `priority` | streng | `høy` | `høy`/`middels`/`lav`/`informasjon` |
-| `is_structural` | boolsk | `false` | Strukturelt-flagg fra suppression-listen |
-| `recipient` | e-post | `rds-koordinator@motive-offshore.no` | Primærmottaker |
-
-<p align="center"><small><i>Tabell 6.6 Skjema for varselsobjektet som modellen produserer per utløste celle.</i></small></p>
+Hvert utløste varsel produserer modellen et strukturert objekt som videreføres til varslingslogikken i WBS-aktivitet 3.4. Objektet inneholder kjernefeltene `snapshot_t`, `week_start`, `asset_type`, `asset_tier2`, `gap_t`, `severity_t`, `change_type`, `priority` og `recipient`, samt åtte metadata-felt for sporbarhet og forrige-snapshot-verdier. Det fulle skjemaet med alle 17 felt, typer, eksempler og beskrivelser er gjengitt i Vedlegg G.
 
 Varslene aggregeres til **én digest-e-post per mottaker per snapshot** for å unngå å spamme koordinatorene med separate meldinger per celle. Digesten grupperer varsler etter endringstype – nye gap først, deretter skjulte endringer (severity-regel), forverrede, løste – og inkluderer mønster-deteksjon når flere sammenhengende uker for samme asset utløser varsler (typisk indikator på ny kontrakt). For aktive (ulukkede) gap som varslet i forrige snapshot men ikke er løst, sendes en kortere **ukentlig påminnelse** inntil cellen havner i kategori *løst* eller *forbedret*. Avslutningstrigger ved løst gap genererer ett informasjonsvarsel og fjerner tråden fra påminnelseskøen. Modellen i dette kapittelet stopper ved utløsingsbeslutningen og varselsobjektet; selve e-postleveransen og påminnelses-tilstandsmaskinen er implementert i Python-modulen `gap_alerting.py` og dokumentert i 8.5.
 
-7. # **Analyse** {#analyse}
+# **7. Analyse**
 
 Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-snapshotet 2026-05-07. Resultatene legges frem objektivt; vurdering av hva de betyr er forbeholdt diskusjonskapittelet. Den dynamiske uke-til-uke-analysen presenteres i 7.6 og bygger på sammenligning mellom påfølgende snapshots.
 
@@ -704,7 +648,7 @@ Fordelingen av endringer over kalenderhorisonten og over asset types er vist i F
   <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer per asset type for delta-par 1. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
 </div>
 
-### 7.6.1 Andre delta-par 2026-05-14 ↔ 2026-05-21
+### **7.6.1 Andre delta-par 2026-05-14 ↔ 2026-05-21**
 
 Med snapshot $t_2$ (2026-05-21) tilgjengelig kjøres delta-detektoren også på det andre snapshot-paret. Sammenligningen omfatter de 768 cellene som finnes i begge snapshots (32 uker × 24 utstyrsenheter); de to nye Tier 2-radene i $t_2$ (jf. 5.2.4) inngår ikke i delta-deteksjonen siden de mangler en motpart i $t_1$. Tabell 7.7 viser fordelingen.
 
@@ -742,9 +686,9 @@ Fordelingen av endringene over kalenderhorisonten og per asset type for delta-pa
   <p align="center"><small><i>Figur 7.9 Fordeling av cellevise endringer per asset type for delta-par 2. Cable Pulling machine og RDS er mest aktive – Cable bidrar med både to nye gap og tre løste gap, RDS med tre løste gap.</i></small></p>
 </div>
 
-### 7.6.2 Varslingstråder over to delta-par
+### **7.6.2 Varslingstråder over to delta-par**
 
-Varslingsmodulen `gap_alerting.py` (kap 6.7) holder en persistent tråd-tilstand i `active_alerts.json` på tvers av snapshots. Etter første delta-par var det 10 aktive tråder; etter andre delta-par er antallet 9. Netto endring $-1$ skjuler en større bevegelse: fem tråder lukkes (fire ved *løst gap* mot $G$-regelen og én via *positiv endring* der severity går fra lilla til grønn), og fire nye tråder åpnes (de fire *nye gap*-cellene i Tabell 7.7). Fem av de ti opprinnelige trådene fortsetter inn i tredje syklus med en ukentlig påminnelse (`reminder_count = 1`). Tabell 7.9 sporer de ti opprinnelige trådene gjennom de to delta-parene.
+Varslingsmodulen `gap_alerting.py` (kap 6.6) holder en persistent tråd-tilstand i `active_alerts.json` på tvers av snapshots. Etter første delta-par var det 10 aktive tråder; etter andre delta-par er antallet 9. Netto endring $-1$ skjuler en større bevegelse: fem tråder lukkes (fire ved *løst gap* mot $G$-regelen og én via *positiv endring* der severity går fra lilla til grønn), og fire nye tråder åpnes (de fire *nye gap*-cellene i Tabell 7.7). Fem av de ti opprinnelige trådene fortsetter inn i tredje syklus med en ukentlig påminnelse (`reminder_count = 1`). Tabell 7.9 sporer de ti opprinnelige trådene gjennom de to delta-parene.
 
 | Tråd-ID | Åpnet ved | Status etter delta-par 1 | Status etter delta-par 2 |
 |---------|-----------|--------------------------|--------------------------|
@@ -763,7 +707,7 @@ Varslingsmodulen `gap_alerting.py` (kap 6.7) holder en persistent tråd-tilstand
 
 Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (500Te RDS-mønsteret der underskuddet smelter bort uke for uke etter hvert som kalenderen forskyves) og *engangsavklaring* (158KW HPU og 30kW HPU). Den viser også at trådene som krever vedvarende oppfølging – 500Te RDS @ 08-17 og 08-24 samt 55kW HPU @ 07-20 – overlever til en tredje påminnelse, noe som er konsistent med 3.4-akseptansekriteriet om ukentlig påminnelse inntil resolusjon. Den underliggende mekanikken (digest-formatering, mottakerruting og tilstandsfilen) er resultatet av gap-deteksjonens output kjørt gjennom varslingsmodulen, og dekkes i sin helhet i kap 8.5.
 
-8. # **Resultat** {#resultat}
+# **8. Resultat**
 
 Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-05-07 og det første snapshot-paret (baseline mot 2026-05-14). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
 
@@ -855,7 +799,7 @@ Suppression-regelen i 6.5 evaluerer hvert utløste varsel mot suppression-listen
 
 ## **8.5 Varselsutløsing og prioritering**
 
-Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.7 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
+Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.6 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
 
 | Mottaker (Asset type) | Lav prioritet | Middels prioritet | Høy prioritet | Informasjon | Totalt |
 |---|---|---|---|---|---|
@@ -894,9 +838,9 @@ Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den uk
 
 <p align="center"><small><i>Tabell 8.5c Tilstandsendring i `active_alerts.json` over snapshot-paret 2026-05-14 ↔ 2026-05-21.</i></small></p>
 
-At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at lukkemekanismen i kap 6.7 fungerer på reelle Power BI-data. Samtidig viser bevaringen av fem tråder med `reminder_count = 1` at påminnelseslogikken er aktivert som spesifisert i 3.4-akseptansekriteriet, og at trådene som ikke endrer status overlever til neste snapshot. Genererte digester for snapshot 2026-05-21 ligger i `006 analysis/3.4 varsling/digests/digest_2026-05-21_*.txt`.
+At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at lukkemekanismen i kap 6.6 fungerer på reelle Power BI-data. Samtidig viser bevaringen av fem tråder med `reminder_count = 1` at påminnelseslogikken er aktivert som spesifisert i 3.4-akseptansekriteriet, og at trådene som ikke endrer status overlever til neste snapshot. Genererte digester for snapshot 2026-05-21 ligger i `006 analysis/3.4 varsling/digests/digest_2026-05-21_*.txt`.
 
-### 8.5.1 Demonstrasjon av SMTP-leveranse
+### **8.5.1 Demonstrasjon av SMTP-leveranse**
 
 For å verifisere at varslingssystemet kan levere digestene som faktiske e-poster (og ikke bare som filer på disk), er modulen `send_digests.py` (006 analysis/3.4 varsling/) implementert som et tynt lag over Pythons standardbibliotek `smtplib`. Modulen leser hver `digest_<dato>_<mottaker>.txt`-fil, parser `To`/`Cc`/`Subject`-feltene, omdirigerer mottakeradressene til en testkonto (originaladressene beholdes synlig i brødteksten med en kort demo-merknad) og sender e-postene via `smtp.gmail.com:465` med innlogging via et Gmail App Password lest fra environment-variabelen `GMAIL_APP_PASSWORD`. Demoen ble kjørt 2026-05-23 mot testkontoen `tordalinho@gmail.com`. Alle fem digestene for snapshot 2026-05-21 ble levert, og resultatet er vist i Figur 8.1.
 
@@ -907,7 +851,7 @@ For å verifisere at varslingssystemet kan levere digestene som faktiske e-poste
 
 #### Lesing av digestene
 
-Hver digest er en oppsummering av endringer mellom de to siste snapshotene (her: 2026-05-14 → 2026-05-21), filtrert til kun de utstyrsenhetene mottakerens asset type-domene dekker. Innholdet er gruppert i opptil fire kategorier, som svarer direkte til trådlogikken i kap 6.7:
+Hver digest er en oppsummering av endringer mellom de to siste snapshotene (her: 2026-05-14 → 2026-05-21), filtrert til kun de utstyrsenhetene mottakerens asset type-domene dekker. Innholdet er gruppert i opptil fire kategorier, som svarer direkte til trådlogikken i kap 6.6:
 
 - **NYE VARSLER** – kapasitetsgap som ikke fantes i forrige snapshot. En ny varslingstråd åpnes; krever oppfølging fra koordinator. Utløst av `NYTT_GAP` (G-regel) eller `SKJULT_NYTT_GAP` (severity-regel).
 - **PÅMINNELSER** – aktive gap som ble varslet i et tidligere snapshot og ennå ikke er løst. Sendes ukentlig inntil tråden lukkes; `(uke N i tråden, åpnet YYYY-MM-DD)` viser hvor lenge saken har vært åpen.
@@ -924,38 +868,203 @@ Hver enkelt rad i en digest leses som:
 
 Kalenderukene som adresseres ligger typisk **3–7 måneder fram i tid**, ikke i inneværende uke. Det er nettopp dette tidsvinduet som er forretningsverdien: et gap som flagges i mai for en uke i juli gir 6 ukers handlingsrom for å flytte utstyr fra et annet verksted, forhandle med kunden, eller dekke etterspørselen med en alternativ utstyrsenhet. Dersom samme gap først oppdages når kunden ringer dagen før leveranse, er tapet allerede påløpt.
 
-Digestens lengde varierer betydelig mellom mottakere (Tabell 8.5b). HPUS-koordinator får den rikeste digesten i dette delta-paret med varsler i alle fire kategoriene (Figur 8.2), mens Tensioner- og Spoolers-koordinator får én linje hver (Figur 8.5 og 8.6). Mottakere som ikke har noen endringer denne uken – i delta-par 2 gjelder dette Winch-, Under rollers-, LMA machines- og Turntables-koordinator – får ingen digest. Det er en bevisst designvalg: tomme e-poster ville svekket signalverdien av at en digest faktisk dukker opp i innboksen.
+Digestens lengde varierer betydelig mellom mottakere (Tabell 8.5b). HPUS-koordinator får den rikeste digesten i dette delta-paret med varsler i alle fire kategoriene (Figur 8.2), mens RDS-, Cable Pulling-, Tensioner- og Spoolers-koordinator får varianter med færre kategorier; de fire komplementære digestene er gjengitt i Vedlegg D. Mottakere som ikke har noen endringer denne uken – i delta-par 2 gjelder dette Winch-, Under rollers-, LMA machines- og Turntables-koordinator – får ingen digest. Det er en bevisst designvalg: tomme e-poster ville svekket signalverdien av at en digest faktisk dukker opp i innboksen.
 
 <div align="center">
   <img src="../006 analysis/3.4 varsling/fig_demo_digest_HPUS.png" alt="HPUS-digest" width="80%">
   <p align="center"><small><i>Figur 8.2 HPUS-koordinatordigesten – den mest komplette i delta-par 2, med varsler i alle fire kategoriene (1 nytt, 2 påminnelser, 2 løste, 2 informasjon). Headerblokken viser at e-posten i produksjon ville gått til `hpus-koordinator@motive-offshore.no` med kopi til `salg@motive-offshore.no`; her er begge omdirigert til testkontoen. Saken «Electric – 55kW HPU, uke 2026-07-20» er et eksempel på en påminnelse der gap-verdien er forbedret fra -2 til 0, men severity er fortsatt purple, slik at tråden ikke lukkes.</i></small></p>
 </div>
 
-<div align="center">
-  <img src="../006 analysis/3.4 varsling/fig_demo_digest_RDS.png" alt="RDS-digest" width="80%">
-  <p align="center"><small><i>Figur 8.3 RDS-koordinatordigesten. To påminnelser for *500Te RDS* ukene 17.08 og 24.08 (gap fortsatt -1) og tre LØST-saker for ukene 31.08, 07.09 og 14.09 (gap -1 → 0). Mønsterdeteksjonen grupperer de tre løste sakene i én linje siden de gjelder samme utstyrsenhet i sammenhengende uker, typisk indikator på at en og samme kontrakt har endret status.</i></small></p>
-</div>
-
-<div align="center">
-  <img src="../006 analysis/3.4 varsling/fig_demo_digest_CPM.png" alt="Cable Pulling-digest" width="80%">
-  <p align="center"><small><i>Figur 8.4 Cable Pulling-koordinatordigesten. To nye NYTT_GAP-varsler for *2Te Linear Cable Engine* (ukene 06.07 og 13.07, gap 0 → -2) og tre LØST-informasjonsvarsler for ukene 08.06–22.06. Cable Pulling er den eneste asset type i dette delta-paret som både åpner og lukker tråder i samme syklus, og illustrerer hvordan kalenderhorisonten forskyves uke for uke.</i></small></p>
-</div>
-
-<div align="center">
-  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Tensioners.png" alt="Tensioner-digest" width="80%">
-  <p align="center"><small><i>Figur 8.5 Tensioner-koordinatordigesten. Én ny NYTT_GAP-varsel for *Horizontal – 4-track 50Te Tensioner* i uke 13.07 (gap 0 → -1, farge green → black). Eneste endring i Tensioner-domenet denne uken.</i></small></p>
-</div>
-
-<div align="center">
-  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Spoolers.png" alt="Spoolers-digest" width="80%">
-  <p align="center"><small><i>Figur 8.6 Spoolers-koordinatordigesten. Én PÅMINNELSE for *Electric – 75Te Electric Spooler* i uke 22.06 – tråden ble åpnet i delta-par 1 som SKJULT_NYTT_GAP og er fortsatt aktiv siden severity ikke har endret seg fra purple.</i></small></p>
-</div>
-
 Demoen lukker den siste tekniske delkomponenten i milepæl M5 («Varslingslogikk implementert – e-postvarsling»): pipelinen kan nå kjøres ende-til-ende fra to snapshot-CSV-er til mottatt e-post i innboks. Selve produksjonssetting (oppsett av en dedikert avsenderadresse i Motive Offshores M365-tenant, ruting av reelle mottakeradresser og overvåkning av leveranse-feil) er utenfor prosjektets omfang og diskuteres som videre arbeid i kap 9.5.
 
 ## **8.6 Validering mot syntetiske scenarier**
 
-Modellens deteksjonsregler (kap 6.5) og trådhåndtering (kap 6.7) er validert mot 50 syntetiske scenarier implementert som `pytest`-tester i `006 analysis/3.5 validering/`. Testene dekker de seks regelkategoriene fra Tabell 6.4 (G-regel), de fem fra Tabell 6.5 (severity-regel) og hele varslingstrådlivssyklusen *ny → påminnelse → eskalert → løst*. Alle 50 tester passerer (1,57 s kjøretid). Tabell 8.6 oppsummerer de viktigste scenariene; full liste er i `test_evaluate_alert.py` og `test_thread_lifecycle.py`.
+Modellens deteksjonsregler (kap 6.5) og trådhåndtering (kap 6.6) er validert mot 50 syntetiske scenarier implementert som `pytest`-tester i `006 analysis/3.5 validering/`. Testene dekker hele rammeverket i fire hovedgrupper: (i) G-regelens seks endringskategorier fra Tabell 6.4 inkludert magnitudeklasse-grenser, (ii) severity-regelens fem overganger fra Tabell 6.5 inkludert parameteriserte sone-overganger, (iii) varslingstråd-livssyklusen *ny → påminnelse → eskalert → løst* med ruting til riktig mottaker, og (iv) edge cases som identiske snapshots, mønsterdeteksjon over sammenhengende uker og eksklusjonshåndtering. Alle 50 tester passerer (1,57 s kjøretid). Full scenariotabell med forventet og faktisk utfall per kategori er gjengitt i Vedlegg F.
+
+<p align="center"><small><i>Tabell 8.6 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
+
+Valideringen viser at modellens regelmatrise fungerer som spesifisert i kap 6.5, at trådhåndteringen håndterer livssyklusen ny → påminnelse → eskalert → løst korrekt på tvers av snapshots, og at rutingen fra 6.6 fordeler varsler riktig per asset type. Hele testsettet kjører på under to sekunder og er pluggbart inn i et eventuelt CI-oppsett før produksjonsbruk.
+
+## **8.7 Resultatenes kobling til delproblemene**
+
+De fire delproblemene formulert i 1.2 dekkes av ulike resultater i dette kapittelet. Tabell 8.7 viser hvilke konkrete tabeller og figurer som adresserer hvert delproblem; selve vurderingen av i hvilken grad delproblemene er besvart er forbeholdt 9.1.
+
+| Delproblem | Resultater som dokumenterer dekningen |
+|---|---|
+| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien med 816 + 792 + 832 rader), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker i baselinen) |
+| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler i baselinen), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel i delta-par 1), Tabell 7.7 og 8.3b (4 nye gap + 8 løste i delta-par 2), Tabell 8.2 (sammenligning av regelutløsing over begge delta-par), Tabell 7.6 og 7.8 (severity-regel fanger 3 + 2 skjulte endringer i de to delta-parene) |
+| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Vedlegg G (varselsobjekt-skjema), Tabell 8.5 og 8.5b (12 og 19 utløste varsler fordelt på 3 og 5 mottakere i de to delta-parene), Figur 8.1 og 8.2 (SMTP-leverte digester; øvrige fire digester i Vedlegg D) |
+| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Kap 8.5.1 (kalenderhorisont 3–7 måneder fram, automatisk ruting til 5 koordinatorer i delta-par 2), Tabell 7.6 og 7.8 (severity-deltaen fanger «skjulte» endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.5c (5 av 10 tråder lukkes automatisk i andre syklus), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
+
+<p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og resultatene presentert i kapitlet.</i></small></p>
+
+# **9. Diskusjon**
+
+Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen, litteraturen i kapittel 2 og de metodiske valgene dokumentert i kapittel 5. Det vurderer i hvilken grad varslingssystemet svarer på forskningsspørsmålet, hvilke begrensninger metoden medfører, og hvilke implikasjoner resultatene har for Motive Offshore og lignende virksomheter.
+
+## **9.1 Drøfting mot problemstillingen og delproblemene**
+
+Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap. Resultatene i kap 7 og 8 viser at en slik pipeline er bygget og kjørt på reelle data over tre ukentlige snapshots, og at den produserer både statiske gap-rapporter (77 negative celler i baseline-snapshotet, Tabell 8.1) og dynamiske endringsvarsler (12 og 19 varsler i de to delta-parene, Tabell 8.5 og 8.5b). Vurderingen nedenfor følger de fire delproblemene fra kap 1.2 i tur.
+
+**Delproblem 1: Datastrukturering.** Delproblem 1 spør hvordan data fra Salesforce, Asset Voice og Power BI kan struktureres for å identifisere kapasitetsgap per asset og tidsperiode. Tre ukentlige snapshots er transkribert fra PNG-skjermbilder til lang-form CSV med ti felt (Tabell 5.1), totalt 816 + 792 + 832 rader (Tabell 5.3). Skjemaet `(snapshot_date, week_start, asset_type, asset_tier2, gap_value, severity_band, …)` er fininndelt nok til at både den statiske gap-deteksjonen (cellevis $G < 0$, kap 6.3) og den dynamiske endringsdeteksjonen (uke-til-uke-sammenligning på samme celle, kap 6.4) kan operere uten ytterligere transformasjon. At alle tre snapshotene matcher Power BIs egne Tier 1-summer innenfor toleransen på ±2 unit-uker (kap 5.2.5) er en empirisk bekreftelse på at transkriberingen bevarer informasjonsinnholdet i originaldataene. Delproblemet er dermed besvart innenfor de rammene avgrensingene i kap 1.3 setter – nemlig at datafangsten skjer via PNG-eksport, ikke direkte API-integrasjon.
+
+**Delproblem 2: Regelbasert oppdagelse.** Delproblem 2 spør hvordan regelbasert logikk kan brukes til å oppdage negative verdier, forverrede verdier og uke-til-uke-endringer. Begge regelene er implementert og kjørt på reelle data: $G$-regelen (Tabell 6.4) klassifiserer hver celle ut fra fortegnet på $G^{(s_i)}$ og $G^{(s_{i-1})}$, og severity-regelen (Tabell 6.5) klassifiserer ut fra overganger i `severity_band`. Tabell 8.2 viser at de to delta-parene til sammen genererte 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP via disse to reglene. Hovedfunnet er at de to reglene komplementerer hverandre: severity-regelen fanget i delta-par 1 tre celler (Tabell 7.6) der gap-verdien var uendret eller forbedret, men der den underliggende prosent-eksponeringen passerte 75 %-terskelen i en retning som flyttet cellen fra grønn til lilla. Disse tre cellene ville vært usynlige for en detektor som kun ser på $G$. Det betyr at delproblemet er besvart med en sterkere modell enn det bokstaven av delproblemet krevde – `severity_band` legger til et signal som rein gap-verdi-måling ikke fanger.
+
+**Delproblem 3: Automatisk varselsformat.** Delproblem 3 spør hvordan et automatisk varsel kan utformes slik at selger eller prosjektkoordinator får tydelig informasjon om assets, periode og gap. Vedlegg G spesifiserer varselsobjektet med 17 felt som dekker alle de tre nevnte dimensjonene pluss kontekst (severity-overgang, regel, magnitudeklasse, prioritet, strukturelt-flagg, mottaker). Aggregeringen til én digest per mottaker per snapshot er implementert i `gap_alerting.py`, og SMTP-leveransen er demonstrert ende-til-ende i Figur 8.1 og 8.2 (med komplementære digester i Vedlegg D): alle fem digestene for snapshot 2026-05-21 nådde testkontoen med fullstendig innhold, gruppert i de fire kategoriene NYE VARSLER, PÅMINNELSER, LØSTE SAKER og INFORMASJONSVARSLER (kap 8.5.1). Hver linje i digesten oppgir Tier 2-utstyrsenhet, kalenderuke, gap-overgang, severity-overgang og regel-trigger – det vil si nøyaktig det informasjonsgrunnlaget en koordinator trenger for å vurdere om en sak skal følges opp. Delproblemet er besvart både konseptuelt (skjema) og operativt (mottatt e-post i innboks).
+
+**Delproblem 4: Tidligere og tydeligere varsling.** Delproblem 4 er det normative og spør i hvilken grad systemet gir tidligere og tydeligere varsling enn dagens manuelle kontrollprosess. Den dynamiske endringsdeteksjonen identifiserte i delta-par 2 fire nye kapasitetsgap i kalenderukene 2026-07-06 og 2026-07-13 – det vil si 6,5 og 7,5 uker fram fra snapshot-datoen (kap 8.5.1). For en koordinator gir det et handlingsrom på halvannen til to måneder før etterspørselen materialiseres, mot dagens situasjon hvor gapet ofte først oppdages når en kontrakt nærmer seg signering eller kunden tar kontakt om leveransedato (kap 4.4). Tidligheten er altså demonstrert direkte. Tydeligheten viser seg i tre dimensjoner: (i) automatisk ruting til riktig asset type-koordinator basert på `recipients.yaml`, slik at HPUS-koordinator ikke får RDS-varsler og omvendt; (ii) mønsterdeteksjon som grupperer sammenhengende uker for samme utstyr i én digest-linje (Figur 8.3, der tre LØST-uker for 500Te RDS slås sammen til én linje – det er én kontrakt, ikke tre hendelser); og (iii) den ukentlige påminnelseslogikken (Tabell 8.5c) som holder en sak i koordinatorens bevissthet inntil $G$ eller `severity_band` faktisk endrer seg. Tilsammen utgjør dette en kvalitativt annen oppfølgingsmekanisme enn dagens prosess, der ansvarsfordelingen er implisitt og oppfølging skjer ad hoc.
+
+Det mest uventede funnet i de to delta-parene er at gap-livssyklusen for en typisk Tier 2-utstyrsenhet er kortere enn først antatt – fem av ti opprinnelige tråder lukkes etter bare én syklus (Tabell 8.5c), hvilket gjør den persistente trådstaten til en sentral mekanisme for at koordinator skal kunne koble lukke- og åpne-varsler til samme underliggende sak. Begrensningen ved at ingen FORVERRET-celler ble observert i noen av delta-parene, og at alle observerte gap havner i *mildt*-klassen, diskuteres videre i 9.3.
+
+## **9.2 Sammenligning mot litteraturen**
+
+Resultatene plasserer seg innenfor det datadrevne kapasitetsstyringsfeltet beskrevet av Xu et al. (2023) og Koot et al. (2021), som argumenterer for at verdien av big data og IoT i supply chain først realiseres når dataene aktivt brukes til beslutningsstøtte og ikke bare til visualisering. Tråd-livssyklusen i Tabell 8.5c – der fem av ti tråder lukkes automatisk i andre syklus uten manuell inngripen – er et konkret eksempel på denne overgangen fra dashboard-konsum til handlingsutløsende analyse. Samtidig avgrenses bidraget mot Rajani og Heggdes (2020) review-funn om at kapasitetsstyring er en underprioritert disiplin i overgangen fra produktbasert til tjenestebasert supply chain: modellen utviklet her adresserer nettopp tjenestesiden (utleie av offshore-utstyr) der etterspørsel og tilgjengelighet må matches per tidsperiode, men gjør det med et regelbasert format som er enklere å implementere og forklare enn de avanserte AI-tilnærmingene som dominerer den ferskeste litteraturen.
+
+Sammenlignet med Wang og Zhens (2025) studie av flåteplassering og kapasitetsallokering under etterspørsels-usikkerhet i maritim logistikk, gjør denne modellen et bevisst valg om *ikke* å løse optimaliseringsproblemet, men kun å flagge når en ubalanse oppstår. Det samme gjelder for Cheng et al. (2025), som behandler usikkerhet via opsjonskontrakter – også her tar varslingssystemet et steg tilbake og overlater den faktiske beslutningen til koordinator. Oliveira et al. (2017) viser i sin litteraturreview av utleieindustrien at flåtestyring tradisjonelt er bygget rundt revenue management og prising, mens denne modellen flytter fokus til *tidlig identifikasjon av mismatch* mellom fysisk kapasitet og kontraktstyrt etterspørsel. Det er et annet problem enn det Oliveira et al. systematiserer, men bygger på samme grunnleggende premiss om at utleiekapasitet må disponeres før behovet materialiserer seg.
+
+For sales pipeline-dimensjonen er forskjellen mot González-Flores et al. (2025) tydelig: der lead scoring-litteraturen bruker vinnersannsynlighet til å rangere salgsmuligheter for selgere, brukes 75 %-terskelen her som *trigger* for en kapasitetsanalyse på baksiden. Dataene er de samme (CRM-pipeline med sannsynlighetsestimat), men formålet er motsatt rettet – ikke å prioritere hvilke leads selgeren skal jobbe med, men å varsle hvilke ressurser organisasjonen må sikre dersom leadene konverterer. Dette utvider bruksområdet for pipeline-data fra salgsoppfølging til kapasitetsplanlegging og er en relativt lite utforsket kobling i litteraturen.
+
+Den mest direkte parallellen til modellens regelbaserte design finnes hos Alaoua og Karim (2025), som beskriver et *Baseline Probabilistic Alert System (BPAS)* basert på faste terskler som referansemodell for mer avanserte IoT-kalibrerte varslingssystemer. Modellen i denne rapporten er en konkret implementasjon av nettopp BPAS-konseptet, og resultatene viser at en slik tilnærming – med kombinert $G$-regel og severity-regel – fanger relevante endringer på reelle data uten å kreve det analytiske maskineriet bak prediktive modeller. Det støtter også Qi et al. (2022) sin observasjon om at tidlig varsling er sentralt for å bygge supply chain-resiliens, men plasserer ansvaret for tolkning og handling tydelig hos mennesker. Forskjellen mot Sonnleitner et al. (2025), som understreker at prognoser først får praktisk verdi når de kobles til beslutninger, er at det her ikke produseres prognoser i det hele tatt – beslutningsstøtten kommer fra deterministisk regelbasert tolkning av allerede aggregerte data. Det er en bevisst nedskalering av kompleksitet, motivert av et premiss om at usikkerheten allerede er innbakt i 75 %-filteret og at koordinatorenes lokale kunnskap er bedre egnet enn modellprognoser til å avgjøre hvordan et gap skal håndteres.
+
+## **9.3 Modellens robusthet og begrensninger**
+
+Den tydeligste empiriske begrensningen er at snapshot-serien kun rakk å bli tre lange innenfor prosjekttidsrammen. To delta-par er nok til å demonstrere åpning, lukking og påminnelse i tråd-livssyklusen (jf. 8.5c), men ikke nok til å aktivere suppression-regelens *K = 4*-kriterium for strukturelle gap (kap 6.5). Det betyr at suppression-mekanismen er logisk spesifisert og enhetstestet (Tabell 8.6), men ikke empirisk verifisert. Inntil en lengre produksjonsserie foreligger, må modellens strukturelle-håndtering aksepteres som en designhypotese, og koordinator må manuelt markere de syv front-lastede enhetene fra Tabell 7.3 som strukturelle om suppression skal kunne aktiveres.
+
+En relatert begrensning gjelder magnitudeklassene definert i kap 6.3. Alle observerte negative celler i de tre snapshotene har $G \in \{-1, -2\}$ – det vil si at hele datagrunnlaget faller i den mildeste av de tre magnitudeklassene (Tabell 8.3 og 8.3b). Verken klassen *moderat* ($-5 \leq G \leq -3$) eller *kritisk* ($G \leq -6$) er empirisk truffet. Konsekvensen er dobbelt: for det første er prioritetsutløsningen for høyere klasser kun bekreftet via syntetiske tester (Tabell 8.6), og for det andre er kategorien *forverret som krysser klassegrense* aldri observert på reelle data (Tabell 8.2). Modellens evne til å eskalere fra «middels» til «høy» prioritet ved kryssing av klassegrense er dermed teoretisk plausibel, men ikke demonstrert i drift. Følsomheten for valg av klassegrenser ($-3$ og $-6$) er heller ikke testet med alternative verdier; en grundigere robusthetsanalyse ville variert grensene innenfor rimelige intervaller og målt hvor mange varsler hver justering legger til eller fjerner.
+
+Modellens evne til å håndtere endringer i selve datagrunnlaget mellom snapshots har tre konkrete edge cases som er verdt å nevne. For det første: når en ny Tier 2-rad dukker opp i Power BI – som *60Te Turntable* og *Electric – 54kW Electric HPU* gjorde i snapshot $t_2$ (jf. 5.2.4) – kan delta-detektoren ikke vurdere den fordi den mangler en motpart i forrige snapshot. Resultatet er at et reelt underskudd på fire uker for 60Te Turntable i $t_2$ ikke utløste varsel, og koordinator må stole på den statiske baseline-rapporten for å fange dette. Tilsvarende blir Tier 2-rader som *forsvinner* mellom snapshots stille fjernet uten et eksplisitt lukke-varsel, hvilket kan etterlate aktive tråder i en udefinert tilstand. For det andre: dersom en celle oscillerer raskt mellom snapshots (eksempelvis $G : -1 \to 0 \to -1$ over tre uker), vil modellen utløse henholdsvis et LØST- og deretter et NYTT_GAP-varsel uten å kjenne igjen at det er samme underliggende sak. Sammenligningen er rent parvis, og det finnes ingen mekanisme for å oppdage at en gjenåpnet tråd «egentlig er den samme» som en tidligere lukket. For det tredje: kalenderhorisonten forskyves én uke framover for hvert snapshot, og gap som ligger i de tidligste ukene «glir ut av synshorisonten» når referanseuken passeres – ikke fordi de er løst, men fordi de blir historiske. Modellen behandler dette korrekt (tråden lukkes ikke automatisk), men det betyr at uten manuell oppfølging vil koordinator etter hvert sitte med tråder for kalenderuker som ligger bak nåtid og som derfor ikke lenger er actionable.
+
+Til slutt avhenger modellens terskelfølsomhet av Power BIs underliggende avrundingslogikk (kap 5.2.5). Verdiene som vises i Calendar-cellene er avrundede heltall, mens asset type-summer aggregeres fra desimaler. Det betyr at en celle som vises som $G = 0$ kan ha en underliggende verdi i intervallet $(-0{,}5, 0{,}5)$, og en marginal endring i etterspørsel kan tippe en celle fra $G = 0$ til $G = -1$ uten at det reflekterer en reell ny kontrakt – kun en avrundingsskifte. Severity-regelen demper denne risikoen ved å kreve en samtidig farge-overgang (typisk grønn → lilla eller lilla → svart), men eliminerer den ikke fullstendig. Praktisk konsekvens er at enkelte NYTT_GAP-varsler i grenseland teknisk sett kan være avrundingsartefakter snarere enn nye kontrakter. Effekten ville reduseres betydelig dersom datafangsten skjedde via direkte API-eksport med desimal-presisjon (drøftes i 9.4).
+
+## **9.4 Datafangstmetodens påvirkning på resultatene**
+
+Valget av manuell PNG-skjermavlesning som datafangstmetode (kap 5.2.3) skyldes at prosjektgruppen ikke hadde tilstrekkelige Power BI-rettigheter til å bruke *Analyser i Excel* eller *Eksporter data*, og direkte API-tilgang til Salesforce og Asset Voice var utenfor prosjektets omfang (jf. 1.3-avgrensning). Metoden er reproducerbar og full transparent – hvert PNG-bilde og hver transkripsjons-skript ligger lokalt under `004 data/` med stempel på datofangst – men introduserer to typer risiko som er verdt å diskutere.
+
+Den første er **transkriberingsfeil**. Hver celle leses manuelt og kodes som `(gap_value, severity_band)` i et Python-skript, og selv med god konsentrasjon er det ikke realistisk å oppnå perfeksjon på 800+ celler per snapshot. Sumsjekken som er innebygd i transkripsjons-skriptene (kap 5.2.3) sammenligner leaf-summen mot Power BIs egne asset type- og `Totalt`-rader, og flagger automatisk avvik over ±2 unit-uker per uke. For snapshot $t_2$ rapporterte sjekken 9 av 32 uker med avvik innenfor toleransen og ingen avvik over – det vil si at en eller flere celler kan være feilavlest med ±1 uten at sjekken kan peke ut hvilke. Effekten på den dynamiske endringsdeteksjonen er begrenset så lenge feilen er stabil mellom snapshots (den samme feilen i $t_1$ og $t_2$ gir uendret delta), men kan i ugunstige tilfeller skape et falskt NYTT_GAP eller skjule et reelt. At ingen av de 19 varslene i delta-par 2 ved manuell stikkprøve mot kildebildene viste seg å være feilavlesninger, gir en viss empirisk trygghet, men dette er ikke en formell verifisering av samtlige varsler.
+
+Den andre risikoen er **avrundingsstøy fra Power BIs interne aggregering** (kap 5.2.5 og 9.3). En direkte CSV- eller API-eksport ville eliminert støyen ved å gi tilgang til desimalverdiene rett fra datamodellen, samtidig som det manuelle transkriberings-leddet bortfaller. Modellens grunnlogikk forblir uendret – $G$-regelen og severity-regelen virker likt på heltall som på desimaler – men presisjon i terskelnære varsler ville bli betydelig høyere.
+
+Et tredje moment er skalerbarhet. Hvert snapshot tok i denne studien om lag 60–90 minutter å fange og transkribere (4–8 PNG-bilder per snapshot × cellevis koding × verifisering mot Power BI). Det er akseptabelt for en tidsbegrenset prosjektperiode med tre snapshots, men ikke for kontinuerlig produksjon der varslingssystemet skal kjøre ukentlig i flere år. En produksjonssetting forutsetter at Motive Offshore etablerer enten direkte API-uttrekk fra Power BI/Salesforce, eller en planlagt eksport av Calendar-tabellen til CSV som kan leses inn automatisk. Modellen i seg selv (kap 6) er bygd opp slik at den ikke har noen avhengighet til PNG-formatet – inngangen er en standard CSV med ti felt (Tabell 5.1) – og kan derfor uten endringer kobles på en automatisert datakilde. Konklusjonen er at datafangstmetoden er den åpenbare flaskehalsen i produksjonssetting, men at den ikke skaper en strukturell begrensning i selve varslingslogikken; den er et IT-prosjekt, ikke et metodeprosjekt.
+
+## **9.5 Praktisk betydning og generaliserbarhet**
+
+Dagens manuelle prosess i 4.4 viser at kapasitetsgap først blir prioritert når en selger eller koordinator selv åpner Power BI-dashbordet og ser etter dem. Mellom en kontrakts oppdatering til 75 prosent vinnersannsynlighet og leveransedatoen finnes det ingen automatisk mekanisme som påminner om gap som ikke er handlet på. Konsekvensen, også beskrevet i 4.4, er at gap som kunne vært løst billig på tre til seks måneders horisont, ender med hasteanskaffelse, luftfrakt eller fremleie – alle med direkte marginpåvirkning for kontrakten.
+
+Volumet av varsler systemet produserer er moderat og operasjonelt håndterbart. For det første snapshot-paret (Tabell 8.5) gikk 12 varsler ut til tre koordinatorer: 5 til RDS-, 6 til HPUS- og 1 til Spoolers-koordinatoren. For det andre snapshot-paret (Tabell 8.5b) økte volumet til 19 varsler fordelt på fem koordinatorer – Cable Pulling- og Tensioner-koordinator fikk også digest i denne syklusen. Fem av RDS-varslene i delta-par 1 gjelder samme utstyrsenhet over fem sammenhengende uker og presenteres som ett mønster i digesten – det vil si én reell handlingsoppgave for koordinatoren, ikke fem. På denne baselinen vil en enkelt koordinator i praksis motta én ukentlig digest med under ti distinkte handlingspunkter. Det er et nivå som faktisk kan leses og handles på, ikke et varslingsvolum som drukner.
+
+Severity-deltaen, ikke gap-verdien alene, fanger tre av disse tolv varslene (jf. 7.6). Disse tre cellene har $G_{r,a,t}$ med endring mindre enn én enhet, men prosentvis gap har krysset et fargebånd i Power BI. De ville vært usynlige for en regel som kun ser på heltallsverdien, og de er nettopp den typen tidlige signaler kontraktskoordinatoren trenger for å handle før gappet rekker å bli større. At modellen fanger dem styrker svaret på delproblem 4 om tydeligere varsling enn manuell kontroll.
+
+Systemet endrer beslutningssyklusen fra en *pull*-modell, hvor handling betinger at riktig person sjekker dashbordet til riktig tid, til en *push*-modell hvor digesten leveres til ansvarlig koordinator hver mandag. Den ukentlige påminnelsen som er beskrevet i 6.6 og demonstrert i både 50 syntetiske testscenarier (Tabell 8.6) og på reelle data over to delta-par (Tabell 8.5c – der fem av ti aktive tråder lukkes automatisk og fem fortsetter med påminnelse uten manuell inngripen) sikrer at utløste varsler ikke forsvinner ut av synet hvis koordinator ikke rekker å handle med en gang. Avslutningsvarsel ved løst gap lar varslingstråden lukkes formelt, slik at koordinatorens innboks ikke fylles av åpne saker som faktisk er løst.
+
+For at Motive Offshore skal kunne ta systemet i bruk i produksjon, må fire komponenter falle på plass. **Datafangsten** må gå fra manuell skjermavlesning til en automatisert eksport – enten ved tilgangsutvidelse for Power BI sin *Analyser i Excel*, eller via Power BI REST API som beskrevet kort i 9.6. **Recipient-mappingen** i `recipients.yaml` må valideres mot Motives faktiske organisasjonsstruktur og oppdateres ved personalendringer. **SMTP-integrasjonen** er allerede demonstrert ende-til-ende i 8.5.1 mot en Gmail-testkonto, og må i produksjon kun reflenkes til Motives M365-tenant med en dedikert avsenderadresse og passende signatur – selve leveransemekanismen er bevist å fungere. **Suppression-listen** bør gjennomgås manuelt av en flåtekoordinator første gang systemet kjøres i produksjon, slik at kjente strukturelle underdimensjoneringer (jf. 7.5) markeres opp før K=4-kriteriet rekker å samle nok historikk.
+
+Den umiddelbare gevinsten er reduksjon av risikoen for at en kontraktsdrevet kapasitetskonflikt forblir uoppdaget til leveransedato. Det er denne risikoen 4.4 dokumenterer som direkte marginreduserende, og den langsiktige gevinsten ved automatisering er at den reduserende effekten kommer alle uker, ikke bare når en oppmerksom selger tilfeldigvis sjekker det riktige dashbordet til riktig tid.
+
+Utover Motive Offshore er modellen bygget rundt fire generelle byggesteiner som ikke er spesifikke for offshore-bransjen: (1) en kapasitetsoversikt strukturert som *enhet × tidsperiode* med supply-, demand- og gap-verdi, (2) en pipeline-mekanisme med probabilistisk fremdrift og en aksjonsterskel (her 75 %), (3) en regelbasert klassifisering av uke-til-uke-endringer og (4) en varslingsmekanisme som ruter strukturerte varsler til ansvarlige mottakere. Det som er spesifikt for Motive er kun verdiene som fyller disse byggesteinene – navnet på Tier 2-utstyrsenhetene, fargeintervallene fra Power BI-rapporten, antallet asset types og koordinator-tilordningen i `recipients.yaml`.
+
+Innenfor Motive-konsernet er overgangen triviell. Selve modellen er **lokasjons-agnostisk**: filtrene Asset Custodian, Project Owner Demand og Region byttes synkront for å kjøre samme analyse for Motive UK, Motive USA eller en hvilken som helst annen lokasjon (jf. 5.2.2). Datasettets størrelse vil variere – andre verksteder har andre utstyrstyper – men pipelinen fra CSV-eksport til varsel er uendret. Det betyr at hvis Motive ønsker å skalere opp, kreves det null kodeendringer; kun nye recipient-mappinger og eventuelle justeringer av suppression- og eksklusjonslistene per verksted.
+
+Andre offshore-utleievirksomheter med tilsvarende dataøkosystem – Salesforce eller annen CRM som CRM, et flåteforvaltningssystem som tilsvarer Asset Voice, og et BI-verktøy som aggregerer dem til en supply/demand-oversikt – kan adoptere modellen med moderat tilpasningsarbeid. Hovedoppgaven er å sette opp datafangsten (eksport eller transkribering) til samme skjema som beskrevet i 5.2, og oppdatere fargenøkkelen i 5.2.1 hvis BI-rapporten bruker andre intervaller. Selve gap-deteksjonen, suppression-reglene og varslingslogikken er datadrevne og krever ingen omskriving. Pipelinen håndterer også dynamisk innstrømning av nye utstyrsenheter mellom snapshots uten endringer i koden – som da *60Te Turntable* og *54kW Electric HPU* dukket opp i $t_2$ (jf. 5.2.4) ble de automatisk inkludert i baseline for neste delta-par.
+
+For tidsoppløsning og granularitet er modellen fleksibel. Uke som tidsenhet er en pragmatisk konsekvens av at Power BI-rapporten oppdateres ukentlig; modellen kan like gjerne kjøres på daglig eller månedlig kadens dersom datakilden støtter det. Tier 2-granulariteten er valgt fordi det er den lokale flåtekoordinatoren faktisk forholder seg til i daglig drift; en annen virksomhet kunne adopterer Tier 1 (asset type), Tier 3 (individuell enhet) eller en helt egen taksonomi uten at deteksjons- og varslingsreglene endres.
+
+Utover offshore-utleie er modellen overførbar til andre kapitalintensive utleiebransjer hvor pipeline-fremdrift møter en kapasitetsbeskrankning over tid – maskinutleie, kran- og løfteutstyr, fartøyssharter, flycharter. Felles for disse er en kombinasjon av kontraktsforhandling med variabel sannsynlighet og en fysisk fleet som ikke kan utvides på kort varsel. Modellen vil **ikke** uten videre fungere i tjenestebaserte virksomheter der "kapasitet" er menneskelig arbeidstid som kan omfordeles fleksibelt; der vil suppression-regelen ha andre semantiske implikasjoner og magnitudeklassene må kalibreres helt på nytt mot tjenestens kost-konsekvensstruktur.
+
+Det helt generelle bidraget fra dette prosjektet er konstruksjonen av en **regelbasert tidsserie-delta-detektor** kombinert med en **prosentbasert alvorlighetsklassifikasjon** (`severity_band`). Denne kombinasjonen er ikke spesifikk for utleiebransjer i det hele tatt og kan benyttes overalt hvor BI-verktøy presenterer prosentbaserte fargekoder over et numerisk grunnlag. Severity-deltaen som komplement til den absolutte gap-deltaen er et metodisk mønster som kan adopteres bredt i regelbasert overvåking av aggregerte BI-rapporter.
+
+## **9.6 Forslag til videre forskning**
+
+Prosjektet etablerer en regelbasert deteksjons- og varslingsmodell som demonstreres på et begrenset datagrunnlag fra ett verksted og to delta-par. Resultatene peker mot fem konkrete forskningsspor som ville bygge videre på løsningen og adressere de begrensningene som er identifisert i 9.3 og 9.4.
+
+**Per-kontrakt-ruting via Salesforce-integrasjon.** Dagens modell ruter varsler per asset type fordi den aggregerte Power BI-tabellen ikke oppgir hvilken kontrakt som forårsaket en gitt gap-celle (jf. 6.6 og avgrensningen i 1.3). En naturlig utvidelse er å hente kontrakts-id fra Salesforce og koble varslet til den spesifikke selgeren som eier den utløsende kontrakten. Det vil flytte varslingen fra koordinator-nivå til selger-nivå og kan forbedre signal-til-støy-forholdet ytterligere. Forskningsspørsmålet er hvor mye reaksjonstiden faktisk reduseres ved å sende varslet direkte til den ansvarlige selgeren, og om koordinatoren fortsatt bør motta en oppsummering for flåtebalansering på tvers av selgere.
+
+**Empirisk kalibrering av magnitudeklassegrenser.** Klassegrensene mildt/moderat/kritisk er i denne studien satt skjønnsmessig ved $-2/-3$ og $-5/-6$ (jf. 6.3). En videre studie bør koble klassegrensene til faktiske kostnadsforskjeller mellom håndteringstiltakene som beskrives i 4.4: hvor mye dyrere er luftfrakt versus sjøtransport som funksjon av gap-størrelsen, hvor stort gap krever fremleie versus nyanskaffelse, og når blir tap av kontrakt det mest sannsynlige utfallet. En slik konsekvensanalyse kan rettferdiggjøre kvantitative klassegrenser og direkte koble magnitudeklassene til varslingsprioritetene i 6.6.
+
+**SARIMA eller andre tidsserieprognoser som supplement.** Modellen reagerer på endringer som har skjedd – det vil si kontrakter som allerede har krysset 75 prosent vinnersannsynlighet. En prognoserende komponent kunne fange opp kontrakter med raskt voksende vinnersannsynlighet under terskelen og varsle proaktivt, ikke reaktivt. Forskningsspørsmålet er hvor verdifullt et "varsel om kommende varsel" er i den daglige driften, sett opp mot risikoen for falske positive prognoser. SARIMA er nevnt i kapittel 3.4 som alternativ til regelbasert deteksjon, og denne studien har valgt regelbasert tilnærming bevisst. Et hybrid-design hvor regelbasert deteksjon er hovedmekanisme og prognosen et supplement, bevarer modellens sporbarhet samtidig som det utvider varslingshorisonten.
+
+**Lengre snapshot-serie i produksjon.** Suppression-regelens $K = 4$-kriterium for *strukturell*-klassifisering kan ikke eksercereres innenfor prosjektperioden, der to delta-par gir maksimalt $K = 3$ konsekutive observasjoner per celle (jf. 9.3). En 12+ ukers serie i produksjon vil tillate empirisk validering av at suppression-listen stabiliserer seg over tid uten å forkaste reelle nye gap, og at delta-detektoren ikke produserer falske positive ved rask oscillasjon eller kontrakter som beveger seg over og under 75 %-terskelen. En slik longitudinell studie kan også gi grunnlag for å justere $K$ opp eller ned basert på observert varslingsvolum og koordinatorens evne til å handle på dem.
+
+**Brukerstudie av varselsformatet.** Digest-formatet beskrevet i 6.6 og demonstrert i 8.5 og 8.5.1 (SMTP-levering til testkonto) er designet basert på antagelser om hva selgere og prosjektkoordinatorer trenger – prioritetsgruppering, mønsterdeteksjon, livssyklus-status. En kvalitativ studie hvor faktiske brukere mottar digester over flere uker og rapporterer signal-til-støy, lesbarhet og handlbarhet, vil avdekke om formatet faktisk støtter den beslutningssyklusen 9.5 argumenterer for. Brukerstudien kan også vurdere foretrukken kanal (e-post, Teams, dedikert dashboard) og påminnelsesfrekvens som ikke nødvendigvis er ukentlig for alle prioritetsnivåer.
+
+Felles for de fem sporene er at de bygger videre på, ikke erstatter, den regelbaserte kjernen som er konstruert i dette prosjektet. Prosjektets bidrag har vært å etablere et fundament som tåler videre forskning – ved å være sporbart, regelbasert, testbart og separasjonsklart mellom dataskjema, deteksjonslogikk og leveransekanal.
+
+# **10. Konklusjon**
+
+Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.4) med en severity-fargeregel (Tabell 6.5) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.5.1 med fem digester levert til en testkonto.
+
+Hovedfunnene viser at modellen leverer på alle fire delproblemene fra kap 1.2. Datastrukturering fra Salesforce, Asset Voice og Power BI til en sporbar `(snapshot, region, asset_tier2, uke)`-skjema er etablert og verifisert mot Power BIs egne aggregater (kap 5.2). Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer fanger 11 NYTT_GAP, 8 LØST og 5 supplerende severity-baserte varsler over de to delta-parene (Tabell 8.2). Det automatiske varselsformatet beskriver hvert tilfelle med utstyrsenhet, periode, gap-størrelse og mottaker (Vedlegg G), og digestene er levert som faktiske e-poster i innboks. Tidligere og tydeligere varsling enn dagens manuelle prosess er demonstrert ved at varslene i delta-par 2 adresserer kalenderuker 6,5–7,5 uker fram, mot dagens situasjon hvor gapet ofte først oppdages tett opp mot leveransedato.
+
+Det viktigste empiriske bidraget er tråd-livssyklusen som er observert over to delta-par. Av de ti opprinnelig åpnede trådene i delta-par 1 lukkes fem automatisk i delta-par 2 ved at $G$ eller `severity_band` returnerer til positiv tilstand, mens fem fortsetter med en formell påminnelse (Tabell 8.5c). Det er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at modellen kan tas i bruk operativt. Severity-regelen viser seg samtidig å være et selvstendig signal som rein gap-verdi-måling ville oversett: tre av de ti gap-åpnende varslene i delta-par 1 ble utløst kun av en fargeovergang i Power BI.
+
+Prosjektet har samtidig identifisert tre konkrete begrensninger som ikke kan løses innenfor tidsrammen. Snapshot-serien på tre er ikke lang nok til å aktivere suppression-regelens *K = 4*-kriterium for strukturelle gap empirisk; alle observerte negative gap havner i den mildeste magnitudeklassen og verken *moderat* eller *kritisk* prioritetslogikk er truffet av reelle data; og datafangsten via manuell PNG-transkripsjon er ikke skalerbar til kontinuerlig produksjon. Disse begrensningene rokker ikke ved at modellen fungerer for det den er bygd for, men de definerer presist hva som må videreutvikles før varslingssystemet kan kjøres i drift uten manuell inngripen.
+
+For Motive Offshore betyr resultatene at det er mulig å gå fra en *pull*-modell – der oppdagelse av kapasitetsgap er avhengig av at riktig person sjekker dashbordet til riktig tid – til en *push*-modell der den ukentlige digesten leveres til ansvarlig koordinator hver mandag. Den direkte gevinsten er reduksjon av risikoen for at en kontraktsdrevet kapasitetskonflikt forblir uoppdaget til leveransedato, der konsekvensen i dag er hasteanskaffelse, luftfrakt eller fremleie med direkte marginpåvirkning (kap 4.4). For et lengre forskningsperspektiv åpner prosjektet for fem konkrete spor som drøftes i 9.6, der per-kontrakt-ruting via Salesforce-integrasjon og empirisk kalibrering av magnitudeklassegrenser fremstår som de mest verdifulle utvidelsene. Kjernebidraget – en regelbasert tidsserie-delta-detektor kombinert med en prosentbasert alvorlighetsklassifikasjon – er et metodisk mønster som kan adopteres bredt for regelbasert overvåking av aggregerte BI-rapporter i andre kapitalintensive utleiebransjer.
+
+# **11. Bibliografi**
+
+Alaoua, A., & Karim, M. (2025). Intelligent early warning system for supplier delays using dynamic IoT-calibrated probabilistic modeling in smart engineer-to-order supply chains. *Applied System Innovation, 8*(5), Article 124. [https://doi.org/10.3390/asi8050124](https://doi.org/10.3390/asi8050124)
+
+Anthropic. (2026). Claude \[stor språkmodell\]. [https://claude.ai](https://claude.ai)
+
+Cheng, H., He, H., Zheng, S., Zhang, L., Xu, L., & Wang, C. (2025). Sustainable ferry leasing strategies: The option contract perspective. *Frontiers in Marine Science, 12*, Article 1615572\. https://doi.org/10.3389/fmars.2025.1615572
+
+González-Flores, L., Rubiano-Moreno, J., & Sosa-Gómez, G. (2025). The relevance of lead prioritization: A B2B lead scoring model based on machine learning. *Frontiers in Artificial Intelligence, 8*, Article 1554325\. https://doi.org/10.3389/frai.2025.1554325
+
+Koot, M., Mes, M. R. K., & Iacob, M. E. (2021). A systematic literature review of supply chain decision making supported by the Internet of Things and Big Data Analytics. *Computers & Industrial Engineering, 154*, Article 107076\. [https://doi.org/10.1016/j.cie.2020.107076](https://doi.org/10.1016/j.cie.2020.107076)
+
+Oliveira, B. B., Carravilla, M. A., & Oliveira, J. F. (2017). Fleet and revenue management in car rental companies: A literature review and an integrated conceptual framework. *Omega, 71*, 11-26. [https://doi.org/10.1016/j.omega.2016.08.011](https://doi.org/10.1016/j.omega.2016.08.011)
+
+Qi, F., Zhang, L., Zhuo, K., & Ma, X. (2022). Early warning for manufacturing supply chain resilience based on improved grey prediction model. *Sustainability, 14*(20), Article 13125. [https://doi.org/10.3390/su142013125](https://doi.org/10.3390/su142013125)
+
+Rajani, R. L., & Heggde, G. S. (2020). Capacity management strategies in supply chains: A critical review and directions for future research. *International Journal of Business Excellence, 21*(1), 81-117. [https://doi.org/10.1504/IJBEX.2020.106951](https://doi.org/10.1504/IJBEX.2020.106951)
+
+Sonnleitner, B., Kourentzes, N., Ehrig, C., & Pflaum, A. (2025). Forecasting for optimization in road freight transport: A review. *Transportation Research Part E: Logistics and Transportation Review*. https://doi.org/10.1016/j.tre.2025.104174
+
+Wang, X., & Zhen, L. (2025). Fleet deployment and freight allocation for cleaner maritime logistics under demand uncertainty. *Cleaner Logistics and Supply Chain, 17*, Article 100269\. [https://doi.org/10.1016/j.clscn.2025.100269](https://doi.org/10.1016/j.clscn.2025.100269)
+
+Xu, J., Pero, M., & Fabbri, M. (2023). Unfolding the link between big data analytics and supply chain planning. *Technological Forecasting and Social Change, 196*, Article 122805\. [https://doi.org/10.1016/j.techfore.2023.122805](https://doi.org/10.1016/j.techfore.2023.122805) 
+
+# **12. Vedlegg**
+
+## **Vedlegg A: KI-bruk-erklæring**
+
+*[Signert KI-erklæring legges inn ved innlevering.]*
+
+## **Vedlegg B: Taushetserklæring**
+
+*[Signert taushetserklæring med Motive Offshore legges inn ved innlevering.]*
+
+## **Vedlegg C: Kravmatrise**
+
+*[Tabell som kobler WBS-akseptansekriterier til konkrete leveranser i rapporten. Skrives etter Kap 10.]*
+
+## **Vedlegg D: Komplette SMTP-digester fra demo 2026-05-23**
+
+Figur 8.2 i kap 8.5.1 viser HPUS-koordinatordigesten – den mest komplette av de fem digestene som ble levert. De fire øvrige er gjengitt her for fullstendighet.
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_RDS.png" alt="RDS-digest" width="80%">
+  <p align="center"><small><i>Figur D.1 RDS-koordinatordigesten. To påminnelser for *500Te RDS* ukene 17.08 og 24.08 (gap fortsatt -1) og tre LØST-saker for ukene 31.08, 07.09 og 14.09 (gap -1 → 0). Mønsterdeteksjonen grupperer de tre løste sakene i én linje siden de gjelder samme utstyrsenhet i sammenhengende uker, typisk indikator på at en og samme kontrakt har endret status.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_CPM.png" alt="Cable Pulling-digest" width="80%">
+  <p align="center"><small><i>Figur D.2 Cable Pulling-koordinatordigesten. To nye NYTT_GAP-varsler for *2Te Linear Cable Engine* (ukene 06.07 og 13.07, gap 0 → -2) og tre LØST-informasjonsvarsler for ukene 08.06–22.06. Cable Pulling er den eneste asset type i dette delta-paret som både åpner og lukker tråder i samme syklus, og illustrerer hvordan kalenderhorisonten forskyves uke for uke.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Tensioners.png" alt="Tensioner-digest" width="80%">
+  <p align="center"><small><i>Figur D.3 Tensioner-koordinatordigesten. Én ny NYTT_GAP-varsel for *Horizontal – 4-track 50Te Tensioner* i uke 13.07 (gap 0 → -1, farge green → black). Eneste endring i Tensioner-domenet denne uken.</i></small></p>
+</div>
+
+<div align="center">
+  <img src="../006 analysis/3.4 varsling/fig_demo_digest_Spoolers.png" alt="Spoolers-digest" width="80%">
+  <p align="center"><small><i>Figur D.4 Spoolers-koordinatordigesten. Én PÅMINNELSE for *Electric – 75Te Electric Spooler* i uke 22.06 – tråden ble åpnet i delta-par 1 som SKJULT_NYTT_GAP og er fortsatt aktiv siden severity ikke har endret seg fra purple.</i></small></p>
+</div>
+
+## **Vedlegg F: Full valideringsscenario-tabell**
+
+Kap 8.6 oppsummerer at 50 syntetiske `pytest`-scenarier validerer modellens regelmatrise, trådhåndtering og ruting. Tabell F.1 viser fordelingen per scenariokategori med forventet og faktisk utfall.
 
 | Scenariokategori | Antall tester | Forventet utfall | Faktisk utfall |
 |------------------|---------------|------------------|----------------|
@@ -980,167 +1089,30 @@ Modellens deteksjonsregler (kap 6.5) og trådhåndtering (kap 6.7) er validert m
 | Eksklusjonshåndtering | 1 | Generator-funksjonen leverer varsel; main-flyten filtrerer før kall | ✓ |
 | **Totalt** | **50** | – | **50/50 passerer** |
 
-<p align="center"><small><i>Tabell 8.6 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
-
-Valideringen viser at modellens regelmatrise fungerer som spesifisert i kap 6.5, at trådhåndteringen håndterer livssyklusen ny → påminnelse → eskalert → løst korrekt på tvers av snapshots, og at rutingen fra 6.7 fordeler varsler riktig per asset type. Hele testsettet kjører på under to sekunder og er pluggbart inn i et eventuelt CI-oppsett før produksjonsbruk.
-
-## **8.7 Resultatenes kobling til delproblemene**
-
-De fire delproblemene formulert i 1.2 dekkes av ulike resultater i dette kapittelet. Tabell 8.7 viser hvilke konkrete tabeller og figurer som adresserer hvert delproblem; selve vurderingen av i hvilken grad delproblemene er besvart er forbeholdt 9.1.
-
-| Delproblem | Resultater som dokumenterer dekningen |
-|---|---|
-| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien med 816 + 792 + 832 rader), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker i baselinen) |
-| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler i baselinen), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel i delta-par 1), Tabell 7.7 og 8.3b (4 nye gap + 8 løste i delta-par 2), Tabell 8.2 (sammenligning av regelutløsing over begge delta-par), Tabell 7.6 og 7.8 (severity-regel fanger 3 + 2 skjulte endringer i de to delta-parene) |
-| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Tabell 6.6 (varselsobjekt-skjema), Tabell 8.5 og 8.5b (12 og 19 utløste varsler fordelt på 3 og 5 mottakere i de to delta-parene), Figur 8.1–8.6 (SMTP-leverte digester) |
-| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Kap 8.5.1 (kalenderhorisont 3–7 måneder fram, automatisk ruting til 5 koordinatorer i delta-par 2), Tabell 7.6 og 7.8 (severity-deltaen fanger «skjulte» endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.5c (5 av 10 tråder lukkes automatisk i andre syklus), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
-
-<p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og resultatene presentert i kapitlet.</i></small></p>
-
-9. # **Diskusjon** {#diskusjon}
-
-Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen, litteraturen i kapittel 2 og de metodiske valgene dokumentert i kapittel 5. Det vurderer i hvilken grad varslingssystemet svarer på forskningsspørsmålet, hvilke begrensninger metoden medfører, og hvilke implikasjoner resultatene har for Motive Offshore og lignende virksomheter.
-
-## **9.1 Drøfting mot problemstillingen og delproblemene**
-
-Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap. Resultatene i kap 7 og 8 viser at en slik pipeline er bygget og kjørt på reelle data over tre ukentlige snapshots, og at den produserer både statiske gap-rapporter (77 negative celler i baseline-snapshotet, Tabell 8.1) og dynamiske endringsvarsler (12 og 19 varsler i de to delta-parene, Tabell 8.5 og 8.5b). Vurderingen nedenfor følger de fire delproblemene fra kap 1.2 i tur, og avsluttes med en kort gjennomgang av hva som var forventet versus uventet i de empiriske observasjonene.
-
-### Delproblem 1: Datastrukturering
-
-Delproblem 1 spør hvordan data fra Salesforce, Asset Voice og Power BI kan struktureres for å identifisere kapasitetsgap per asset og tidsperiode. Tre ukentlige snapshots er transkribert fra PNG-skjermbilder til lang-form CSV med ti felt (Tabell 5.1), totalt 816 + 792 + 832 rader (Tabell 5.3). Skjemaet `(snapshot_date, week_start, asset_type, asset_tier2, gap_value, severity_band, …)` er fininndelt nok til at både den statiske gap-deteksjonen (cellevis $G < 0$, kap 6.3) og den dynamiske endringsdeteksjonen (uke-til-uke-sammenligning på samme celle, kap 6.4) kan operere uten ytterligere transformasjon. At alle tre snapshotene matcher Power BIs egne Tier 1-summer innenfor toleransen på ±2 unit-uker (kap 5.2.5) er en empirisk bekreftelse på at transkriberingen bevarer informasjonsinnholdet i originaldataene. Delproblemet er dermed besvart innenfor de rammene avgrensingene i kap 1.3 setter – nemlig at datafangsten skjer via PNG-eksport, ikke direkte API-integrasjon.
-
-### Delproblem 2: Regelbasert oppdagelse
-
-Delproblem 2 spør hvordan regelbasert logikk kan brukes til å oppdage negative verdier, forverrede verdier og uke-til-uke-endringer. Begge regelene er implementert og kjørt på reelle data: $G$-regelen (Tabell 6.4) klassifiserer hver celle ut fra fortegnet på $G^{(s_i)}$ og $G^{(s_{i-1})}$, og severity-regelen (Tabell 6.5) klassifiserer ut fra overganger i `severity_band`. Tabell 8.2 viser at de to delta-parene til sammen genererte 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP via disse to reglene. Hovedfunnet er at de to reglene komplementerer hverandre: severity-regelen fanget i delta-par 1 tre celler (Tabell 7.6) der gap-verdien var uendret eller forbedret, men der den underliggende prosent-eksponeringen passerte 75 %-terskelen i en retning som flyttet cellen fra grønn til lilla. Disse tre cellene ville vært usynlige for en detektor som kun ser på $G$. Det betyr at delproblemet er besvart med en sterkere modell enn det bokstaven av delproblemet krevde – `severity_band` legger til et signal som rein gap-verdi-måling ikke fanger.
-
-### Delproblem 3: Automatisk varselsformat
-
-Delproblem 3 spør hvordan et automatisk varsel kan utformes slik at selger eller prosjektkoordinator får tydelig informasjon om assets, periode og gap. Tabell 6.6 spesifiserer varselsobjektet med 16 felt som dekker alle de tre nevnte dimensjonene pluss kontekst (severity-overgang, regel, magnitudeklasse, prioritet, strukturelt-flagg, mottaker). Aggregeringen til én digest per mottaker per snapshot er implementert i `gap_alerting.py`, og SMTP-leveransen er demonstrert ende-til-ende i Figur 8.1–8.6: alle fem digestene for snapshot 2026-05-21 nådde testkontoen med fullstendig innhold, gruppert i de fire kategoriene NYE VARSLER, PÅMINNELSER, LØSTE SAKER og INFORMASJONSVARSLER (kap 8.5.1). Hver linje i digesten oppgir Tier 2-utstyrsenhet, kalenderuke, gap-overgang, severity-overgang og regel-trigger – det vil si nøyaktig det informasjonsgrunnlaget en koordinator trenger for å vurdere om en sak skal følges opp. Delproblemet er besvart både konseptuelt (skjema) og operativt (mottatt e-post i innboks).
-
-### Delproblem 4: Tidligere og tydeligere varsling
-
-Delproblem 4 er det normative og spør i hvilken grad systemet gir tidligere og tydeligere varsling enn dagens manuelle kontrollprosess. Den dynamiske endringsdeteksjonen identifiserte i delta-par 2 fire nye kapasitetsgap i kalenderukene 2026-07-06 og 2026-07-13 – det vil si 6,5 og 7,5 uker fram fra snapshot-datoen (kap 8.5.1). For en koordinator gir det et handlingsrom på halvannen til to måneder før etterspørselen materialiseres, mot dagens situasjon hvor gapet ofte først oppdages når en kontrakt nærmer seg signering eller kunden tar kontakt om leveransedato (kap 4.4–4.5). Tidligheten er altså demonstrert direkte. Tydeligheten viser seg i tre dimensjoner: (i) automatisk ruting til riktig asset type-koordinator basert på `recipients.yaml`, slik at HPUS-koordinator ikke får RDS-varsler og omvendt; (ii) mønsterdeteksjon som grupperer sammenhengende uker for samme utstyr i én digest-linje (Figur 8.3, der tre LØST-uker for 500Te RDS slås sammen til én linje – det er én kontrakt, ikke tre hendelser); og (iii) den ukentlige påminnelseslogikken (Tabell 8.5c) som holder en sak i koordinatorens bevissthet inntil $G$ eller `severity_band` faktisk endrer seg. Tilsammen utgjør dette en kvalitativt annen oppfølgingsmekanisme enn dagens prosess, der ansvarsfordelingen er implisitt og oppfølging skjer ad hoc.
-
-### Forventede og uventede funn
-
-Det forventede mønsteret materialiserte seg i delta-par 1: snapshot $t_0$ → $t_1$ er dominert av nye varsler ($n = 7$ NYTT_GAP) som etablerer trådbestanden, mens andelen LØST og FORBEDRET er null. Det stemmer overens med modellen: en åpningsfase trenger noen sykluser før løsninger begynner å materialisere seg. Delta-par 2 viste det motsatte mønsteret med åtte LØST og bare fire NYTT_GAP, og dette er hovedmekanismen bak at trådbestanden gikk fra 10 til 9 (Tabell 8.5c). Det viser at trådmodellen håndterer både åpning og lukking på reelle data og at gap-livssyklusen for en typisk Tier 2-utstyrsenhet er kortere enn først antatt – ofte én eller to uker. Tre funn var ikke fullt ut forventet på forhånd:
-
-Først ble det ikke registrert en eneste FORVERRET-celle i noen av de to delta-parene (Tabell 8.2). Forklaringen ligger i magnitudefordelingen: alle observerte gap havner i klassen *mildt* ($G \in \{-1, -2\}$, Tabell 8.3 og 8.3b), og det er smalt rom for ytterligere forverring innenfor samme klasse uten å enten lukkes eller krysse en klassegrense. At både innen-klasse-forverring og klassebyttende forverring forblir uobservert på reelle data er en empirisk begrensning som dekkes opp av syntetisk validering (Tabell 8.6), men diskuteres videre i 9.3.
-
-Dernest ga severity-regelen større praktisk verdi enn forventet. Tre av de ti gap-åpnende varslene i delta-par 1 (30 %) ble utløst kun av severity-overgangen, ikke av $G$-fortegnsbyttet. Det demonstrerer empirisk at `severity_band` ikke er redundant informasjon, og at en modell som kun ser på $G$-verdien ville oversett en tredjedel av de relevante endringene.
-
-Til slutt viste den persistente trådstaten seg å ha en helt sentral pedagogisk funksjon utover ren funksjonalitet. Tabell 8.5c viser at lukkemekanismen og påminnelseslogikken må ses sammen: uten persistens hadde de fem LØST-varslene i delta-par 2 vært vanskelige å koble til de opprinnelige NYTT_GAP-varslene fra delta-par 1, og koordinatoren ville mistet konteksten om hvilken sak som faktisk ble løst. At fem av de ti opprinnelige trådene faktisk lukkes etter én syklus – uten manuell inngripen – er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at delproblem 4 anses besvart.
-
-## **9.2 Sammenligning mot litteraturen**
-
-Resultatene plasserer seg innenfor det datadrevne kapasitetsstyringsfeltet beskrevet av Xu et al. (2023) og Koot et al. (2021), som argumenterer for at verdien av big data og IoT i supply chain først realiseres når dataene aktivt brukes til beslutningsstøtte og ikke bare til visualisering. Tråd-livssyklusen i Tabell 8.5c – der fem av ti tråder lukkes automatisk i andre syklus uten manuell inngripen – er et konkret eksempel på denne overgangen fra dashboard-konsum til handlingsutløsende analyse. Samtidig avgrenses bidraget mot Rajani og Heggdes (2020) review-funn om at kapasitetsstyring er en underprioritert disiplin i overgangen fra produktbasert til tjenestebasert supply chain: modellen utviklet her adresserer nettopp tjenestesiden (utleie av offshore-utstyr) der etterspørsel og tilgjengelighet må matches per tidsperiode, men gjør det med et regelbasert format som er enklere å implementere og forklare enn de avanserte AI-tilnærmingene som dominerer den ferskeste litteraturen.
-
-Sammenlignet med Wang og Zhens (2025) studie av flåteplassering og kapasitetsallokering under etterspørsels-usikkerhet i maritim logistikk, gjør denne modellen et bevisst valg om *ikke* å løse optimaliseringsproblemet, men kun å flagge når en ubalanse oppstår. Det samme gjelder for Cheng et al. (2025), som behandler usikkerhet via opsjonskontrakter – også her tar varslingssystemet et steg tilbake og overlater den faktiske beslutningen til koordinator. Oliveira et al. (2017) viser i sin litteraturreview av utleieindustrien at flåtestyring tradisjonelt er bygget rundt revenue management og prising, mens denne modellen flytter fokus til *tidlig identifikasjon av mismatch* mellom fysisk kapasitet og kontraktstyrt etterspørsel. Det er et annet problem enn det Oliveira et al. systematiserer, men bygger på samme grunnleggende premiss om at utleiekapasitet må disponeres før behovet materialiserer seg.
-
-For sales pipeline-dimensjonen er forskjellen mot González-Flores et al. (2025) tydelig: der lead scoring-litteraturen bruker vinnersannsynlighet til å rangere salgsmuligheter for selgere, brukes 75 %-terskelen her som *trigger* for en kapasitetsanalyse på baksiden. Dataene er de samme (CRM-pipeline med sannsynlighetsestimat), men formålet er motsatt rettet – ikke å prioritere hvilke leads selgeren skal jobbe med, men å varsle hvilke ressurser organisasjonen må sikre dersom leadene konverterer. Dette utvider bruksområdet for pipeline-data fra salgsoppfølging til kapasitetsplanlegging og er en relativt lite utforsket kobling i litteraturen.
-
-Den mest direkte parallellen til modellens regelbaserte design finnes hos Alaoua og Karim (2025), som beskriver et *Baseline Probabilistic Alert System (BPAS)* basert på faste terskler som referansemodell for mer avanserte IoT-kalibrerte varslingssystemer. Modellen i denne rapporten er en konkret implementasjon av nettopp BPAS-konseptet, og resultatene viser at en slik tilnærming – med kombinert $G$-regel og severity-regel – fanger relevante endringer på reelle data uten å kreve det analytiske maskineriet bak prediktive modeller. Det støtter også Qi et al. (2022) sin observasjon om at tidlig varsling er sentralt for å bygge supply chain-resiliens, men plasserer ansvaret for tolkning og handling tydelig hos mennesker. Forskjellen mot Sonnleitner et al. (2025), som understreker at prognoser først får praktisk verdi når de kobles til beslutninger, er at det her ikke produseres prognoser i det hele tatt – beslutningsstøtten kommer fra deterministisk regelbasert tolkning av allerede aggregerte data. Det er en bevisst nedskalering av kompleksitet, motivert av et premiss om at usikkerheten allerede er innbakt i 75 %-filteret og at koordinatorenes lokale kunnskap er bedre egnet enn modellprognoser til å avgjøre hvordan et gap skal håndteres.
-
-## **9.3 Modellens robusthet og begrensninger**
-
-Den tydeligste empiriske begrensningen er at snapshot-serien kun rakk å bli tre lange innenfor prosjekttidsrammen. To delta-par er nok til å demonstrere åpning, lukking og påminnelse i tråd-livssyklusen (jf. 8.5c), men det er ikke nok til å aktivere suppression-regelens *K = 4*-kriterium for strukturelle gap (kap 6.5). Det betyr at suppression-mekanismen er logisk spesifisert og enhetstestet (Tabell 8.6), men ikke empirisk verifisert mot reelle data. En produksjonsserie på 12 uker eller mer ville gjort det mulig å observere både korrekte strukturelle-klassifiseringer og falske positive (enheter som tilfredsstiller *K = 4* uten å være strukturelle i forstanden 7.5), og dermed gi grunnlag for å justere terskelen oppover eller nedover. Med tre snapshots må modellens strukturelle-håndtering aksepteres som en designhypotese snarere enn et validert resultat, og koordinator må inntil videre manuelt markere de syv front-lastede enhetene fra Tabell 7.3 som strukturelle om suppression skal kunne aktiveres.
-
-En relatert begrensning gjelder magnitudeklassene definert i kap 6.3. Alle observerte negative celler i de tre snapshotene har $G \in \{-1, -2\}$ – det vil si at hele datagrunnlaget faller i den mildeste av de tre magnitudeklassene (Tabell 8.3 og 8.3b). Verken klassen *moderat* ($-5 \leq G \leq -3$) eller *kritisk* ($G \leq -6$) er empirisk truffet. Konsekvensen er dobbelt: for det første er prioritetsutløsningen for høyere klasser kun bekreftet via syntetiske tester (Tabell 8.6), og for det andre er kategorien *forverret som krysser klassegrense* aldri observert på reelle data (Tabell 8.2). Modellens evne til å eskalere fra «middels» til «høy» prioritet ved kryssing av klassegrense er dermed teoretisk plausibel, men ikke demonstrert i drift. Følsomheten for valg av klassegrenser ($-3$ og $-6$) er heller ikke testet med alternative verdier; en grundigere robusthetsanalyse ville variert grensene innenfor rimelige intervaller og målt hvor mange varsler hver justering legger til eller fjerner.
-
-Modellens evne til å håndtere endringer i selve datagrunnlaget mellom snapshots har tre konkrete edge cases som er verdt å nevne. For det første: når en ny Tier 2-rad dukker opp i Power BI – som *60Te Turntable* og *Electric – 54kW Electric HPU* gjorde i snapshot $t_2$ (jf. 5.2.4) – kan delta-detektoren ikke vurdere den fordi den mangler en motpart i forrige snapshot. Resultatet er at et reelt underskudd på fire uker for 60Te Turntable i $t_2$ ikke utløste varsel, og koordinator må stole på den statiske baseline-rapporten for å fange dette. Tilsvarende blir Tier 2-rader som *forsvinner* mellom snapshots stille fjernet uten et eksplisitt lukke-varsel, hvilket kan etterlate aktive tråder i en udefinert tilstand. For det andre: dersom en celle oscillerer raskt mellom snapshots (eksempelvis $G : -1 \to 0 \to -1$ over tre uker), vil modellen utløse henholdsvis et LØST- og deretter et NYTT_GAP-varsel uten å kjenne igjen at det er samme underliggende sak. Sammenligningen er rent parvis, og det finnes ingen mekanisme for å oppdage at en gjenåpnet tråd «egentlig er den samme» som en tidligere lukket. For det tredje: kalenderhorisonten forskyves én uke framover for hvert snapshot, og gap som ligger i de tidligste ukene «glir ut av synshorisonten» når referanseuken passeres – ikke fordi de er løst, men fordi de blir historiske. Modellen behandler dette korrekt (tråden lukkes ikke automatisk), men det betyr at uten manuell oppfølging vil koordinator etter hvert sitte med tråder for kalenderuker som ligger bak nåtid og som derfor ikke lenger er actionable.
-
-Til slutt avhenger modellens terskelfølsomhet av Power BIs underliggende avrundingslogikk (kap 5.2.5). Verdiene som vises i Calendar-cellene er avrundede heltall, mens asset type-summer aggregeres fra desimaler. Det betyr at en celle som vises som $G = 0$ kan ha en underliggende verdi i intervallet $(-0{,}5, 0{,}5)$, og en marginal endring i etterspørsel kan tippe en celle fra $G = 0$ til $G = -1$ uten at det reflekterer en reell ny kontrakt – kun en avrundingsskifte. Severity-regelen demper denne risikoen ved å kreve en samtidig farge-overgang (typisk grønn → lilla eller lilla → svart), men eliminerer den ikke fullstendig. Praktisk konsekvens er at enkelte NYTT_GAP-varsler i grenseland teknisk sett kan være avrundingsartefakter snarere enn nye kontrakter. Effekten ville reduseres betydelig dersom datafangsten skjedde via direkte API-eksport med desimal-presisjon (drøftes i 9.4).
-
-## **9.4 Datafangstmetodens påvirkning på resultatene**
-
-Valget av manuell PNG-skjermavlesning som datafangstmetode (kap 5.2.3) skyldes at prosjektgruppen ikke hadde tilstrekkelige Power BI-rettigheter til å bruke *Analyser i Excel* eller *Eksporter data*, og direkte API-tilgang til Salesforce og Asset Voice var utenfor prosjektets omfang (jf. 1.3-avgrensning). Metoden er reproducerbar og full transparent – hvert PNG-bilde og hver transkripsjons-skript ligger lokalt under `004 data/` med stempel på datofangst – men introduserer to typer risiko som er verdt å diskutere.
-
-Den første er **transkriberingsfeil**. Hver celle leses manuelt og kodes som `(gap_value, severity_band)` i et Python-skript, og selv med god konsentrasjon er det ikke realistisk å oppnå perfeksjon på 800+ celler per snapshot. Sumsjekken som er innebygd i transkripsjons-skriptene (kap 5.2.3) sammenligner leaf-summen mot Power BIs egne asset type- og `Totalt`-rader, og flagger automatisk avvik over ±2 unit-uker per uke. For snapshot $t_2$ rapporterte sjekken 9 av 32 uker med avvik innenfor toleransen og ingen avvik over – det vil si at en eller flere celler kan være feilavlest med ±1 uten at sjekken kan peke ut hvilke. Effekten på den dynamiske endringsdeteksjonen er begrenset så lenge feilen er stabil mellom snapshots (den samme feilen i $t_1$ og $t_2$ gir uendret delta), men kan i ugunstige tilfeller skape et falskt NYTT_GAP eller skjule et reelt. At ingen av de 19 varslene i delta-par 2 ved manuell stikkprøve mot kildebildene viste seg å være feilavlesninger, gir en viss empirisk trygghet, men dette er ikke en formell verifisering av samtlige varsler.
-
-Den andre risikoen er **avrundingsstøy fra Power BIs interne aggregering** (kap 5.2.5). Power BI viser supply- og demand-celler som avrundede heltall, men aggregerer asset type-summer fra de underliggende desimalverdiene. En utstyrsenhet som er delvis tilgjengelig (eksempelvis utleid tre av sju dager, $0{,}43$) vises som $0$ men teller som $0{,}43$ i aggregatet. Konsekvensen er at leaf-summen kan avvike fra Power BIs egen sum med opptil ±2 per uke uten at det reflekterer feil i transkriberingen, og at terskelfølsomheten for marginal-celler påvirkes (en celle som vises som $G = 0$ kan ha underliggende verdi mellom $-0{,}5$ og $+0{,}5$). En direkte CSV- eller API-eksport ville eliminert denne støyen ved å gi tilgang til desimalverdiene rett fra datamodellen, og ville samtidig fjernet det manuelle transkriberings-leddet. Modellens grunnlogikk forblir uendret av dette – $G$-regelen og severity-regelen virker likt på heltall som på desimaler – men presisjon i terskelnære varsler ville bli betydelig høyere.
-
-Et tredje moment er skalerbarhet. Hvert snapshot tok i denne studien om lag 60–90 minutter å fange og transkribere (4–8 PNG-bilder per snapshot × cellevis koding × verifisering mot Power BI). Det er akseptabelt for en tidsbegrenset prosjektperiode med tre snapshots, men ikke for kontinuerlig produksjon der varslingssystemet skal kjøre ukentlig i flere år. En produksjonssetting forutsetter at Motive Offshore etablerer enten direkte API-uttrekk fra Power BI/Salesforce, eller en planlagt eksport av Calendar-tabellen til CSV som kan leses inn automatisk. Modellen i seg selv (kap 6) er bygd opp slik at den ikke har noen avhengighet til PNG-formatet – inngangen er en standard CSV med ti felt (Tabell 5.1) – og kan derfor uten endringer kobles på en automatisert datakilde. Konklusjonen er at datafangstmetoden er den åpenbare flaskehalsen i produksjonssetting, men at den ikke skaper en strukturell begrensning i selve varslingslogikken; den er et IT-prosjekt, ikke et metodeprosjekt.
-
-## **9.5 Praktisk betydning for Motive Offshore**
-
-Dagens manuelle prosess i 4.4 viser at kapasitetsgap først blir prioritert når en selger eller koordinator selv åpner Power BI-dashbordet og ser etter dem. Mellom en kontrakts oppdatering til 75 prosent vinnersannsynlighet og leveransedatoen finnes det ingen automatisk mekanisme som påminner om gap som ikke er handlet på. Konsekvensen, beskrevet i 4.5, er at gap som kunne vært løst billig på tre til seks måneders horisont, ender med hasteanskaffelse, luftfrakt eller fremleie – alle med direkte marginpåvirkning for kontrakten.
-
-Volumet av varsler systemet produserer er moderat og operasjonelt håndterbart. For det første snapshot-paret (Tabell 8.5) gikk 12 varsler ut til tre koordinatorer: 5 til RDS-, 6 til HPUS- og 1 til Spoolers-koordinatoren. For det andre snapshot-paret (Tabell 8.5b) økte volumet til 19 varsler fordelt på fem koordinatorer – Cable Pulling- og Tensioner-koordinator fikk også digest i denne syklusen. Fem av RDS-varslene i delta-par 1 gjelder samme utstyrsenhet over fem sammenhengende uker og presenteres som ett mønster i digesten – det vil si én reell handlingsoppgave for koordinatoren, ikke fem. På denne baselinen vil en enkelt koordinator i praksis motta én ukentlig digest med under ti distinkte handlingspunkter. Det er et nivå som faktisk kan leses og handles på, ikke et varslingsvolum som drukner.
-
-Severity-deltaen, ikke gap-verdien alene, fanger tre av disse tolv varslene (jf. 7.6). Disse tre cellene har $G_{r,a,t}$ med endring mindre enn én enhet, men prosentvis gap har krysset et fargebånd i Power BI. De ville vært usynlige for en regel som kun ser på heltallsverdien, og de er nettopp den typen tidlige signaler kontraktskoordinatoren trenger for å handle før gappet rekker å bli større. At modellen fanger dem styrker svaret på delproblem 4 om tydeligere varsling enn manuell kontroll.
-
-Systemet endrer beslutningssyklusen fra en *pull*-modell, hvor handling betinger at riktig person sjekker dashbordet til riktig tid, til en *push*-modell hvor digesten leveres til ansvarlig koordinator hver mandag. Den ukentlige påminnelsen som er beskrevet i 6.7 og demonstrert i både 50 syntetiske testscenarier (Tabell 8.6) og på reelle data over to delta-par (Tabell 8.5c – der fem av ti aktive tråder lukkes automatisk og fem fortsetter med påminnelse uten manuell inngripen) sikrer at utløste varsler ikke forsvinner ut av synet hvis koordinator ikke rekker å handle med en gang. Avslutningsvarsel ved løst gap lar varslingstråden lukkes formelt, slik at koordinatorens innboks ikke fylles av åpne saker som faktisk er løst.
-
-For at Motive Offshore skal kunne ta systemet i bruk i produksjon, må fire komponenter falle på plass. **Datafangsten** må gå fra manuell skjermavlesning til en automatisert eksport – enten ved tilgangsutvidelse for Power BI sin *Analyser i Excel*, eller via Power BI REST API som beskrevet kort i 9.7. **Recipient-mappingen** i `recipients.yaml` må valideres mot Motives faktiske organisasjonsstruktur og oppdateres ved personalendringer. **SMTP-integrasjonen** er allerede demonstrert ende-til-ende i 8.5.1 mot en Gmail-testkonto, og må i produksjon kun reflenkes til Motives M365-tenant med en dedikert avsenderadresse og passende signatur – selve leveransemekanismen er bevist å fungere. **Suppression-listen** bør gjennomgås manuelt av en flåtekoordinator første gang systemet kjøres i produksjon, slik at kjente strukturelle underdimensjoneringer (jf. 7.5) markeres opp før K=4-kriteriet rekker å samle nok historikk.
-
-Den umiddelbare gevinsten er reduksjon av risikoen for at en kontraktsdrevet kapasitetskonflikt forblir uoppdaget til leveransedato. Det er denne risikoen 4.5 dokumenterer som direkte marginreduserende, og den langsiktige gevinsten ved automatisering er at den reduserende effekten kommer alle uker, ikke bare når en oppmerksom selger tilfeldigvis sjekker det riktige dashbordet til riktig tid.
-
-## **9.6 Generaliserbarhet**
-
-Modellen er bygget rundt fire generelle byggesteiner som ikke er spesifikke for Motive Offshore eller offshore-bransjen: (1) en kapasitetsoversikt strukturert som *enhet × tidsperiode* med supply-, demand- og gap-verdi, (2) en pipeline-mekanisme med probabilistisk fremdrift og en aksjonsterskel (her 75 %), (3) en regelbasert klassifisering av uke-til-uke-endringer og (4) en varslingsmekanisme som ruter strukturerte varsler til ansvarlige mottakere. Det som er spesifikt for Motive er kun verdiene som fyller disse byggesteinene – navnet på Tier 2-utstyrsenhetene, fargeintervallene fra Power BI-rapporten, antallet asset types og koordinator-tilordningen i `recipients.yaml`.
-
-Innenfor Motive-konsernet er overgangen triviell. Selve modellen er **lokasjons-agnostisk**: filtrene Asset Custodian, Project Owner Demand og Region byttes synkront for å kjøre samme analyse for Motive UK, Motive USA eller en hvilken som helst annen lokasjon (jf. 5.2.2). Datasettets størrelse vil variere – andre verksteder har andre utstyrstyper – men pipelinen fra CSV-eksport til varsel er uendret. Det betyr at hvis Motive ønsker å skalere opp, kreves det null kodeendringer; kun nye recipient-mappinger og eventuelle justeringer av suppression- og eksklusjonslistene per verksted.
-
-Andre offshore-utleievirksomheter med tilsvarende dataøkosystem – Salesforce eller annen CRM som CRM, et flåteforvaltningssystem som tilsvarer Asset Voice, og et BI-verktøy som aggregerer dem til en supply/demand-oversikt – kan adoptere modellen med moderat tilpasningsarbeid. Hovedoppgaven er å sette opp datafangsten (eksport eller transkribering) til samme skjema som beskrevet i 5.2, og oppdatere fargenøkkelen i 5.2.1 hvis BI-rapporten bruker andre intervaller. Selve gap-deteksjonen, suppression-reglene og varslingslogikken er datadrevne og krever ingen omskriving. Pipelinen håndterer også dynamisk innstrømning av nye utstyrsenheter mellom snapshots uten endringer i koden – som da *60Te Turntable* og *54kW Electric HPU* dukket opp i $t_2$ (jf. 5.2.4) ble de automatisk inkludert i baseline for neste delta-par.
-
-For tidsoppløsning og granularitet er modellen fleksibel. Uke som tidsenhet er en pragmatisk konsekvens av at Power BI-rapporten oppdateres ukentlig; modellen kan like gjerne kjøres på daglig eller månedlig kadens dersom datakilden støtter det. Tier 2-granulariteten er valgt fordi det er den lokale flåtekoordinatoren faktisk forholder seg til i daglig drift; en annen virksomhet kunne adopterer Tier 1 (asset type), Tier 3 (individuell enhet) eller en helt egen taksonomi uten at deteksjons- og varslingsreglene endres.
-
-Utover offshore-utleie er modellen overførbar til andre kapitalintensive utleiebransjer hvor pipeline-fremdrift møter en kapasitetsbeskrankning over tid – maskinutleie, kran- og løfteutstyr, fartøyssharter, flycharter. Felles for disse er en kombinasjon av kontraktsforhandling med variabel sannsynlighet og en fysisk fleet som ikke kan utvides på kort varsel. Modellen vil **ikke** uten videre fungere i tjenestebaserte virksomheter der "kapasitet" er menneskelig arbeidstid som kan omfordeles fleksibelt; der vil suppression-regelen ha andre semantiske implikasjoner og magnitudeklassene må kalibreres helt på nytt mot tjenestens kost-konsekvensstruktur.
-
-Det helt generelle bidraget fra dette prosjektet er konstruksjonen av en **regelbasert tidsserie-delta-detektor** kombinert med en **prosentbasert alvorlighetsklassifikasjon** (`severity_band`). Denne kombinasjonen er ikke spesifikk for utleiebransjer i det hele tatt og kan benyttes overalt hvor BI-verktøy presenterer prosentbaserte fargekoder over et numerisk grunnlag. Severity-deltaen som komplement til den absolutte gap-deltaen er et metodisk mønster som kan adopteres bredt i regelbasert overvåking av aggregerte BI-rapporter.
-
-## **9.7 Forslag til videre forskning**
-
-Prosjektet etablerer en regelbasert deteksjons- og varslingsmodell som demonstreres på et begrenset datagrunnlag fra ett verksted og to delta-par. Resultatene peker mot fem konkrete forskningsspor som ville bygge videre på løsningen og adressere de begrensningene som er identifisert i 9.3 og 9.4.
-
-**Per-kontrakt-ruting via Salesforce-integrasjon.** Dagens modell ruter varsler per asset type fordi den aggregerte Power BI-tabellen ikke oppgir hvilken kontrakt som forårsaket en gitt gap-celle (jf. 6.7 og avgrensningen i 1.3). En naturlig utvidelse er å hente kontrakts-id fra Salesforce og koble varslet til den spesifikke selgeren som eier den utløsende kontrakten. Det vil flytte varslingen fra koordinator-nivå til selger-nivå og kan forbedre signal-til-støy-forholdet ytterligere. Forskningsspørsmålet er hvor mye reaksjonstiden faktisk reduseres ved å sende varslet direkte til den ansvarlige selgeren, og om koordinatoren fortsatt bør motta en oppsummering for flåtebalansering på tvers av selgere.
-
-**Empirisk kalibrering av magnitudeklassegrenser.** Klassegrensene mildt/moderat/kritisk er i denne studien satt skjønnsmessig ved $-2/-3$ og $-5/-6$ (jf. 6.3). En videre studie bør koble klassegrensene til faktiske kostnadsforskjeller mellom håndteringstiltakene som beskrives i 4.5: hvor mye dyrere er luftfrakt versus sjøtransport som funksjon av gap-størrelsen, hvor stort gap krever fremleie versus nyanskaffelse, og når blir tap av kontrakt det mest sannsynlige utfallet. En slik konsekvensanalyse kan rettferdiggjøre kvantitative klassegrenser og direkte koble magnitudeklassene til varslingsprioritetene i 6.7.
-
-**SARIMA eller andre tidsserieprognoser som supplement.** Modellen reagerer på endringer som har skjedd – det vil si kontrakter som allerede har krysset 75 prosent vinnersannsynlighet. En prognoserende komponent kunne fange opp kontrakter med raskt voksende vinnersannsynlighet under terskelen og varsle proaktivt, ikke reaktivt. Forskningsspørsmålet er hvor verdifullt et "varsel om kommende varsel" er i den daglige driften, sett opp mot risikoen for falske positive prognoser. SARIMA er nevnt i kapittel 3.4 som alternativ til regelbasert deteksjon, og denne studien har valgt regelbasert tilnærming bevisst. Et hybrid-design hvor regelbasert deteksjon er hovedmekanisme og prognosen et supplement, bevarer modellens sporbarhet samtidig som det utvider varslingshorisonten.
-
-**Lengre snapshot-serie i produksjon.** Suppression-regelens $K = 4$-kriterium for *strukturell*-klassifisering kan ikke eksercereres innenfor prosjektperioden, der to delta-par gir maksimalt $K = 3$ konsekutive observasjoner per celle (jf. 9.3). En 12+ ukers serie i produksjon vil tillate empirisk validering av at suppression-listen stabiliserer seg over tid uten å forkaste reelle nye gap, og at delta-detektoren ikke produserer falske positive ved rask oscillasjon eller kontrakter som beveger seg over og under 75 %-terskelen. En slik longitudinell studie kan også gi grunnlag for å justere $K$ opp eller ned basert på observert varslingsvolum og koordinatorens evne til å handle på dem.
-
-**Brukerstudie av varselsformatet.** Digest-formatet beskrevet i 6.7 og demonstrert i 8.5 og 8.5.1 (SMTP-levering til testkonto) er designet basert på antagelser om hva selgere og prosjektkoordinatorer trenger – prioritetsgruppering, mønsterdeteksjon, livssyklus-status. En kvalitativ studie hvor faktiske brukere mottar digester over flere uker og rapporterer signal-til-støy, lesbarhet og handlbarhet, vil avdekke om formatet faktisk støtter den beslutningssyklusen 9.5 argumenterer for. Brukerstudien kan også vurdere foretrukken kanal (e-post, Teams, dedikert dashboard) og påminnelsesfrekvens som ikke nødvendigvis er ukentlig for alle prioritetsnivåer.
-
-Felles for de fem sporene er at de bygger videre på, ikke erstatter, den regelbaserte kjernen som er konstruert i dette prosjektet. Prosjektets bidrag har vært å etablere et fundament som tåler videre forskning – ved å være sporbart, regelbasert, testbart og separasjonsklart mellom dataskjema, deteksjonslogikk og leveransekanal.
-
-10. # **Konklusjon** {#konklusjon}
-
-I oppgavens konklusjon oppsummerer du hovedfunn sett i forhold til problemstilling.  
-Avslutt gjerne med spørsmål til videre forskning, og del personlige refleksjoner du eventuelt måtte ha.
-
-Hva er det viktigste dere har funnet?
-
-* Konkludere i henhold til oppgavens problemstilling. Ofte begynner en konklusjon med å gjenta forskningsspørsmålet:  
-  * «I denne oppgaven har analysert/redegjort for...».  
-  * «Hovedfunnene i oppgaven viser at ....»  
-  * «På tross av de svakhetene som oppgaven har er det indikasjoner om at ...»  
-* I konklusjonen blir det ofte litt gjentagelse fra diskusjon/resultat men det er helt greit. Her skal dere dra frem de viktigste funnene og hvilken betydning det har for deres case.
-
-11. # **Bibliografi** {#bibliografi}
-
-Alaoua, A., & Karim, M. (2025). Intelligent early warning system for supplier delays using dynamic IoT-calibrated probabilistic modeling in smart engineer-to-order supply chains. *Applied System Innovation, 8*(5), Article 124. [https://doi.org/10.3390/asi8050124](https://doi.org/10.3390/asi8050124)
-
-Anthropic. (2026). Claude \[stor språkmodell\]. [https://claude.ai](https://claude.ai)
-
-Cheng, H., He, H., Zheng, S., Zhang, L., Xu, L., & Wang, C. (2025). Sustainable ferry leasing strategies: The option contract perspective. *Frontiers in Marine Science, 12*, Article 1615572\. https://doi.org/10.3389/fmars.2025.1615572
-
-González-Flores, L., Rubiano-Moreno, J., & Sosa-Gómez, G. (2025). The relevance of lead prioritization: A B2B lead scoring model based on machine learning. *Frontiers in Artificial Intelligence, 8*, Article 1554325\. https://doi.org/10.3389/frai.2025.1554325
-
-Koot, M., Mes, M. R. K., & Iacob, M. E. (2021). A systematic literature review of supply chain decision making supported by the Internet of Things and Big Data Analytics. *Computers & Industrial Engineering, 154*, Article 107076\. [https://doi.org/10.1016/j.cie.2020.107076](https://doi.org/10.1016/j.cie.2020.107076)
-
-Oliveira, B. B., Carravilla, M. A., & Oliveira, J. F. (2017). Fleet and revenue management in car rental companies: A literature review and an integrated conceptual framework. *Omega, 71*, 11-26. [https://doi.org/10.1016/j.omega.2016.08.011](https://doi.org/10.1016/j.omega.2016.08.011)
-
-Qi, F., Zhang, L., Zhuo, K., & Ma, X. (2022). Early warning for manufacturing supply chain resilience based on improved grey prediction model. *Sustainability, 14*(20), Article 13125. [https://doi.org/10.3390/su142013125](https://doi.org/10.3390/su142013125)
-
-Rajani, R. L., & Heggde, G. S. (2020). Capacity management strategies in supply chains: A critical review and directions for future research. *International Journal of Business Excellence, 21*(1), 81-117. [https://doi.org/10.1504/IJBEX.2020.106951](https://doi.org/10.1504/IJBEX.2020.106951)
-
-Sonnleitner, B., Kourentzes, N., Ehrig, C., & Pflaum, A. (2025). Forecasting for optimization in road freight transport: A review. *Transportation Research Part E: Logistics and Transportation Review*. https://doi.org/10.1016/j.tre.2025.104174
-
-Wang, X., & Zhen, L. (2025). Fleet deployment and freight allocation for cleaner maritime logistics under demand uncertainty. *Cleaner Logistics and Supply Chain, 17*, Article 100269\. [https://doi.org/10.1016/j.clscn.2025.100269](https://doi.org/10.1016/j.clscn.2025.100269)
-
-Xu, J., Pero, M., & Fabbri, M. (2023). Unfolding the link between big data analytics and supply chain planning. *Technological Forecasting and Social Change, 196*, Article 122805\. [https://doi.org/10.1016/j.techfore.2023.122805](https://doi.org/10.1016/j.techfore.2023.122805) 
-
-12. # **Vedlegg** {#vedlegg}
-
+<p align="center"><small><i>Tabell F.1 Full liste over de 50 syntetiske valideringsscenariene fra `006 analysis/3.5 validering/`, med forventet og faktisk utfall.</i></small></p>
+
+## **Vedlegg G: Varselsobjekt-skjema**
+
+Kap 6.6 beskriver at hvert utløste varsel produseres som et strukturert objekt med 17 felt. Tabell G.1 viser det fulle skjemaet.
+
+| Felt | Type | Eksempel | Beskrivelse |
+|------|------|----------|-------------|
+| `snapshot_t` | dato | `2026-05-14` | Snapshot-dato $s_i$ |
+| `snapshot_t_minus_1` | dato | `2026-05-07` | Forrige snapshot-dato $s_{i-1}$ |
+| `week_start` | dato | `2026-08-17` | Uken cellen gjelder for |
+| `region` | streng | `Motive Norway` | Verkstedet |
+| `asset_type` | streng | `RDS` | Asset type (rutingsnøkkel) |
+| `asset_tier2` | streng | `- 500Te RDS` | Spesifikk utstyrsenhet |
+| `gap_t_minus_1` | heltall | `0` | $G^{(s_{i-1})}$ |
+| `gap_t` | heltall | `-1` | $G^{(s_i)}$ |
+| `severity_t_minus_1` | streng | `green` | `severity_band` i $s_{i-1}$ |
+| `severity_t` | streng | `black` | `severity_band` i $s_i$ |
+| `change_type` | streng | `NYTT_GAP` | Klassifisering fra Tabell 6.3 |
+| `severity_change` | streng | `VERRE_FARGE` | Klassifisering fra 6.4 |
+| `rule_triggered` | streng | `G-regel` | `G-regel` (Tabell 6.4) eller `severity-regel` (Tabell 6.5) |
+| `magnitude_class` | streng | `mildt` | Magnitudeklasse for $G^{(s_i)}$ |
+| `priority` | streng | `høy` | `høy`/`middels`/`lav`/`informasjon` |
+| `is_structural` | boolsk | `false` | Strukturelt-flagg fra suppression-listen |
+| `recipient` | e-post | `rds-koordinator@motive-offshore.no` | Primærmottaker |
+
+<p align="center"><small><i>Tabell G.1 Fullt skjema for varselsobjektet som modellen produserer per utløste celle.</i></small></p>

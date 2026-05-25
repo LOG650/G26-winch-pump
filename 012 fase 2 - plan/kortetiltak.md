@@ -1,74 +1,73 @@
 # Kortetiltak for Prosjektrapport.md
 
-**Status:** Forberedt 2026-05-18, klar for sluttspurten
-**Mål:** Redusere rapporten med 100–150 linjer (~12–17 %) uten å miste substans
-**Når:** Etter snapshot 3 er transkribert og analysert (~22.05)
+**Status:** Oppdatert 2026-05-24, klar for gjennomføring
+**Mål:** Redusere rapporten med ~155 linjer (~14 %) uten å miste substans
+**Utgangspunkt:** Rapporten er **1146 linjer**
 
-## Utgangspunkt
+## Avklart plan – gjennomføres i rekkefølge
 
-Rapporten er **867 linjer** ved utgangspunkt. Tyngdepunkter:
+### Gruppe A – Trygge, åpenbare kutt (~21 linjer)
 
-| Kap | Linjer (omtrent) |
+- [x] **A1.** Fjern draftnotat «Metode og data (kan splittes i to)» og instruksjonsavsnitt «Litt avhengig av omfanget...» (linje 291–293) – 3 linjer
+- [x] **A2.** Reduser kap 4.7 «Datagrunnlag» (~7 linjer) til 1 setning som peker fram mot 5.2 – innholdet dupliseres helt i 5.2 – ~6 linjer
+- [x] **A3.** Fjern mal-instruksjonene i kap 10 (linje 1108–1119) – 12 linjer (kap 10 skrives på nytt etter dette)
+
+### Gruppe B – Sammenslåing av underkapittel (~55 linjer)
+
+- [x] **B1.** Slå sammen kap 4.5 + 4.6 → integrert i 4.4 «Hvordan kapasitetsgap blir oversett, konsekvenser og faktorer» – ~20 linjer
+- [x] **B2.** Slå sammen kap 5.2.1 + 5.2.2 → «Datakilder og filtrering» – ~5 linjer
+- [x] **B3.** Slå sammen kap 5.2.4 + 5.2.5 → «Datasett og kvalitet» – ~5 linjer
+- [x] **B4.** Slå sammen kap 6.5 + 6.6 → «Suppression og eksklusjon» – ~15 linjer
+- [x] **B5.** Slå sammen kap 9.5 + 9.6 → «Praktisk betydning og generaliserbarhet» – ~10 linjer
+
+### Gruppe C – Stramming av nylig skrevne avsnitt (~25 linjer)
+
+- [x] **C1.** Stram kap 9.1 – 9.4: fjerne overlapp mellom 9.1 («Forventede og uventede funn») og 9.3 (begrensninger), redusere gjentagelser – ~25 linjer
+
+### Gruppe D – Vedlegg-flytting (~57 linjer i hovedtekst)
+
+- [x] **D1.** Flytt Figur 8.3 (RDS-digest), Figur 8.4 (Cable Pulling-digest), Figur 8.5 (Tensioner-digest) og Figur 8.6 (Spoolers-digest) til Vedlegg D «Komplette SMTP-digester fra demo 2026-05-23». Behold Figur 8.1 (innboks) og Figur 8.2 (HPUS-digest) i hovedteksten – ~20 linjer
+- [x] **D2.** Kondenser Tabell 8.6 (valideringsscenarier, 19 rader) til en kort oppsummering i kap 8.6 («50 tester fordelt på X kategorier, alle passerer; full liste i Vedlegg F»). Full tabell flyttes til Vedlegg F – ~15 linjer
+- [x] **D3.** Kondenser Tabell 6.6 (varselsobjekt-skjema, 17 rader) til kort liste i kap 6.6 («objektet inneholder kjernefelt X, Y, Z + 8 metadata-felt; fullt skjema i Vedlegg G»). Full tabell flyttes til Vedlegg G – ~22 linjer
+
+## Det som IKKE skal røres
+
+Per beslutning 2026-05-24:
+
+- **Kap 2 Litteratur** – urørt (referanseseksjon)
+- **Kap 3 Teori** – urørt (referanseseksjon, nylig oppdatert med Rajani & Heggde, Oliveira, Alaoua & Karim, Qi et al.)
+- `recipients.yaml`-utdrag i kap 6.7 – beholdes i hovedteksten (brukers valg)
+- Tabell 5.1 (fargenøkkelen) – kritisk for forståelse
+- Tabell 5.3 (snapshot-serien) – nødvendig for reproduserbarhet
+- Kap 6.3 og 6.4 – kjerna i modellbeskrivelsen
+- Kap 7.6 / 7.6.1 / 7.6.2 – eneste empiriske validering av modellverdi
+- Tabell 8.7 (delproblem-kobling) – kort og tett kobla til diskusjonen
+- Figur 6.2 (endringstype-fase) – forklarer kjerneregelen
+
+## Senere arbeid (etter Kap 10)
+
+- [ ] Vedlegg A: KI-bruk-erklæring (mal ventes fra skolen)
+- [ ] Vedlegg B: Taushetserklæring (krever signatur)
+- [ ] Vedlegg C: Kravmatrise (kobling mellom WBS-akseptansekriterier og leveranser) – lages etter Kap 10
+- [ ] Vurder ytterligere vedleggs-flytting etter ferdig kap 10
+
+## Forventet resultat etter alle tiltak
+
+| Tiltak | Spart |
 |---|---|
-| 6 Modellering | ~155 |
-| 7 Analyse | ~140 |
-| 8 Resultat | ~110 |
-| 9 Diskusjon | ~90 |
-| 5 Metode og data | ~82 |
-| 4 Casebeskrivelse | ~55 |
+| Gruppe A | 21 linjer |
+| Gruppe B | 55 linjer |
+| Gruppe C | 25 linjer |
+| Gruppe D | 57 linjer |
+| **Sum** | **~158 linjer** |
 
-## Tiltak gruppert etter innsats
+**Rapport går fra 1146 → ~990 linjer (14 % kutt).** Vedlegget vokser med ~50 linjer kondenserte tabeller og figurer.
 
-### 🔧 Lavthengende rydding (5–10 min)
+## Sjekkliste etter alle kutt
 
-- [ ] Fjern draftnotat "Metode og data (kan splittes i to)" (kap 5-tittel, linje 291)
-- [ ] Fjern instruksjonsavsnitt "Litt avhengig av omfanget..." (linje 293)
-- [ ] Reduser kap 4.7 (Datagrunnlag, ~10 linjer) til én setning som peker fram mot 5.2 – innholdet dupliseres allerede der
-
-### 🔄 Sammenslåinger uten innholdsoffer (~30 min totalt)
-
-| Slå sammen | Til | Spart |
-|---|---|---|
-| Kap 3.1 + 3.2 | "Kapasitet og gap" – bruker samme G/S/D-formel | ~15 linjer |
-| Kap 3.3 + 3.4 | "Kapasitetsutnyttelse og beslutningslogikk" – varslingsregel bygger på utnyttelse | ~10 linjer |
-| Kap 4.5 + 4.6 | Integrer i 4.4 som siste avsnitt | ~20 linjer |
-| Kap 5.2.1 + 5.2.2 | "Datakilder og filtrering" – filtre er egenskap ved datakilde | ~5 linjer |
-| Kap 5.2.4 + 5.2.5 | "Datasett og kvalitet" | ~5 linjer |
-| Kap 6.5 + 6.6 | "Suppression og eksklusjon" – begge filter-mekanismer | ~10 linjer |
-| Kap 9.5 + 9.6 | "Praktisk betydning og generaliserbarhet" | ~10 linjer |
-
-**Sum: ~75 linjer (~9 %)**
-
-### ⚠️ Innhold som krever beslutning
-
-- [ ] **Kap 7 vs 8 overlapp.** Skolen krever begge (Analyse med tolkning, Resultat kun presentasjon). I dag dupliserer kap 8 tabeller fra kap 7. Mulighet: kap 8 reduseres til **referanser** ("Resultatene er presentert i Tabell 7.5 og 7.6; her oppsummeres koblingen til delproblemene"). **Potensielt 40–60 linjer spart**, men risiko for brudd med malens formelle krav.
-- [ ] **recipients.yaml-utdrag i kap 6 (linje 514).** Vurder å flytte til vedlegg (kap 12). **~15 linjer spart.**
-- [ ] **Kap 9 placeholder-blokker.** Skriv kun de som faktisk fyller en drøftingsfunksjon, slett resten.
-
-### 🚫 Hva som ikke skal røres
-
-- Kap 5.2.1 (fargenøkkelen) – kritisk for forståelse av datasettet
-- Kap 6.3–6.4 (modellbeskrivelsen) – kjerne i hele rapporten
-- Kap 7.6 (uke-til-uke-analysen) – eneste empiriske validering av modellverdi
-- Tabell 5.2 (filterinnstillinger) og Tabell 5.3 (snapshot-serien) – nødvendige for reproduserbarhet
-- Tabell/figur-numre etter renummerering – kontroller alle tekstreferanser etter sammenslåing
-
-## Anbefalt rekkefølge i sluttspurten
-
-1. **Rydding** (5 min): draftnotater + kap 4.7
-2. **Kap 3-restrukturering** (15 min): slå sammen 3.1+3.2, 3.3+3.4
-3. **Kap 4-restrukturering** (15 min): kollaps 4.5+4.6 inn i 4.4
-4. **Kap 5+6 underseksjoner** (20 min)
-5. **Kap 7/8-vurdering** (30 min): krever beslutning – diskuter før kutt
-6. **Kap 9 placeholders** (15 min): fjern eller fyll
-
-**Estimert total innsats: ~1,5 timer**
-**Forventet kutt: 100–150 linjer (~12–17 %)**
-
-## Sjekkliste etter kutt
-
-- [ ] Alle tabell- og figurnumre renummeret konsistent
+- [ ] Alle tabell- og figurnumre renummerert konsistent (særlig kap 8 etter D1/D2/D3)
 - [ ] Alle interne kryssreferanser oppdatert (Tabell X.Y, Figur X.Y, kap X.Y)
-- [ ] Innholdsfortegnelse (hvis det finnes) regenerert
+- [ ] Innholdsfortegnelse regenerert
 - [ ] Lest gjennom hele rapporten for å sjekke at sammenslåtte avsnitt flyter naturlig
 - [ ] Rapportsjekkliste i AGENTS.md gått gjennom
+- [ ] Sjekke at ingen av de 10 bibliografi-referansene blir foreldreløse etter sammenslåing
