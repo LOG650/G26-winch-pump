@@ -1096,7 +1096,9 @@ For Motive Offshore betyr resultatene at det er mulig å gå fra en *pull*-model
 
 Alaoua, A., & Karim, M. (2025). Intelligent early warning system for supplier delays using dynamic IoT-calibrated probabilistic modeling in smart engineer-to-order supply chains. *Applied System Innovation, 8*(5), Article 124. [https://doi.org/10.3390/asi8050124](https://doi.org/10.3390/asi8050124)
 
-Anthropic. (2026). *Claude Sonnet 4.5 og Claude Opus 4.7* \[stor språkmodell, versjoner brukt januar–mai 2026\]. Brukt som støtte til kodeforslag, feilsøking og språkvask; ikke som selvstendig analysemodell. Se Vedlegg A for KI-bruk-erklæring. [https://claude.ai](https://claude.ai)
+Anthropic. (2026). *Claude* (Sonnet 4.5 og Opus 4.7) \[stor språkmodell\]. [https://claude.ai](https://claude.ai)
+
+Anthropic. (2026). *Claude Code* (versjon 2.1.4.40) \[programvare\]. [https://www.anthropic.com/claude-code](https://www.anthropic.com/claude-code)
 
 Cheng, H., He, H., Zheng, S., Zhang, L., Xu, L., & Wang, C. (2025). Sustainable ferry leasing strategies: The option contract perspective. *Frontiers in Marine Science, 12*, Article 1615572\. https://doi.org/10.3389/fmars.2025.1615572
 
@@ -1120,7 +1122,7 @@ Xu, J., Pero, M., & Fabbri, M. (2023). Unfolding the link between big data analy
 
 ## **Vedlegg A: KI-bruk-erklæring**
 
-Anthropic Claude (Sonnet 4.5 og Opus 4.7) er brukt som støtte til kodeforslag, feilsøking og språkvask gjennom prosjektperioden. KI-verktøyet er ikke brukt som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk. Alle metodiske valg, modellbeslutninger og analysetolkninger er gjort av prosjektgruppen. Signert KI-bruk-erklæring etter NTNUs mal legges ved innlevering.
+Prosjektgruppen har brukt to KI-verktøy fra Anthropic gjennom prosjektperioden: *Claude* (chat-grensesnittet på claude.ai, modellene Sonnet 4.5 og Opus 4.7) og *Claude Code* (Anthropics offisielle kommandolinjeverktøy som bruker de samme modellene). Verktøyene er brukt som støtte til kodeforslag, feilsøking, refaktorering og språkvask. Ingen av verktøyene er brukt som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk. Alle metodiske valg, modellbeslutninger og analysetolkninger er gjort av prosjektgruppen. Signert KI-bruk-erklæring etter Høgskolen i Moldes mal legges ved innlevering.
 
 ## **Vedlegg B: Konfidensialitet**
 
