@@ -103,9 +103,7 @@ Innhold
 
 [3.2 Tilgjengelighet og kapasitetsgap	14](#3.2-tilgjengelighet-og-kapasitetsgap)
 
-[3.3 Kapasitetsutnyttelse og servicenivå	15](#3.3-kapasitetsutnyttelse-og-servicenivå)
-
-[3.4 Regelbasert varslingslogikk	15](#3.4-regelbasert-varslingslogikk)
+[3.3 Regelbasert varslingslogikk	15](#3.3-regelbasert-varslingslogikk)
 
 [**4.0 Casebeskrivelse	16**](#casebeskrivelse)
 
@@ -173,15 +171,11 @@ Innhold
 
 [8.3 Krysstabulering: endringstype × magnitudeklasse	43](#8.3-krysstabulering)
 
-[8.4 Suppression-effekt på varslingsvolum	44](#8.4-suppression-effekt-på-varslingsvolum)
+[8.4 Varselsutløsing og prioritering	45](#8.4-varselsutløsing-og-prioritering)
 
-[8.5 Varselsutløsing og prioritering	45](#8.5-varselsutløsing-og-prioritering)
+[8.4.1 Demonstrasjon av SMTP-leveranse	47](#8.4.1-demonstrasjon-av-smtp-leveranse)
 
-[8.5.1 Demonstrasjon av SMTP-leveranse	47](#8.5.1-demonstrasjon-av-smtp-leveranse)
-
-[8.6 Validering mot syntetiske scenarier	49](#8.6-validering-mot-syntetiske-scenarier)
-
-[8.7 Resultatenes kobling til delproblemene	50](#8.7-resultatenes-kobling-til-delproblemene)
+[8.5 Validering mot syntetiske scenarier	49](#8.5-validering-mot-syntetiske-scenarier)
 
 [**9.0 Diskusjon	51**](#diskusjon)
 
@@ -283,46 +277,35 @@ Sonnleitner et al. (2025) peker på at prognoser i transportlogistikk ofte bruke
 
 # **3. Teori**
 
-Dette kapittelet presenterer det teoretiske rammeverket som ligger til grunn for metodevalg og senere modellering. Kapittelet avgrenser seg til sentrale begreper og prinsipper som brukes for å forstå kapasitetsstyring, tilgjengelighet, kapasitetsgap, kapasitetsutnyttelse og regelbasert varsling. Tidligere forskning er behandlet i litteraturkapittelet, mens den konkrete matematiske modellen og implementeringen beskrives senere i modellering- og metodekapittelet.
+Dette kapittelet presenterer det teoretiske rammeverket for metodevalg og modellering. Tidligere forskning er behandlet i litteraturkapittelet, mens den konkrete modellen beskrives i kapittel 6.
 
 ## **3.1 Kapasitetsstyring og ressursbalanse**
 
-Kapasitetsstyring handler om å balansere tilgjengelige ressurser mot etterspørsel innenfor en gitt tidsperiode, og er en sentral disiplin i operations management og supply chain-faget (Rajani & Heggde, 2020). I logistikk innebærer dette å sikre at virksomheten har nok kapasitet til å dekke behovet, uten at ressursene blir stående unødvendig ubrukt. For lav kapasitet kan føre til forsinkelser, tapte inntekter og behov for dyre hastetiltak, mens for høy kapasitet kan gi lav ressursutnyttelse og økte kostnader (Cheng et al., 2025; Wang & Zhen, 2025).
+Kapasitetsstyring handler om å balansere tilgjengelige ressurser mot etterspørsel innenfor en gitt tidsperiode, og er en sentral disiplin i operations management og supply chain-faget (Rajani & Heggde, 2020). For lav kapasitet gir forsinkelser, tapte inntekter og dyre hastetiltak; for høy kapasitet gir lav ressursutnyttelse og økte kostnader (Cheng et al., 2025; Wang & Zhen, 2025).
 
-I et utleiebasert system kan kapasitet forstås som tilgjengelig utstyr, mens etterspørsel representerer kundebehov i bestemte perioder. Ressursbalansen kan derfor uttrykkes som forholdet mellom tilgjengelig kapasitet og etterspørsel:
+I et utleiebasert system uttrykkes ressursbalansen som forholdet mellom tilgjengelig kapasitet og etterspørsel:
 
-Gr,a,t \=Sr,a,t-Dr,a,t
+$$G_{r,a,t} = S_{r,a,t} - D_{r,a,t}$$
 
-der Gr,a,t er kapasitetsbalansen, Sr,a,t er tilgjengelig kapasitet, og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Dersom Gr,a,t\<0, overstiger etterspørselen tilgjengelig kapasitet, og det oppstår et kapasitetsgap.
+der $G_{r,a,t}$ er kapasitetsbalansen, $S_{r,a,t}$ er tilgjengelig kapasitet, og $D_{r,a,t}$ er etterspørsel for region $r$, utstyrsklasse $a$ og tidsperiode $t$. Dersom $G_{r,a,t} < 0$, overstiger etterspørselen tilgjengelig kapasitet og det oppstår et kapasitetsgap.
 
 ## **3.2 Tilgjengelighet og kapasitetsgap**
 
-Tilgjengelighet beskriver hvor mye kapasitet som faktisk kan brukes i en bestemt periode. I et utleiebasert system er ikke alt utstyr tilgjengelig samtidig, fordi enkelte enheter allerede kan være leid ut, reservert eller bundet til andre oppdrag, og kapasitetsvurderingen må derfor ta hensyn til både eksisterende forpliktelser og nye behov (Oliveira et al., 2017).
-Et kapasitetsgap oppstår når etterspørselen er større enn tilgjengelig kapasitet. Dette kan uttrykkes som:  
-Sr,a,t \< Dr,a,t
+Tilgjengelighet beskriver hvor mye kapasitet som faktisk kan brukes i en bestemt periode. I et utleiebasert system er ikke alt utstyr tilgjengelig samtidig fordi enkelte enheter allerede kan være leid ut, reservert eller bundet til andre oppdrag, og kapasitetsvurderingen må ta hensyn til både eksisterende forpliktelser og nye behov (Oliveira et al., 2017). Et kapasitetsgap oppstår når
 
-der Sr,a,t er tilgjengelig kapasitet og Dr,a,t er etterspørsel for region r, utstyrsklasse a og tidsperiode t. Når denne betingelsen er oppfylt, betyr det at virksomheten ikke har nok tilgjengelig utstyr til å dekke behovet i den aktuelle perioden uten ekstra tiltak. Slike gap er særlig viktige å oppdage tidlig, fordi tiltak som omdisponering, innleie eller nyanskaffelse ofte krever planleggingstid (Koot et al., 2021; Xu et al., 2023).
+$$S_{r,a,t} < D_{r,a,t}.$$
 
-## **3.3 Kapasitetsutnyttelse og servicenivå**
+Slike gap er særlig viktige å oppdage tidlig fordi tiltak som omdisponering, innleie eller nyanskaffelse krever planleggingstid (Koot et al., 2021; Xu et al., 2023). Dersom et gap først oppdages nær leveransedato, svekkes servicenivået fordi virksomheten må bruke hastetiltak for å levere som planlagt – og det er nettopp denne avveiingen mellom kapasitet, gap og servicenivå som motiverer behovet for tidlig deteksjon.
 
-Kapasitetsutnyttelse beskriver hvor stor del av tilgjengelig kapasitet som brukes til å dekke etterspørsel. Høy kapasitetsutnyttelse kan være positivt fordi ressursene brukes effektivt, men svært høy utnyttelse gir mindre fleksibilitet dersom nye behov oppstår, og avveiingen mellom effektivitet og bufferkapasitet er sentral i kapasitetsplanlegging under usikkerhet (Cheng et al., 2025; Wang & Zhen, 2025). Kapasitetsutnyttelse kan uttrykkes som:
+## **3.3 Regelbasert varslingslogikk**
 
-Ur,a,t=Dr,a,t/ Sr,a,t
+Regelbasert varslingslogikk innebærer at systemet bruker faste betingelser for å avgjøre når et varsel skal utløses. I stedet for å predikere fremtidig etterspørsel kontrollerer systemet om bestemte forhold er oppfylt i datagrunnlaget. En slik tilnærming, der varsler utløses ved at observerte verdier krysser forhåndsdefinerte terskler, omtales i nyere supply chain-litteratur som en *baseline probabilistic alert system* og brukes typisk som referansemodell for mer avanserte IoT- og prognosebaserte varslingssystemer (Alaoua & Karim, 2025). Til forskjell fra prediktive prognosemodeller (Sonnleitner et al., 2025) tar regelbaserte løsninger utgangspunkt i det som faktisk står i datagrunnlaget, og er hensiktsmessige når underliggende usikkerhet allerede er reflektert i et eksisterende sannsynlighetsfilter – som 75 %-terskelen i Motives pipeline.
 
-der Ur,a,t er kapasitetsutnyttelsen, Dr,a,t er etterspørsel, og Sr,a,t er tilgjengelig kapasitet for region r, utstyrsklasse a og tidsperiode t. Dersom Ur,a,t\>1, overstiger etterspørselen tilgjengelig kapasitet.
+Formålet er å oppdage kapasitetsgap basert på oppdaterte data, slik at organisasjonen får tidlig varsel før gapene materialiserer seg som operative problemer (Qi et al., 2022). Et varsel utløses når tilgjengelig kapasitet ikke dekker etterspørselen og behovet samtidig vurderes som relevant nok til å kreve oppfølging:
 
-Servicenivå handler om evnen til å dekke kundebehov innen avtalt tid og omfang. Dersom et kapasitetsgap oppstår, kan servicenivået svekkes fordi virksomheten må bruke ekstra tiltak for å levere som planlagt. Sammenhengen mellom kapasitetsutnyttelse og servicenivå forklarer derfor hvorfor kapasitetsgap bør identifiseres før de blir operative problemer.
+$$A_{r,a,t} = 1 \text{ hvis } G_{r,a,t} < 0 \text{ og } p_j \geq 0{,}75$$
 
-## **3.4 Regelbasert varslingslogikk**
-
-Regelbasert varslingslogikk innebærer at systemet bruker faste betingelser for å avgjøre når et varsel skal utløses. I stedet for å predikere fremtidig etterspørsel, kontrollerer systemet om bestemte forhold er oppfylt i datagrunnlaget. En slik tilnærming, der varsler utløses ved at observerte verdier krysser forhåndsdefinerte terskler, omtales i nyere supply chain-litteratur som en *baseline probabilistic alert system* og brukes typisk som referansemodell for mer avanserte IoT- og prognosebaserte varslingssystemer (Alaoua & Karim, 2025). Til forskjell fra prediktive prognosemodeller (Sonnleitner et al., 2025) tar regelbaserte løsninger utgangspunkt i det som faktisk står i datagrunnlaget, og er hensiktsmessige når underliggende usikkerhet allerede er reflektert i et eksisterende sannsynlighetsfilter – som 75 %-terskelen i Motives pipeline. Samlet gir teorien et grunnlag for metode- og modellkapittelet: kapasitetsstyring forklarer hvorfor supply og demand må sammenlignes, kapasitetsgap forklarer hva systemet skal oppdage, kapasitetsutnyttelse og servicenivå forklarer hvorfor gapene har operasjonell betydning, og regelbasert varslingslogikk forklarer hvorfor løsningen kan bygges som en kontrollmodell fremfor en prediksjonsmodell.
-
-Formålet er å oppdage konkrete avvik eller kapasitetsgap basert på oppdaterte data, slik at organisasjonen får tidlig varsel før gapene materialiserer seg som operative problemer (Qi et al., 2022).  
-I denne typen løsning kan et varsel utløses når tilgjengelig kapasitet ikke dekker etterspørselen, og når behovet samtidig vurderes som relevant nok til å kreve oppfølging. Dette kan uttrykkes som en enkel beslutningsregel:
-
-Ar,a,t \= 1 hvis Gr,a,t \< 0 og pj ≥ 0,75
-
-Her betyr Ar,a,t=1 at et varsel utløses, Gr,a,t er kapasitetsbalansen, og pj er vinnersannsynligheten for kontrakt j. Regelen viser at varsel bare sendes når det finnes et kapasitetsgap, og når kontrakten har nådd en definert sannsynlighetsterskel. Regelbasert logikk gir et tydelig beslutningsgrunnlag fordi kriteriene for varsel er eksplisitte og kan testes mot datagrunnlaget.
+der $A_{r,a,t} = 1$ markerer at et varsel utløses og $p_j$ er vinnersannsynligheten for kontrakt $j$. Samlet gir teorien et grunnlag for metode- og modellkapittelet: kapasitetsstyring forklarer hvorfor supply og demand må sammenlignes, kapasitetsgap forklarer hva systemet skal oppdage, og regelbasert varslingslogikk forklarer hvorfor løsningen kan bygges som en kontrollmodell fremfor en prediksjonsmodell.
 
 # **4. Casebeskrivelse**
 
@@ -488,7 +471,7 @@ Etter forhåndsfiltrering er datasettet klart for de to deteksjonsreglene som be
 
 ## **6.3 Statisk gap-deteksjon**
 
-Den grunnleggende regelen for statisk gap-deteksjon er definert i kapittel 3.4 og operasjonaliseres i modellen som:
+Den grunnleggende regelen for statisk gap-deteksjon er definert i kapittel 3.3 og operasjonaliseres i modellen som:
 
 $$A_{r,a,t}^{(s)} = 1 \quad \text{hvis} \quad G_{r,a,t}^{(s)} < 0$$
 
@@ -602,7 +585,7 @@ cc:                     salg@motive-offshore.no
 
 Asset type som rutingsnøkkel er pragmatisk: Power BI-tabellen oppgir ikke kontrakts-id, så modellen kan ikke route per kontrakt eller selger. Per-kontrakt-ruting ville krevd Salesforce-integrasjon (utenfor omfanget, jf. 1.3) og er omtalt som produksjonsanbefaling i 9.6.
 
-Hvert utløst varsel produseres som et strukturert objekt med 17 felt (fullt skjema i Vedlegg F) og videreføres til varslingsmodulen `gap_alerting.py` (8.5). Varslene aggregeres til **én digest-e-post per mottaker per snapshot**, gruppert etter endringstype og med mønster-deteksjon som slår sammen sammenhengende uker for samme asset. Aktive (ulukkede) gap genererer en **ukentlig påminnelse** inntil cellen blir *løst* eller *forbedret*.
+Hvert utløst varsel produseres som et strukturert objekt med 17 felt (fullt skjema i Vedlegg F) og videreføres til varslingsmodulen `gap_alerting.py` (8.4). Varslene aggregeres til **én digest-e-post per mottaker per snapshot**, gruppert etter endringstype og med mønster-deteksjon som slår sammen sammenhengende uker for samme asset. Aktive (ulukkede) gap genererer en **ukentlig påminnelse** inntil cellen blir *løst* eller *forbedret*.
 
 # **7. Analyse**
 
@@ -651,7 +634,7 @@ Tensioner, RDS og Cable Pulling machine er de asset typene som har vedvarende ne
 
 ## **7.4 De mest utsatte utstyrsenhetene**
 
-Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker. Figur 7.4 og Figur 7.5 viser samme sortering henholdsvis som søylediagram og som heatmap mot ukene.
+Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker, og Figur 7.4 viser samme sortering som heatmap mot ukene.
 
 | Asset type | Asset (Tier 2) | Kumulativt gap |
 |--------|---------------|----------------|
@@ -666,13 +649,8 @@ Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker. Figu
 <p align="center"><small><i>Tabell 7.2 Utstyrsenhetene med negativt kumulativt gap over snapshot-perioden 2026-05-11 til 2026-12-28.</i></small></p>
 
 <div align="center">
-  <img src="../006 analysis/3.2 eda/fig_topp10_verste_assets.png" alt="Enheter med negativt kumulativt gap" width="80%">
-  <p align="center"><small><i>Figur 7.4 Utstyrsenheter med negativt kumulativt gap.</i></small></p>
-</div>
-
-<div align="center">
   <img src="../006 analysis/3.2 eda/fig_gap_heatmap_topp30.png" alt="Heatmap utstyrsenheter" width="95%">
-  <p align="center"><small><i>Figur 7.5 Heatmap av gap-verdi per uke for de 24 utstyrsenhetene i Motive Norway-baselinen.</i></small></p>
+  <p align="center"><small><i>Figur 7.4 Heatmap av gap-verdi per uke for de 24 utstyrsenhetene i Motive Norway-baselinen.</i></small></p>
 </div>
 
 To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$, etterfulgt av *Horizontal – 2 track – 15Te Horizontal Tensioner* med $-16$ og *500Te RDS* med $-14$. Alle syv enhetene har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.5).
@@ -732,16 +710,16 @@ Severity-deltaen flagger i tillegg ti celler som *verre farge* og to som *bedre 
 
 <p align="center"><small><i>Tabell 7.6 Endring i severity_band mellom snapshot 2026-05-07 og 2026-05-14. Tre av de ti «verre farge»-cellene fanges kun gjennom severity-dimensjonen (G-regelen utløser ikke varsel), og illustrerer empirisk hvorfor `severity_band` er fanget som eget attributt jf. 5.2.1.</i></small></p>
 
-Fordelingen av endringer over kalenderhorisonten og over asset types er vist i Figur 7.6 og 7.7. Endringene konsentreres i juli–september, det vil si i det tidsvinduet som har høyest tetthet av eksisterende negative celler i baselinen, og fordeler seg på asset types RDS og HPUS. Ingen endringer i kategoriene *forverret*, *forbedret* eller *løst* observeres i dette første delta-paret – en konsekvens av at perioden mellom snapshotene kun er én uke, og at de fleste underdekninger i baselinen ligger på $G \in \{-1, -2\}$ uten rom for ytterligere forverring innenfor magnitudeklassen *mildt*.
+Fordelingen av endringer over kalenderhorisonten og over asset types er vist i Figur 7.5 og 7.7. Endringene konsentreres i juli–september, det vil si i det tidsvinduet som har høyest tetthet av eksisterende negative celler i baselinen, og fordeler seg på asset types RDS og HPUS. Ingen endringer i kategoriene *forverret*, *forbedret* eller *løst* observeres i dette første delta-paret – en konsekvens av at perioden mellom snapshotene kun er én uke, og at de fleste underdekninger i baselinen ligger på $G \in \{-1, -2\}$ uten rom for ytterligere forverring innenfor magnitudeklassen *mildt*.
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta1.png" alt="Endringer per uke - delta-par 1" width="80%">
-  <p align="center"><small><i>Figur 7.6 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 1 (2026-05-07 ↔ 2026-05-14). Stabile celler er ekskludert for lesbarhet.</i></small></p>
+  <p align="center"><small><i>Figur 7.5 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 1 (2026-05-07 ↔ 2026-05-14). Stabile celler er ekskludert for lesbarhet.</i></small></p>
 </div>
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta1.png" alt="Endringer per asset type - delta-par 1" width="80%">
-  <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer per asset type for delta-par 1. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
+  <p align="center"><small><i>Figur 7.6 Fordeling av cellevise endringer per asset type for delta-par 1. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
 </div>
 
 ### **7.6.1 Andre delta-par 2026-05-14 ↔ 2026-05-21**
@@ -770,16 +748,16 @@ Alle fire dynamiske kategorier er nå aktivert. De åtte *løste* gapene fordele
 
 <p align="center"><small><i>Tabell 7.8 Endring i severity_band mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
 
-Fordelingen av endringene over kalenderhorisonten og per asset type for delta-par 2 er vist i Figur 7.8 og 7.9. Endringene grupperer seg igjen i sommer- og tidlig høstmåneder – i tråd med at det er denne perioden som har høyest tetthet av eksisterende negative og lilla celler i baselinen og dermed flest celler som er innenfor «én klassebytte» fra et nytt eller løst gap.
+Fordelingen av endringene over kalenderhorisonten og per asset type for delta-par 2 er vist i Figur 7.7 og 7.9. Endringene grupperer seg igjen i sommer- og tidlig høstmåneder – i tråd med at det er denne perioden som har høyest tetthet av eksisterende negative og lilla celler i baselinen og dermed flest celler som er innenfor «én klassebytte» fra et nytt eller løst gap.
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta2.png" alt="Endringer per uke - delta-par 2" width="80%">
-  <p align="center"><small><i>Figur 7.8 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 2 (2026-05-14 ↔ 2026-05-21). Stabile celler er ekskludert for lesbarhet.</i></small></p>
+  <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 2 (2026-05-14 ↔ 2026-05-21). Stabile celler er ekskludert for lesbarhet.</i></small></p>
 </div>
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta2.png" alt="Endringer per asset type - delta-par 2" width="80%">
-  <p align="center"><small><i>Figur 7.9 Fordeling av cellevise endringer per asset type for delta-par 2. Cable Pulling machine og RDS er mest aktive – Cable bidrar med både to nye gap og tre løste gap, RDS med tre løste gap.</i></small></p>
+  <p align="center"><small><i>Figur 7.8 Fordeling av cellevise endringer per asset type for delta-par 2. Cable Pulling machine og RDS er mest aktive – Cable bidrar med både to nye gap og tre løste gap, RDS med tre løste gap.</i></small></p>
 </div>
 
 ### **7.6.2 Varslingstråder over to delta-par**
@@ -801,7 +779,7 @@ Varslingsmodulen `gap_alerting.py` (kap 6.6) holder en persistent tråd-tilstand
 
 <p align="center"><small><i>Tabell 7.9 Livssyklus for de ti trådene som ble åpnet i delta-par 1 (sju via G-regelen og tre via severity-regelen). Etter delta-par 2 er fem tråder lukket og fem fortsetter til neste snapshot. I tillegg åpnes fire nye tråder i delta-par 2 (de fire NYTT_GAP-cellene fra Tabell 7.7), slik at trådtilstanden går fra 10 til 9.</i></small></p>
 
-Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (RDS-mønsteret som smelter bort uke for uke) og *engangsavklaring* (158KW HPU, 30kW HPU). Tråder som krever vedvarende oppfølging overlever til ny påminnelse, konsistent med kravet i 6.6. Den underliggende mekanikken dekkes i 8.5.
+Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (RDS-mønsteret som smelter bort uke for uke) og *engangsavklaring* (158KW HPU, 30kW HPU). Tråder som krever vedvarende oppfølging overlever til ny påminnelse, konsistent med kravet i 6.6. Den underliggende mekanikken dekkes i 8.4.
 
 # **8. Resultat**
 
@@ -819,22 +797,11 @@ Den statiske gap-deteksjonsregelen $A_{r,a,t}^{(s)} = 1$ hvis $G_{r,a,t}^{(s)} <
 
 <p align="center"><small><i>Tabell 8.1 Fordeling av utløste statiske gap-celler i baseline-snapshotet etter magnitudeklasse.</i></small></p>
 
-Fordelingen etter asset type er vist i Tabell 8.1b. Tensioner, RDS og HPUS bidrar med flest negative celler; Spoolers, LMA machines og Under rollers har ingen.
-
-| Asset type | Antall negative celler | Andel av 77 |
-|------------|------------------------|-------------|
-| RDS | 23 | 29,9 % |
-| Tensioner | 22 | 28,6 % |
-| HPUS | 19 | 24,7 % |
-| Winch | 10 | 13,0 % |
-| Cable Pulling machine | 3 | 3,9 % |
-| Spoolers, LMA machines, Under rollers | 0 | 0,0 % |
-
-<p align="center"><small><i>Tabell 8.1b Fordeling av utløste statiske gap-celler i baseline-snapshotet per asset type.</i></small></p>
+Fordelt på asset type bidrar RDS, Tensioner og HPUS med flest negative celler (henholdsvis 23, 22 og 19 av 77), Winch og Cable Pulling machine med 10 og 3, mens Spoolers, LMA machines og Under rollers har ingen.
 
 ## **8.2 Uke-til-uke-deltadeteksjon**
 
-Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.5 og bygges ikke om her. Severity-deltaen er gitt i Tabell 7.6. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten og per asset type er visualisert i Figur 7.6 og 7.7.
+Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.5 og bygges ikke om her. Severity-deltaen er gitt i Tabell 7.6. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten og per asset type er visualisert i Figur 7.5 og 7.7.
 
 For det andre delta-paret 2026-05-14 ↔ 2026-05-21 (Tabell 7.7) utløser deltadetektoren 4 *nye gap* og 8 *løste gap* via $G$-regelen, samt 2 *forbedrede gap*. Severity-deltaen flagger 4 *verre farge*-celler og 11 *bedre farge*-celler (Tabell 7.8). I motsetning til første delta-par er nå alle de fire dynamiske kategoriene aktivert, noe som gir den første empiriske observasjonen av en hel livssyklus i datasettet – fra åpning til løsning. Tabell 8.2 oppsummerer regel-utløsingene for begge delta-parene.
 
@@ -880,20 +847,9 @@ Tabell 8.3b viser den tilsvarende fordelingen for delta-paret 2026-05-14 ↔ 202
 
 <p align="center"><small><i>Tabell 8.3b Fordeling av utløste gap-åpnende varsler etter regel og magnitudeklasse for delta-par 2. Informasjonsvarsler (8 LØST, 2 FORBEDRET og 2 SKJULT_LOST_GAP) er ikke inkludert.</i></small></p>
 
-## **8.4 Suppression-effekt på varslingsvolum**
+## **8.4 Varselsutløsing og prioritering**
 
-Suppression-regelen i 6.5 evaluerer hvert utløste varsel mot suppression-listen over strukturelle assets. For begge snapshot-parene er listen tom – ingen enheter tilfredsstiller $K = 4$-kriteriet (selv etter tre snapshots er det høyst $K = 3$ konsekutive observasjoner av en enhet med $G < 0$ i samme uke), og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle. Resultatet er at samtlige utløste varsler videreføres til varselsutløsing i begge parene (Tabell 8.4).
-
-| | Delta-par 1 | Delta-par 2 |
-|---|---|---|
-| Potensielle varsler før suppression | 12 | 14 |
-| Suppress'et (strukturelle assets uten klassebytte) | 0 | 0 |
-| Videreført til varselsutløsing | 12 | 14 |
-| Suppression-rate | 0 % | 0 % |
-
-<p align="center"><small><i>Tabell 8.4 Suppression-regelens effekt på varslingsvolum for de to snapshot-parene. Antallet for delta-par 2 (14) summerer de 4 gap-åpnende varslene fra Tabell 8.3b med de 8 LØST og 2 SKJULT_LOST_GAP-varslene fra Tabell 8.2; det skiller seg fra det totale antallet utstedte varsler (19, jf. 8.5) som også inkluderer 5 påminnelser generert fra trådtilstand.</i></small></p>
-
-## **8.5 Varselsutløsing og prioritering**
+Suppression-regelen (6.5) videreførte samtlige utløste varsler i begge snapshot-parene fordi suppression-listen er tom – ingen enheter tilfredsstiller $K = 4$-kriteriet etter kun tre snapshots, og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle.
 
 Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.6 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
 
@@ -904,11 +860,11 @@ Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatris
 | Spoolers-koordinator | 0 | 1 | 0 | 0 | 1 |
 | **Sum** | **0** | **10** | **0** | **2** | **12** |
 
-<p align="center"><small><i>Tabell 8.5 Utløste varsler fordelt på mottaker (asset type-koordinator) og prioritet for snapshot-paret 2026-05-07 ↔ 2026-05-14. Lav og høy prioritet er 0 fordi alle observerte gap-verdier ligger i magnitudeklasse «mildt» (jf. 6.3) og ingen forverring krysser klassegrense.</i></small></p>
+<p align="center"><small><i>Tabell 8.4 Utløste varsler fordelt på mottaker (asset type-koordinator) og prioritet for snapshot-paret 2026-05-07 ↔ 2026-05-14. Lav og høy prioritet er 0 fordi alle observerte gap-verdier ligger i magnitudeklasse «mildt» (jf. 6.3) og ingen forverring krysser klassegrense.</i></small></p>
 
 Varslene aggregeres til tre digest-e-poster, én per primærmottaker. Mønsterdeteksjonen for sammenhengende uker grupperer de fem RDS-varslene i én linje i RDS-digesten – Power BI-cellene viser fem etterfølgende uker (2026-08-17 til 2026-09-14) med samme overgang $G : 0 \to -1$ og farge grønn → svart, som tolkes som én ny kontrakt og ikke fem uavhengige hendelser.
 
-For delta-par 2 (2026-05-14 ↔ 2026-05-21) filtreres 32 av 768 celler bort av samme eksklusjonsregel. På de gjenværende 736 cellene utløser modellen 14 nye/lukkende varsler fra regelmatrisen (Tabell 8.2) og henter i tillegg 5 påminnelser fra den persistente trådtilstanden generert i delta-par 1 (jf. 7.6.2). Resultatet er 19 utstedte varsler fordelt på fem digest-e-poster – to flere mottakere enn i forrige syklus, fordi *Cable Pulling machine* og *Tensioner* nå har egne varsler. Tabell 8.5b oppsummerer fordelingen per mottaker og prioritet.
+For delta-par 2 (2026-05-14 ↔ 2026-05-21) filtreres 32 av 768 celler bort av samme eksklusjonsregel. På de gjenværende 736 cellene utløser modellen 14 nye/lukkende varsler fra regelmatrisen (Tabell 8.2) og henter i tillegg 5 påminnelser fra den persistente trådtilstanden generert i delta-par 1 (jf. 7.6.2). Resultatet er 19 utstedte varsler fordelt på fem digest-e-poster – to flere mottakere enn i forrige syklus, fordi *Cable Pulling machine* og *Tensioner* nå har egne varsler. Tabell 8.4b oppsummerer fordelingen per mottaker og prioritet.
 
 | Mottaker (Asset type) | Middels prioritet (ny) | Informasjon (løst, skjult løst, påminnelse) | Totalt |
 |---|---|---|---|
@@ -919,9 +875,9 @@ For delta-par 2 (2026-05-14 ↔ 2026-05-21) filtreres 32 av 768 celler bort av s
 | Spoolers-koordinator | 0 | 1 (påminnelse) | 1 |
 | **Sum** | **4** | **15** | **19** |
 
-<p align="center"><small><i>Tabell 8.5b Utløste varsler for snapshot-paret 2026-05-14 ↔ 2026-05-21 fordelt på mottaker og prioritet. Antall mottakere øker fra 3 til 5 i denne syklusen fordi *Cable Pulling machine* og *Tensioner* også har endringer som krever oppfølging.</i></small></p>
+<p align="center"><small><i>Tabell 8.4b Utløste varsler for snapshot-paret 2026-05-14 ↔ 2026-05-21 fordelt på mottaker og prioritet. Antall mottakere øker fra 3 til 5 i denne syklusen fordi *Cable Pulling machine* og *Tensioner* også har endringer som krever oppfølging.</i></small></p>
 
-Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den ukentlige påminnelseslogikken (Tabell 6.5) operasjonell på tvers av snapshots. Etter delta-par 1 stod 10 tråder i `active_alerts.json`; etter delta-par 2 er antallet 9. Tabell 8.5c viser den underliggende balansen.
+Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den ukentlige påminnelseslogikken (Tabell 6.5) operasjonell på tvers av snapshots. Etter delta-par 1 stod 10 tråder i `active_alerts.json`; etter delta-par 2 er antallet 9. Tabell 8.4c viser den underliggende balansen.
 
 | Trådhendelse | Antall | Beskrivelse |
 |---|---|---|
@@ -932,11 +888,11 @@ Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den uk
 | Nye tråder åpnet (NYTT_GAP) | 4 | 2Te Linear Cable × 2 + 55kW HPU + 4-track 50Te |
 | **Aktive tråder etter delta-par 2** | **9** | $10 - 5 + 4 = 9$ |
 
-<p align="center"><small><i>Tabell 8.5c Tilstandsendring i `active_alerts.json` over snapshot-paret 2026-05-14 ↔ 2026-05-21.</i></small></p>
+<p align="center"><small><i>Tabell 8.4c Tilstandsendring i `active_alerts.json` over snapshot-paret 2026-05-14 ↔ 2026-05-21.</i></small></p>
 
 At fem av ti tråder lukkes automatisk etter én syklus er det første empiriske beviset på at lukkemekanismen i 6.6 fungerer på reelle data, og de fem gjenværende med `reminder_count = 1` viser at påminnelseslogikken er aktivert som spesifisert.
 
-### **8.5.1 Demonstrasjon av SMTP-leveranse**
+### **8.4.1 Demonstrasjon av SMTP-leveranse**
 
 For å verifisere ende-til-ende-leveranse er modulen `send_digests.py` implementert som et tynt lag over `smtplib`. Den leser hver digest-fil, omdirigerer mottakeradressene til en testkonto og sender via `smtp.gmail.com:465`. Demoen ble kjørt 2026-05-23 mot testkontoen `tordalinho@gmail.com`; alle fem digestene for snapshot 2026-05-21 ble levert (Figur 8.1).
 
@@ -973,26 +929,13 @@ HPUS-koordinator får den rikeste digesten i delta-par 2, med varsler i alle fir
 
 Demoen viser at pipelinen kan kjøres ende-til-ende fra snapshot-CSV til mottatt e-post. Selve produksjonssetting (M365-tenant, reelle mottakere, leveranseovervåkning) er utenfor omfanget og diskuteres i 9.5.
 
-## **8.6 Validering mot syntetiske scenarier**
+## **8.5 Validering mot syntetiske scenarier**
 
 Deteksjonsreglene (6.5) og trådhåndteringen (6.6) er validert mot 50 syntetiske `pytest`-scenarier som dekker (i) $G$-regelens seks endringskategorier inkl. klassegrenser, (ii) severity-regelens fem overganger, (iii) trådlivssyklusen *ny → påminnelse → eskalert → løst* med ruting, og (iv) edge cases (identiske snapshots, mønsterdeteksjon, eksklusjon). Alle 50 tester passerer (1,57 s). Full scenariotabell ligger i Vedlegg E.
 
-<p align="center"><small><i>Tabell 8.6 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
+<p align="center"><small><i>Tabell 8.5 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
 
 Testsettet er pluggbart inn i et CI-oppsett før produksjonsbruk.
-
-## **8.7 Resultatenes kobling til delproblemene**
-
-De fire delproblemene formulert i 1.2 dekkes av ulike resultater i dette kapittelet. Tabell 8.7 viser hvilke konkrete tabeller og figurer som adresserer hvert delproblem; selve vurderingen av i hvilken grad delproblemene er besvart er forbeholdt 9.1.
-
-| Delproblem | Resultater som dokumenterer dekningen |
-|---|---|
-| 1. Datastrukturering fra Salesforce, Asset Voice og Power BI til Tier 2 × uke | Kap 5.2 (datakilder, filtre, skjema), Tabell 5.1 (fargenøkkel), Tabell 5.3 (snapshot-serien med 816 + 792 + 832 rader), Tabell 7.1 (816 celler fordelt på 24 Tier 2-utstyrsenheter × 34 uker i baselinen) |
-| 2. Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer | Tabell 8.1 (77 statisk utløste celler i baselinen), Tabell 7.5 og 8.3 (7 nye gap via $G$-regel i delta-par 1), Tabell 7.7 og 8.3b (4 nye gap + 8 løste i delta-par 2), Tabell 8.2 (sammenligning av regelutløsing over begge delta-par), Tabell 7.6 og 7.8 (severity-regel fanger 3 + 2 skjulte endringer i de to delta-parene) |
-| 3. Automatisk varselsformat med utstyrsklasse, tidsperiode, gap-størrelse og mottaker | Vedlegg F (varselsobjekt-skjema), Tabell 8.5 og 8.5b (12 og 19 utløste varsler fordelt på 3 og 5 mottakere i de to delta-parene), Figur 8.1 og 8.2 (SMTP-leverte digester; øvrige fire digester i Vedlegg D) |
-| 4. Tidligere og tydeligere varsling enn dagens manuelle prosess | Kap 8.5.1 (kalenderhorisont 3–7 måneder fram, automatisk ruting til 5 koordinatorer i delta-par 2), Tabell 7.6 og 7.8 (severity-deltaen fanger «skjulte» endringer som manuell gap-verdi-avlesning ikke ville sett), Tabell 8.5c (5 av 10 tråder lukkes automatisk i andre syklus), Tabell 8.6 (50 validerte scenarier inkludert ukentlig påminnelses-livssyklus) |
-
-<p align="center"><small><i>Tabell 8.7 Kobling mellom delproblemene i kapittel 1.2 og resultatene presentert i kapitlet.</i></small></p>
 
 # **9. Diskusjon**
 
@@ -1000,7 +943,7 @@ Dette kapittelet drøfter resultatene fra kapittel 8 i lys av problemstillingen,
 
 ## **9.1 Drøfting mot problemstillingen og delproblemene**
 
-Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere kapasitetsgap og automatisk varsle ansvarlige. Resultatene i kap 7 og 8 viser at pipelinen er bygget og kjørt på tre reelle snapshots, og produserer både statiske rapporter (77 negative celler i baseline, Tabell 8.1) og dynamiske endringsvarsler (12 og 19 varsler over de to delta-parene, Tabell 8.5 og 8.5b). De fire delproblemene fra kap 1.2 er besvart slik:
+Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere kapasitetsgap og automatisk varsle ansvarlige. Resultatene i kap 7 og 8 viser at pipelinen er bygget og kjørt på tre reelle snapshots, og produserer både statiske rapporter (77 negative celler i baseline, Tabell 8.1) og dynamiske endringsvarsler (12 og 19 varsler over de to delta-parene, Tabell 8.4 og 8.4b). De fire delproblemene fra kap 1.2 er besvart slik:
 
 **Delproblem 1 – Datastrukturering.** Tre snapshots er transkribert til lang-form CSV med ti felt (skjema beskrevet i 5.2.1) og matcher Power BIs egne Tier 1-summer innenfor ±2 unit-uker (kap 5.2.3). Skjemaet støtter både statisk gap-deteksjon (kap 6.3) og dynamisk endringsdeteksjon (kap 6.4) uten ytterligere transformasjon, innenfor avgrensningen i 1.3 om at datafangsten skjer via PNG-eksport.
 
@@ -1008,13 +951,13 @@ Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem 
 
 **Delproblem 3 – Automatisk varselsformat.** Varselsobjektet (Vedlegg F) dekker utstyrsenhet, periode, gap-størrelse og mottaker, pluss kontekst (severity-overgang, regel, prioritet, strukturelt-flagg). Digestene er gruppert i fire kategorier (NYE, PÅMINNELSER, LØSTE, INFORMASJON) og levert ende-til-ende via SMTP til testkontoen (Figur 8.1, 8.2 og Vedlegg D). Hver linje oppgir nøyaktig det informasjonsgrunnlaget koordinator trenger for å vurdere oppfølging.
 
-**Delproblem 4 – Tidligere og tydeligere varsling.** Delta-par 2 identifiserte fire nye gap 6,5–7,5 uker fram i tid, mot dagens situasjon hvor gap ofte først oppdages tett opp mot leveransedato (kap 4.4). Tydeligheten styrkes av automatisk ruting per asset type, mønsterdeteksjon som grupperer sammenhengende uker til én digest-linje (Figur 8.3), og ukentlige påminnelser (Tabell 8.5c) som holder saken i koordinatorens bevissthet inntil $G$ eller `severity_band` endrer seg.
+**Delproblem 4 – Tidligere og tydeligere varsling.** Delta-par 2 identifiserte fire nye gap 6,5–7,5 uker fram i tid, mot dagens situasjon hvor gap ofte først oppdages tett opp mot leveransedato (kap 4.4). Tydeligheten styrkes av automatisk ruting per asset type, mønsterdeteksjon som grupperer sammenhengende uker til én digest-linje, og ukentlige påminnelser (Tabell 8.4c) som holder saken i koordinatorens bevissthet inntil $G$ eller `severity_band` endrer seg.
 
-Det mest uventede funnet er at gap-livssyklusen er kortere enn antatt: fem av ti tråder fra delta-par 1 lukkes automatisk i andre syklus (Tabell 8.5c). Den persistente trådstaten er dermed sentral for at koordinator skal kunne koble åpne- og lukke-varsler til samme underliggende sak. At ingen FORVERRET-celler ble observert, og at alle gap havner i *mildt*-klassen, drøftes videre i 9.3.
+Det mest uventede funnet er at gap-livssyklusen er kortere enn antatt: fem av ti tråder fra delta-par 1 lukkes automatisk i andre syklus (Tabell 8.4c). Den persistente trådstaten er dermed sentral for at koordinator skal kunne koble åpne- og lukke-varsler til samme underliggende sak. At ingen FORVERRET-celler ble observert, og at alle gap havner i *mildt*-klassen, drøftes videre i 9.3.
 
 ## **9.2 Sammenligning mot litteraturen**
 
-Resultatene plasserer seg i det datadrevne kapasitetsstyringsfeltet Xu et al. (2023) og Koot et al. (2021) beskriver, der verdien av big data først realiseres når dataene utløser handling – ikke bare visualisering. Tråd-livssyklusen i Tabell 8.5c er et konkret eksempel på denne overgangen fra dashboard-konsum til handlingsutløsende analyse. Modellen adresserer samtidig den underprioriterte tjenestebaserte kapasitetsstyringen Rajani og Heggde (2020) etterlyser, men i et regelbasert format som er enklere å forklare enn de AI-tunge tilnærmingene som dominerer ferskeste litteratur.
+Resultatene plasserer seg i det datadrevne kapasitetsstyringsfeltet Xu et al. (2023) og Koot et al. (2021) beskriver, der verdien av big data først realiseres når dataene utløser handling – ikke bare visualisering. Tråd-livssyklusen i Tabell 8.4c er et konkret eksempel på denne overgangen fra dashboard-konsum til handlingsutløsende analyse. Modellen adresserer samtidig den underprioriterte tjenestebaserte kapasitetsstyringen Rajani og Heggde (2020) etterlyser, men i et regelbasert format som er enklere å forklare enn de AI-tunge tilnærmingene som dominerer ferskeste litteratur.
 
 Mot Wang og Zhen (2025) og Cheng et al. (2025) gjør modellen et bevisst valg om *ikke* å løse optimaliserings- eller kontraktsproblemet, men kun å flagge ubalansen og overlate beslutningen til koordinator. Oliveira et al. (2017) viser at flåteforskning tradisjonelt er bygget rundt revenue management; modellen her flytter fokus til *tidlig identifikasjon av mismatch* mellom kapasitet og kontraktstyrt etterspørsel. For pipeline-dimensjonen er forskjellen mot González-Flores et al. (2025) at 75 %-terskelen ikke brukes til å rangere selgerens leads, men som *trigger* for kapasitetsanalyse på baksiden – en lite utforsket kobling.
 
@@ -1022,7 +965,7 @@ Den tydeligste parallellen er Alaoua og Karims (2025) *Baseline Probabilistic Al
 
 ## **9.3 Modellens robusthet og begrensninger**
 
-Den tydeligste begrensningen er at snapshot-serien kun rakk å bli tre lang. To delta-par demonstrerer åpning, lukking og påminnelse (8.5c), men er ikke nok til å aktivere suppression-regelens $K = 4$-kriterium (kap 6.5). Suppression-mekanismen er enhetstestet (Tabell 8.6), men ikke empirisk verifisert – koordinator må manuelt markere de syv front-lastede enhetene fra Tabell 7.3 som strukturelle inntil en lengre serie foreligger. På samme måte havner alle observerte negative celler i den mildeste magnitudeklassen ($G \in \{-1, -2\}$), slik at *moderat* og *kritisk* prioritetslogikk kun er bekreftet via syntetiske tester. Følsomheten for klassegrensene ($-3$ og $-6$) er heller ikke testet med alternative verdier.
+Den tydeligste begrensningen er at snapshot-serien kun rakk å bli tre lang. To delta-par demonstrerer åpning, lukking og påminnelse (8.4c), men er ikke nok til å aktivere suppression-regelens $K = 4$-kriterium (kap 6.5). Suppression-mekanismen er enhetstestet (Tabell 8.5), men ikke empirisk verifisert – koordinator må manuelt markere de syv front-lastede enhetene fra Tabell 7.3 som strukturelle inntil en lengre serie foreligger. På samme måte havner alle observerte negative celler i den mildeste magnitudeklassen ($G \in \{-1, -2\}$), slik at *moderat* og *kritisk* prioritetslogikk kun er bekreftet via syntetiske tester. Følsomheten for klassegrensene ($-3$ og $-6$) er heller ikke testet med alternative verdier.
 
 Tre edge cases ved datagrunnlaget er verdt å nevne: (i) Nye Tier 2-rader kan ikke vurderes av delta-detektoren før de finnes i to snapshots, og rader som forsvinner blir stille fjernet uten lukke-varsel. (ii) Celler som oscillerer raskt ($G : -1 \to 0 \to -1$) genererer separate LØST- og NYTT_GAP-varsler uten kobling til samme underliggende sak. (iii) Kalenderhorisonten forskyves én uke per snapshot, så gap som glir ut av synshorisonten lukkes ikke automatisk.
 
@@ -1070,11 +1013,11 @@ Felles for sporene er at de bygger videre på, ikke erstatter, den regelbaserte 
 
 # **10. Konklusjon**
 
-Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.4) med en severity-fargeregel (Tabell 6.5) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.5.1 med fem digester levert til en testkonto.
+Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.4) med en severity-fargeregel (Tabell 6.5) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.4.1 med fem digester levert til en testkonto.
 
 Hovedfunnene viser at modellen leverer på alle fire delproblemene fra kap 1.2. Datastrukturering fra Salesforce, Asset Voice og Power BI til en sporbar `(snapshot, region, asset_tier2, uke)`-skjema er etablert og verifisert mot Power BIs egne aggregater (kap 5.2). Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer fanger 11 NYTT_GAP, 8 LØST og 5 supplerende severity-baserte varsler over de to delta-parene (Tabell 8.2). Det automatiske varselsformatet beskriver hvert tilfelle med utstyrsenhet, periode, gap-størrelse og mottaker (Vedlegg F), og digestene er levert som faktiske e-poster i innboks. Tidligere og tydeligere varsling enn dagens manuelle prosess er demonstrert ved at varslene i delta-par 2 adresserer kalenderuker 6,5–7,5 uker fram, mot dagens situasjon hvor gapet ofte først oppdages tett opp mot leveransedato.
 
-Det viktigste empiriske bidraget er tråd-livssyklusen som er observert over to delta-par. Av de ti opprinnelig åpnede trådene i delta-par 1 lukkes fem automatisk i delta-par 2 ved at $G$ eller `severity_band` returnerer til positiv tilstand, mens fem fortsetter med en formell påminnelse (Tabell 8.5c). Det er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at modellen kan tas i bruk operativt. Severity-regelen viser seg samtidig å være et selvstendig signal som rein gap-verdi-måling ville oversett: tre av de ti gap-åpnende varslene i delta-par 1 ble utløst kun av en fargeovergang i Power BI.
+Det viktigste empiriske bidraget er tråd-livssyklusen som er observert over to delta-par. Av de ti opprinnelig åpnede trådene i delta-par 1 lukkes fem automatisk i delta-par 2 ved at $G$ eller `severity_band` returnerer til positiv tilstand, mens fem fortsetter med en formell påminnelse (Tabell 8.4c). Det er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at modellen kan tas i bruk operativt. Severity-regelen viser seg samtidig å være et selvstendig signal som rein gap-verdi-måling ville oversett: tre av de ti gap-åpnende varslene i delta-par 1 ble utløst kun av en fargeovergang i Power BI.
 
 Prosjektet har samtidig identifisert tre konkrete begrensninger som ikke kan løses innenfor tidsrammen. Snapshot-serien på tre er ikke lang nok til å aktivere suppression-regelens *K = 4*-kriterium for strukturelle gap empirisk; alle observerte negative gap havner i den mildeste magnitudeklassen og verken *moderat* eller *kritisk* prioritetslogikk er truffet av reelle data; og datafangsten via manuell PNG-transkripsjon er ikke skalerbar til kontinuerlig produksjon. Disse begrensningene rokker ikke ved at modellen fungerer for det den er bygd for, men de definerer presist hva som må videreutvikles før varslingssystemet kan kjøres i drift uten manuell inngripen.
 
@@ -1118,11 +1061,11 @@ Prosjektgruppen har ikke inngått skriftlig taushetserklæring med Motive Offsho
 
 ## **Vedlegg C: Kravmatrise**
 
-Koblingen mellom delproblemene i 1.2 og konkrete resultater i rapporten er gjengitt i Tabell 8.7. Tabellen fungerer som rapportens kravmatrise og dupliseres ikke her.
+Koblingen mellom delproblemene i 1.2 og konkrete resultater i rapporten er drøftet i 9.1, der hvert delproblem besvares med henvisning til relevante tabeller og figurer. En separat kravmatrise er derfor ikke gjengitt her.
 
 ## **Vedlegg D: Komplette SMTP-digester fra demo 2026-05-23**
 
-Figur 8.2 i kap 8.5.1 viser HPUS-koordinatordigesten – den mest komplette av de fem digestene som ble levert. De fire øvrige er gjengitt her for fullstendighet.
+Figur 8.2 i kap 8.4.1 viser HPUS-koordinatordigesten – den mest komplette av de fem digestene som ble levert. De fire øvrige er gjengitt her for fullstendighet.
 
 <div align="center">
   <img src="../006 analysis/3.4 varsling/fig_demo_digest_RDS.png" alt="RDS-digest" width="80%">
@@ -1146,7 +1089,7 @@ Figur 8.2 i kap 8.5.1 viser HPUS-koordinatordigesten – den mest komplette av d
 
 ## **Vedlegg E: Full valideringsscenario-tabell**
 
-Kap 8.6 oppsummerer at 50 syntetiske `pytest`-scenarier validerer modellens regelmatrise, trådhåndtering og ruting. Tabell E.1 viser fordelingen per scenariokategori med forventet og faktisk utfall.
+Kap 8.5 oppsummerer at 50 syntetiske `pytest`-scenarier validerer modellens regelmatrise, trådhåndtering og ruting. Tabell E.1 viser fordelingen per scenariokategori med forventet og faktisk utfall.
 
 | Scenariokategori | Antall tester | Forventet utfall | Faktisk utfall |
 |------------------|---------------|------------------|----------------|
