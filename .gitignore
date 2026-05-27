@@ -1,13 +1,8 @@
-# ── Data (konfidensielt / store filer) ───────────────────────────────────────
-# Hver snapshot lagres i egen dato-mappe under 004 data/. Hele mappen er
-# konfidensiell og skal ikke committes.
-004 data/*/
-*.csv
-*.xlsx
-*.xls
-
-# Transkriberingsskript (inneholder rådata inline – konfidensielt)
-_transcribe_*.py
+# ── Data ─────────────────────────────────────────────────────────────────────
+# 004 data/ inneholder ukentlige Power BI-snapshots fra Motive Norway.
+# Mappen er gjort tilgjengelig offentlig etter godkjenning fra Motive og
+# faglærer for å la sensor kunne reprodusere analysen. CSV- og PNG-filer
+# samt transkriberings-skript committes derfor.
 
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/

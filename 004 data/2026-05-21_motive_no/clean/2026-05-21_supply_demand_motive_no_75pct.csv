@@ -1,0 +1,833 @@
+snapshot_date,week_start,asset_type,asset_tier2,gap_value,severity_band,custodian,project_owner_demand,region,probability_threshold
+2026-05-21,2026-05-25,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Winch,Hydraulic - Wide|35Te Wide Drum Winch - 35Te Wide Drum Winch,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,5,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Winch,Hydraulic - Wide|20Te Wide Drum Winch - 20Te Wide Drum Winch,7,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Winch,Hydraulic - Narr|20Te Narrow Drum Winch - 20Te Narrow Drum Winch,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Winch,Hydraulic - 5Te Brevini Winch,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Under rollers,- 60Te Crane Loaded Underrollers,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Turntables,- 60Te Turntable,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Turntables,- 60Te Turntable,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Tensioner,Horizontal - 4 track - 50Te Tensioner - 4 Track,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Tensioner,Horizontal - 2 track - 15Te Horizontal Tensioner,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Spoolers,Pneumatic - 6Te Air Spooler,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Spoolers,Pneumatic - 6Te Air Spooler,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Spoolers,Pneumatic - 6Te Air Spooler,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Spoolers,Pneumatic - 6Te Air Spooler,4,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Spoolers,Electric - 75Te Electric Spooler,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Spoolers,Electric - 75Te Electric Spooler,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Spoolers,Electric - 75Te Electric Spooler,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,RDS,- 500Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,RDS,- 500Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,RDS,- 150Te RDS,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,RDS,- 150Te RDS,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,LMA machines,LMA - LMA300 MRT Machine,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 90KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 90KW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 90KW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 55kW Electric HPU - Zone 1,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 55kW Electric HPU - Zone 1,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 55kW Electric HPU - Zone 1,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 55kW Electric HPU - Zone 1,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 55kW Electric HPU - Zone 1,3,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 55kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 55kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 55kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 55kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 55kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 54kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 54kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 54kW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 54kW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 37kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 37kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 30kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 30kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 30kW Electric HPU,2,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 18.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 158KW Electric HPU,-1,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 158KW Electric HPU,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 11kW Electric HPU,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 11kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Electric - 1.5kW Electric HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Diesel - 63kW Diesel HPU Zone II,0,purple,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,HPUS,Diesel - 63kW Diesel HPU,1,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-05-25,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-01,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-08,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-15,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-22,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-06-29,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-06,Cable Pulling machine,- 2Te Linear Cable Engine,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-13,Cable Pulling machine,- 2Te Linear Cable Engine,-2,black,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-20,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-07-27,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-03,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-10,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-17,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-24,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-08-31,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-07,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-14,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-21,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-09-28,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-05,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-12,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-19,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-10-26,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-02,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-09,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-16,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-23,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-11-30,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-07,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-14,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-21,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
+2026-05-21,2026-12-28,Cable Pulling machine,- 2Te Linear Cable Engine,0,green,Motive AS,Motive AS,Motive Norway,75
