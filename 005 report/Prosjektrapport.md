@@ -367,7 +367,7 @@ Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdaterings
 
 **Reliabilitet.** Datafangsten skjer via manuell transkripsjon av PNG-bilder (5.2.2), noe som introduserer risiko for avlesningsfeil. Reliabiliteten sikres ved automatisk sumsjekk mot Power BIs egne asset type- og `Totalt`-rader med en toleranse på $\pm 2$ unit-uker per uke (5.2.3), som reflekterer den strukturelle avrundingsstøyen Power BI selv produserer. Snapshots som overstiger toleransen avvises og kontrolleres mot kildebildet før godkjenning. Modellens regelbaserte og deterministiske natur (6.1) gjør at den samme inndatamengden alltid produserer samme varselsmengde, slik at reliabiliteten i analyse-leddet er full.
 
-**Etiske hensyn.** Datagrunnlaget inneholder kommersielt sensitiv informasjon om Motives kunder, kontrakter og flåteutnyttelse. Prosjektgruppen fikk tilgang til Power BI-rapporten gjennom Motive Offshore med en muntlig forståelse om at tallene er konfidensielle. Det er ikke inngått skriftlig taushetserklæring, men prosjektgruppen behandler dataene som konfidensielle: hele datakatalogen `004 data/` er ekskludert fra versjonskontroll for å hindre utilsiktet eksponering. Rapporten gjengir aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er. KI-verktøy (Anthropic Claude) er brukt som støtte til kodeforslag, feilsøking og språkvask, men ikke som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk – jf. KI-bruk-erklæringen i Vedlegg A.
+**Etiske hensyn.** Datagrunnlaget inneholder kommersielt sensitiv informasjon om Motives kunder, kontrakter og flåteutnyttelse. Prosjektgruppen fikk tilgang til Power BI-rapporten gjennom Motive Offshore med en muntlig forståelse om at tallene er konfidensielle. Det er ikke inngått skriftlig taushetserklæring, men gruppen har avtalt med Motive at datagrunnlaget kun deles med prosjektgruppen og sensorene som vurderer rapporten. Rapportens hovedtekst gjengir aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er. KI-verktøy (Anthropic Claude) er brukt som støtte til kodeforslag, feilsøking og språkvask, men ikke som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk – jf. KI-bruk-erklæringen i Vedlegg A.
 
 ## **5.2 Data**
 
@@ -411,7 +411,7 @@ Filteret **Project Owner Demand** er det som låser etterspørselen til prosjekt
 
 På uttrekkstidspunktet hadde prosjektgruppens Power BI-bruker ikke tilstrekkelige rettigheter til å bruke *Analyser i Excel* eller *Eksporter data* i rapporten, og direkte tabelluttrekk var derfor ikke mulig. Som arbeidsmetode i prosjektperioden ble det valgt å fange dataene gjennom **manuell skjermavlesning av PNG-skjermbilder** av Power BI-tabellene, og transkribere disse til CSV i Python.
 
-Hvert snapshot dekker hele kalenderen fra inneværende uke og frem til siste uke som vises i Power BI, fordelt over 4–8 skjermbilder for å dekke hele Tier 2-listen vannrett og hele datointervallet loddrett. Råbildene lagres lokalt under `004 data/raw/snapshots/<YYYY-MM-DD>/` og transkriberes til lang-form CSV i `004 data/clean/snapshots/`. Hele datakatalogen er ekskludert fra versjonskontroll i tråd med den muntlige konfidensialitetsavtalen med Motive Offshore (jf. 5.1.1).
+Hvert snapshot dekker hele kalenderen fra inneværende uke og frem til siste uke som vises i Power BI, fordelt over 4–8 skjermbilder for å dekke hele Tier 2-listen vannrett og hele datointervallet loddrett. Råbildene lagres lokalt under `004 data/raw/snapshots/<YYYY-MM-DD>/` og transkriberes til lang-form CSV i `004 data/clean/snapshots/`. Datakatalogen og transkriberings-skriptene deles kun med prosjektgruppen og sensorene, i tråd med den muntlige konfidensialitetsavtalen med Motive Offshore (jf. 5.1.1).
 
 Hvert transkribert CSV verifiseres automatisk mot `Totalt`-raden og asset type-summene i Power BI før det godkjennes som datagrunnlag. Avvik på mer enn ±2 unit-uker per asset type per uke flagges som mistanke om transkriberingsfeil og kontrolleres manuelt mot kildebildet. For å fange uke-til-uke-endringene som er kjernen i gap-deteksjonen, tas nye snapshots ukentlig (mandager) gjennom resten av prosjektperioden.
 
@@ -489,21 +489,13 @@ Binær deteksjon skiller ikke mellom marginale celleunderskudd og alvorlige flå
 
 Klassegrensene følger naturlige brudd i en bredere distribusjon enn baselinen alene representerer, og revideres når flere snapshots gir bredere empirisk verdiområde.
 
-Som komplement til magnitudeklassen registrerer modellen Power BI-rapportens egen fargeklassifisering `severity_band` (5.2.1), som koder det prosentvise forholdet mellom gap og demand. De to klassifikasjonene er ortogonale: en celle med $G = -1$ er alltid *mildt*, men kan være *lilla* eller *svart* avhengig av demand. Skillet er operasjonelt fordi den manuelle varslingen modellen automatiserer bygger på fargen, ikke på gap-verdien. Korrespondansen er oppsummert i Tabell 6.2.
-
-| Magnitudeklasse | Typisk fargebånd | Hvorfor de ikke alltid samsvarer |
-|-----------------|------------------|-----------------------------------|
-| Mildt ($-2 \leq G \leq -1$) | Lilla eller svart | Et lite gap kan dekke størsteparten av en liten demand og dermed bli svart |
-| Moderat ($-5 \leq G \leq -3$) | Vanligvis svart | Et moderat absolutt gap er nesten alltid en stor prosent av demand |
-| Kritisk ($G \leq -6$) | Svart | Et stort absolutt gap dekker per definisjon mer enn 50 % i de fleste tilfeller |
-
-<p align="center"><small><i>Tabell 6.2 Forventet sammenheng mellom magnitudeklasse og severity-fargebånd. Modellen lagrer begge attributtene per detektert gap-celle.</i></small></p>
+Som komplement til magnitudeklassen registrerer modellen Power BI-rapportens egen fargeklassifisering `severity_band` (5.2.1), som koder det prosentvise forholdet mellom gap og demand. De to klassifikasjonene er ortogonale: en celle med $G = -1$ er alltid *mildt*, men kan være *lilla* eller *svart* avhengig av demand-størrelsen. Moderate og kritiske gap er typisk svart. Skillet er operasjonelt fordi den manuelle varslingen modellen automatiserer bygger på fargen, ikke på gap-verdien.
 
 Resultatet av den statiske regelen for et snapshot $s$ er en samling tripletter $(r, a, t)$ som tilfredsstiller $A_{r,a,t}^{(s)} = 1$, hver merket med både magnitudeklasse og `severity_band`. Denne samlingen utgjør grunnlaget for delta-detektoren i 6.4 og for varselsutløsingen i 6.6. Strukturelt vedvarende underskudd, som typisk havner i kritisk-klassen eller har vedvarende svart fargebånd, skilles ut og styres separat gjennom suppression-reglene i 6.5.
 
 ## **6.4 Uke-til-uke-deltadeteksjon**
 
-For hver celle $(r, a, t)$ som finnes i begge påfølgende snapshots, klassifiserer modellen endringen i én av fem kategorier basert på fortegnet og forholdet mellom $G_{r,a,t}^{(s_{i-1})}$ og $G_{r,a,t}^{(s_i)}$. Denne klassifiseringen er sentral for problemstillingen: det er endringene mellom snapshots – særlig nye og forverrede gap – som indikerer at en kontrakt har blitt oppdatert i Salesforce og dermed bumpet over 75 %-terskelen mellom de to datofangstene. Definisjonene av endringstypene er gitt i Tabell 6.3.
+For hver celle $(r, a, t)$ som finnes i begge påfølgende snapshots, klassifiserer modellen endringen i én av fem kategorier basert på fortegnet og forholdet mellom $G_{r,a,t}^{(s_{i-1})}$ og $G_{r,a,t}^{(s_i)}$. Denne klassifiseringen er sentral for problemstillingen: det er endringene mellom snapshots – særlig nye og forverrede gap – som indikerer at en kontrakt har blitt oppdatert i Salesforce og dermed bumpet over 75 %-terskelen mellom de to datofangstene. Definisjonene av endringstypene er gitt i Tabell 6.2.
 
 | Endringstype | Forrige verdi | Nåværende verdi | Tolkning |
 |--------------|---------------|-----------------|----------|
@@ -513,18 +505,13 @@ For hver celle $(r, a, t)$ som finnes i begge påfølgende snapshots, klassifise
 | Uendret gap | $G^{(s_{i-1})} < 0$ | $G^{(s_i)} = G^{(s_{i-1})}$ | Cellen har samme negative verdi som før. Ingen ny handling utløses, men cellen rapporteres som eksisterende gap. |
 | Løst gap | $G^{(s_{i-1})} < 0$ | $G^{(s_i)} \geq 0$ | Tidligere gap er eliminert. Brukes til å avslutte aktive varslingstråder for cellen. |
 
-<p align="center"><small><i>Tabell 6.3 Klassifisering av cellevise endringer mellom påfølgende snapshots $s_{i-1}$ og $s_i$ for celler som finnes i begge.</i></small></p>
+<p align="center"><small><i>Tabell 6.2 Klassifisering av cellevise endringer mellom påfølgende snapshots $s_{i-1}$ og $s_i$ for celler som finnes i begge.</i></small></p>
 
-Figur 6.2 visualiserer de fem kategoriene som regioner i $(G^{(s_{i-1})}, G^{(s_i)})$-fasen. Kombinasjonen av aksene og diagonalen $y = x$ deler planet inn i seks regioner, der fem av dem tilsvarer endringstypene i Tabell 6.3 og den siste (begge $\geq 0$) ikke gir handlingsrelevans. Kravet om at modellen skal skille mellom nye, eksisterende og forverrede gap dekkes direkte av kategoriene *nytt*, *uendret* og *forverret*; *forbedret* og *løst* er supplerende kategorier som gir varslingstråder en naturlig avslutning.
-
-<div align="center">
-  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringstype_fase.png" alt="Endringstype som regioner i (G_prev, G_curr)-fasen" width="65%">
-  <p align="center"><small><i>Figur 6.2 Klassifisering av cellevise endringer som regioner i $(G^{(s_{i-1})}, G^{(s_i)})$-fasen. Diagonalen $y = x$ representerer uendret gap-verdi. Eksempelpunktene viser typiske celler i hver kategori.</i></small></p>
-</div>
+Kravet om at modellen skal skille mellom nye, eksisterende og forverrede gap dekkes direkte av kategoriene *nytt*, *uendret* og *forverret*; *forbedret* og *løst* er supplerende kategorier som gir varslingstråder en naturlig avslutning.
 
 Hver detektert endring kombineres med magnitudeklassen til den nåværende verdien fra 6.3. En forverring innen samme klasse gir lav prioritet, mens en endring som krysser en klassegrense gir høy prioritet. Selve prioriteringslogikken beskrives i 6.6.
 
-Parallelt klassifiserer modellen også **endringen i `severity_band`** mellom de to snapshotene som *verre farge*, *bedre farge* eller *samme farge*. Fordi fargen kodes fra det prosentvise forholdet mellom gap og demand, kan en celle skifte farge selv når gap-verdien er identisk – og fange forverringer som ikke krysser $G = 0$-terskelen. Modellen utløser derfor varsel både på $G$-endringer (Tabell 6.3) og på severity-overganger mellom overdekning og underdekning.
+Parallelt klassifiserer modellen også **endringen i `severity_band`** mellom de to snapshotene som *verre farge*, *bedre farge* eller *samme farge*. Fordi fargen kodes fra det prosentvise forholdet mellom gap og demand, kan en celle skifte farge selv når gap-verdien er identisk – og fange forverringer som ikke krysser $G = 0$-terskelen. Modellen utløser derfor varsel både på $G$-endringer (Tabell 6.2) og på severity-overganger mellom overdekning og underdekning.
 
 ## **6.5 Suppression og eksklusjon**
 
@@ -532,7 +519,7 @@ EDA i kapittel 7 viser at syv utstyrsenheter har sammenhengende negative gap-ver
 
 Et asset markeres som strukturelt når $G_{r,a,t}^{(s)} < 0$ for alle observerte $(t, s)$ i et evalueringsvindu på $K = 4$ påfølgende snapshots, slik at kortvarige nedgangsperioder ikke feilaktig klassifiseres som strukturelle. Innenfor prosjektets tre snapshots kan kriteriet ikke eksercerases (jf. 9.3); de syv front-lastede enhetene i Tabell 7.3 er naturlige kandidater for **manuell strukturell-markering** når Motive-koordinatoren bekrefter underdimensjoneringen.
 
-Suppression-regelen styrer hvordan hver detektert endring fra 6.3 og 6.4 håndteres avhengig av om asset er strukturelt eller ikke (Tabell 6.4).
+Suppression-regelen styrer hvordan hver detektert endring fra 6.3 og 6.4 håndteres avhengig av om asset er strukturelt eller ikke (Tabell 6.3).
 
 | Endringstype | Krysser magnitudeklasse | Ikke-strukturelt asset | Strukturelt asset |
 |--------------|-------------------------|------------------------|-------------------|
@@ -543,9 +530,9 @@ Suppression-regelen styrer hvordan hver detektert endring fra 6.3 og 6.4 håndte
 | Forbedret | (n/a) | Loggføres, ikke varsel | Loggføres, ikke varsel |
 | Løst | (n/a) | Varsel (positiv) | Varsel (positiv) |
 
-<p align="center"><small><i>Tabell 6.4 Suppression-regelens utløsingsmatrise basert på endring i $G_{r,a,t}$. Strukturelle assets utløser varsel kun ved meningsfulle tilstandsendringer – klassebytte eller løst gap – og ikke ved variasjon innenfor samme magnitudeklasse.</i></small></p>
+<p align="center"><small><i>Tabell 6.3 Suppression-regelens utløsingsmatrise basert på endring i $G_{r,a,t}$. Strukturelle assets utløser varsel kun ved meningsfulle tilstandsendringer – klassebytte eller løst gap – og ikke ved variasjon innenfor samme magnitudeklasse.</i></small></p>
 
-Reglene i Tabell 6.4 fanger alle endringer som krysser $G = 0$-grensen eller endrer magnitudeklasse. Den fanger derimot **ikke** endringer hvor $G$ forblir på samme side av nullinjen (begge $\geq 0$ eller begge $< 0$ uten klassebytte) men den underliggende etterspørselen har vokst eller falt slik at det prosentvise gapet har krysset et fargebånd (jf. 5.2.1). Det empiriske eksempelet i 7.6 viser at det første snapshot-paret inneholder tre slike "skjulte" endringer som ikke blir fanget av tabellen over. Modellen anvender derfor en supplerende regel basert på `severity_band`, som evalueres når Tabell 6.4 ikke har utløst varsel for cellen. Severity-båndene ordnes fra alvorlig til komfortabel som svart, lilla, rød, gul, grønn, og en *overgang* defineres som flytting fra ett bånd til et annet mellom to snapshots. Reglene er gitt i Tabell 6.5.
+Reglene i Tabell 6.3 fanger alle endringer som krysser $G = 0$-grensen eller endrer magnitudeklasse. Den fanger derimot **ikke** endringer hvor $G$ forblir på samme side av nullinjen (begge $\geq 0$ eller begge $< 0$ uten klassebytte) men den underliggende etterspørselen har vokst eller falt slik at det prosentvise gapet har krysset et fargebånd (jf. 5.2.1). Det empiriske eksempelet i 7.6 viser at det første snapshot-paret inneholder tre slike "skjulte" endringer som ikke blir fanget av tabellen over. Modellen anvender derfor en supplerende regel basert på `severity_band`, som evalueres når Tabell 6.3 ikke har utløst varsel for cellen. Severity-båndene ordnes fra alvorlig til komfortabel som svart, lilla, rød, gul, grønn, og en *overgang* defineres som flytting fra ett bånd til et annet mellom to snapshots. Reglene er gitt i Tabell 6.4.
 
 | Severity-overgang | Tolkning | Ikke-strukturelt asset | Strukturelt asset |
 |-------------------|----------|------------------------|-------------------|
@@ -555,9 +542,9 @@ Reglene i Tabell 6.4 fanger alle endringer som krysser $G = 0$-grensen eller end
 | Svart → lilla | Skjult forbedring: alvorlig gap nedjustert til mildt | Loggføres, ikke varsel | Loggføres, ikke varsel |
 | Innen samme over- eller underdekningssone (f.eks. grønn → gul) | Marginal endring uten operasjonell handling | Loggføres, ikke varsel | Loggføres, ikke varsel |
 
-<p align="center"><small><i>Tabell 6.5 Supplerende utløsingsregler basert på endring i `severity_band` for celler der Tabell 6.4 ikke har utløst varsel. Reglene utløser varsel når demand-endringer krysser et fargebånd som markerer overgang mellom overdekning og underdekning, eller mellom mild og alvorlig underdekning.</i></small></p>
+<p align="center"><small><i>Tabell 6.4 Supplerende utløsingsregler basert på endring i `severity_band` for celler der Tabell 6.3 ikke har utløst varsel. Reglene utløser varsel når demand-endringer krysser et fargebånd som markerer overgang mellom overdekning og underdekning, eller mellom mild og alvorlig underdekning.</i></small></p>
 
-For celler hvor både $G$ og `severity_band` har endret seg, dominerer Tabell 6.4. Tabell 6.5 utvider dermed deteksjonsrommet uten å konkurrere med $G$-regelen. Strukturelle gap rapporteres i en separat månedlig oversikt til vedlikeholds-/kapasitetsutvidelsesteamet, slik at kortsiktig handling og langsiktig planlegging håndteres i hver sin kanal.
+For celler hvor både $G$ og `severity_band` har endret seg, dominerer Tabell 6.3. Tabell 6.4 utvider dermed deteksjonsrommet uten å konkurrere med $G$-regelen. Strukturelle gap rapporteres i en separat månedlig oversikt til vedlikeholds-/kapasitetsutvidelsesteamet, slik at kortsiktig handling og langsiktig planlegging håndteres i hver sin kanal.
 
 **Eksklusjonslisten** fjerner assets som ikke skal evalueres i det hele tatt. EDA i kapittel 7 identifiserer én slik enhet: *Diesel – 63kW Diesel HPU Zone II* har $G = 0$ i alle 34 ukene av baselinen, hvilket tyder på at den er inaktiv eller registrert med null kapasitet i Asset Voice. Den initielle listen er et forslag basert på baseline og krever bekreftelse fra Motive før produksjonsbruk.
 
@@ -593,7 +580,7 @@ Dette kapittelet presenterer den eksplorative dataanalysen utført på baseline-
 
 ## **7.1 Distribusjon av gap-verdier**
 
-Calendar-datasettet inneholder 816 celler fordelt over 24 utstyrsenheter og 34 uker. Tabell 7.1 viser fordelingen etter fortegn på gap-verdien $G_{r,a,t}$, og Figur 7.1 viser den fulle distribusjonen.
+Calendar-datasettet inneholder 816 celler fordelt over 24 utstyrsenheter og 34 uker. Tabell 7.1 viser fordelingen etter fortegn på gap-verdien $G_{r,a,t}$.
 
 | Tilstand | Antall celler | Andel |
 |----------|---------------|-------|
@@ -603,38 +590,26 @@ Calendar-datasettet inneholder 816 celler fordelt over 24 utstyrsenheter og 34 u
 
 <p align="center"><small><i>Tabell 7.1 Fordeling av cellene i Calendar-datasettet etter fortegn på gap-verdien.</i></small></p>
 
-<div align="center">
-  <img src="../006 analysis/3.2 eda/fig_gap_distribusjon.png" alt="Distribusjon av gap-verdier" width="80%">
-  <p align="center"><small><i>Figur 7.1 Distribusjon av gap-verdiene i Calendar-datasettet, fargekodet etter negativ, balansert og positiv tilstand.</i></small></p>
-</div>
-
-Distribusjonen er lett venstreforskjøvet for negative verdier og bredere på overskuddssiden. For de negative cellene er median $-1$, 25-prosentilen $-1$ og 5-prosentilen $-2$. Verdiområdet for hele datasettet er $[-2, +7]$.
+Distribusjonen er lett venstreforskjøvet på negative verdier og bredere på overskuddssiden, med median $-1$ og 5-prosentil $-2$ blant negative celler. Verdiområdet for hele datasettet er $[-2, +7]$.
 
 ## **7.2 Gap-utviklingen over kalenderhorisonten**
 
-Figur 7.2 viser sum av $G_{r,a,t}$ aggregert per uke over hele 34-ukers-horisonten.
-
-<div align="center">
-  <img src="../006 analysis/3.2 eda/fig_total_gap_per_uke.png" alt="Totalt gap per uke" width="85%">
-  <p align="center"><small><i>Figur 7.2 Totalt synlig gap per uke i baseline-snapshotet.</i></small></p>
-</div>
-
-Samlet ukentlig gap er positivt gjennom hele horisonten og øker fra $+10$ unit-uker i uken 2026-05-11 til $+34$ i uken 2026-12-28. Trendkurven er svakt stigende og monoton fra og med oktober 2026; de første 9 ukene har lokal flatlinje i intervallet $+9$ til $+13$ fordi syv enheter har strukturelt underskudd i denne tidlige perioden (jf. 7.5). At baseline-snapshotet i sin helhet ligger over null betyr at Motive Norway-flåten samlet sett dekker den 75 %+-eksponerte etterspørselen som er synlig per snapshot-datoen.
+Samlet ukentlig gap er positivt gjennom hele horisonten og øker fra $+10$ unit-uker i uken 2026-05-11 til $+34$ i uken 2026-12-28. De første 9 ukene har en lokal flatlinje i intervallet $+9$ til $+13$ fordi syv enheter har front-lastet underskudd i denne tidlige perioden (jf. 7.5). At baseline-snapshotet samlet ligger over null betyr at Motive Norway-flåten dekker den 75 %+-eksponerte etterspørselen som er synlig per snapshot-datoen.
 
 ## **7.3 Sammenligning på tvers av asset types**
 
-Figur 7.3 dekomponerer det ukentlige gapet etter asset type.
+Figur 7.1 dekomponerer det ukentlige gapet etter asset type.
 
 <div align="center">
   <img src="../006 analysis/3.2 eda/fig_per_asset_type_uker.png" alt="Gap per asset type over uker" width="85%">
-  <p align="center"><small><i>Figur 7.3 Ukentlig sum av gap-verdi per asset type.</i></small></p>
+  <p align="center"><small><i>Figur 7.1 Ukentlig sum av gap-verdi per asset type.</i></small></p>
 </div>
 
 Tensioner, RDS og Cable Pulling machine er de asset typene som har vedvarende negative ukessummer i Motive Norway-flåten. Tensioner går så lavt som $-3$ per uke, RDS ned til $-2$ og Cable Pulling machine ned til $-2$. Disse tre asset typene står til sammen for hele det negative bidraget på asset type-nivå (kumulativt $-25$, $-23$ og $-6$ unit-uker over de 34 ukene). Winch, Spoolers, LMA machines, Under rollers og HPUS har positiv ukessum i alle 34 ukene (sum henholdsvis $+308$, $+199$, $+34$, $+34$ og $+307$); HPUS som asset type er altså samlet i overskudd, selv om enkeltenheten *158KW Electric HPU* har negative leaf-celler i tidlig periode (jf. 7.5).
 
 ## **7.4 De mest utsatte utstyrsenhetene**
 
-Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker, og Figur 7.4 viser samme sortering som heatmap mot ukene.
+Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker.
 
 | Asset type | Asset (Tier 2) | Kumulativt gap |
 |--------|---------------|----------------|
@@ -648,12 +623,7 @@ Tabell 7.2 lister de syv enhetene med negativt kumulativt gap over 34 uker, og F
 
 <p align="center"><small><i>Tabell 7.2 Utstyrsenhetene med negativt kumulativt gap over snapshot-perioden 2026-05-11 til 2026-12-28.</i></small></p>
 
-<div align="center">
-  <img src="../006 analysis/3.2 eda/fig_gap_heatmap_topp30.png" alt="Heatmap utstyrsenheter" width="95%">
-  <p align="center"><small><i>Figur 7.4 Heatmap av gap-verdi per uke for de 24 utstyrsenhetene i Motive Norway-baselinen.</i></small></p>
-</div>
-
-To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$, etterfulgt av *Horizontal – 2 track – 15Te Horizontal Tensioner* med $-16$ og *500Te RDS* med $-14$. Alle syv enhetene har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.5).
+To av de syv enhetene tilhører Tensioner-gruppen og to tilhører RDS, mens Winch, HPUS og Cable Pulling machine bidrar med én enhet hver. Verste enkeltasset er *Hydraulic – Wide|35Te Wide Drum Winch* med kumulativt gap $-19$. Alle syv enheter har sitt negative bidrag konsentrert i de første 9–14 ukene av kalenderhorisonten og stabiliserer seg deretter på $G = 0$ (jf. 7.5).
 
 ## **7.5 Front-lastet underskudd og inaktive utstyrsenheter**
 
@@ -671,17 +641,11 @@ Ingen utstyrsenhet i baselinen har $G < 0$ i alle 34 ukene, og ingen tilfredssti
 
 <p align="center"><small><i>Tabell 7.3 Utstyrsenheter med front-lastet underskudd (sammenhengende negative gap-verdier i tidlig kalenderperiode) i baseline-snapshotet 2026-05-07.</i></small></p>
 
-Én utstyrsenhet har $G_{r,a,t} = 0$ i alle 34 uker (Tabell 7.4).
-
-| Asset type | Asset (Tier 2) |
-|--------|---------------|
-| HPUS | Diesel – 63kW Diesel HPU Zone II |
-
-<p align="center"><small><i>Tabell 7.4 Utstyrsenheter med gap-verdi 0 i alle 34 uker av baseline-snapshotet 2026-05-07.</i></small></p>
+Én utstyrsenhet (*HPUS – Diesel – 63kW Diesel HPU Zone II*) har $G_{r,a,t} = 0$ i alle 34 uker av baselinen, og er kandidat for eksklusjonslisten i 6.5.
 
 ## **7.6 Uke-til-uke-analyse**
 
-Den dynamiske endringsdeteksjonen beskrevet i 6.4 er kjørt på det første snapshot-paret 2026-05-07 ↔ 2026-05-14. Modellen sammenligner de 792 cellene som finnes i begge snapshots (33 uker × 24 utstyrsenheter) og klassifiserer hver celle både etter endring i $G_{r,a,t}$ (Tabell 6.3) og etter endring i `severity_band` (5.2.1). Tabell 7.5 viser fordelingen mellom de seks endringskategoriene.
+Den dynamiske endringsdeteksjonen beskrevet i 6.4 er kjørt på det første snapshot-paret 2026-05-07 ↔ 2026-05-14. Modellen sammenligner de 792 cellene som finnes i begge snapshots (33 uker × 24 utstyrsenheter) og klassifiserer hver celle både etter endring i $G_{r,a,t}$ (Tabell 6.2) og etter endring i `severity_band` (5.2.1). Tabell 7.4 viser fordelingen mellom de seks endringskategoriene.
 
 | Endringstype | Antall celler | Andel |
 |--------------|---------------|-------|
@@ -693,38 +657,25 @@ Den dynamiske endringsdeteksjonen beskrevet i 6.4 er kjørt på det første snap
 | Positiv endring (ikke-negativt begge snapshots) | 37 | 4,7 % |
 | Stabil (uendret ikke-negativt) | 678 | 85,6 % |
 
-<p align="center"><small><i>Tabell 7.5 Fordeling av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14.</i></small></p>
+<p align="center"><small><i>Tabell 7.4 Fordeling av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14.</i></small></p>
 
 I dette første delta-paret er det kun kategorien *nytt gap* som utløser nye varsler basert på $G$-regelen. De syv nye gap-cellene fordeler seg på tre utstyrsenheter, og fem av dem opptrer i fem sammenhengende uker for samme enhet:
 
 - *500Te RDS* har fått ny etterspørsel i ukene 2026-08-17 til og med 2026-09-14, alle med $G$ som faller fra 0 til $-1$ og fargen som skifter fra grønn til svart. Det sammenhengende mønsteret over fem uker er det tydeligste signalet i datasettet på at en ny kontrakt har passert 75 %-terskelen i Salesforce mellom de to datafangstene.
 - *Electric – 158KW Electric HPU* (uke 2026-07-13) og *Electric – 55kW Electric HPU* (uke 2026-07-20) viser hvert sitt enkeltstående nye gap.
 
-Severity-deltaen flagger i tillegg ti celler som *verre farge* og to som *bedre farge*. Tre av de ti er $G$-uendret eller forbedret, men har skiftet fargebånd – usynlige for en ren $G$-detektor. Severity-regelen utløser også to positive informasjonsvarsler ved lilla → grønn. Fordelingen er i Tabell 7.6.
+Severity-deltaen flagger i tillegg ti celler som *verre farge* og to som *bedre farge* (de øvrige 780 er uendret). Tre av de ti er $G$-uendret eller forbedret, men har skiftet fargebånd – usynlige for en ren $G$-detektor. Severity-regelen utløser også to positive informasjonsvarsler ved lilla → grønn.
 
-| Severity-endring | Antall celler |
-|------------------|---------------|
-| Verre farge | 10 |
-| Bedre farge | 2 |
-| Samme farge | 780 |
-
-<p align="center"><small><i>Tabell 7.6 Endring i severity_band mellom snapshot 2026-05-07 og 2026-05-14. Tre av de ti «verre farge»-cellene fanges kun gjennom severity-dimensjonen (G-regelen utløser ikke varsel), og illustrerer empirisk hvorfor `severity_band` er fanget som eget attributt jf. 5.2.1.</i></small></p>
-
-Fordelingen av endringer over kalenderhorisonten og over asset types er vist i Figur 7.5 og 7.7. Endringene konsentreres i juli–september, det vil si i det tidsvinduet som har høyest tetthet av eksisterende negative celler i baselinen, og fordeler seg på asset types RDS og HPUS. Ingen endringer i kategoriene *forverret*, *forbedret* eller *løst* observeres i dette første delta-paret – en konsekvens av at perioden mellom snapshotene kun er én uke, og at de fleste underdekninger i baselinen ligger på $G \in \{-1, -2\}$ uten rom for ytterligere forverring innenfor magnitudeklassen *mildt*.
+Fordelingen av endringer over kalenderhorisonten er vist i Figur 7.2. Endringene konsentreres i juli–september – tidsvinduet med høyest tetthet av eksisterende negative celler i baselinen – og fordeler seg på asset types RDS og HPUS. Ingen endringer i kategoriene *forverret*, *forbedret* eller *løst* observeres i dette første delta-paret – en konsekvens av at perioden mellom snapshotene kun er én uke, og at de fleste underdekninger ligger på $G \in \{-1, -2\}$ uten rom for ytterligere forverring innenfor magnitudeklassen *mildt*.
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta1.png" alt="Endringer per uke - delta-par 1" width="80%">
-  <p align="center"><small><i>Figur 7.5 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 1 (2026-05-07 ↔ 2026-05-14). Stabile celler er ekskludert for lesbarhet.</i></small></p>
-</div>
-
-<div align="center">
-  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta1.png" alt="Endringer per asset type - delta-par 1" width="80%">
-  <p align="center"><small><i>Figur 7.6 Fordeling av cellevise endringer per asset type for delta-par 1. RDS og HPUS dominerer endringsvolumet i det første delta-paret.</i></small></p>
+  <p align="center"><small><i>Figur 7.2 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 1 (2026-05-07 ↔ 2026-05-14). Stabile celler er ekskludert for lesbarhet.</i></small></p>
 </div>
 
 ### **7.6.1 Andre delta-par 2026-05-14 ↔ 2026-05-21**
 
-Med snapshot $t_2$ (2026-05-21) tilgjengelig kjøres delta-detektoren også på det andre snapshot-paret. Sammenligningen omfatter de 768 cellene som finnes i begge snapshots (32 uker × 24 utstyrsenheter); de to nye Tier 2-radene i $t_2$ (jf. 5.2.3) inngår ikke i delta-deteksjonen siden de mangler en motpart i $t_1$. Tabell 7.7 viser fordelingen.
+Med snapshot $t_2$ (2026-05-21) tilgjengelig kjøres delta-detektoren også på det andre snapshot-paret. Sammenligningen omfatter de 768 cellene som finnes i begge snapshots (32 uker × 24 utstyrsenheter); de to nye Tier 2-radene i $t_2$ (jf. 5.2.3) inngår ikke i delta-deteksjonen siden de mangler en motpart i $t_1$. Tabell 7.5 viser fordelingen.
 
 | Endringstype | Antall celler | Andel |
 |--------------|---------------|-------|
@@ -736,33 +687,20 @@ Med snapshot $t_2$ (2026-05-21) tilgjengelig kjøres delta-detektoren også på 
 | Positiv endring (ikke-negativt begge snapshots) | 15 | 2,0 % |
 | Stabil (uendret ikke-negativt) | 679 | 88,4 % |
 
-<p align="center"><small><i>Tabell 7.7 Fordeling av cellevise endringer mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
+<p align="center"><small><i>Tabell 7.5 Fordeling av cellevise endringer mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
 
-Alle fire dynamiske kategorier er nå aktivert. De åtte *løste* gapene fordeler seg på *2Te Linear Cable Engine* (3), *500Te RDS* (3) og *158KW Electric HPU* (1). De fire *nye* gapene rammer fire ulike enhet-/uke-kombinasjoner. Mønsteret er konsistent med at kalenderen forskyves én uke framover: tidlige gap glir ut av synshorisonten, mens nye dukker opp ved overgangen «for tett på» → «innenfor 75 %-vinduet». Severity-fordelingen er i Tabell 7.8.
+Alle fire dynamiske kategorier er nå aktivert. De åtte *løste* gapene fordeler seg på *2Te Linear Cable Engine* (3), *500Te RDS* (3) og *158KW Electric HPU* (1). De fire *nye* gapene rammer fire ulike enhet-/uke-kombinasjoner. Mønsteret er konsistent med at kalenderen forskyves én uke framover: tidlige gap glir ut av synshorisonten, mens nye dukker opp ved overgangen «for tett på» → «innenfor 75 %-vinduet». Severity-deltaen flagger 4 *verre farge*-celler og 11 *bedre farge*-celler.
 
-| Severity-endring | Antall celler |
-|------------------|---------------|
-| Verre farge | 4 |
-| Bedre farge | 11 |
-| Samme farge | 753 |
-
-<p align="center"><small><i>Tabell 7.8 Endring i severity_band mellom snapshot 2026-05-14 og 2026-05-21.</i></small></p>
-
-Fordelingen av endringene over kalenderhorisonten og per asset type for delta-par 2 er vist i Figur 7.7 og 7.9. Endringene grupperer seg igjen i sommer- og tidlig høstmåneder – i tråd med at det er denne perioden som har høyest tetthet av eksisterende negative og lilla celler i baselinen og dermed flest celler som er innenfor «én klassebytte» fra et nytt eller løst gap.
+Fordelingen av endringene over kalenderhorisonten for delta-par 2 er vist i Figur 7.3. Endringene grupperer seg igjen i sommer- og tidlig høstmåneder, i tråd med at det er denne perioden som har høyest tetthet av eksisterende negative og lilla celler i baselinen og dermed flest celler som er innenfor «én klassebytte» fra et nytt eller løst gap. Cable Pulling machine og RDS dominerer endringsvolumet.
 
 <div align="center">
   <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_uke_delta2.png" alt="Endringer per uke - delta-par 2" width="80%">
-  <p align="center"><small><i>Figur 7.7 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 2 (2026-05-14 ↔ 2026-05-21). Stabile celler er ekskludert for lesbarhet.</i></small></p>
-</div>
-
-<div align="center">
-  <img src="../006 analysis/3.3 gap-deteksjon/fig_endringer_per_asset_type_delta2.png" alt="Endringer per asset type - delta-par 2" width="80%">
-  <p align="center"><small><i>Figur 7.8 Fordeling av cellevise endringer per asset type for delta-par 2. Cable Pulling machine og RDS er mest aktive – Cable bidrar med både to nye gap og tre løste gap, RDS med tre løste gap.</i></small></p>
+  <p align="center"><small><i>Figur 7.3 Fordeling av cellevise endringer over kalenderhorisonten for delta-par 2 (2026-05-14 ↔ 2026-05-21). Stabile celler er ekskludert for lesbarhet.</i></small></p>
 </div>
 
 ### **7.6.2 Varslingstråder over to delta-par**
 
-Varslingsmodulen `gap_alerting.py` (kap 6.6) holder en persistent tråd-tilstand i `active_alerts.json` på tvers av snapshots. Etter første delta-par var det 10 aktive tråder; etter andre delta-par er antallet 9. Netto endring $-1$ skjuler en større bevegelse: fem tråder lukkes (fire ved *løst gap* mot $G$-regelen og én via *positiv endring* der severity går fra lilla til grønn), og fire nye tråder åpnes (de fire *nye gap*-cellene i Tabell 7.7). Fem av de ti opprinnelige trådene fortsetter inn i tredje syklus med en ukentlig påminnelse (`reminder_count = 1`). Tabell 7.9 sporer de ti opprinnelige trådene gjennom de to delta-parene.
+Varslingsmodulen `gap_alerting.py` (kap 6.6) holder en persistent tråd-tilstand i `active_alerts.json` på tvers av snapshots. Etter første delta-par var det 10 aktive tråder; etter andre delta-par er antallet 9. Netto endring $-1$ skjuler en større bevegelse: fem tråder lukkes (fire ved *løst gap* mot $G$-regelen og én via *positiv endring* der severity går fra lilla til grønn), og fire nye tråder åpnes (de fire *nye gap*-cellene i Tabell 7.5). Fem av de ti opprinnelige trådene fortsetter inn i tredje syklus med en ukentlig påminnelse (`reminder_count = 1`). Tabell 7.6 sporer de ti opprinnelige trådene gjennom de to delta-parene.
 
 | Tråd-ID | Åpnet ved | Status etter delta-par 1 | Status etter delta-par 2 |
 |---------|-----------|--------------------------|--------------------------|
@@ -777,7 +715,7 @@ Varslingsmodulen `gap_alerting.py` (kap 6.6) holder en persistent tråd-tilstand
 | 11kW HPU @ 2026-10-12 | SKJULT_NYTT_GAP | aktiv | påminnelse |
 | 30kW HPU @ 2026-07-13 | SKJULT_NYTT_GAP | aktiv | **lukket (positiv)** |
 
-<p align="center"><small><i>Tabell 7.9 Livssyklus for de ti trådene som ble åpnet i delta-par 1 (sju via G-regelen og tre via severity-regelen). Etter delta-par 2 er fem tråder lukket og fem fortsetter til neste snapshot. I tillegg åpnes fire nye tråder i delta-par 2 (de fire NYTT_GAP-cellene fra Tabell 7.7), slik at trådtilstanden går fra 10 til 9.</i></small></p>
+<p align="center"><small><i>Tabell 7.6 Livssyklus for de ti trådene som ble åpnet i delta-par 1 (sju via G-regelen og tre via severity-regelen). Etter delta-par 2 er fem tråder lukket og fem fortsetter til neste snapshot. I tillegg åpnes fire nye tråder i delta-par 2 (de fire NYTT_GAP-cellene fra Tabell 7.5), slik at trådtilstanden går fra 10 til 9.</i></small></p>
 
 Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (RDS-mønsteret som smelter bort uke for uke) og *engangsavklaring* (158KW HPU, 30kW HPU). Tråder som krever vedvarende oppfølging overlever til ny påminnelse, konsistent med kravet i 6.6. Den underliggende mekanikken dekkes i 8.4.
 
@@ -801,9 +739,9 @@ Fordelt på asset type bidrar RDS, Tensioner og HPUS med flest negative celler (
 
 ## **8.2 Uke-til-uke-deltadeteksjon**
 
-Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.5 og bygges ikke om her. Severity-deltaen er gitt i Tabell 7.6. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten og per asset type er visualisert i Figur 7.5 og 7.7.
+Klassifiseringen av cellevise endringer mellom snapshot 2026-05-07 og 2026-05-14 er presentert i Tabell 7.4 og bygges ikke om her. Av de 792 sammenlignede cellene utløser delta-detektoren 7 *nye gap* via $G$-regelen og ytterligere 5 varsler via severity-regelen, med ingen *forverrede*, *forbedrede* eller *løste* gap i dette første delta-paret. Fordelingen over kalenderhorisonten er visualisert i Figur 7.2.
 
-For det andre delta-paret 2026-05-14 ↔ 2026-05-21 (Tabell 7.7) utløser deltadetektoren 4 *nye gap* og 8 *løste gap* via $G$-regelen, samt 2 *forbedrede gap*. Severity-deltaen flagger 4 *verre farge*-celler og 11 *bedre farge*-celler (Tabell 7.8). I motsetning til første delta-par er nå alle de fire dynamiske kategoriene aktivert, noe som gir den første empiriske observasjonen av en hel livssyklus i datasettet – fra åpning til løsning. Tabell 8.2 oppsummerer regel-utløsingene for begge delta-parene.
+For det andre delta-paret 2026-05-14 ↔ 2026-05-21 (Tabell 7.5) utløser deltadetektoren 4 *nye gap* og 8 *løste gap* via $G$-regelen, samt 2 *forbedrede gap*. Severity-deltaen flagger 4 *verre farge*-celler og 11 *bedre farge*-celler. I motsetning til første delta-par er nå alle de fire dynamiske kategoriene aktivert, noe som gir den første empiriske observasjonen av en hel livssyklus i datasettet – fra åpning til løsning. Tabell 8.2 oppsummerer regel-utløsingene for begge delta-parene.
 
 | Regel | Delta-par 1 (792 celler) | Delta-par 2 (768 celler) |
 |-------|---------------------------|---------------------------|
@@ -851,7 +789,7 @@ Tabell 8.3b viser den tilsvarende fordelingen for delta-paret 2026-05-14 ↔ 202
 
 Suppression-regelen (6.5) videreførte samtlige utløste varsler i begge snapshot-parene fordi suppression-listen er tom – ingen enheter tilfredsstiller $K = 4$-kriteriet etter kun tre snapshots, og koordinator har ikke manuelt markert front-lastede enheter (Tabell 7.3) som strukturelle.
 
-Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.6 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.4) og 5 via severity-regelen (Tabell 6.5).
+Modulen `gap_alerting.py` (006 analysis/3.4 varsling/) anvender utløsingsmatrisene i 6.5 og rutingen i 6.6 på begge snapshot-parene. For delta-par 1 (2026-05-07 ↔ 2026-05-14) filtreres 33 av 792 celler bort av eksklusjonslisten (én utstyrsenhet × 33 uker, *Diesel – 63kW Diesel HPU Zone II*); av de gjenværende 759 cellene utløser modellen 12 varsler – 7 via $G$-regelen (Tabell 6.3) og 5 via severity-regelen (Tabell 6.4).
 
 | Mottaker (Asset type) | Lav prioritet | Middels prioritet | Høy prioritet | Informasjon | Totalt |
 |---|---|---|---|---|---|
@@ -877,7 +815,7 @@ For delta-par 2 (2026-05-14 ↔ 2026-05-21) filtreres 32 av 768 celler bort av s
 
 <p align="center"><small><i>Tabell 8.4b Utløste varsler for snapshot-paret 2026-05-14 ↔ 2026-05-21 fordelt på mottaker og prioritet. Antall mottakere øker fra 3 til 5 i denne syklusen fordi *Cable Pulling machine* og *Tensioner* også har endringer som krever oppfølging.</i></small></p>
 
-Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den ukentlige påminnelseslogikken (Tabell 6.5) operasjonell på tvers av snapshots. Etter delta-par 1 stod 10 tråder i `active_alerts.json`; etter delta-par 2 er antallet 9. Tabell 8.4c viser den underliggende balansen.
+Trådhåndteringen mellom de to delta-parene er hovedmekanismen som gjør den ukentlige påminnelseslogikken (Tabell 6.4) operasjonell på tvers av snapshots. Etter delta-par 1 stod 10 tråder i `active_alerts.json`; etter delta-par 2 er antallet 9. Tabell 8.4c viser den underliggende balansen.
 
 | Trådhendelse | Antall | Beskrivelse |
 |---|---|---|
@@ -947,7 +885,7 @@ Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem 
 
 **Delproblem 1 – Datastrukturering.** Tre snapshots er transkribert til lang-form CSV med ti felt (skjema beskrevet i 5.2.1) og matcher Power BIs egne Tier 1-summer innenfor ±2 unit-uker (kap 5.2.3). Skjemaet støtter både statisk gap-deteksjon (kap 6.3) og dynamisk endringsdeteksjon (kap 6.4) uten ytterligere transformasjon, innenfor avgrensningen i 1.3 om at datafangsten skjer via PNG-eksport.
 
-**Delproblem 2 – Regelbasert oppdagelse.** $G$-regelen (Tabell 6.4) og severity-regelen (Tabell 6.5) klassifiserer henholdsvis fortegnsendringer i gap-verdien og overganger i `severity_band`. Sammen genererte de 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP over de to delta-parene (Tabell 8.2). Severity-regelen fanget i delta-par 1 tre celler der gap-verdien var uendret eller forbedret, men prosent-eksponeringen krysset 75 %-terskelen – signaler en rein $G$-detektor ville oversett.
+**Delproblem 2 – Regelbasert oppdagelse.** $G$-regelen (Tabell 6.3) og severity-regelen (Tabell 6.4) klassifiserer henholdsvis fortegnsendringer i gap-verdien og overganger i `severity_band`. Sammen genererte de 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP over de to delta-parene (Tabell 8.2). Severity-regelen fanget i delta-par 1 tre celler der gap-verdien var uendret eller forbedret, men prosent-eksponeringen krysset 75 %-terskelen – signaler en rein $G$-detektor ville oversett.
 
 **Delproblem 3 – Automatisk varselsformat.** Varselsobjektet (Vedlegg F) dekker utstyrsenhet, periode, gap-størrelse og mottaker, pluss kontekst (severity-overgang, regel, prioritet, strukturelt-flagg). Digestene er gruppert i fire kategorier (NYE, PÅMINNELSER, LØSTE, INFORMASJON) og levert ende-til-ende via SMTP til testkontoen (Figur 8.1, 8.2 og Vedlegg D). Hver linje oppgir nøyaktig det informasjonsgrunnlaget koordinator trenger for å vurdere oppfølging.
 
@@ -1013,7 +951,7 @@ Felles for sporene er at de bygger videre på, ikke erstatter, den regelbaserte 
 
 # **10. Konklusjon**
 
-Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.4) med en severity-fargeregel (Tabell 6.5) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.4.1 med fem digester levert til en testkonto.
+Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige Power BI-eksporter til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.3) med en severity-fargeregel (Tabell 6.4) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.4.1 med fem digester levert til en testkonto.
 
 Hovedfunnene viser at modellen leverer på alle fire delproblemene fra kap 1.2. Datastrukturering fra Salesforce, Asset Voice og Power BI til en sporbar `(snapshot, region, asset_tier2, uke)`-skjema er etablert og verifisert mot Power BIs egne aggregater (kap 5.2). Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer fanger 11 NYTT_GAP, 8 LØST og 5 supplerende severity-baserte varsler over de to delta-parene (Tabell 8.2). Det automatiske varselsformatet beskriver hvert tilfelle med utstyrsenhet, periode, gap-størrelse og mottaker (Vedlegg F), og digestene er levert som faktiske e-poster i innboks. Tidligere og tydeligere varsling enn dagens manuelle prosess er demonstrert ved at varslene i delta-par 2 adresserer kalenderuker 6,5–7,5 uker fram, mot dagens situasjon hvor gapet ofte først oppdages tett opp mot leveransedato.
 
@@ -1057,7 +995,7 @@ Prosjektgruppen har brukt to KI-verktøy fra Anthropic gjennom prosjektperioden:
 
 ## **Vedlegg B: Konfidensialitet**
 
-Prosjektgruppen har ikke inngått skriftlig taushetserklæring med Motive Offshore Group. Tilgangen til Power BI-rapporten ble gitt med en muntlig forståelse om at tallene er kommersielt sensitive, og prosjektgruppen behandler dataene deretter: hele datakatalogen `004 data/` er ekskludert fra versjonskontroll, og rapporten gjengir kun aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er.
+Prosjektgruppen har ikke inngått skriftlig taushetserklæring med Motive Offshore Group. Tilgangen til Power BI-rapporten ble gitt med en muntlig forståelse om at tallene er kommersielt sensitive. Gruppen har avtalt med Motive at datagrunnlaget kun deles med prosjektgruppen og sensorene som vurderer rapporten, og rapportens hovedtekst gjengir kun aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er.
 
 ## **Vedlegg C: Kravmatrise**
 
@@ -1132,9 +1070,9 @@ Kap 6.6 beskriver at hvert utløste varsel produseres som et strukturert objekt 
 | `gap_t` | heltall | `-1` | $G^{(s_i)}$ |
 | `severity_t_minus_1` | streng | `green` | `severity_band` i $s_{i-1}$ |
 | `severity_t` | streng | `black` | `severity_band` i $s_i$ |
-| `change_type` | streng | `NYTT_GAP` | Klassifisering fra Tabell 6.3 |
+| `change_type` | streng | `NYTT_GAP` | Klassifisering fra Tabell 6.2 |
 | `severity_change` | streng | `VERRE_FARGE` | Klassifisering fra 6.4 |
-| `rule_triggered` | streng | `G-regel` | `G-regel` (Tabell 6.4) eller `severity-regel` (Tabell 6.5) |
+| `rule_triggered` | streng | `G-regel` | `G-regel` (Tabell 6.3) eller `severity-regel` (Tabell 6.4) |
 | `magnitude_class` | streng | `mildt` | Magnitudeklasse for $G^{(s_i)}$ |
 | `priority` | streng | `høy` | `høy`/`middels`/`lav`/`informasjon` |
 | `is_structural` | boolsk | `false` | Strukturelt-flagg fra suppression-listen |
