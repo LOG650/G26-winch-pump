@@ -721,7 +721,7 @@ Tabellen viser at trådmodellen håndterer både *gradvis avklaring* (RDS-mønst
 
 # **8. Resultat**
 
-Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-05-07 og det første snapshot-paret (baseline mot 2026-05-14). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
+Dette kapittelet presenterer resultatene fra modellkjøringen på baseline-snapshotet 2026-05-07 og de to påfølgende snapshot-parene (baseline ↔ 2026-05-14 og 2026-05-14 ↔ 2026-05-21). Resultatene legges frem objektivt; vurdering og tolkning gis i kapittel 9. Hvert delresultat kobles direkte til problemstillingen og delproblemene fra kapittel 1.
 
 ## **8.1 Statisk gap-deteksjon på baseline-snapshot**
 
