@@ -1,7 +1,7 @@
 # Prosjektstatus
 
 **Prosjekt:** G26 WinchPump – KI-basert kapasitetsvarsling for Motive Offshore
-**Dato:** 2026-05-24
+**Dato:** 2026-05-31
 **Utarbeidet av:** David Johan Lunde og Tord Haakon Johnsen Hovden
 
 ---
@@ -17,7 +17,7 @@
 | M5 | [x] | Varslingslogikk implementert (e-postvarsling) | 2026-05-02 | 2026-05-23 *(SMTP-demo)* |
 | M6 | [x] | Varslingssystem testet og validert mot kjente gap | 2026-05-10 | 2026-05-23 *(50 syntetiske tester + 2 delta-par på reelle data)* |
 | M7 | [x] | Førsteutkast rapport ferdig | 2026-05-16 | 2026-05-24 *(alle kapitler skrevet; sammendrag/abstract/forside gjenstår som finpuss)* |
-| M8 | [ ] | Sluttrapport innlevert | 2026-05-31 | – |
+| M8 | [x] | Sluttrapport innlevert | 2026-05-31 | 2026-05-31 |
 
 ---
 
@@ -47,8 +47,8 @@
 
 ### 4.0 Avslutning
 
-- [ ] 4.1 Sluttrapport — Begge *(kortetiltak gjennomført 2026-05-24; sluttsjekk og endelig innlevering gjenstår)*
-- [ ] 4.2 KI-bruk-dokumentasjon — Begge *(Vedlegg A venter på mal fra skolen)*
+- [x] 4.1 Sluttrapport — Begge *(innlevert 2026-05-31)*
+- [x] 4.2 KI-bruk-dokumentasjon — Begge
 - [ ] 4.3 Muntlig presentasjon — Begge
 
 ---
@@ -57,11 +57,11 @@
 
 ### Forside og erklæringer
 
-- [ ] Egenerklæring/gruppeerklæring signert
-- [ ] Personvern (NSD/REK vurdert)
-- [ ] Publiseringsavtale fylt ut
-- [ ] Sammendrag (norsk)
-- [ ] Abstract (engelsk)
+- [x] Egenerklæring/gruppeerklæring signert
+- [x] Personvern (NSD/REK vurdert)
+- [x] Publiseringsavtale fylt ut
+- [x] Sammendrag (norsk)
+- [x] Abstract (engelsk)
 
 ### Kapitler
 
@@ -82,10 +82,10 @@
 - [x] 9.0 Diskusjon
 - [x] 10.0 Konklusjon
 - [x] 11.0 Bibliografi (APA 7) — 10 referanser
-- [ ] 12.0 Vedlegg
-  - [ ] Vedlegg A: KI-bruk-erklæring *(venter på mal)*
-  - [ ] Vedlegg B: Taushetserklæring *(signeres ved innlevering)*
-  - [ ] Vedlegg C: Kravmatrise *(skrives før innlevering)*
+- [x] 12.0 Vedlegg
+  - [x] Vedlegg A: KI-bruk-erklæring
+  - [x] Vedlegg B: Taushetserklæring
+  - [x] Vedlegg C: Kravmatrise
   - [x] Vedlegg D: Komplette SMTP-digester
   - [x] Vedlegg F: Full valideringsscenario-tabell
   - [x] Vedlegg G: Varselsobjekt-skjema
@@ -93,24 +93,17 @@
 ### Ferdigstilling
 
 - [x] Førsteutkast (alle kapitler dekket) — ferdig 2026-05-24 *(7 dager etter planlagt 2026-05-16)*
-- [ ] Tilbakemeldinger fra veiledere innarbeidet *(peer review fra halvveis i prosjektet legges inn senere)*
-- [ ] KI-bruk dokumentert og erklæring signert
-- [ ] Sluttsjekk per AGENTS.md-sjekkliste
-- [ ] Endelig innlevering — innen 2026-05-31
+- [x] Tilbakemeldinger fra veiledere innarbeidet
+- [x] Sluttsjekk per AGENTS.md-sjekkliste
+- [x] Endelig innlevering — 2026-05-31
 
 ---
 
-## Gjenstående arbeid (per 2026-05-24, 7 dager til frist)
+## Gjenstående arbeid (per 2026-05-31)
 
 | Oppgave | Estimat |
 |---|---|
-| Sammendrag (norsk) + Abstract (engelsk) | 1–2 t |
-| Vedlegg C: Kravmatrise | 30–60 min |
-| Vedlegg A: KI-bruk-erklæring | 30 min når mal foreligger |
-| Vedlegg B: Taushetserklæring + forside-erklæringer (signering) | 1 t |
-| Innarbeiding av peer review | 1–2 t |
-| Sluttsjekk per AGENTS.md-sjekkliste | 1 t |
-| **Sum** | **5–8 t** |
+| Muntlig presentasjon | – |
 
 ---
 
