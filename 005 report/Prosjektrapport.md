@@ -1,12 +1,12 @@
 
 
-**Tittel (norsk og/eller engelsk)** 
+**Tidlig varsling av kapasitetsgap i offshore utleieflåte: Et regelbasert system basert på Power BI-data**
 
-Forfatter(e)
+Tord Hovden og David Johan Lunde
 
-Totalt antall sider inkludert forsiden:      
+Totalt antall sider inkludert forsiden: 64
 
-Molde, Innleveringsdato
+Molde, 31.05.2026
 
 **Obligatorisk egenerklæring/gruppeerklæring** 
 
@@ -14,35 +14,31 @@ Den enkelte student er selv ansvarlig for å sette seg inn i hva som er lovlige 
 
 | *Du/dere fyller ut erklæringen ved å klikke i ruten til høyre for den enkelte del 1-6:* |  |  |
 | :---- | :---- | :---- |
-| **1\.** | **Jeg/vi erklærer herved at min/vår besvarelse er mitt/vårt eget arbeid, og at jeg/vi ikke har brukt andre kilder eller har mottatt annen hjelp enn det som er nevnt i besvarelsen.**  |  ☐ |
-| **2\.** | **Jeg/vi erklærer videre at denne besvarelsen:**  ikke har vært brukt til annen eksamen ved annen avdeling/universitet/høgskole innenlands eller utenlands.  ikke refererer til andres arbeid uten at det er oppgitt. ikke refererer til eget tidligere arbeid uten at det er oppgitt.  har alle referansene oppgitt i litteraturlisten.  ikke er en kopi, duplikat eller avskrift av andres arbeid eller besvarelse.  |  ☐ |
-| **3\.** | **Jeg/vi er kjent med at brudd på ovennevnte er å betrakte som fusk og kan medføre annullering av eksamen og utestengelse fra universiteter og høgskoler i Norge, jf. [Universitets- og høgskoleloven](http://www.lovdata.no/all/nl-20050401-015.html) §§4-7 og 4-8 og [Forskrift om eksamen](http://kvalitet.himolde.no/KS_UNL114) §§14 og 15\.**  |  ☐ |
-| **4\.** | **Jeg/vi er kjent med at alle innleverte oppgaver kan bli plagiatkontrollert i URKUND, se [Retningslinjer for elektronisk innlevering og publisering av studiepoenggivende studentoppgaver](http://kvalitet.himolde.no/KS_UNL221)** |  ☐ |
-| **5\.** | **Jeg/vi er kjent med at høgskolen vil behandle alle saker hvor det forligger mistanke om fusk etter høgskolens [retningslinjer for behandling av saker om fusk](http://kvalitet.himolde.no/KS_UNL409)** |  ☐ |
-| **6\.** | **Jeg/vi har satt oss inn i regler og retningslinjer i bruk av [kilder og referanser på biblioteket sine nettsider](http://www.himolde.no/biblioteket/Sider/Veiledning/Kilder-og-referanser.aspx)** |  ☐ |
+| **1\.** | **Jeg/vi erklærer herved at min/vår besvarelse er mitt/vårt eget arbeid, og at jeg/vi ikke har brukt andre kilder eller har mottatt annen hjelp enn det som er nevnt i besvarelsen.**  |  ☒ |
+| **2\.** | **Jeg/vi erklærer videre at denne besvarelsen:**  ikke har vært brukt til annen eksamen ved annen avdeling/universitet/høgskole innenlands eller utenlands.  ikke refererer til andres arbeid uten at det er oppgitt. ikke refererer til eget tidligere arbeid uten at det er oppgitt.  har alle referansene oppgitt i litteraturlisten.  ikke er en kopi, duplikat eller avskrift av andres arbeid eller besvarelse.  |  ☒ |
+| **3\.** | **Jeg/vi er kjent med at brudd på ovennevnte er å betrakte som fusk og kan medføre annullering av eksamen og utestengelse fra universiteter og høgskoler i Norge, jf. [Universitets- og høgskoleloven](http://www.lovdata.no/all/nl-20050401-015.html) §§4-7 og 4-8 og [Forskrift om eksamen](http://kvalitet.himolde.no/KS_UNL114) §§14 og 15\.**  |  ☒ |
+| **4\.** | **Jeg/vi er kjent med at alle innleverte oppgaver kan bli plagiatkontrollert i URKUND, se [Retningslinjer for elektronisk innlevering og publisering av studiepoenggivende studentoppgaver](http://kvalitet.himolde.no/KS_UNL221)** |  ☒ |
+| **5\.** | **Jeg/vi er kjent med at høgskolen vil behandle alle saker hvor det forligger mistanke om fusk etter høgskolens [retningslinjer for behandling av saker om fusk](http://kvalitet.himolde.no/KS_UNL409)** |  ☒ |
+| **6\.** | **Jeg/vi har satt oss inn i regler og retningslinjer i bruk av [kilder og referanser på biblioteket sine nettsider](http://www.himolde.no/biblioteket/Sider/Veiledning/Kilder-og-referanser.aspx)** |  ☒ |
 
 **Personvern**
 
 **Personopplysningsloven**  
 Forskningsprosjekt som innebærer behandling av personopplysninger iht. Personopplysningsloven skal meldes til Norsk senter for forskningsdata, NSD, for vurdering.
 
-**Har oppgaven vært vurdert av NSD?**					☐**ja	 ☐nei**  
-\- Hvis ja:   
-**Referansenummer:      **  
+**Har oppgaven vært vurdert av NSD?**					☐**ja	 ☒nei**  
 \- Hvis nei:   
-**Jeg/vi erklærer at oppgaven ikke omfattes av Personopplysningsloven:** ☐	
+**Jeg/vi erklærer at oppgaven ikke omfattes av Personopplysningsloven:** ☒	
 
 **Helseforskningsloven**  
 Dersom prosjektet faller inn under Helseforskningsloven, skal det også søkes om forhåndsgodkjenning fra Regionale komiteer for medisinsk og helsefaglig forskningsetikk, REK, i din region.
 
-**Har oppgaven vært til behandling hos REK?**				☐**ja	 ☐nei**  
-\- Hvis ja:   
-**Referansenummer:      **
+**Har oppgaven vært til behandling hos REK?**				☐**ja	 ☒nei**  
 
 **Publiseringsavtale**
 
-**Studiepoeng:      **			  
-**Veileder:      **  
+**Studiepoeng:** 15
+**Veileder:** Bård Inge Austigard Pettersen, Per Kristian Rekdal
 			  
 **Fullmakt til elektronisk publisering av oppgaven**  
 Forfatter(ne) har opphavsrett til oppgaven. Det betyr blant annet enerett til å gjøre verket tilgjengelig for allmennheten (Åndsverkloven. §2).  
@@ -50,18 +46,21 @@ Alle oppgaver som fyller kriteriene vil bli registrert og publisert i Brage HiM 
 Oppgaver som er unntatt offentlighet eller båndlagt vil ikke bli publisert.
 
 **Jeg/vi gir herved Høgskolen i Molde en vederlagsfri rett til å**   
-**gjøre oppgaven tilgjengelig for elektronisk publisering:** 		☐**ja	 ☐nei**
+**gjøre oppgaven tilgjengelig for elektronisk publisering:** 		☐**ja	 ☒nei**
 
-**Er oppgaven båndlagt (konfidensiell)?					☐ja	 ☐nei**  
-**(**Båndleggingsavtale må fylles ut)  
-\- Hvis ja:   
-**Kan oppgaven publiseres når båndleggingsperioden er over?		☐ja	 ☐nei**  
+**Er oppgaven båndlagt (konfidensiell)?					☐ja	 ☒nei**  
 			  
-**Dato:      **
+**Dato:** 31.05.2026
 
-**Antall ord:** Marker denne setningen, og skriv inn antall ord dersom det er et krav at antall ord skal oppgis. Hvis det ikke er et krav at antall ord skal oppgis slettes hele dette avsnittet, og i begge tilfeller slettes denne setning. 
+**Forfattererklæring**
 
-**Forfattererklæring**: Marker denne setningen, og skriv inn forfattererklæring dersom det er et krav til oppgaven. Hvis det ikke er krav om forfattererklæring slettes hele dette avsnitt, og i begge tilfeller slettes denne setning. 
+Vi erklærer at rapporten er skrevet i fellesskap, og at begge forfattere står solidarisk inne for hele rapportens innhold.
+
+**Bruk av kunstig intelligens (KI)**
+
+I tråd med Høgskolen i Moldes retningslinjer for ansvarlig bruk av KI-verktøy erklærer vi følgende om bruken av kunstig intelligens i arbeidet med denne oppgaven. KI-verktøyet som er benyttet er Claude fra Anthropic, primært via Claude Code. Verktøyet er brukt til strukturering, språklig bearbeiding og korrekturlesing av rapporttekst, til hjelp med implementering og feilsøking av Python-kode (blant annet snapshot-transkripsjon, regelbasert deteksjonslogikk, varselsmodul og pytest-scenarier), til generering og forbedring av visualiseringer og figurer, og som diskusjonspartner for faglige problemstillinger, metodevalg og tolkning av resultater.
+
+KI er ikke benyttet til å generere kilder eller referanser uten egen verifikasjon, og alle modellresultater, analyser og konklusjoner er kontrollert og validert av forfatterne. Problemstilling, metodevalg, faglige vurderinger og endelig fortolkning av resultatene er forfatternes egne, og rapporten er gjennomlest og kvalitetssikret av forfatterne før innlevering.
 
 **Sammendrag**
 
@@ -197,17 +196,15 @@ Innhold
 
 [**12.0 Vedlegg	60**](#vedlegg)
 
-[Vedlegg A: KI-bruk-erklæring	60](#vedlegg-a-ki-bruk-erklæring)
+[Vedlegg A: Konfidensialitet	60](#vedlegg-a-konfidensialitet)
 
-[Vedlegg B: Konfidensialitet	60](#vedlegg-b-konfidensialitet)
+[Vedlegg B: Kravmatrise	60](#vedlegg-b-kravmatrise)
 
-[Vedlegg C: Kravmatrise	60](#vedlegg-c-kravmatrise)
+[Vedlegg C: Komplette SMTP-digester fra demo 2026-05-23	60](#vedlegg-c-komplette-smtp-digester)
 
-[Vedlegg D: Komplette SMTP-digester fra demo 2026-05-23	60](#vedlegg-d-komplette-smtp-digester)
+[Vedlegg D: Full valideringsscenario-tabell	62](#vedlegg-d-full-valideringsscenario-tabell)
 
-[Vedlegg E: Full valideringsscenario-tabell	62](#vedlegg-e-full-valideringsscenario-tabell)
-
-[Vedlegg F: Varselsobjekt-skjema	63](#vedlegg-f-varselsobjekt-skjema)
+[Vedlegg E: Varselsobjekt-skjema	63](#vedlegg-e-varselsobjekt-skjema)
 
 # **1. Innledning**
 
@@ -337,7 +334,7 @@ Selv om Power BI-dashbordet gjør det mulig å oppdage kapasitetsgap manuelt, vi
 
 Når et kapasitetsgap først oppdages tett opp mot leveransedato, finnes i hovedsak tre mulige tiltak: **bygge nytt utstyr** (produksjonstid ~4 måneder, sjelden mulig sent), **sende utstyr fra annen lokasjon** (krever ofte luftfrakt som er flere ganger dyrere enn sjøtransport) eller **fremleie fra ekstern leverandør** (innleiekostnader reduserer marginen). I tilfeller hvor gapet kunne vært oppdaget tre til seks måneder tidligere, dekkes en ellers unngåelig kostnad av Motive selv – kunden aksepterer normalt ikke ekstra fraktkostnader eller innleiepåslag som ikke var avtalt på forhånd. Tidlig og automatisk varsling gir derfor selgeren tid til å gjennomføre planlagte tiltak fremfor reaktive hasteløsninger, og er den direkte motivasjonen for varslingssystemet som utvikles i denne rapporten.
 
-Fire faktorer er særlig relevante for hvorvidt kapasitetsgap oppstår og om de oppdages i tide: **salgsmulighetenes fremdrift** (når en kontrakt passerer 75 % vinnersannsynlighet, er behovet meget sannsynlig), **eksisterende bookinger** (utstyr leid ut eller reservert reduserer tilgjengelig kapasitet), **geografi** (utstyr er regionslokalisert og kan ikke omdisponeres uten planleggingstid) og **oppdateringsfrekvens** (Power BI oppdateres ukentlig, så endringer i Salesforce eller Asset Voice fanges først opp ved neste snapshot).
+Fire faktorer er særlig relevante for hvorvidt kapasitetsgap oppstår og om de oppdages i tide: **salgsmulighetenes fremdrift** (når en kontrakt passerer 75 % vinnersannsynlighet, er behovet meget sannsynlig), **eksisterende bookinger** (utstyr leid ut eller reservert reduserer tilgjengelig kapasitet), **geografi** (utstyr er regionslokalisert og kan ikke omdisponeres uten planleggingstid) og **oppdateringsfrekvens** (Power BI oppdateres daglig fra Salesforce og Asset Voice, så endringer i kildesystemene reflekteres i dashbordet innen 24 timer).
 
 ## **4.5 Datagrunnlag**
 
@@ -367,7 +364,7 @@ Metodiske begrensninger er hovedsakelig knyttet til datakvalitet og oppdaterings
 
 **Reliabilitet.** Datafangsten skjer via manuell transkripsjon av PNG-bilder (5.2.2), noe som introduserer risiko for avlesningsfeil. Reliabiliteten sikres ved automatisk sumsjekk mot Power BIs egne asset type- og `Totalt`-rader med en toleranse på $\pm 2$ unit-uker per uke (5.2.3), som reflekterer den strukturelle avrundingsstøyen Power BI selv produserer. Snapshots som overstiger toleransen avvises og kontrolleres mot kildebildet før godkjenning. Modellens regelbaserte og deterministiske natur (6.1) gjør at den samme inndatamengden alltid produserer samme varselsmengde, slik at reliabiliteten i analyse-leddet er full.
 
-**Etiske hensyn.** Datagrunnlaget inneholder kommersielt sensitiv informasjon om Motives kunder, kontrakter og flåteutnyttelse. Prosjektgruppen fikk tilgang til Power BI-rapporten gjennom Motive Offshore med en muntlig forståelse om at tallene er konfidensielle. Det er ikke inngått skriftlig taushetserklæring, men gruppen har avtalt med Motive at datagrunnlaget kun deles med prosjektgruppen og sensorene som vurderer rapporten. Rapportens hovedtekst gjengir aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er. KI-verktøy (Anthropic Claude) er brukt som støtte til kodeforslag, feilsøking og språkvask, men ikke som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk – jf. KI-bruk-erklæringen i Vedlegg A.
+**Etiske hensyn.** Datagrunnlaget inneholder kommersielt sensitiv informasjon om Motives kunder, kontrakter og flåteutnyttelse. Prosjektgruppen fikk tilgang til Power BI-rapporten gjennom Motive Offshore med en muntlig forståelse om at tallene er konfidensielle. Det er ikke inngått skriftlig taushetserklæring, men gruppen har avtalt med Motive at datagrunnlaget kun deles med prosjektgruppen og sensorene som vurderer rapporten. Rapportens hovedtekst gjengir aggregerte tall og anonymiserte asset type-navn, ikke kundenavn eller kontrakts-id-er. KI-verktøy (Anthropic Claude) er brukt som støtte til kodeforslag, feilsøking og språkvask, men ikke som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk.
 
 ## **5.2 Data**
 
@@ -572,7 +569,7 @@ cc:                     salg@motive-offshore.no
 
 Asset type som rutingsnøkkel er pragmatisk: Power BI-tabellen oppgir ikke kontrakts-id, så modellen kan ikke route per kontrakt eller selger. Per-kontrakt-ruting ville krevd Salesforce-integrasjon (utenfor omfanget, jf. 1.3) og er omtalt som produksjonsanbefaling i 9.6.
 
-Hvert utløst varsel produseres som et strukturert objekt med 17 felt (fullt skjema i Vedlegg F) og videreføres til varslingsmodulen `gap_alerting.py` (8.4). Varslene aggregeres til **én digest-e-post per mottaker per snapshot**, gruppert etter endringstype og med mønster-deteksjon som slår sammen sammenhengende uker for samme asset. Aktive (ulukkede) gap genererer en **ukentlig påminnelse** inntil cellen blir *løst* eller *forbedret*.
+Hvert utløst varsel produseres som et strukturert objekt med 17 felt (fullt skjema i Vedlegg E) og videreføres til varslingsmodulen `gap_alerting.py` (8.4). Varslene aggregeres til **én digest-e-post per mottaker per snapshot**, gruppert etter endringstype og med mønster-deteksjon som slår sammen sammenhengende uker for samme asset. Aktive (ulukkede) gap genererer en **ukentlig påminnelse** inntil cellen blir *løst* eller *forbedret*.
 
 # **7. Analyse**
 
@@ -858,7 +855,7 @@ Hver enkelt rad i en digest leses som:
 
 Kalenderukene som adresseres ligger typisk **3–7 måneder fram i tid** – nettopp det handlingsrommet som forsvinner når gap først oppdages tett opp mot leveransedato.
 
-HPUS-koordinator får den rikeste digesten i delta-par 2, med varsler i alle fire kategoriene (Figur 8.2); de fire øvrige er gjengitt i Vedlegg D. Mottakere uten endringer får ingen digest – tomme e-poster ville svekket signalverdien.
+HPUS-koordinator får den rikeste digesten i delta-par 2, med varsler i alle fire kategoriene (Figur 8.2); de fire øvrige er gjengitt i Vedlegg C. Mottakere uten endringer får ingen digest – tomme e-poster ville svekket signalverdien.
 
 <div align="center">
   <img src="../006 analysis/3.4 varsling/fig_demo_digest_HPUS.png" alt="HPUS-digest" width="80%">
@@ -869,7 +866,7 @@ Demoen viser at pipelinen kan kjøres ende-til-ende fra snapshot-CSV til mottatt
 
 ## **8.5 Validering mot syntetiske scenarier**
 
-Deteksjonsreglene (6.5) og trådhåndteringen (6.6) er validert mot 50 syntetiske `pytest`-scenarier som dekker (i) $G$-regelens seks endringskategorier inkl. klassegrenser, (ii) severity-regelens fem overganger, (iii) trådlivssyklusen *ny → påminnelse → eskalert → løst* med ruting, og (iv) edge cases (identiske snapshots, mønsterdeteksjon, eksklusjon). Alle 50 tester passerer (1,57 s). Full scenariotabell ligger i Vedlegg E.
+Deteksjonsreglene (6.5) og trådhåndteringen (6.6) er validert mot 50 syntetiske `pytest`-scenarier som dekker (i) $G$-regelens seks endringskategorier inkl. klassegrenser, (ii) severity-regelens fem overganger, (iii) trådlivssyklusen *ny → påminnelse → eskalert → løst* med ruting, og (iv) edge cases (identiske snapshots, mønsterdeteksjon, eksklusjon). Alle 50 tester passerer (1,57 s). Full scenariotabell ligger i Vedlegg D.
 
 <p align="center"><small><i>Tabell 8.5 Resultater fra valideringen av varslingsmodulen mot syntetiske scenarier.</i></small></p>
 
@@ -887,7 +884,7 @@ Hovedproblemstillingen i kap 1.1 spør hvordan et Python-basert varslingssystem 
 
 **Delproblem 2 – Regelbasert oppdagelse.** $G$-regelen (Tabell 6.3) og severity-regelen (Tabell 6.4) klassifiserer henholdsvis fortegnsendringer i gap-verdien og overganger i `severity_band`. Sammen genererte de 11 NYTT_GAP, 8 LØST, 2 FORBEDRET, 3 SKJULT_NYTT_GAP og 4 SKJULT_LØST_GAP over de to delta-parene (Tabell 8.2). Severity-regelen fanget i delta-par 1 tre celler der gap-verdien var uendret eller forbedret, men prosent-eksponeringen krysset 75 %-terskelen – signaler en rein $G$-detektor ville oversett.
 
-**Delproblem 3 – Automatisk varselsformat.** Varselsobjektet (Vedlegg F) dekker utstyrsenhet, periode, gap-størrelse og mottaker, pluss kontekst (severity-overgang, regel, prioritet, strukturelt-flagg). Digestene er gruppert i fire kategorier (NYE, PÅMINNELSER, LØSTE, INFORMASJON) og levert ende-til-ende via SMTP til testkontoen (Figur 8.1, 8.2 og Vedlegg D). Hver linje oppgir nøyaktig det informasjonsgrunnlaget koordinator trenger for å vurdere oppfølging.
+**Delproblem 3 – Automatisk varselsformat.** Varselsobjektet (Vedlegg E) dekker utstyrsenhet, periode, gap-størrelse og mottaker, pluss kontekst (severity-overgang, regel, prioritet, strukturelt-flagg). Digestene er gruppert i fire kategorier (NYE, PÅMINNELSER, LØSTE, INFORMASJON) og levert ende-til-ende via SMTP til testkontoen (Figur 8.1, 8.2 og Vedlegg C). Hver linje oppgir nøyaktig det informasjonsgrunnlaget koordinator trenger for å vurdere oppfølging.
 
 **Delproblem 4 – Tidligere og tydeligere varsling.** Delta-par 2 identifiserte fire nye gap 6,5–7,5 uker fram i tid, mot dagens situasjon hvor gap ofte først oppdages tett opp mot leveransedato (kap 4.4). Tydeligheten styrkes av automatisk ruting per asset type, mønsterdeteksjon som grupperer sammenhengende uker til én digest-linje, og ukentlige påminnelser (Tabell 8.4c) som holder saken i koordinatorens bevissthet inntil $G$ eller `severity_band` endrer seg.
 
@@ -953,7 +950,7 @@ Felles for sporene er at de bygger videre på, ikke erstatter, den regelbaserte 
 
 Problemstillingen for prosjektet var hvordan et Python-basert varslingssystem kan bruke ukentlige kapasitetsdata fra Power BI til å identifisere negative kapasitetsverdier og endringer i Asset Calendar, og automatisk varsle selgere og prosjektkoordinatorer om kapasitetsgap i Motive Offshores utleieflåte. Resultatet er en regelbasert pipeline som er bygget, validert og kjørt på reelle data fra tre ukentlige snapshots (2026-05-07, 2026-05-14, 2026-05-21). Modellen kombinerer en gap-verdi-regel (Tabell 6.3) med en severity-fargeregel (Tabell 6.4) og ruter strukturerte varsler til asset type-koordinatorer via digest-e-poster. SMTP-leveransen er demonstrert ende-til-ende i kap 8.4.1 med fem digester levert til en testkonto.
 
-Hovedfunnene viser at modellen leverer på alle fire delproblemene fra kap 1.2. Datastrukturering fra Salesforce, Asset Voice og Power BI til en sporbar `(snapshot, region, asset_tier2, uke)`-skjema er etablert og verifisert mot Power BIs egne aggregater (kap 5.2). Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer fanger 11 NYTT_GAP, 8 LØST og 5 supplerende severity-baserte varsler over de to delta-parene (Tabell 8.2). Det automatiske varselsformatet beskriver hvert tilfelle med utstyrsenhet, periode, gap-størrelse og mottaker (Vedlegg F), og digestene er levert som faktiske e-poster i innboks. Tidligere og tydeligere varsling enn dagens manuelle prosess er demonstrert ved at varslene i delta-par 2 adresserer kalenderuker 6,5–7,5 uker fram, mot dagens situasjon hvor gapet ofte først oppdages tett opp mot leveransedato.
+Hovedfunnene viser at modellen leverer på alle fire delproblemene fra kap 1.2. Datastrukturering fra Salesforce, Asset Voice og Power BI til en sporbar `(snapshot, region, asset_tier2, uke)`-skjema er etablert og verifisert mot Power BIs egne aggregater (kap 5.2). Regelbasert oppdagelse av negative og forverrede verdier samt uke-til-uke-endringer fanger 11 NYTT_GAP, 8 LØST og 5 supplerende severity-baserte varsler over de to delta-parene (Tabell 8.2). Det automatiske varselsformatet beskriver hvert tilfelle med utstyrsenhet, periode, gap-størrelse og mottaker (Vedlegg E), og digestene er levert som faktiske e-poster i innboks. Tidligere og tydeligere varsling enn dagens manuelle prosess er demonstrert ved at varslene i delta-par 2 adresserer kalenderuker 6,5–7,5 uker fram, mot dagens situasjon hvor gapet ofte først oppdages tett opp mot leveransedato.
 
 Det viktigste empiriske bidraget er tråd-livssyklusen som er observert over to delta-par. Av de ti opprinnelig åpnede trådene i delta-par 1 lukkes fem automatisk i delta-par 2 ved at $G$ eller `severity_band` returnerer til positiv tilstand, mens fem fortsetter med en formell påminnelse (Tabell 8.4c). Det er det første empiriske beviset på at livssyklusen *ny → påminnelse → løst* fungerer på reelle Power BI-data, og er hovedargumentet for at modellen kan tas i bruk operativt. Severity-regelen viser seg samtidig å være et selvstendig signal som rein gap-verdi-måling ville oversett: tre av de ti gap-åpnende varslene i delta-par 1 ble utløst kun av en fargeovergang i Power BI.
 
@@ -989,19 +986,15 @@ Xu, J., Pero, M., & Fabbri, M. (2023). Unfolding the link between big data analy
 
 # **12. Vedlegg**
 
-## **Vedlegg A: KI-bruk-erklæring**
-
-Prosjektgruppen har brukt to KI-verktøy fra Anthropic gjennom prosjektperioden: *Claude* (chat-grensesnittet på claude.ai, modellene Sonnet 4.5 og Opus 4.7) og *Claude Code* (Anthropics offisielle kommandolinjeverktøy som bruker de samme modellene). Verktøyene er brukt som støtte til kodeforslag, feilsøking, refaktorering og språkvask. Ingen av verktøyene er brukt som selvstendig analysemodell eller til behandling av rådata utover offentlig dokumentert API-bruk. Alle metodiske valg, modellbeslutninger og analysetolkninger er gjort av prosjektgruppen. Signert KI-bruk-erklæring etter Høgskolen i Moldes mal legges ved innlevering.
-
-## **Vedlegg B: Konfidensialitet**
+## **Vedlegg A: Konfidensialitet**
 
 Prosjektgruppen har ikke inngått skriftlig taushetserklæring med Motive Offshore Group. Tilgangen til Power BI-rapporten ble gitt med en muntlig forståelse om at tallene er kommersielt sensitive. Gruppen har avtalt med Motive at datagrunnlaget kun deles med prosjektgruppen og sensorene som vurderer rapporten.
 
-## **Vedlegg C: Kravmatrise**
+## **Vedlegg B: Kravmatrise**
 
 Koblingen mellom delproblemene i 1.2 og konkrete resultater i rapporten er drøftet i 9.1, der hvert delproblem besvares med henvisning til relevante tabeller og figurer. En separat kravmatrise er derfor ikke gjengitt her.
 
-## **Vedlegg D: Komplette SMTP-digester fra demo 2026-05-23**
+## **Vedlegg C: Komplette SMTP-digester fra demo 2026-05-23**
 
 Figur 8.2 i kap 8.4.1 viser HPUS-koordinatordigesten – den mest komplette av de fem digestene som ble levert. De fire øvrige er gjengitt her for fullstendighet.
 
@@ -1025,7 +1018,7 @@ Figur 8.2 i kap 8.4.1 viser HPUS-koordinatordigesten – den mest komplette av d
   <p align="center"><small><i>Figur D.4 Spoolers-koordinatordigesten. Én PÅMINNELSE for *Electric – 75Te Electric Spooler* i uke 22.06 – tråden ble åpnet i delta-par 1 som SKJULT_NYTT_GAP og er fortsatt aktiv siden severity ikke har endret seg fra purple.</i></small></p>
 </div>
 
-## **Vedlegg E: Full valideringsscenario-tabell**
+## **Vedlegg D: Full valideringsscenario-tabell**
 
 Kap 8.5 oppsummerer at 50 syntetiske `pytest`-scenarier validerer modellens regelmatrise, trådhåndtering og ruting. Tabell E.1 viser fordelingen per scenariokategori med forventet og faktisk utfall.
 
@@ -1054,7 +1047,7 @@ Kap 8.5 oppsummerer at 50 syntetiske `pytest`-scenarier validerer modellens rege
 
 <p align="center"><small><i>Tabell E.1 Full liste over de 50 syntetiske valideringsscenariene fra `006 analysis/3.5 validering/`, med forventet og faktisk utfall.</i></small></p>
 
-## **Vedlegg F: Varselsobjekt-skjema**
+## **Vedlegg E: Varselsobjekt-skjema**
 
 Kap 6.6 beskriver at hvert utløste varsel produseres som et strukturert objekt med 17 felt. Tabell F.1 viser det fulle skjemaet.
 
